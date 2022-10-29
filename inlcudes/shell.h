@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
-/*   Updated: 2022/10/27 13:46:40 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/10/29 15:36:54 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,35 @@
 # define SHELL_H
 # include "../libft/incl/libft.h"
 # include "keys.h"
-#include <termios.h>
+# include <term.h>
+# include <fcntl.h>
+# include <time.h>
+# include <sys/ioctl.h>
+
+typedef struct	s_win
+{
+		struct winsize	*win;
+		int				cols;
+		int				rows;
+		int				current_row;
+}				t_win;
 
 typedef struct s_shell
 {
 	char	**environ;
-	char	**path_array;
 	char	*minish;
 	int		num_of_variables;
 	int		quote;
-	int		l_flag;
-	int		p_flag;
-	int		n_flag;
-	int		i;
-	int		x;
 	int		dir_len;
 	int		previous_dir_in_cd;
-	char	*curr_shell;
 	char	*prev_dir;
+	t_win	*window;
 }				t_shell;
 
+/*
+** CURSOR
+*/
+void	init_window(t_win *window);
 /*
 ** KEYS
 */
@@ -43,7 +52,7 @@ void	keypress(void);
 /*
 ** RAW
 */
-void	enable_rawmode();
+int		enable_rawmode(void);
 void	kill_mode(const char *str);
 
 # endif
