@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
-/*   Updated: 2022/10/27 13:46:40 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/10/31 16:19:46 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,46 @@
 # define SHELL_H
 # include "../libft/incl/libft.h"
 # include "keys.h"
-#include <termios.h>
+
+#define EOF '\0'
+#define HIST_FILE ".shell_history"
+
+#define TRUE 1
+#define FALSE 0
 
 typedef struct s_shell
 {
-	char	**environ;
-	char	**path_array;
-	char	*minish;
-	int		num_of_variables;
-	int		quote;
-	int		l_flag;
-	int		p_flag;
-	int		n_flag;
-	int		i;
-	int		x;
-	int		dir_len;
-	int		previous_dir_in_cd;
-	char	*curr_shell;
-	char	*prev_dir;
-}				t_shell;
+	char		*cmd_line;
+	char		**env;
+	t_array		*sequence; // array of structs (';' separation)
+}	t_shell;
 
-/*
-** KEYS
-*/
-int		ft_iscntrl(char c);
-void	keypress(void);
+typedef struct s_array
+{
+	int		type; // populated by PIPE, REDIR, SIMPLE_CMD
+}	t_array;
 
-/*
-** RAW
-*/
-void	enable_rawmode();
-void	kill_mode(const char *str);
+
+typedef enum t_type
+{
+	COMMAND,
+	PIPE,
+	REDIR,
+}	e_type;
+
+typedef enum t_state
+{
+	STATE_START,
+	STATE_GENERAL,
+	STATE_IN_FILENAME,
+	STATE_IN_PIPE,
+	STATE_IN_REDIRECT,
+	STATE_CMD_SEPARATOR,
+}	e_state;
+
+int		env_variable_counter(char **environ);
+void	init_shell(t_shell *shell, char **environ);
+void	allocation_check(void **check);
+
 
 # endif

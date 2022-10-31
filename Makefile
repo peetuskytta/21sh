@@ -1,7 +1,7 @@
 #Compiler and compiler flags
 CC := gcc
-#FLAGS := -Wall -Wextra -Werror -g -fsanitize=address
-FLAGS := -Wall -Wextra -Werror
+FLAGS := -Wall -Wextra -Werror -g -fsanitize=address
+#FLAGS := -Wall -Wextra -Werror
 
 #Color scheme
 WHITE = \033[37m
@@ -10,15 +10,18 @@ RED = \033[31m
 BOLD = \033[1m
 
 #Target Binary Program
-NAME := minishell
+NAME := 21sh
 
-SOURCES :=
+SOURCES := srcs/main.c \
+	srcs/allocation_check.c \
+	srcs/env_variable_counter.c \
+	srcs/init_shell.c \
 
 OBJ := $(SOURCES:.c=.o)
 
 LIBFT_M := make -s -C srcs/libft
-LIBFT_A := srcs/libft/libft.a
-HEADER := includes/21sh.h
+LIBFT_A := ../libft/libft.a
+HEADER := includes/shell.h
 
 all: $(NAME)
 
