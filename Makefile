@@ -1,7 +1,7 @@
 #Compiler and compiler flags
 CC := gcc
-FLAGS := -Wall -Wextra -Werror -g -fsanitize=address
-#FLAGS := -Wall -Wextra -Werror
+#FLAGS := -Wall -Wextra -Werror -g -fsanitize=address
+FLAGS := -Wall -Wextra -Werror
 
 #Color scheme
 WHITE = \033[37m
