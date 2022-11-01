@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
-/*   Updated: 2022/11/01 17:56:02 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/11/01 19:13:27 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,26 @@ typedef struct s_shell
 	char		**env;
 }	t_shell;
 
-typedef struct s_simple_cmd
+typedef struct s_exec
 {
 	char	*cmd;
 	char	**args;
-}	t_simple_cmd;
+}			t_exec;
 
+typedef struct s_pipe
+{
+	t_exec	cmd;
+	char	*file; // in or out file
+	int		mode; // depending on '<<' or '>>'
+	int		fd; // its 0 or 1 depending on '<' or '>'
+}			t_pipe;
 typedef struct s_redir
 {
-	t_simple_cmd	cmd;
-	char			*file; // in or out file
-	int				mode; // O_CREATE etc..
-	int				fd;
-}	t_redir;
-
+	t_exec	cmd;
+	char	*file; // in or out file
+	int		mode; // O_CREATE etc..
+	int		fd;
+}			t_redir;
 typedef enum t_type
 {
 	PIPE,
@@ -58,10 +64,10 @@ typedef enum t_state
 }	e_state;
 typedef union t_command
 {
-	t_simple_cmd	cmd;
-	t_redir			redir;
-	t_pipe			pipe;
-}	u_command;
+	t_exec	*exec;
+	t_redir	*redir;
+	t_pipe	*pipe;
+}			u_command;
 
 typedef struct s_tree
 {
