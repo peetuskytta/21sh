@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
-/*   Updated: 2022/11/01 19:13:27 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/11/01 21:45:39 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 # define SHELL_H
 # include "../libft/incl/libft.h"
 # include "keys.h"
+# include "errors.h"
+# include <term.h>
+# include <fcntl.h>
+# include <time.h>
+# include <sys/ioctl.h>
 
 #define EOF '\0'
 #define HIST_FILE ".shell_history"
@@ -76,8 +81,45 @@ typedef struct s_tree
 	u_command	*right; // if the last sequence ends set this to NULL to indicate end of tree
 }				t_tree;
 
+typedef struct	s_win
+{
+		struct winsize	*win;
+		int				cols;
+		int				rows;
+		int				current_row;
+}				t_win;
+
+typedef struct s_shell
+{
+	char	**environ;
+	char	*minish;
+	int		num_of_variables;
+	int		quote;
+	int		dir_len;
+	int		previous_dir_in_cd;
+	char	*prev_dir;
+	t_win	*window;
+}				t_shell;
+
+/*
+** SHELL
+*/
 int		env_variable_counter(char **environ);
 void	init_shell(t_shell *shell, char **environ);
 void	allocation_check(void **check);
+/*
+** CURSOR
+*/
+void	init_window(t_win *window);
+/*
+** KEYS
+*/
+int		ft_iscntrl(char c);
+void	keypress(void);
+/*
+** RAW
+*/
+int		enable_rawmode(void);
+void	kill_mode(const char *str);
 
 # endif
