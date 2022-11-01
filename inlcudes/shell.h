@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
-/*   Updated: 2022/11/01 20:23:36 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/11/01 20:48:57 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define SHELL_H
 # include "../libft/incl/libft.h"
 # include "keys.h"
+# include "errors.h"
 # include <term.h>
 # include <fcntl.h>
 # include <time.h>
