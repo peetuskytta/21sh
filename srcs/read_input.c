@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:34:55 by pskytta           #+#    #+#             */
-/*   Updated: 2022/11/03 09:12:36 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/11/03 10:13:21 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	command_prompt_loop(t_shell *shell)
 		shell->cmd_line = ft_strdup(buf);
 		ft_strdel(&buf);
 		ft_printf("\nbuf: %s\n\n", shell->cmd_line);
-		lexer(shell->cmd_line, ft_strlen(shell->cmd_line), &lex);
+		lexer(shell->cmd_line, 1, &lex);
 		exit(EXIT_SUCCESS);
 	}
 }
