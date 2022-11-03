@@ -6,11 +6,11 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2022/11/02 10:12:39 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/11/03 13:02:50 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inlcudes/shell.h"
+#include "../includes/shell.h"
 
 int	main(int argc, char **argv, char **envp)
 {

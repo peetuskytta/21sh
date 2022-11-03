@@ -6,11 +6,11 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 14:49:07 by pskytta           #+#    #+#             */
-/*   Updated: 2022/11/02 08:29:06 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/11/03 13:26:42 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inlcudes/shell.h"
+#include "../includes/shell.h"
 
 void	allocation_check(void **check)
 {

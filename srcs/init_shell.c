@@ -6,11 +6,11 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 09:15:27 by pskytta           #+#    #+#             */
-/*   Updated: 2022/11/02 09:35:52 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/11/03 13:34:25 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inlcudes/shell.h"
+#include "../includes/shell.h"
 
 static void	fetch_envp(t_shell *shell, char **environ, int count)
 {

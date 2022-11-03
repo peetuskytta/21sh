@@ -6,11 +6,11 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 14:48:05 by pskytta           #+#    #+#             */
-/*   Updated: 2022/10/31 14:48:24 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/11/03 13:34:19 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inlcudes/shell.h"
+#include "../includes/shell.h"
 
 int	env_variable_counter(char **environ)
 {

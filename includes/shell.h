@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
-/*   Updated: 2022/11/02 13:57:33 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/11/03 13:23:49 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,6 @@ void	allocation_check(void **check);
 */
 int		command_prompt_loop(t_shell *shell);
 char	*handle_open_quotes(t_shell *shell, char *buf, int *quotes);
-
-/*
-** LEXER
-*/
-void	lexer(char *input);
 
 /*
 ** CURSOR

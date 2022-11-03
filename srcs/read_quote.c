@@ -6,11 +6,11 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:49:29 by pskytta           #+#    #+#             */
-/*   Updated: 2022/11/02 10:15:34 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/11/03 13:34:54 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inlcudes/shell.h"
+#include "../includes/shell.h"
 
 /*
 **	writes "dquote>" for open double quote and "quote>" for open single quote

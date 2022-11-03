@@ -6,15 +6,12 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 13:58:06 by pskytta           #+#    #+#             */
-/*   Updated: 2022/11/03 10:11:54 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/11/03 13:38:52 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
-
-# include "shell.h"
-
 typedef enum e_tok_type
 {
 	CHAR_PIPE = '|',
@@ -45,7 +42,7 @@ typedef struct s_tok
 {
 	int		type;
 	char	*word;
-	t_tok	*next;
+	s_tok	*next;
 }			t_tok;
 
 typedef struct s_lexer
