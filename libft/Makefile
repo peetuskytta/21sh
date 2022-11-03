@@ -6,7 +6,7 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror -I$(HDR_SRC)
 
-# ASCII_DIR = ./ascii/ 
+# ASCII_DIR = ./ascii/
 # CONV_DIR = ./convert/
 # LIST_DIR = ./list/
 # MATH_DIR = ./math/
@@ -16,12 +16,12 @@ CFLAGS = -Wall -Wextra -Werror -I$(HDR_SRC)
 # STR_DIR = ./src/
 # BIT_DIR = ./bits
 
-# ASCII = $(addprefix $(ASCII_DIR), $(_ASCII_SRC)) 
+# ASCII = $(addprefix $(ASCII_DIR), $(_ASCII_SRC))
 # CONV = $(addprefix $(CONV_DIR), $(_CONV_SRC))
-# LIST = $(addprefix $(LIST_DIR), $(_LIST_SRC)) 
+# LIST = $(addprefix $(LIST_DIR), $(_LIST_SRC))
 # MATH = $(addprefix $(MATH_DIR, $(_MATH_SRC))
 # MEM = $(addprefix $(MEM_DIR, $(_MEM_SRC))
-# PRINT = $(addprefix $(PRINT_DIR), $(_PRINT_SRC)) 
+# PRINT = $(addprefix $(PRINT_DIR), $(_PRINT_SRC))
 # STR = $(addprefix $(STR_DIR), $(_STR_SRC))
 
 _ARRAY_SRC = array/ft_arrdup.c \
@@ -51,11 +51,11 @@ _CONV_SRC = convert/ft_atoi.c \
 		convert/ft_atof.c \
 		convert/ft_litoa.c \
 		convert/ft_ftoa.c \
-		convert/ft_sizetoa.c 
+		convert/ft_sizetoa.c
 
 _LIST_SRC = list/ft_listnew.c \
 			list/ft_addlstelem.c \
-			list/ft_freelst.c 
+			list/ft_freelst.c
 
 _MATH_SRC = math/dig_count_base.c \
 		math/dig_count.c \
@@ -67,6 +67,7 @@ _MATH_SRC = math/dig_count_base.c \
 		math/ft_powerof.c \
 		math/ft_strstr_start.c \
 		math/ft_strchr_index.c \
+		math/ft_count_chrstr.c \
 		math/ft_long_abs.c \
 		math/ft_swap.c \
 
@@ -80,7 +81,7 @@ _MEM_SRC =  mem/ft_bzero.c \
 		mem/ft_memmove.c \
 		mem/ft_memset.c \
 		mem/ft_realloc.c \
-		mem/ft_memdel_range.c 
+		mem/ft_memdel_range.c
 
 _PERMISSIONS_SRC = permissions/ft_is_directory.c
 
@@ -145,7 +146,7 @@ _STR_SRC = str/ft_charstr.c \
 		str/ft_strtrimdup.c
 
 _TREE_SRC = trees/ft_add_node.c \
-		trees/ft_new_node.c 
+		trees/ft_new_node.c
 
 OBJ = $(LIBFT_OBJ)
 OBJ_DIR = obj

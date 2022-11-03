@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr_index.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:22:23 by zraunio           #+#    #+#             */
-/*   Updated: 2022/09/26 14:22:24 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/11/02 10:02:45 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_strchr_index(char *str, char c, char start)
 	else if (start == 'e')
 	{
 		i = ft_strlen(str);
-		while (i >= 0)
+		while (i > 0)
 		{
 			if (str[i] == c)
 				return (i);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:24:46 by zraunio           #+#    #+#             */
-/*   Updated: 2022/11/01 20:48:25 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/11/02 08:37:23 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # define ARG_USAGE_2 " filename [arguments]"
 # define NO_FILE_OR_DIR ": No such file or directory"
 # define HIST_ERR_FILE "Could not open history file."
+# define NO_STRING ""
 
 /*Error message defines for CD*/
 # define CD_NO_HOME " HOME not set"

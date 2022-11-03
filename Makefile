@@ -16,11 +16,14 @@ SOURCES := srcs/main.c \
 	srcs/allocation_check.c \
 	srcs/env_variable_counter.c \
 	srcs/init_shell.c \
+	srcs/read_input.c \
+	srcs/read_quote.c \
+	srcs/lexer.c \
 
 OBJ := $(SOURCES:.c=.o)
 
 LIBFT_M := make -s -C srcs/libft
-LIBFT_A := ../libft/libft.a
+LIBFT_A := libft/libft.a
 HEADER := includes/shell.h
 
 all: $(NAME)

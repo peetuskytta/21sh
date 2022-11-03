@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2022/10/31 15:30:16 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/11/02 10:12:39 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@ int	main(int argc, char **argv, char **envp)
 
 	ft_memset(&shell, EOF, sizeof(shell));
 	if (argc && argv && envp)
+	{
 		init_shell(&shell, envp);
+		command_prompt_loop(&shell);
+	}
 	return (EXIT_SUCCESS);
 }
