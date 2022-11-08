@@ -1,4 +1,4 @@
-#include "../../inlcudes/shell.h"
+#include "../../includes/shell.h"
 #include <stdio.h>
 
 int	main(void)

@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
-/*   Updated: 2022/11/03 13:23:49 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/11/08 08:47:42 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,13 @@
 # define S_QUOTE '\''
 # define D_QUOTE '\"'
 
-typedef struct s_exec
-{
-	char	*cmd;
-	char	**args;
-}			t_exec;
-
 typedef struct	s_win
 {
-		struct winsize	*win;
-		int				cols;
-		int				rows;
-		int				current_row;
-}				t_win;
+	struct winsize	*win;
+	int				cols;
+	int				rows;
+	int				current_row;
+}					t_win;
 
 typedef struct s_shell
 {
@@ -84,5 +78,16 @@ void	keypress(void);
 */
 int		enable_rawmode(void);
 void	kill_mode(const char *str);
+
+#define EOF '\0'
+#define HIST_FILE ".shell_history"
+
+#define TRUE 1
+#define FALSE 0
+
+int		env_variable_counter(char **environ);
+void	init_shell(t_shell *shell, char **environ);
+void	allocation_check(void **check);
+
 
 # endif

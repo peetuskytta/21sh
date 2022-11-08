@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   allocation_check.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 14:49:07 by pskytta           #+#    #+#             */
-/*   Updated: 2022/11/03 13:26:42 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/11/03 15:36:55 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,3 +20,5 @@ void	allocation_check(void **check)
 		exit(MALLOC_ERRNO);
 	}
 }
+
+// make into ft_mem style function and add to libft

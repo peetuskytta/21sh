@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   keypress.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 13:35:45 by zraunio           #+#    #+#             */
-/*   Updated: 2022/10/29 15:04:32 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/11/08 08:49:44 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inlcudes/shell.h"
+#include "../../includes/shell.h"
 
 static char	read_key(void)
 {
@@ -34,9 +34,9 @@ void	keypress(void)
 	c = read_key();
 	while (c)
 	{
-		if (c == CTRL_C)
-			kill_mode("exit");
-		else if (ft_iscntrl(c) == 0)
+	/*	if (c == CTRL_C)
+			kill_mode("exit");*/
+		if (ft_iscntrl(c) == 0)
 			write(1, &c, 1);
 		c = read_key();
 	}
