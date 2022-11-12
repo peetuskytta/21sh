@@ -6,11 +6,11 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 15:06:54 by zraunio           #+#    #+#             */
-/*   Updated: 2022/10/29 15:33:22 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/11/12 11:09:28 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inlcudes/shell.h"
+#include "../../includes/shell.h"
 
 void	init_window(t_win *window)
 {

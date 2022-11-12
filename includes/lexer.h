@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 13:58:06 by pskytta           #+#    #+#             */
-/*   Updated: 2022/11/03 13:38:52 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/11/12 11:09:11 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ typedef enum e_state
 
 typedef struct s_tok
 {
-	int		type;
-	char	*word;
-	s_tok	*next;
+	int				type;
+	char			*word;
+	struct s_tok	*next;
 }			t_tok;
 
 typedef struct s_lexer

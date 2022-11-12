@@ -6,15 +6,15 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 12:04:38 by zraunio           #+#    #+#             */
-/*   Updated: 2022/10/27 13:33:10 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/11/12 11:24:39 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inlcudes/shell.h"
+#include "../../includes/shell.h"
 
 int	ft_iscntrl(char c)
 {
-	if ((c >= 1 && c <= 32))
+	if ((c >= 1 && c <= 31))
 		return (1);
 	else
 		return (0);

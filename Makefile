@@ -68,6 +68,10 @@ $(OBJ):
 $(LIBFT_A):
 	@make -C libft/
 
+rori:
+	@make re -C libft
+	@ $(CC) $(FLAGS) $(_KEYS) $(_RAWMODE) $(_CURSOR) $(LIBFT_A) -ltermcap -I includes/
+
 clean:
 	@make -C libft clean
 	@rm -f $(OBJ)

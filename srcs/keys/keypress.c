@@ -6,13 +6,18 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 13:35:45 by zraunio           #+#    #+#             */
-/*   Updated: 2022/10/29 15:04:32 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/11/12 13:00:45 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inlcudes/shell.h"
+#include "../../includes/shell.h"
 
-static char	read_key(void)
+static int	ft_putchar_out(int c)
+{
+	return (write(STDIN_FILENO, &c, 1));
+}
+
+static char	read_key(t_shell *shell)
 {
 	int		i;
 	char	c;
@@ -21,23 +26,27 @@ static char	read_key(void)
 	while (i != 1)
 	{
 		if (i == -1)
-			kill_mode("read");
+			kill_mode("read", shell);
 		i = read(STDIN_FILENO, &c, 1);
 	}
 	return (c);
 }
 
-void	keypress(void)
+void	keypress(t_shell *shell)
 {
 	char	c;
 
-	c = read_key();
+	c = read_key(shell);
 	while (c)
 	{
 		if (c == CTRL_C)
-			kill_mode("exit");
-		else if (ft_iscntrl(c) == 0)
-			write(1, &c, 1);
-		c = read_key();
+			kill_mode("exit", shell);
+		else if (ft_isprint(c) || (ft_isspace(c)))
+		{
+			if (c == ENTER)
+				tputs(tgetstr("cr", NULL), 1, ft_putchar_out);
+			write(STDOUT_FILENO, &c, 1);
+		}
+		c = read_key(shell);
 	}
 }

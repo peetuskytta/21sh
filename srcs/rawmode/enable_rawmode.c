@@ -6,27 +6,24 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 12:59:48 by zraunio           #+#    #+#             */
-/*   Updated: 2022/10/29 14:55:12 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/11/12 12:58:06 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inlcudes/shell.h"
+#include "../../includes/shell.h"
 
-int	enable_rawmode(void)
+int	enable_rawmode(t_shell *shell)
 {
-	struct termios	raw;
-
-	if (tcgetattr(STDIN_FILENO, &raw) == -1)
+	struct termios	orig_raw;
+	if (tcgetattr(STDIN_FILENO, &orig_raw) == -1)
 		return (0);
-	raw.c_iflag &= ~(IGNBRK | BRKINT | PARMRK | ISTRIP
+	shell->orig_raw = orig_raw;
+	orig_raw.c_iflag &= ~(IGNBRK | BRKINT | PARMRK | ISTRIP
 			| INLCR | IGNCR | ICRNL | IXON);
-	raw.c_oflag &= ~OPOST;
-	raw.c_lflag &= ~(ECHO | ECHONL | ICANON | IEXTEN | ISIG);
-	raw.c_cflag &= ~(CSIZE | PARENB);
-	raw.c_cflag |= CS8;
-	raw.c_cc[VMIN] = 1;
-	raw.c_cc[VTIME] = 0;
-	if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw) == -1)
-		return (0);
+	orig_raw.c_oflag &= ~OPOST;
+	orig_raw.c_lflag &= ~(ECHO | ECHONL | ICANON | IEXTEN | ISIG);
+	orig_raw.c_cflag &= ~(CSIZE | PARENB);
+	orig_raw.c_cflag |= CS8;
+	shell->raw = orig_raw;
 	return (1);
 }
