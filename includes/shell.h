@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
-/*   Updated: 2022/11/12 13:00:04 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/11/12 18:44:16 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define BUFFER 1024
 # define S_QUOTE '\''
 # define D_QUOTE '\"'
+# define MAX_BUFF 2049
 
 typedef struct s_exec
 {
@@ -56,7 +57,7 @@ typedef struct s_shell
 	int			dir_len;
 	int			previous_dir_in_cd;
 	char		*prev_dir;
-	t_win		*window;
+	t_win		window;
 	struct termios	orig_raw;
 	struct termios	raw;
 }				t_shell;
@@ -75,9 +76,15 @@ int		command_prompt_loop(t_shell *shell);
 char	*handle_open_quotes(t_shell *shell, char *buf, int *quotes);
 
 /*
+** OUTPUT
+*/
+int		stdout_char(int c);
+
+/*
 ** CURSOR
 */
 void	init_window(t_win *window);
+void	goto_newline(t_shell *shell);
 /*
 ** KEYS
 */
