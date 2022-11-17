@@ -2,3 +2,9 @@
 *.pdf
 *.pdf
 *.txt
+*.
+*.out
+*.a
+21sh
+.vscode/
+libft/ft_printf/.deps/

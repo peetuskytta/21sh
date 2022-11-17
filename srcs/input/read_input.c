@@ -6,11 +6,11 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:34:55 by pskytta           #+#    #+#             */
-/*   Updated: 2022/11/08 12:19:10 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/11/17 13:20:25 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/shell.h"
+#include "../../includes/shell.h"
 
 /*
 **	Verification if quote is still unclosed.
@@ -81,7 +81,7 @@ int	command_prompt_loop(t_shell *shell)
 		allocation_check((void *)shell->cmd_line);
 		ft_strdel(&buf);
 		lexer(shell->cmd_line);
-		ft_printf("buf: {%s}\n\n", shell->cmd_line);
+		//ft_printf("buf: {%s}\n\n", shell->cmd_line);
 		exit(EXIT_SUCCESS);
 	}
 }

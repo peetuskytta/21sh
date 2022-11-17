@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
-/*   Updated: 2022/11/08 08:47:42 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/11/17 15:07:39 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@
 # include <term.h>
 # include <fcntl.h>
 # include <time.h>
+# include <curses.h>
+# include <termcap.h>
 # include <sys/ioctl.h>
 
-# define EOF '\0'
 # define HIST_FILE ".shell_history"
 
 # define TRUE 1
@@ -40,15 +41,17 @@ typedef struct	s_win
 
 typedef struct s_shell
 {
-	char	**environ;
-	char	*cmd_line;
-	char	*minish;
-	int		num_of_variables;
-	int		quote;
-	int		dir_len;
-	int		previous_dir_in_cd;
-	char	*prev_dir;
-	t_win	*window;
+	char		**environ;
+	char		*cmd_line;
+	char		*minish;
+	int			num_of_variables;
+	int			quote;
+	int			dir_len;
+	int			previous_dir_in_cd;
+	char		*prev_dir;
+	t_win		*window;
+	struct termios	orig_raw;
+	struct termios	raw;
 }				t_shell;
 
 /*
@@ -72,16 +75,16 @@ void	init_window(t_win *window);
 ** KEYS
 */
 int		ft_iscntrl(char c);
-void	keypress(void);
+void	keypress(t_shell *shell);
 /*
 ** RAW
 */
-int		enable_rawmode(void);
-void	kill_mode(const char *str);
+int		enable_rawmode(t_shell *shell);
+void	kill_mode(const char *str, t_shell *shell);
 
-#define EOF '\0'
 #define HIST_FILE ".shell_history"
 
+#define NULL_BYTE '\0'
 #define TRUE 1
 #define FALSE 0
 
