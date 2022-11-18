@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 12:02:56 by pskytta           #+#    #+#             */
-/*   Updated: 2022/11/17 15:52:50 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/11/18 13:05:43 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static char	get_char_type(char c)
 		return (CHAR_QUOTE);
 	else if (c == CHAR_SEMICOLON)
 		return (CHAR_SEMICOLON);
+	else if (c == CHAR_WHITESPACE)
+		return (CHAR_WHITESPACE);
 	else
 		return (CHAR_GENERAL);
 }
@@ -49,12 +51,13 @@ static void	change_state(t_tok *tok, int *state, int *k, char ch)
 {
 	tok->string[*k] = ch;
 	(*k)++;
+	tok->type = WORD;
 	if (ch == CHAR_DQUOTE)
 		*state = STATE_IN_DQUOTE;
 	else if (ch == CHAR_QUOTE)
 		*state = STATE_IN_QUOTE;
 	else if (ch == CHAR_ESCAPE)
-		*state = STATE_IN_ESCAPE;
+		*state = STATE_GENERAL;
 	else if (ch == CHAR_GENERAL)
 		*state = STATE_GENERAL;
 }
@@ -95,20 +98,23 @@ void	lexer(char *input)
 			{
 				if (k > 0)
 				{
-					token[tok].string[--k] = NULL_BYTE;
+					token[tok].string[k] = NULL_BYTE;
 					k = 0;
 					tok++;
 					token[tok].type = CHAR_NULL;
 				}
 			}
-			if (ch_type == CHAR_SEMICOLON || ch_type == CHAR_PIPE)
+			else if (ch_type == CHAR_SEMICOLON || ch_type == CHAR_PIPE)
 			{
-				if (k > 0)
+				if (k >= 0)
 				{
-					token[tok].string[k] = NULL_BYTE;
+					token[tok].string[k] = ch_type;
 					k = 0;
+					if (ch_type == CHAR_PIPE)
+						token[tok].type = PIPE;
+					else if (ch_type == CHAR_SEMICOLON)
+						token[tok].type = SEPARATOR;
 					tok++;
-					token[tok].type = CHAR_NULL;
 				}
 				token[tok].type = (int)ch_type;
 				token[tok].string[0] = ch_type;
@@ -139,9 +145,9 @@ void	lexer(char *input)
 		i++;
 	}
 	i = 0;
-	while (tok > i)
+	while (tok >= i)
 	{
-		ft_printf("\ntype: {%d}\ntoken[%d]: {%s}\n", &token[i].type, i, &token[i].string);
+		ft_printf("token[%d] type: {%d} content: {%s}\n", i, token[i].type, &token[i].string);
 		i++;
 	}
 }
