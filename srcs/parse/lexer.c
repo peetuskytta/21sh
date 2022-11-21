@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 12:02:56 by pskytta           #+#    #+#             */
-/*   Updated: 2022/11/21 19:40:09 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/11/21 20:46:49 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,17 +78,49 @@ static int	number_of_jobs(t_tok *tokens, int tok)
 	return (count);
 }
 
+static int	number_of_pipes(t_tok *tokens, int tok)
+{
+	int	count;
+	int	i;
+
+	count = 0;
+	i = 0;
+	while (tok > i)
+	{
+		if (tokens[i].type == PIPE)
+			count++;
+		i++;
+	}
+	return (count);
+}
+
 static void	build_command_tab(t_tok *tokens, int tok)
 {
 	t_jobs	*jobs;
-	int	nbr;
+	int		pip_n;
+	int		job_n;
 
-	nbr = number_of_jobs(tokens, tok); // count how many jobs is needed
-	ft_printf("\nBUILDER\njob count: {%d}\n", nbr);
-	jobs = (t_jobs *)ft_memalloc(sizeof(t_jobs) * nbr + 1);
-	ft_memset(jobs, 0, sizeof(t_jobs) * nbr + 1);
+	job_n = number_of_jobs(tokens, tok);					// count how many jobs is needed
+	ft_printf("\nBUILDER\nJOB count: {%d}\n", job_n);
+	jobs = (t_jobs *)ft_memalloc(sizeof(t_jobs) * job_n + 1);
+	ft_memset(jobs, 0, sizeof(t_jobs) * job_n + 1);
+
+	int i = 0;
+	while (job_n >= i)
+	{
+		pip_n = number_of_pipes(tokens, tok);					// count how many pipes is needed
+		ft_printf("\nBUILDER\nPIPE count: {%d}\n", pip_n);
+		jobs[i].cmd = (t_cmd *)ft_memalloc(sizeof(t_cmd) * pip_n + 1);
+		ft_memset(jobs[i].cmd, 0, sizeof(t_cmd) * pip_n + 1);
+		i++;
+	}
 
 
+
+
+
+
+	ft_memdel((void *)&jobs->cmd);
 	ft_memdel((void *)&jobs);
 }
 
@@ -148,9 +180,17 @@ void	lexer(char *input)
 						token[tok].type = REDIR;
 					tok++;
 				}
-				token[tok].type = (int)ch_type;
-				token[tok].string[0] = ch_type;
-				token[tok].string[1] = NULL_BYTE;
+				else
+				{
+					if (ch_type == CHAR_PIPE)
+						token[tok].type = PIPE;
+					else if (ch_type == CHAR_SEMICOLON)
+						token[tok].type = SEPARATOR;
+					else if (ch_type == CHAR_GREATER || ch_type == CHAR_LESSER)
+						token[tok].type = REDIR;
+					token[tok].string[0] = ch_type;
+					token[tok].string[1] = NULL_BYTE;
+				}
 			}
 		}
 		else if (state == STATE_IN_DQUOTE)

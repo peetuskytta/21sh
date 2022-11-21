@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 13:58:06 by pskytta           #+#    #+#             */
-/*   Updated: 2022/11/21 19:21:59 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/11/21 20:49:47 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ typedef union u_cmd
 
 typedef struct s_jobs
 {
-	int			type;
+	int			end;
 	union u_cmd	*cmd;
 }				t_jobs;
 
