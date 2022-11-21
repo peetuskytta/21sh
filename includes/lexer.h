@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 13:58:06 by pskytta           #+#    #+#             */
-/*   Updated: 2022/11/18 12:17:11 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/11/21 19:21:59 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ typedef enum t_type
 	REDIR,
 	SEPARATOR,
 	WORD,
+	JOB,
+	NO_JOB,
 }	e_type;
 
 typedef enum t_state
@@ -89,6 +91,7 @@ typedef union u_cmd
 
 typedef struct s_jobs
 {
+	int			type;
 	union u_cmd	*cmd;
 }				t_jobs;
 

@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 12:02:56 by pskytta           #+#    #+#             */
-/*   Updated: 2022/11/18 13:05:43 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/11/21 19:40:09 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static t_tok	*init_tokens(t_tok *token, char *input)
 	size_t	size;
 
 	size = ft_count_chrstr(input, CHAR_WHITESPACE);
-	ft_printf("\naprox. number of tokens: %ld\n", size);
+	ft_printf("\nLEXER\naprox. number of tokens: %ld\n", size);
 	token = (t_tok *)ft_memalloc(sizeof(t_tok) * size);
 	allocation_check((void *)(token));
 	ft_memset(token, 0, sizeof(t_tok) * size);
@@ -49,8 +49,6 @@ static char	get_char_type(char c)
 
 static void	change_state(t_tok *tok, int *state, int *k, char ch)
 {
-	tok->string[*k] = ch;
-	(*k)++;
 	tok->type = WORD;
 	if (ch == CHAR_DQUOTE)
 		*state = STATE_IN_DQUOTE;
@@ -60,6 +58,38 @@ static void	change_state(t_tok *tok, int *state, int *k, char ch)
 		*state = STATE_GENERAL;
 	else if (ch == CHAR_GENERAL)
 		*state = STATE_GENERAL;
+	tok->string[*k] = ch;
+	(*k)++;
+}
+
+static int	number_of_jobs(t_tok *tokens, int tok)
+{
+	int	count;
+	int	i;
+
+	count = 0;
+	i = 0;
+	while (tok > i)
+	{
+		if (tokens[i].type == SEPARATOR)
+			count++;
+		i++;
+	}
+	return (count);
+}
+
+static void	build_command_tab(t_tok *tokens, int tok)
+{
+	t_jobs	*jobs;
+	int	nbr;
+
+	nbr = number_of_jobs(tokens, tok); // count how many jobs is needed
+	ft_printf("\nBUILDER\njob count: {%d}\n", nbr);
+	jobs = (t_jobs *)ft_memalloc(sizeof(t_jobs) * nbr + 1);
+	ft_memset(jobs, 0, sizeof(t_jobs) * nbr + 1);
+
+
+	ft_memdel((void *)&jobs);
 }
 
 void	lexer(char *input)
@@ -91,7 +121,7 @@ void	lexer(char *input)
 			else if (ch_type == CHAR_DQUOTE)
 				change_state(&token[tok], &state, &k, CHAR_DQUOTE);
 			else if (ch_type == CHAR_ESCAPE)
-				change_state(&token[tok], &state, &k, input[i + 1]);
+				change_state(&token[tok], &state, &k, input[++i]);
 			else if (ch_type == CHAR_GENERAL)
 				change_state(&token[tok], &state, &k, c);
 			else if (ch_type == CHAR_WHITESPACE)
@@ -104,7 +134,7 @@ void	lexer(char *input)
 					token[tok].type = CHAR_NULL;
 				}
 			}
-			else if (ch_type == CHAR_SEMICOLON || ch_type == CHAR_PIPE)
+			else if (ch_type == CHAR_SEMICOLON || ch_type == CHAR_PIPE || ch_type == CHAR_GREATER || ch_type == CHAR_LESSER)
 			{
 				if (k >= 0)
 				{
@@ -114,6 +144,8 @@ void	lexer(char *input)
 						token[tok].type = PIPE;
 					else if (ch_type == CHAR_SEMICOLON)
 						token[tok].type = SEPARATOR;
+					else if (ch_type == CHAR_GREATER || ch_type == CHAR_LESSER)
+						token[tok].type = REDIR;
 					tok++;
 				}
 				token[tok].type = (int)ch_type;
@@ -145,9 +177,13 @@ void	lexer(char *input)
 		i++;
 	}
 	i = 0;
+	/*PRINT FOR DEBUGGING PURPOSES*/
 	while (tok >= i)
 	{
 		ft_printf("token[%d] type: {%d} content: {%s}\n", i, token[i].type, &token[i].string);
 		i++;
 	}
+	// After the lexing is done quotations should be removed and maybe do expansion?
+	build_command_tab(token, tok);
+	ft_memdel((void *)&token);
 }
