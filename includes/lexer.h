@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 13:58:06 by pskytta           #+#    #+#             */
-/*   Updated: 2022/11/21 20:49:47 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/11/22 12:02:56 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ typedef enum t_type
 	REDIR,
 	SEPARATOR,
 	WORD,
-	JOB,
-	NO_JOB,
 }	e_type;
 
 typedef enum t_state
@@ -53,48 +51,16 @@ typedef enum t_state
 
 typedef struct s_tok
 {
-	int		type;
-	char	string[1024];
-}			t_tok;
+	int				type;
+	char			*str;
+	struct s_tok	*next;
+}					t_tok;
 
-typedef struct s_simple
+typedef struct s_lex
 {
-	char	*cmd;
-	char	**args;
-	char	**envp;
-}			t_simple;
+	t_tok	*token_list;
+}			t_lex;
 
-typedef struct s_redir
-{
-	char	*cmd;
-	char	**args;
-	char	**envp;
-	char	*in_file;
-	char	*out_file;
-}			t_redir;
-
-typedef struct s_pipe
-{
-	char	*cmd;
-	char	**args;
-	char	**envp;
-	int		fd[2];
-}			t_pipe;
-
-typedef union u_cmd
-{
-	int			type;
-	t_simple	*simple;
-	t_redir		*redir;
-	t_pipe		*pipe;
-}				t_cmd;
-
-typedef struct s_jobs
-{
-	int			end;
-	union u_cmd	*cmd;
-}				t_jobs;
-
-void	lexer(char *input);
+void	lexer(char *input, int size, t_lex *list);
 
 #endif
