@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:34:55 by pskytta           #+#    #+#             */
-/*   Updated: 2022/11/21 19:38:43 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/11/22 12:13:38 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,18 +69,28 @@ static char	*read_input_stdin(t_shell *shell, char *buf, int bytes_read)
 */
 int	command_prompt_loop(t_shell *shell)
 {
+	t_lex	list;
 	char	*buf;
 
 	while (TRUE)
 	{
-		//write_prompt_and_folder(shell);
 		write(1, "$> ", 4);
 		buf = (char *)ft_memalloc(BUFFER + 1);
 		buf = read_input_stdin(shell, buf, 0);
 		shell->cmd_line = ft_strtrim(buf);
 		allocation_check((void *)shell->cmd_line);
 		ft_strdel(&buf);
-		lexer(shell->cmd_line);
+		lexer(shell->cmd_line, ft_strlen(shell->cmd_line), &list);
+
+	/*PRINT FOR DEBUGGING PURPOSES*/
+		int i = 0;
+		while (list.token_list)
+		{
+			ft_printf("token[%d]type:\t{%d} content: {%s}\n", i, list.token_list->type, list.token_list->str);
+			i++;
+			list.token_list = list.token_list->next;
+
+		}
 		exit(EXIT_SUCCESS);
 	}
 }
