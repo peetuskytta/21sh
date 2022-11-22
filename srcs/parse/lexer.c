@@ -6,23 +6,19 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 12:02:56 by pskytta           #+#    #+#             */
-/*   Updated: 2022/11/21 20:46:49 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/11/22 12:11:09 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lexer.h"
 
-static t_tok	*init_tokens(t_tok *token, char *input)
+static void	init_token(t_tok *token, int size)
 {
-	size_t	size;
-
-	size = ft_count_chrstr(input, CHAR_WHITESPACE);
-	ft_printf("\nLEXER\naprox. number of tokens: %ld\n", size);
-	token = (t_tok *)ft_memalloc(sizeof(t_tok) * size);
-	allocation_check((void *)(token));
-	ft_memset(token, 0, sizeof(t_tok) * size);
-	return (token);
-
+	token->str = (char *)ft_memalloc(sizeof(char) * size + 1);
+	allocation_check((void *)(token->str));
+	ft_memset(token->str, EOF, size + 1);
+	token->type = CHAR_NULL;
+	token->next = NULL;
 }
 
 static char	get_char_type(char c)
@@ -58,88 +54,26 @@ static void	change_state(t_tok *tok, int *state, int *k, char ch)
 		*state = STATE_GENERAL;
 	else if (ch == CHAR_GENERAL)
 		*state = STATE_GENERAL;
-	tok->string[*k] = ch;
+	tok->str[*k] = ch;
 	(*k)++;
 }
 
-static int	number_of_jobs(t_tok *tokens, int tok)
-{
-	int	count;
-	int	i;
-
-	count = 0;
-	i = 0;
-	while (tok > i)
-	{
-		if (tokens[i].type == SEPARATOR)
-			count++;
-		i++;
-	}
-	return (count);
-}
-
-static int	number_of_pipes(t_tok *tokens, int tok)
-{
-	int	count;
-	int	i;
-
-	count = 0;
-	i = 0;
-	while (tok > i)
-	{
-		if (tokens[i].type == PIPE)
-			count++;
-		i++;
-	}
-	return (count);
-}
-
-static void	build_command_tab(t_tok *tokens, int tok)
-{
-	t_jobs	*jobs;
-	int		pip_n;
-	int		job_n;
-
-	job_n = number_of_jobs(tokens, tok);					// count how many jobs is needed
-	ft_printf("\nBUILDER\nJOB count: {%d}\n", job_n);
-	jobs = (t_jobs *)ft_memalloc(sizeof(t_jobs) * job_n + 1);
-	ft_memset(jobs, 0, sizeof(t_jobs) * job_n + 1);
-
-	int i = 0;
-	while (job_n >= i)
-	{
-		pip_n = number_of_pipes(tokens, tok);					// count how many pipes is needed
-		ft_printf("\nBUILDER\nPIPE count: {%d}\n", pip_n);
-		jobs[i].cmd = (t_cmd *)ft_memalloc(sizeof(t_cmd) * pip_n + 1);
-		ft_memset(jobs[i].cmd, 0, sizeof(t_cmd) * pip_n + 1);
-		i++;
-	}
-
-
-
-
-
-
-	ft_memdel((void *)&jobs->cmd);
-	ft_memdel((void *)&jobs);
-}
-
-void	lexer(char *input)
+void	lexer(char *input, int size, t_lex *list)
 {
 	t_tok	*token;
-	char	c;
 	char	ch_type;
+	char	c;
 	int		i;
 	int		k;
-	int		tok;
 	int		state;
 
 	i = 0;
 	k = 0;
-	tok = 0;
-	state = STATE_GENERAL;
 	token = NULL;
-	token = init_tokens(token, input);
+	state = STATE_GENERAL;
+	list->token_list = ft_memalloc(sizeof(t_tok));
+	token = list->token_list;
+	init_token(token, size);
 	c = input[i];
 
 	while (c != NULL_BYTE)
@@ -149,59 +83,51 @@ void	lexer(char *input)
 		if (state == STATE_GENERAL)
 		{
 			if (ch_type == CHAR_QUOTE)
-				change_state(&token[tok], &state, &k, CHAR_QUOTE);
+				change_state(token, &state, &k, CHAR_QUOTE);
 			else if (ch_type == CHAR_DQUOTE)
-				change_state(&token[tok], &state, &k, CHAR_DQUOTE);
+				change_state(token, &state, &k, CHAR_DQUOTE);
 			else if (ch_type == CHAR_ESCAPE)
-				change_state(&token[tok], &state, &k, input[++i]);
+				change_state(token, &state, &k, input[++i]);
 			else if (ch_type == CHAR_GENERAL)
-				change_state(&token[tok], &state, &k, c);
+				change_state(token, &state, &k, c);
 			else if (ch_type == CHAR_WHITESPACE)
 			{
 				if (k > 0)
 				{
-					token[tok].string[k] = NULL_BYTE;
+					token->str[k] = NULL_BYTE;
+					token->next = (t_tok *)ft_memalloc(sizeof(t_tok));
+					token = token->next;
+					init_token(token, size - i);
 					k = 0;
-					tok++;
-					token[tok].type = CHAR_NULL;
 				}
 			}
 			else if (ch_type == CHAR_SEMICOLON || ch_type == CHAR_PIPE || ch_type == CHAR_GREATER || ch_type == CHAR_LESSER)
 			{
-				if (k >= 0)
+				if (k > 0)
 				{
-					token[tok].string[k] = ch_type;
+					token->str[k] = NULL_BYTE;
+					token->next = (t_tok *)ft_memalloc(sizeof(t_tok));
+					token = token->next;
+					init_token(token, size - i);
 					k = 0;
-					if (ch_type == CHAR_PIPE)
-						token[tok].type = PIPE;
-					else if (ch_type == CHAR_SEMICOLON)
-						token[tok].type = SEPARATOR;
-					else if (ch_type == CHAR_GREATER || ch_type == CHAR_LESSER)
-						token[tok].type = REDIR;
-					tok++;
 				}
-				else
-				{
-					if (ch_type == CHAR_PIPE)
-						token[tok].type = PIPE;
-					else if (ch_type == CHAR_SEMICOLON)
-						token[tok].type = SEPARATOR;
-					else if (ch_type == CHAR_GREATER || ch_type == CHAR_LESSER)
-						token[tok].type = REDIR;
-					token[tok].string[0] = ch_type;
-					token[tok].string[1] = NULL_BYTE;
-				}
+				token->str[0] = ch_type;
+				token->str[1] = NULL_BYTE;
+				token->type = ch_type;
+				token->next = (t_tok *)ft_memalloc(sizeof(t_tok));
+				token = token->next;
+				init_token(token, size - i);
 			}
 		}
 		else if (state == STATE_IN_DQUOTE)
 		{
-			token[tok].string[k++] = c;
+			token->str[k++] = c;
 			if (ch_type == CHAR_DQUOTE)
 				state = STATE_GENERAL;
 		}
 		else if (state == STATE_IN_QUOTE)
 		{
-			token[tok].string[k++] = c;
+			token->str[k++] = c;
 			if (ch_type == CHAR_QUOTE)
 				state = STATE_GENERAL;
 		}
@@ -209,21 +135,11 @@ void	lexer(char *input)
 		{
 			if (k > 0)
 			{
-				token[tok].string[k] = NULL_BYTE;
+				token->str[k] = NULL_BYTE;
 				k = 0;
 			}
 		}
 		//ft_printf("state: ch: c: {%d}---{%d}---{%c}\n", state, ch_type, c);
 		i++;
 	}
-	i = 0;
-	/*PRINT FOR DEBUGGING PURPOSES*/
-	while (tok >= i)
-	{
-		ft_printf("token[%d] type: {%d} content: {%s}\n", i, token[i].type, &token[i].string);
-		i++;
-	}
-	// After the lexing is done quotations should be removed and maybe do expansion?
-	build_command_tab(token, tok);
-	ft_memdel((void *)&token);
 }
