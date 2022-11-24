@@ -6,13 +6,34 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 10:20:57 by zraunio           #+#    #+#             */
-/*   Updated: 2022/11/13 10:21:25 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/11/24 16:26:49 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/shell.h"
 
-void	ft_env(t_shell *shell, char *args)
+static void	env_temp(t_shell *shell, char *args)
 {
 	
+}
+
+void	ft_env(t_shell *shell, char **args)
+{
+	int i;
+
+	if (shell->env_iflg == 1)
+		env_temp(shell, args);
+	else if (args)
+	{
+		//env $VALID_ENV_NAME
+		//env temporary env
+		//env misformatted_anything
+		//env command
+	}
+	else
+	{
+		i = 0;
+		while (shell->environ[i])
+			ft_print_fd(STDOUT_FILENO, "%s\n", shell->environ[i++]);
+	}
 }

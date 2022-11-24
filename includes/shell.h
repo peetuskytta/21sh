@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
-/*   Updated: 2022/11/17 15:31:04 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/11/24 17:05:46 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_shell
 {
 	char		**environ;
 	int			env_nbr;
+	int			env_iflg;
 	char		*cmd_line;
 	int			quote;
 	int			dir_len;
@@ -68,6 +69,8 @@ typedef struct s_shell
 void	ft_setenv(t_shell *shell, char *args);
 int		ft_is_strenv(char *name, char **environ);
 void	setenv_update_env(t_shell *shell, char *name, char *value, int i);
+void	ft_env(t_shell *shell, char **args);
+void	ft_unsetenv(t_shell *shell, char *args);
 /*
 ** SHELL
 */
