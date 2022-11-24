@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_stdin.c                                       :+:      :+:    :+:   */
+/*   ft_is_strenv.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/12 18:42:14 by zraunio           #+#    #+#             */
-/*   Updated: 2022/11/13 10:15:05 by zraunio          ###   ########.fr       */
+/*   Created: 2022/11/17 12:16:38 by zraunio           #+#    #+#             */
+/*   Updated: 2022/11/17 12:17:04 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
+#include "../../../includes/shell.h"
 
-char	*read_stdin(t_shell *shell)
+int	ft_is_strenv(char *name, char **environ)
 {
-	char	input[MAX_BUFF];
-	int		i;
-	int		key;
+	int	i;
 
-	while (1)
+	i = 0;
+	while (environ[i] != NULL)
 	{
-		ft_memset(input, 0, MAX_BUFF);
-		if (read(STDIN_FILENO, input, MAX_BUFF) == -1)
-			kill_mode("read", shell);
-		i = keypress(shell);
+		if (ft_strnstr(environ[i], name, ft_strlen(name)) != NULL)
+		{
+			if (environ[i][(int)ft_strlen(name)] == '=')
+				return (i);
+		}
+		i++;
 	}
+	return (-1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:24:46 by zraunio           #+#    #+#             */
-/*   Updated: 2022/11/02 08:37:23 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/11/17 12:10:37 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # define ARG_USAGE_2 " filename [arguments]"
 # define NO_FILE_OR_DIR ": No such file or directory"
 # define HIST_ERR_FILE "Could not open history file."
+# define ABORTED_ERROR "Process aborted."
 # define NO_STRING ""
 
 /*Error message defines for CD*/
@@ -33,6 +34,7 @@
 /*Error message defines for setenv and unsetenv*/
 # define EMPTY_STR "setenv name: cannot be an empty string"
 # define NAME_ERROR "setenv name: cannot be a NULL pointer or 0 length string"
+# define INVALID_CHAR "setenv name: cannot contain a '=' character"
 # define SET_TOO_MANY_ARG "setenv: too many arguments"
 # define SETENV_USAGE "usage: 'setenv [name] [value]'"
 # define NOT_IDENTIFIER ": not a valid identifier"
@@ -63,7 +65,9 @@
 # define NOT_DIR_ERRNO		8
 # define PIPE_ERRNO			9
 # define REDIR_ERRNO		10
-# define EOF_ERRNO			11
-# define BAD_FD_ERRNO		12
+# define BAD_FD_ERRNO		11
+# define ABORT_ERRNO		12
+# define ENV_NAME_ERRNO		13
+# define ENV_INVALID_ERRNO	14
 
 # endif

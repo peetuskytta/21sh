@@ -44,7 +44,9 @@ _KEYS := $(addprefix $(KEYS_DIR)/, ft_iscntrl.c \
 
 _OUTPUT := $(addprefix $(OUTPUT_DIR)/, stdout_char.c )
 
-_PANIC := $(addprefix $(PANIC_DIR)/, )
+_PANIC := $(addprefix $(PANIC_DIR)/, ft_strerror.c \
+									ft_perror.c \
+									ft_abort.c )
 
 _PARSE:= $(addprefix $(PARSE_DIR)/, lexer.c)
 

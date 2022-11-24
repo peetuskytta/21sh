@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 13:01:21 by zraunio           #+#    #+#             */
-/*   Updated: 2022/10/26 14:02:19 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/11/17 15:22:58 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ int					ft_memcmp(const void *s1, const void *s2, size_t n);
 void				*ft_memchr(const void *s, int c, size_t n);
 void				*ft_memccpy(void *dest, const void *src, int c,
 						size_t n);
-void				*ft_realloc(void *ptr, size_t o_size, size_t n_size);
+void				*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 void				ft_bzero(void *s, size_t n);
 int					ft_memdel_range(const int nbr, ...);
 /*

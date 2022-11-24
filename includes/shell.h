@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
-/*   Updated: 2022/11/12 18:44:16 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/11/17 15:31:04 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ typedef struct	s_win
 typedef struct s_shell
 {
 	char		**environ;
+	int			env_nbr;
 	char		*cmd_line;
-	char		*minish;
-	int			num_of_variables;
 	int			quote;
 	int			dir_len;
 	int			previous_dir_in_cd;
+	char		*pwd;
 	char		*prev_dir;
 	t_win		window;
 	struct termios	orig_raw;
@@ -63,18 +63,28 @@ typedef struct s_shell
 }				t_shell;
 
 /*
+** BUILDINS
+*/
+void	ft_setenv(t_shell *shell, char *args);
+int		ft_is_strenv(char *name, char **environ);
+void	setenv_update_env(t_shell *shell, char *name, char *value, int i);
+/*
 ** SHELL
 */
 int		env_variable_counter(char **environ);
 void	init_shell(t_shell *shell, char **environ);
 void	allocation_check(void **check);
-
 /*
 ** READ_INPUT
 */
 int		command_prompt_loop(t_shell *shell);
 char	*handle_open_quotes(t_shell *shell, char *buf, int *quotes);
-
+/*
+** PANIC
+*/
+void	ft_abort(void);
+void	ft_perror(const char *s);
+char	*ft_strerror(int errnum);
 /*
 ** OUTPUT
 */
