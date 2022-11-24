@@ -27,7 +27,8 @@ CFLAGS = -Wall -Wextra -Werror -I$(HDR_SRC)
 _ARRAY_SRC = array/ft_arrdup.c \
 			array/ft_arrfree.c \
 			array/ft_arrnew.c \
-			array/ft_reallocarray.c
+			array/ft_reallocarray.c \
+			array/ft_arrtrim.c
 
 _ASCII_SRC =  ascii/ft_isalnum.c \
 		ascii/ft_isalpha.c \
