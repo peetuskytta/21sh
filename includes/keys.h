@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:58 by zraunio           #+#    #+#             */
-/*   Updated: 2022/11/12 12:23:21 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/11/26 14:12:00 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 # define ESC 27
 # define SPACE 32
 # define BACK 127
-// # define UP 183
-# define DOWN 184
-# define RIGHT 185
-# define LEFT 186
+# define ARW_UP {27, 91, 65}
+# define ARW_DOWN {27, 91, 66}
+# define ARW_LEFT {27, 91, 67}
+# define ARW_RIGHT {27, 91, 68}
 # define END 188
 # define HOME 190
 # define DEL 295

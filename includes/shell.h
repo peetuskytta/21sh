@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
-/*   Updated: 2022/11/24 17:05:46 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/11/26 13:51:04 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ char	*ft_strerror(int errnum);
 /*
 ** OUTPUT
 */
-int		stdout_char(int c);
+int		stdin_char(int c);
 
 /*
 ** CURSOR
@@ -102,7 +102,8 @@ void	goto_newline(t_shell *shell);
 ** KEYS
 */
 int		ft_iscntrl(char c);
-void	keypress(t_shell *shell);
+void	keypress(t_shell *shell, char *read_str);
+void	read_key(t_shell *shell);
 /*
 ** RAW
 */

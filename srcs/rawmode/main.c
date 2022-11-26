@@ -14,7 +14,7 @@ int	main(void)
 		write(STDOUT_FILENO, "\x1b[H", 3);
 		init_window(&shell.window);
 		while (1)
-			keypress(&shell);
+			read_key(&shell);
 	}
 	kill_mode("exit", &shell);
 	return (0);

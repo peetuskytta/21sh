@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:24:46 by zraunio           #+#    #+#             */
-/*   Updated: 2022/11/17 12:10:37 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/11/26 14:35:20 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define NO_FILE_OR_DIR ": No such file or directory"
 # define HIST_ERR_FILE "Could not open history file."
 # define ABORTED_ERROR "Process aborted."
+# define ERROR_EXIT "Exit error."
 # define NO_STRING ""
 
 /*Error message defines for CD*/

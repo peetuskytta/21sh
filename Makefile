@@ -42,7 +42,7 @@ _INPUT := $(addprefix $(INPUT_DIR)/, read_input.c \
 _KEYS := $(addprefix $(KEYS_DIR)/, ft_iscntrl.c \
 								keypress.c)
 
-_OUTPUT := $(addprefix $(OUTPUT_DIR)/, stdout_char.c )
+_OUTPUT := $(addprefix $(OUTPUT_DIR)/, stdin_char.c )
 
 _PANIC := $(addprefix $(PANIC_DIR)/, ft_strerror.c \
 									ft_perror.c \
@@ -76,7 +76,7 @@ $(LIBFT_A):
 
 rori:
 	@make re -C libft
-	@ $(CC) $(FLAGS) $(_KEYS) $(_RAWMODE) $(_CURSOR) $(_OUTPUT) $(LIBFT_A) -ltermcap -I includes/
+	@ $(CC) $(FLAGS) $(_KEYS) $(_RAWMODE) $(_CURSOR) $(_PANIC) $(_OUTPUT) $(LIBFT_A) -ltermcap -I includes/
 
 clean:
 	@make -C libft clean

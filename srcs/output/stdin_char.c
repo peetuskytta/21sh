@@ -6,13 +6,13 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 17:53:11 by zraunio           #+#    #+#             */
-/*   Updated: 2022/11/12 17:53:49 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/11/26 10:56:00 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-int	stdout_char(int c)
+int	stdin_char(int c)
 {
 	return (write(STDIN_FILENO, &c, 1));
 }
