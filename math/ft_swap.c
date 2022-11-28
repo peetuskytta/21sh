@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   kill_mode.c                                        :+:      :+:    :+:   */
+/*   ft_swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 13:28:31 by zraunio           #+#    #+#             */
-/*   Updated: 2022/11/15 08:04:27 by pskytta          ###   ########.fr       */
+/*   Created: 2021/12/08 15:27:00 by pskytta           #+#    #+#             */
+/*   Updated: 2021/12/08 15:27:17 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
+#include "libft.h"
 
-void kill_mode(const char *str, t_shell *shell)
+void	ft_swap(int *a, int *b)
 {
-	if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &shell->raw) == -1)
-	{
-		write(STDOUT_FILENO, "\x1b[2J", 4);
-		write(STDOUT_FILENO, "\x1b[H", 3);
-		ft_putendl_fd(str, STDERR_FILENO);
-		exit(EXIT_SUCCESS);
-	}
+	int	temporary;
+
+	temporary = *a;
+	*a = *b;
+	*b = temporary;
 }

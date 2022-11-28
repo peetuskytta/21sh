@@ -28,7 +28,7 @@ _SRCS := $(addprefix $(SRCS_DIR)/, main.c \
 								allocation_check.c \
 								env_variable_counter.c)
 
-_CURSOR := $(addprefix $(CURSOR_DIR)/, init_window.c )
+#_CURSOR := $(addprefix $(CURSOR_DIR)/, init_window.c )
 
 _EXECUTE := $(addprefix $(EXECUTE_DIR)/,)
 
@@ -37,20 +37,20 @@ _INIT := $(addprefix $(INIT_DIR)/, init_shell.c)
 _INPUT := $(addprefix $(INPUT_DIR)/, read_input.c \
 								read_quote.c)
 
-_KEYS := $(addprefix $(KEYS_DIR)/, ft_iscntrl.c \
+#_KEYS := $(addprefix $(KEYS_DIR)/, ft_iscntrl.c \
 								keypress.c)
 
 _PANIC := $(addprefix $(PANIC_DIR)/, )
 
 _PARSE:= $(addprefix $(PARSE_DIR)/, lexer.c)
 
-_RAWMODE := $(addprefix $(RAWMODE_DIR)/, enable_rawmode.c \
+#_RAWMODE := $(addprefix $(RAWMODE_DIR)/, enable_rawmode.c \
 										kill_mode.c \
 										main.c)
 
 #All to object files
 ALL_SRCS := $(_SRCS) $(_CURSOR) $(_EXECUTE) $(_INIT) $(_INPUT) $(_KEYS) $(_PANIC) $(_PARSE) $(_RAWMODE)
-OBJ := $(_SRCS:.c=.o) $(_CURSOR:.c=.o) $(_EXECUTE:.c=.o) $(_INIT:.c=.o) $(_INPUT:.c=.o) $(_KEYS:.c=.o) $(_PANIC:.c=.o) $(_PARSE:.c=.o) $(_RAWMODE:.c=.o)
+OBJ := $(_SRCS:.c=.o) $(_EXECUTE:.c=.o) $(_INIT:.c=.o) $(_INPUT:.c=.o) $(_PANIC:.c=.o) $(_PARSE:.c=.o)
 #libft
 LIBFT_M := make -s -C srcs/libft
 LIBFT_A := libft/libft.a
@@ -60,13 +60,17 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT_A)
 	@echo "$(BOLD)$(WHITE)$(NAME) Compilation done$(RESET)"
-	@$(CC) $(FLAGS) $(OBJ) $(LIBFT_A) -o $(NAME)
+	@$(CC) $(FLAGS_DB) *.o $(LIBFT_A) -o $(NAME)
 
 $(OBJ):
-	@ $(CC) $(FLAGS) -c $(ALL_SRCS) -I includes/
+	@ $(CC) $(FLAGS_DB) -c $(ALL_SRCS) -I includes/
 
 $(LIBFT_A):
 	@make -C libft/
+
+rori:
+	@make re -C libft
+	@ $(CC) $(FLAGS) $(_KEYS) $(_RAWMODE) $(_CURSOR) $(LIBFT_A) -ltermcap -I includes/
 
 clean:
 	@make -C libft clean

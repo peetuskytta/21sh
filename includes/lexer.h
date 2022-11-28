@@ -6,17 +6,19 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 13:58:06 by pskytta           #+#    #+#             */
-/*   Updated: 2022/11/03 13:38:52 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/11/22 12:02:56 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
+
+# include "shell.h"
+
 typedef enum e_tok_type
 {
 	CHAR_PIPE = '|',
-	CHAR_AMPERSAND = '&',
-	CHAR_QOUTE = '\'',
+	CHAR_QUOTE = '\'',
 	CHAR_DQUOTE = '\"',
 	CHAR_SEMICOLON = ';',
 	CHAR_WHITESPACE = ' ',
@@ -30,27 +32,35 @@ typedef enum e_tok_type
 	TOKEN = -1,
 }	t_tok_type;
 
-typedef enum e_state
+typedef enum t_type
 {
-	STATE_IN_DQUOTE,
-	STATE_IN_SQUOTE,
-	STATE_IN_ESCAPE,
+	COMMAND,
+	PIPE,
+	REDIR,
+	SEPARATOR,
+	WORD,
+}	e_type;
+
+typedef enum t_state
+{
 	STATE_GENERAL,
-}	t_state;
+	STATE_IN_DQUOTE,
+	STATE_IN_QUOTE,
+	STATE_IN_ESCAPE,
+}	e_state;
 
 typedef struct s_tok
 {
-	int		type;
-	char	*word;
-	s_tok	*next;
-}			t_tok;
+	int				type;
+	char			*str;
+	struct s_tok	*next;
+}					t_tok;
 
-typedef struct s_lexer
+typedef struct s_lex
 {
 	t_tok	*token_list;
-	size_t	elements;
-}			t_lexer;
+}			t_lex;
 
-void	lexer(char *input, size_t size, t_lexer *lex);
+void	lexer(char *input, int size, t_lex *list);
 
 #endif

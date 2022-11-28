@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_iscntrl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 12:04:38 by zraunio           #+#    #+#             */
-/*   Updated: 2022/10/27 13:33:10 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/11/15 08:01:14 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inlcudes/shell.h"
+#include "../../includes/shell.h"
 
 int	ft_iscntrl(char c)
 {
-	if ((c >= 1 && c <= 32))
+	if ((c >= 1 && c <= 31))
 		return (1);
 	else
 		return (0);

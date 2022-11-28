@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   kill_mode.c                                        :+:      :+:    :+:   */
+/*   ft_chrstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 13:28:31 by zraunio           #+#    #+#             */
-/*   Updated: 2022/11/15 08:04:27 by pskytta          ###   ########.fr       */
+/*   Created: 2022/09/28 14:35:18 by pskytta           #+#    #+#             */
+/*   Updated: 2022/10/26 13:57:16 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
-
-void kill_mode(const char *str, t_shell *shell)
+/*
+**	This functions counts the amount of times a character specificied in
+**	the parameter c occurs in the string given as a parameter.
+**	Returns the amount of characters found in the string.
+*/
+int	ft_count_chrstr(char *str, char c)
 {
-	if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &shell->raw) == -1)
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (str[i] != '\0')
 	{
-		write(STDOUT_FILENO, "\x1b[2J", 4);
-		write(STDOUT_FILENO, "\x1b[H", 3);
-		ft_putendl_fd(str, STDERR_FILENO);
-		exit(EXIT_SUCCESS);
+		if (str[i++] == c)
+			count++;
 	}
+	return (count);
 }

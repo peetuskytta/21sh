@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_window.c                                      :+:      :+:    :+:   */
+/*   ft_float_abs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/29 15:06:54 by zraunio           #+#    #+#             */
-/*   Updated: 2022/11/15 08:03:39 by pskytta          ###   ########.fr       */
+/*   Created: 2020/11/04 12:54:25 by zraunio           #+#    #+#             */
+/*   Updated: 2021/05/18 14:57:00 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
+#include "../incl/libft.h"
 
-void	init_window(t_win *window)
+float	ft_float_abs(float value)
 {
-	struct winsize	win;
-
-	ioctl(STDOUT_FILENO, TIOCGWINSZ, &win);
-	window->cols = win.ws_col;
-	window->rows = win.ws_row;
-	window->win = &win;
+	if (value < 0)
+		value = -value;
+	return (value);
 }

@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_window.c                                      :+:      :+:    :+:   */
+/*   ft_powerof.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/29 15:06:54 by zraunio           #+#    #+#             */
-/*   Updated: 2022/11/15 08:03:39 by pskytta          ###   ########.fr       */
+/*   Created: 2021/03/12 14:56:10 by zraunio           #+#    #+#             */
+/*   Updated: 2021/05/18 14:57:40 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
+#include "../incl/libft.h"
 
-void	init_window(t_win *window)
+long long int	ft_powerof(long int nb, unsigned int p)
 {
-	struct winsize	win;
+	long long int	tmp;
 
-	ioctl(STDOUT_FILENO, TIOCGWINSZ, &win);
-	window->cols = win.ws_col;
-	window->rows = win.ws_row;
-	window->win = &win;
+	tmp = nb;
+	if (p == 0)
+		return (1);
+	while (--p)
+		tmp *= nb;
+	return (tmp);
 }
