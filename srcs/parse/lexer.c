@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 12:02:56 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/01 13:21:35 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/01 16:52:27 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,20 +58,20 @@ static void	change_state(t_tok *tok, int *state, int *k, char ch)
 	(*k)++;
 }
 
-static void free_list(t_list *lst)
+static void free_list(t_tok *list)
 {
-	t_list	*temp;
+	t_tok	*temp;
 	t_tok	*store;
 
-	temp = lst;
+	temp = list;
 	while (temp != NULL)
 	{
-		store = temp;
-		ft_memdel((void *)&temp->name);
-		ft_memdel((void *)&temp);
+		store = temp->next;
+		ft_strdel(&temp->str);
+		free(temp);
 		temp = store;
 	}
-	lst = NULL;
+	list = NULL;
 }
 
 void	lexer(char *input, int size, t_lex *list)
@@ -119,6 +119,11 @@ void	lexer(char *input, int size, t_lex *list)
 			}
 			else if (ch_type == CHAR_SEMICOLON || ch_type == CHAR_PIPE || ch_type == CHAR_GREATER || ch_type == CHAR_LESSER)
 			{
+				if (input[i] == CHAR_SEMICOLON && input[i + 1] == CHAR_SEMICOLON)
+				{
+					ft_print_fd(2, "21sh: parse error near ´%c%c'\n",input[i], input[i + 1]);
+					free_list(list->token_list);
+				}
 				if (k > 0)
 				{
 					token->str[k] = NULL_BYTE;

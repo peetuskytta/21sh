@@ -6,11 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:34:55 by pskytta           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/11/28 16:57:59 by pskytta          ###   ########.fr       */
-=======
-/*   Updated: 2022/11/30 16:12:55 by pskytta          ###   ########.fr       */
->>>>>>> 163b986cdd317f2474a70a7cc1e0a51fa4a60d6e
+/*   Updated: 2022/12/01 16:42:47 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +84,10 @@ int	command_prompt_loop(t_shell *shell)
 			return (EXIT_SUCCESS);
 		lexer(shell->cmd_line, ft_strlen(shell->cmd_line), &list);
 
+
 	/*PRINT FOR DEBUGGING PURPOSES*/
 		int i = 0;
-		while (list.token_list && list)
+		while (list.token_list)
 		{
 			ft_printf("token[%d]type:\t{%d} content: {%s}\n", i, list.token_list->type, list.token_list->str);
 			i++;
