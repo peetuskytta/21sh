@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 12:02:56 by pskytta           #+#    #+#             */
-/*   Updated: 2022/11/28 16:58:13 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/01 13:21:35 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,22 @@ static void	change_state(t_tok *tok, int *state, int *k, char ch)
 		*state = STATE_GENERAL;
 	tok->str[*k] = ch;
 	(*k)++;
+}
+
+static void free_list(t_list *lst)
+{
+	t_list	*temp;
+	t_tok	*store;
+
+	temp = lst;
+	while (temp != NULL)
+	{
+		store = temp;
+		ft_memdel((void *)&temp->name);
+		ft_memdel((void *)&temp);
+		temp = store;
+	}
+	lst = NULL;
 }
 
 void	lexer(char *input, int size, t_lex *list)

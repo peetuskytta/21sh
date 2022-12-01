@@ -90,7 +90,7 @@ int	command_prompt_loop(t_shell *shell)
 
 	/*PRINT FOR DEBUGGING PURPOSES*/
 		int i = 0;
-		while (list.token_list)
+		while (list.token_list && list)
 		{
 			ft_printf("token[%d]type:\t{%d} content: {%s}\n", i, list.token_list->type, list.token_list->str);
 			i++;
