@@ -36,27 +36,29 @@ _EXECUTE := $(addprefix $(EXECUTE_DIR)/,)
 
 _INIT := $(addprefix $(INIT_DIR)/, init_shell.c)
 
-_INPUT := $(addprefix $(INPUT_DIR)/, read_input.c \
-								read_quote.c)
+_INPUT := $(addprefix $(INPUT_DIR)/, read_quote.c \
+								cmd_line.c\
+								read_stdin.c)
 
 _KEYS := $(addprefix $(KEYS_DIR)/, ft_iscntrl.c \
 								keypress.c)
 
-_OUTPUT := $(addprefix $(OUTPUT_DIR)/, stdin_char.c )
+_OUTPUT := $(addprefix $(OUTPUT_DIR)/, stdin_char.c \
+									cmd_line_prompt.c)
 
 _PANIC := $(addprefix $(PANIC_DIR)/, ft_strerror.c \
 									ft_perror.c \
-									ft_abort.c )
+									ft_abort.c)
 
 _PARSE:= $(addprefix $(PARSE_DIR)/, lexer.c)
 
 _RAWMODE := $(addprefix $(RAWMODE_DIR)/, enable_rawmode.c \
-										kill_mode.c \
-										main.c)
+										kill_mode.c)
 
 #All to object files
 ALL_SRCS := $(_SRCS) $(_CURSOR) $(_EXECUTE) $(_INIT) $(_INPUT) $(_KEYS) $(_OUTPUT) $(_PANIC) $(_PARSE) $(_RAWMODE)
-OBJ := $(_SRCS:.c=.o) $(_CURSOR:.c=.o) $(_EXECUTE:.c=.o) $(_INIT:.c=.o) $(_INPUT:.c=.o) $(_KEYS:.c=.o) $(_OUTPUT:.c=.o) $(_PANIC:.c=.o) $(_PARSE:.c=.o) $(_RAWMODE:.c=.o)
+OBJ := *.o
+# $(_SRCS:.c=.o) $(_CURSOR:.c=.o) $(_EXECUTE:.c=.o) $(_INIT:.c=.o) $(_INPUT:.c=.o) $(_KEYS:.c=.o) $(_OUTPUT:.c=.o) $(_PANIC:.c=.o) $(_PARSE:.c=.o) $(_RAWMODE:.c=.o)
 #libft
 LIBFT_M := make -s -C srcs/libft
 LIBFT_A := libft/libft.a
@@ -66,10 +68,10 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT_A)
 	@echo "$(BOLD)$(WHITE)$(NAME) Compilation done$(RESET)"
-	@$(CC) $(FLAGS) $(OBJ) $(LIBFT_A) -o $(NAME)
+	@$(CC) $(FLAGS_DB) $(OBJ) $(LIBFT_A) -ltermcap -o $(NAME)
 
 $(OBJ):
-	@ $(CC) $(FLAGS) -c $(ALL_SRCS) -I includes/
+	@ $(CC) $(FLAGS_DB) -c $(ALL_SRCS) -I includes/
 
 $(LIBFT_A):
 	@make -C libft/

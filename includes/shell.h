@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
-/*   Updated: 2022/11/26 13:51:04 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/01 15:28:53 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define BUFFER 1024
 # define S_QUOTE '\''
 # define D_QUOTE '\"'
-# define MAX_BUFF 2049
+# define MAX_BUFF 4096
 
 typedef struct s_exec
 {
@@ -53,6 +53,7 @@ typedef struct s_shell
 	int			env_nbr;
 	int			env_iflg;
 	char		*cmd_line;
+	int			cmd_idx;
 	int			quote;
 	int			dir_len;
 	int			previous_dir_in_cd;
@@ -81,7 +82,9 @@ void	allocation_check(void **check);
 ** READ_INPUT
 */
 int		command_prompt_loop(t_shell *shell);
-char	*handle_open_quotes(t_shell *shell, char *buf, int *quotes);
+void	read_quote(t_shell *shell);
+void	cmd_line(t_shell *shell, char c);
+void	read_stdin(t_shell *shell);
 /*
 ** PANIC
 */
@@ -92,6 +95,7 @@ char	*ft_strerror(int errnum);
 ** OUTPUT
 */
 int		stdin_char(int c);
+void	cmd_line_prompt(int quote);
 
 /*
 ** CURSOR
@@ -103,7 +107,7 @@ void	goto_newline(t_shell *shell);
 */
 int		ft_iscntrl(char c);
 void	keypress(t_shell *shell, char *read_str);
-void	read_key(t_shell *shell);
+void	read_key(t_shell *shell, char *input);
 /*
 ** RAW
 */

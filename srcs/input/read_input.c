@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_input.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:34:55 by pskytta           #+#    #+#             */
-/*   Updated: 2022/11/03 13:23:51 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/01 15:53:09 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,10 @@ int	command_prompt_loop(t_shell *shell)
 	t_lexer	lex;
 	char	*buf;
 
+	write(1, "$> ", 4);
 	while (TRUE)
 	{
 		//write_prompt_and_folder(shell);
-		write(1, "$> ", 4);
 		buf = (char *)ft_memalloc(BUFFER + 1);
 		buf = read_input_stdin(shell, buf, 0);
 		shell->cmd_line = ft_strdup(buf);

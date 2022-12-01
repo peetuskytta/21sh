@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 13:28:31 by zraunio           #+#    #+#             */
-/*   Updated: 2022/11/26 14:35:42 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/01 15:19:30 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@ void kill_mode(const char *str, t_shell *shell)
 		ft_perror(ERROR_EXIT);
 	write(STDOUT_FILENO, "\x1b[2J", 4);
 	write(STDOUT_FILENO, "\x1b[H", 3);
-	ft_putendl_fd(str, STDERR_FILENO);
+	ft_perror(str);
 	exit(EXIT_SUCCESS);
 }

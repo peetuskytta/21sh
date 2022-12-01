@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   goto_newline.c                                     :+:      :+:    :+:   */
+/*   cmd_line_prompt.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/12 17:48:04 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/01 14:47:09 by zraunio          ###   ########.fr       */
+/*   Created: 2022/12/01 14:03:58 by zraunio           #+#    #+#             */
+/*   Updated: 2022/12/01 15:11:57 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-void	goto_newline(t_shell *shell)
+void	cmd_line_prompt(int quote)
 {
-		tputs(tgoto(tgetstr("cm", NULL), 0, 1), 1, stdin_char);
-		tputs(tgetstr("cd", NULL), 1, stdin_char);
-		tputs(tgoto(tgetstr("cm", NULL), 0, 1), 1, stdin_char);
-		tputs(tgetstr("cd", NULL), 1, stdin_char);
-		read_quote(shell);
-		cmd_line_prompt(shell->quote);
+	if (quote == CHAR_QUOTE)
+		ft_print_fd(STDOUT_FILENO, "quote>");
+	else if (quote == CHAR_DQUOTE)
+		ft_print_fd(STDOUT_FILENO, "dquote>");
+	else
+		ft_print_fd(STDOUT_FILENO, "$>");
 }

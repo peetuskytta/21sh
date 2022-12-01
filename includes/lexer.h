@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 13:58:06 by pskytta           #+#    #+#             */
-/*   Updated: 2022/11/12 11:09:11 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/01 14:29:08 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ typedef enum e_tok_type
 {
 	CHAR_PIPE = '|',
 	CHAR_AMPERSAND = '&',
-	CHAR_QOUTE = '\'',
+	CHAR_QUOTE = '\'',
 	CHAR_DQUOTE = '\"',
 	CHAR_SEMICOLON = ';',
 	CHAR_WHITESPACE = ' ',

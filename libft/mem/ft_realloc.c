@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 08:54:50 by zraunio           #+#    #+#             */
-/*   Updated: 2022/11/17 15:22:31 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/01 15:10:14 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	*ft_realloc(void *ptr, size_t old_size, size_t new_size)
 		new = NULL;
 	}
 	else
-		new = (void*)malloc(new_size);
+		new = (void *)malloc(new_size);
 	if (new != NULL && ptr != NULL)
 	{
 		ft_memcpy(new, ptr, (old_size > new_size ? new_size : old_size));
@@ -32,3 +32,7 @@ void	*ft_realloc(void *ptr, size_t old_size, size_t new_size)
 	}
 	return (new);
 }
+
+/*
+** norm errors, ternanries forbidden, change it
+*/

@@ -1,0 +1,2 @@
+add '\n' if ENTER, if an open quote exists
+
