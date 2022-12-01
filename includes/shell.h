@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/01 15:28:53 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/01 17:01:47 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,8 @@
 # include <termcap.h>
 # include <sys/ioctl.h>
 
-// # define EOF '\0'
 # define HIST_FILE ".shell_history"
-
+# define NULL_BYTE '\0'
 # define TRUE 1
 # define FALSE 0
 # define BUFFER 1024
@@ -33,19 +32,13 @@
 # define D_QUOTE '\"'
 # define MAX_BUFF 4096
 
-typedef struct s_exec
-{
-	char	*cmd;
-	char	**args;
-}			t_exec;
-
 typedef struct	s_win
 {
-		struct winsize	*win;
-		int				cols;
-		int				rows;
-		int				current_row;
-}				t_win;
+	struct winsize	*win;
+	int				cols;
+	int				rows;
+	int				current_row;
+}					t_win;
 
 typedef struct s_shell
 {
@@ -113,5 +106,11 @@ void	read_key(t_shell *shell, char *input);
 */
 int		enable_rawmode(t_shell *shell);
 void	kill_mode(const char *str, t_shell *shell);
+
+
+int		env_variable_counter(char **environ);
+void	init_shell(t_shell *shell, char **environ);
+void	allocation_check(void **check);
+
 
 # endif

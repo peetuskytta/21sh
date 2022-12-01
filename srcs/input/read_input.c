@@ -6,11 +6,11 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:34:55 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/01 15:53:09 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/01 17:03:10 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/shell.h"
+#include "../../includes/shell.h"
 
 /*
 **	Verification if quote is still unclosed.
@@ -69,19 +69,32 @@ static char	*read_input_stdin(t_shell *shell, char *buf, int bytes_read)
 */
 int	command_prompt_loop(t_shell *shell)
 {
-	t_lexer	lex;
+	t_lex	list;
 	char	*buf;
 
 	write(1, "$> ", 4);
 	while (TRUE)
 	{
-		//write_prompt_and_folder(shell);
+		write(1, "$> ", 4);
 		buf = (char *)ft_memalloc(BUFFER + 1);
 		buf = read_input_stdin(shell, buf, 0);
-		shell->cmd_line = ft_strdup(buf);
+		shell->cmd_line = ft_strtrim(buf);
+		allocation_check((void *)shell->cmd_line);
 		ft_strdel(&buf);
-		ft_printf("\nbuf: %s\n\n", shell->cmd_line);
-		lexer(shell->cmd_line, 1, &lex);
-		exit(EXIT_SUCCESS);
+		if (ft_strequ("exit", shell->cmd_line) == 1)
+			return (EXIT_SUCCESS);
+		lexer(shell->cmd_line, ft_strlen(shell->cmd_line), &list);
+
+
+	/*PRINT FOR DEBUGGING PURPOSES*/
+		int i = 0;
+		while (list.token_list)
+		{
+			ft_printf("token[%d]type:\t{%d} content: {%s}\n", i, list.token_list->type, list.token_list->str);
+			i++;
+			list.token_list = list.token_list->next;
+
+		}
+		//exit(EXIT_SUCCESS);
 	}
 }
