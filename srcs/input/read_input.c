@@ -6,7 +6,11 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:34:55 by pskytta           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/11/28 16:57:59 by pskytta          ###   ########.fr       */
+=======
+/*   Updated: 2022/11/30 16:12:55 by pskytta          ###   ########.fr       */
+>>>>>>> 163b986cdd317f2474a70a7cc1e0a51fa4a60d6e
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +84,8 @@ int	command_prompt_loop(t_shell *shell)
 		shell->cmd_line = ft_strtrim(buf);
 		allocation_check((void *)shell->cmd_line);
 		ft_strdel(&buf);
+		if (ft_strequ("exit", shell->cmd_line) == 1)
+			return (EXIT_SUCCESS);
 		lexer(shell->cmd_line, ft_strlen(shell->cmd_line), &list);
 
 	/*PRINT FOR DEBUGGING PURPOSES*/
@@ -91,6 +97,6 @@ int	command_prompt_loop(t_shell *shell)
 			list.token_list = list.token_list->next;
 
 		}
-		exit(EXIT_SUCCESS);
+		//exit(EXIT_SUCCESS);
 	}
 }

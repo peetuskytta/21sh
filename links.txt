@@ -3,3 +3,8 @@ https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-Writing
 
 ls | grep author ; cat links.txt | grep 'html'
 ls -la > myFile; cat myFile | grep main.c; ps; make
+
+l"s" -la | grep "main."o ; echo "hello\\ " lol ; whoami
+
+
+l"s" -la | grep "main."o ; echo hello\ moro

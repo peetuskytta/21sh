@@ -60,10 +60,10 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT_A)
 	@echo "$(BOLD)$(WHITE)$(NAME) Compilation done$(RESET)"
-	@$(CC) $(FLAGS_DB) *.o $(LIBFT_A) -o $(NAME)
+	@$(CC) $(FLAGS) *.o $(LIBFT_A) -o $(NAME)
 
 $(OBJ):
-	@ $(CC) $(FLAGS_DB) -c $(ALL_SRCS) -I includes/
+	@ $(CC) $(FLAGS) -c $(ALL_SRCS) -I includes/
 
 $(LIBFT_A):
 	@make -C libft/
