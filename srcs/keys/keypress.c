@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 13:35:45 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/01 16:29:17 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/01 16:46:41 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,13 @@ void	keypress(t_shell *shell, char *input)
 		}
 		else if (input[i] != '\0' && !ft_isprint(input[i]))
 		{
-			// while (input[i] && !ft_isprint(input[i]))
-			// {
-			// 	if (input[i++] == 9)
-			// 		write(STDOUT_FILENO, "\t", 1);
-			// 	ft_print_fd(STDOUT_FILENO, "%u\n", input[i]);
-			// 	i++;
-			// }
-			i++;
+			while (input[i] && !ft_isprint(input[i]))
+			{
+				if (input[i++] == 9)
+					write(STDOUT_FILENO, "\t", 1);
+				ft_print_fd(STDOUT_FILENO, "%u\n", input[i]);
+				i++;
+			}
 		}
 		else if (ft_isprint(input[i]))
 		{
@@ -51,8 +50,8 @@ void	read_key(t_shell *shell, char *input)
 {
 	int		i;
 
-	i = 0;
-	while (i != 1)
+	i = 1;
+	while (i != 0)
 	{
 		ft_memset(input, 0, sizeof(char) * (MAX_BUFF + 1));
 		i = read(STDIN_FILENO, input, MAX_BUFF);
