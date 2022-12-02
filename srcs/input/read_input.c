@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:34:55 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/01 16:42:47 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/02 08:53:09 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,14 @@ int	command_prompt_loop(t_shell *shell)
 
 	/*PRINT FOR DEBUGGING PURPOSES*/
 		int i = 0;
-		while (list.token_list)
+		while (list.token_list != NULL)
 		{
 			ft_printf("token[%d]type:\t{%d} content: {%s}\n", i, list.token_list->type, list.token_list->str);
 			i++;
 			list.token_list = list.token_list->next;
 
 		}
+		
 		//exit(EXIT_SUCCESS);
 	}
 }
