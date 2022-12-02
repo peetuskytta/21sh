@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keypress.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 08:01:43 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/01 17:06:05 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/02 13:30:40 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void	read_key(t_shell *shell, char *input)
 }
 
 // SIGNAL - together
-// READ_INPUT - together 
-// BUILTINS - together 
+// READ_INPUT - together
+// BUILTINS - together
 // HISTORY - together
 
 // TERMCAPS - rori

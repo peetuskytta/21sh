@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_stdin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 18:42:14 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/01 16:43:36 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/02 13:31:31 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void read_stdin(t_shell *shell)
 		read_key(shell, input);
 		read_quote(shell);
 		tcsetattr(STDIN_FILENO, TCSANOW, &shell->orig_raw);
-		ft_putendl(shell->cmd_line);
+		//ft_putendl(shell->cmd_line);
 	}
 	kill_mode("exit", shell);
 }
