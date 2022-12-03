@@ -6,38 +6,11 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:49:29 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/01 15:52:44 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/03 16:59:36 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/shell.h"
-
-// /*
-// **	writes "dquote>" for open double quote and "quote>" for open single quote
-// */
-// static void	write_open_quote(char c)
-// {
-// 	if (c == S_QUOTE)
-// 		ft_putstr_fd("quote>", STDOUT_FILENO);
-// 	if (c == D_QUOTE)
-// 		ft_putstr_fd("dquote>", STDOUT_FILENO);
-// }
-
-/*
-**	Joins two strings together and returning a new pointer to the new joined
-**	strings and frees s1 and s2.
-*/
-// static char	*strjoin_free(char *s1, char *s2)
-// {
-// 	char	*tmp;
-
-// 	tmp = ft_strnew(ft_strlen(s1) + ft_strlen(s2));
-// 	ft_strcat(tmp, s1);
-// 	ft_strcat(tmp, s2);
-// 	ft_strdel(&s1);
-// 	ft_strdel(&s2);
-// 	return (tmp);
-// }
 
 /*
 **	Reads new input to *extra and joines the new & extra. Checks if quotes

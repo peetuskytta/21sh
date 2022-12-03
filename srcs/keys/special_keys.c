@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_stdin.c                                       :+:      :+:    :+:   */
+/*   special_keys.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/12 18:42:14 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/03 16:54:12 by zraunio          ###   ########.fr       */
+/*   Created: 2022/12/03 17:00:36 by zraunio           #+#    #+#             */
+/*   Updated: 2022/12/03 17:23:44 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-void read_stdin(t_shell *shell)
+static int	is_escape(t_shell *shell, char *input)
 {
-	char	input[MAX_BUFF + 1];
+	
+}
 
-	write(1, "$> ", 4);
-	while (TRUE)
-	{
-		if (enable_rawmode(shell) == 0)
-			ft_putendl_fd("Error with tcgetattr", STDERR_FILENO);
-		tcsetattr(STDIN_FILENO, TCSANOW, &shell->raw);
-		read_key(shell, input);
-		read_quote(shell);
-		tcsetattr(STDIN_FILENO, TCSANOW, &shell->orig_raw);
-	}
-	kill_mode("exit", shell);
+static int is_arrow(t_shell *shell, char *input)
+{
+	if ()
+}
+
+int	special_keys(t_shell *shell, char *input)
+{
+	if (input[0] == 27 && !is_arrow(shell, input))
+		is_escape(shell, input);
+	
+
 }

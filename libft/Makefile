@@ -28,7 +28,8 @@ _ARRAY_SRC = array/ft_arrdup.c \
 			array/ft_arrfree.c \
 			array/ft_arrnew.c \
 			array/ft_reallocarray.c \
-			array/ft_arrtrim.c
+			array/ft_arrtrim.c \
+			ft_array_strcmp.c
 
 _ASCII_SRC =  ascii/ft_isalnum.c \
 		ascii/ft_isalpha.c \

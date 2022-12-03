@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/01 15:28:53 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/03 17:02:31 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ void	goto_newline(t_shell *shell);
 int		ft_iscntrl(char c);
 void	keypress(t_shell *shell, char *read_str);
 void	read_key(t_shell *shell, char *input);
+int		special_keys(t_shell *shell, char *input);
 /*
 ** RAW
 */
