@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 13:35:45 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/03 17:00:42 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/04 11:45:12 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,10 @@ void	keypress(t_shell *shell, char *input)
 			stdin_char(input[i]);
 			cmd_line(shell, input[i]);
 		}
-		// ft_print_fd(STDOUT_FILENO, "%u\n", input[i++]);
-		// else if (input[i] == shell->quote && input[i] != '\0')
-		// {
-		// 	shell->quote = EOF;
-		// 	return ;
-		// }
-		// else if (input[i] != '\0' && !ft_isprint(input[i]))
-		// 	while (input[i] && !ft_isprint(input[i]))
-		// 		ft_print_fd(STDOUT_FILENO, "%u\n", input[i++]);
+		else if (input[i] == 13)
+			goto_newline(shell);
 		i++;
 	}
-	goto_newline(shell);
 }
 
 // SIGNAL - together
