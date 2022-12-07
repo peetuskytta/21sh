@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_quote.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:49:29 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/01 15:52:44 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/02 15:25:58 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	identify_open_quote(t_shell *shell)
 		while (shell->cmd_line[i] != '\0' && shell->cmd_line[i] != shell->quote)
 		{
 			if (shell->cmd_line[i] == shell->quote)
-				shell->quote = EOF;
+				shell->quote = -1;
 			i++;
 		}
 		i++;
@@ -81,6 +81,6 @@ static void	identify_open_quote(t_shell *shell)
 void	read_quote(t_shell *shell)
 {
 	identify_open_quote(shell);
-	if (shell->quote != EOF)
+	if (shell->quote != -1)
 		read_until_quote(shell);
 }

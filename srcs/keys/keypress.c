@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 08:01:43 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/02 13:30:40 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/02 16:40:53 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ void	keypress(t_shell *shell, char *input)
 			kill_mode("exit", shell);
 		else if (input[i] == shell->quote && input[i] != '\0')
 		{
-			shell->quote = EOF;
+			shell->quote = -1;
 			return ;
 		}
-		else if (input[i] != '\0' && !ft_isprint(input[i]))
+		else if (input[i] != '\0')
 		{
 			while (input[i] && !ft_isprint(input[i]))
 			{
@@ -35,10 +35,11 @@ void	keypress(t_shell *shell, char *input)
 				ft_print_fd(STDOUT_FILENO, "%u\n", input[i]);
 				i++;
 			}
+		i++;
 		}
 		else if (ft_isprint(input[i]))
 		{
-			stdin_char(input[i]);
+			//stdin_char(input[i]);
 			cmd_line(shell, input[i]);
 		}
 		i++;
