@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 13:01:21 by zraunio           #+#    #+#             */
-/*   Updated: 2022/11/24 13:24:59 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/03 17:29:30 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void				ft_arr_free(void ***arr);
 char				**ft_arrnew(size_t rows, size_t row_len);
 char				**ft_arrdup(char **arr);
 void				ft_arrtrim(char **arr, size_t row);
+int					ft_array_strcmp(int *array, char *str);
 /*
 ** ascii
 */

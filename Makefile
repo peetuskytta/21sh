@@ -41,7 +41,9 @@ _INPUT := $(addprefix $(INPUT_DIR)/, read_quote.c \
 								read_stdin.c)
 
 _KEYS := $(addprefix $(KEYS_DIR)/, ft_iscntrl.c \
-								keypress.c)
+								keypress.c \
+								read_key.c \
+								special_keys.c)
 
 _OUTPUT := $(addprefix $(OUTPUT_DIR)/, stdin_char.c \
 									cmd_line_prompt.c)
@@ -83,6 +85,9 @@ rori:
 clean:
 	@make -C libft clean
 	@rm -f $(OBJ)
+	@find . -type f -name '*.o' -print -delete -o -name '#*#' -print -delete
+	@find . -type f -name '*~' -print -delete -o -name '#*#' -print -delete
+	@find . -type f -name '.DS_Store' -print -delete
 	@echo "$(BOLD)$(RED)OBJ deleted$(RESET)"
 
 fclean: clean

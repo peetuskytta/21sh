@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   enable_rawmode.c                                   :+:      :+:    :+:   */
+/*   read_key.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 12:59:48 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/07 08:34:53 by pskytta          ###   ########.fr       */
+/*   Created: 2022/12/03 16:57:43 by zraunio           #+#    #+#             */
+/*   Updated: 2022/12/03 16:58:03 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-int	enable_rawmode(t_shell *shell)
+void	read_key(t_shell *shell, char *input)
 {
-	struct termios	orig_raw;
-	if (tcgetattr(STDIN_FILENO, &orig_raw) == -1)
-		return (0);
-	shell->orig_raw = orig_raw;
-	orig_raw.c_lflag &= ~(ECHO | ICANON | ISIG);
-	shell->raw = orig_raw;
-	return (1);
+	int		i;
+
+	i = 0;
+	while (i != 1)
+	{
+		ft_memset(input, 0, sizeof(char) * (MAX_BUFF + 1));
+		i = read(STDIN_FILENO, input, MAX_BUFF);
+		if (i == -1)
+			return ;
+		keypress(shell, input);
+	}
 }
