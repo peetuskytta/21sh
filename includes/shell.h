@@ -6,7 +6,11 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/12/07 08:35:07 by pskytta          ###   ########.fr       */
+=======
+/*   Updated: 2022/12/08 10:06:44 by zraunio          ###   ########.fr       */
+>>>>>>> read_input
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +52,7 @@ typedef struct s_shell
 	char		*cmd_line;
 	int			cmd_idx;
 	int			quote;
+	int			q_count;
 	int			dir_len;
 	int			previous_dir_in_cd;
 	char		*pwd;

@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 13:35:45 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/07 08:34:04 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/08 11:02:00 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ void	keypress(t_shell *shell, char *input)
 			//stdin_char(input[i]);
 			cmd_line(shell, input[i]);
 		}
-		else if (input[i] == 13)
-			goto_newline(shell);
 		i++;
 	}
 }

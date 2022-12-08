@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 18:42:14 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/07 08:34:07 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/08 11:01:49 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void read_stdin(t_shell *shell)
 		init_window(&shell->window);
 		tcsetattr(STDIN_FILENO, TCSANOW, &shell->raw);
 		read_key(shell, input);
-		read_quote(shell);
 		tcsetattr(STDIN_FILENO, TCSANOW, &shell->orig_raw);
 	}
 	kill_mode("exit", shell);
