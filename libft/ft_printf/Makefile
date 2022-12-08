@@ -56,7 +56,7 @@ SRC = $(addprefix src/, \
 )
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror  #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 CPPFLAGS = -I . -I ../inc -I inc
 DEPFLAGS = -MT $@ -MMD -MP -MF $(DEP_DIR)/$*.d
 COMPILE.c = $(CC) $(DEPFLAGS) $(CFLAGS) $(CPPFLAGS) -c
@@ -83,11 +83,13 @@ DEPFILES = $(addprefix $(DEP_DIR)/, $(SRC:.c=.d))
 $(DEPFILES):
 
 clean:
-	@rm -rf $(OBJ_DIR) $(DEP_DIR)
+	-@rm -rf $(OBJ_DIR) $(DEP_DIR)
 
 fclean: clean
-	@rm -f $(NAME)
+	-@rm -f $(NAME)
 
 re: fclean all
+
+.SILENT: clean fclean re
 
 include $(wildcard $(DEPFILES))
