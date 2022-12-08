@@ -85,9 +85,6 @@ rori:
 clean:
 	@make -C libft clean
 	@rm -f $(OBJ)
-	@find . -type f -name '*.o' -print -delete -o -name '#*#' -print -delete
-	@find . -type f -name '*~' -print -delete -o -name '#*#' -print -delete
-	@find . -type f -name '.DS_Store' -print -delete
 	@echo "$(BOLD)$(RED)OBJ deleted$(RESET)"
 
 fclean: clean
