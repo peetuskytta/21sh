@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 18:42:14 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/08 09:01:05 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/08 09:56:13 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void read_stdin(t_shell *shell)
 		init_window(&shell->window);
 		tcsetattr(STDIN_FILENO, TCSANOW, &shell->raw);
 		read_key(shell, input);
-		read_quote(shell);
-		// ft_putendl(shell->cmd_line);
 		tcsetattr(STDIN_FILENO, TCSANOW, &shell->orig_raw);
 	}
 	kill_mode("exit", shell);

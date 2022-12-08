@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/03 17:02:31 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/08 10:06:44 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_shell
 	char		*cmd_line;
 	int			cmd_idx;
 	int			quote;
+	int			q_count;
 	int			dir_len;
 	int			previous_dir_in_cd;
 	char		*pwd;

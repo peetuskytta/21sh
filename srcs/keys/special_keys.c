@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 17:00:36 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/08 09:19:58 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/08 09:56:29 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	special_keys(t_shell *shell, char *input)
 		return (is_escape(shell, input));
 	else if (input[0] == ENTER)
 	{
-		ft_putnbr_endl(4);
+		read_quote(shell);
 		goto_newline(shell);
 		return (1);
 	}
