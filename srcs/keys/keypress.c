@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 13:35:45 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/04 11:51:33 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/08 09:16:38 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	keypress(t_shell *shell, char *input)
 		{
 			stdin_char(input[i]);
 			cmd_line(shell, input[i]);
+			if (input[i] == shell->quote)
+				return ;
 		}
-		else if (input[i] == 13)
-			goto_newline(shell);
 		i++;
 	}
 }
