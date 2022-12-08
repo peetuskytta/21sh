@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 13:35:45 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/08 11:02:00 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/08 11:18:18 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	keypress(t_shell *shell, char *input)
 			kill_mode("exit", shell);
 		else if (!special_keys(shell,input))
 		{
-			//stdin_char(input[i]);
+			stdin_char(input[i]);
 			cmd_line(shell, input[i]);
 		}
 		i++;
