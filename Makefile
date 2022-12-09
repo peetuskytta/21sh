@@ -1,7 +1,7 @@
 #Compiler and compiler flags
 CC := gcc
 FLAGS_DB := -Wall -Wextra -Werror -g -fsanitize=address
-FLAGS := -Wall -Wextra -Werror
+FLAGS := -Wall -Wextra -Werror -O3
 
 #Color scheme
 WHITE = \033[37m
@@ -13,54 +13,68 @@ BOLD = \033[1m
 NAME := 21sh
 
 #Direcory locations
-SRCS_DIR = srcs
-CURSOR_DIR = srcs/cursor
-EXECUTE_DIR = srcs/execute
-INIT_DIR = srcs/init
-INPUT_DIR = srcs/input
-OUTPUT_DIR = srcs/output
-KEYS_DIR = srcs/keys
-PANIC_DIR = srcs/panic
-PARSE_DIR = srcs/parse
-RAWMODE_DIR = srcs/rawmode
+SRCS_DIR = srcs/
+CURSOR_DIR = srcs/cursor/
+EXECUTE_DIR = srcs/execute/
+INIT_DIR = srcs/init/
+INPUT_DIR = srcs/input/
+OUTPUT_DIR = srcs/output/
+KEYS_DIR = srcs/keys/
+PANIC_DIR = srcs/panic/
+PARSE_DIR = srcs/parse/
+RAWMODE_DIR = srcs/rawmode/
+OBJS_DIR = obj/
+INCL = -I includes/
 
 #Sources by folder
-_SRCS := $(addprefix $(SRCS_DIR)/, main.c \
-								allocation_check.c \
-								env_variable_counter.c)
+_SRCS :=  main.c \
+		allocation_check.c \
+		env_variable_counter.c
 
-_CURSOR := $(addprefix $(CURSOR_DIR)/, init_window.c \
-									goto_newline.c)
+_CURSOR := init_window.c \
+		goto_newline.c
 
-_EXECUTE := $(addprefix $(EXECUTE_DIR)/,)
+# _EXECUTE :=
 
-_INIT := $(addprefix $(INIT_DIR)/, init_shell.c)
+_INIT := init_shell.c
 
-_INPUT := $(addprefix $(INPUT_DIR)/, read_quote.c \
-								cmd_line.c\
-								read_stdin.c)
+_INPUT := read_quote.c \
+		cmd_line.c\
+		read_stdin.c
 
-_KEYS := $(addprefix $(KEYS_DIR)/, ft_iscntrl.c \
-								keypress.c \
-								read_key.c \
-								special_keys.c)
+_KEYS := ft_iscntrl.c \
+		keypress.c \
+		read_key.c \
+		special_keys.c
 
-_OUTPUT := $(addprefix $(OUTPUT_DIR)/, stdin_char.c \
-									cmd_line_prompt.c)
+_OUTPUT := stdin_char.c \
+		cmd_line_prompt.c
 
-_PANIC := $(addprefix $(PANIC_DIR)/, ft_strerror.c \
-									ft_perror.c \
-									ft_abort.c)
+_PANIC := ft_strerror.c \
+		ft_perror.c \
+		ft_abort.c
 
-_PARSE:= $(addprefix $(PARSE_DIR)/, lexer.c)
+_PARSE:= lexer.c
 
-_RAWMODE := $(addprefix $(RAWMODE_DIR)/, enable_rawmode.c \
-										kill_mode.c)
+_RAWMODE := enable_rawmode.c \
+			kill_mode.c
 
 #All to object files
-ALL_SRCS := $(_SRCS) $(_CURSOR) $(_EXECUTE) $(_INIT) $(_INPUT) $(_KEYS) $(_OUTPUT) $(_PANIC) $(_PARSE) $(_RAWMODE)
-OBJ := *.o
-# $(_SRCS:.c=.o) $(_CURSOR:.c=.o) $(_EXECUTE:.c=.o) $(_INIT:.c=.o) $(_INPUT:.c=.o) $(_KEYS:.c=.o) $(_OUTPUT:.c=.o) $(_PANIC:.c=.o) $(_PARSE:.c=.o) $(_RAWMODE:.c=.o)
+	# $(addprefix $(EXECUTE_DIR), $(_EXECUTE))
+ALL_SRCS := $(addprefix $(SRCS_DIR), $(_SRCS)) \
+			$(addprefix $(CURSOR_DIR), $(_CURSOR)) \
+			$(addprefix $(INIT_DIR), $(_INIT)) \
+			$(addprefix $(INPUT_DIR), $(_INPUT)) \
+			$(addprefix $(KEYS_DIR), $(_KEYS)) \
+			$(addprefix $(OUTPUT_DIR), $(_OUTPUT)) \
+			$(addprefix $(PANIC_DIR), $(_PANIC)) \
+			$(addprefix $(PARSE_DIR), $(_PARSE)) \
+			$(addprefix $(RAWMODE_DIR), $(_RAWMODE))
+
+SRCS = $(_SRCS) $(_CURSOR) $(_INIT) $(_INPUT) $(_KEYS) \
+$(_OUTPUT) $(_PANIC) $(_PARSE) $(_RAWMODE) # $(_EXECUTE)
+OBJ_FILES = $(SRCS:.c=.o)
+OBJS = $(patsubst %, $(OBJS_DIR)%, $(SRCS:.c=.o))
 #libft
 LIBFT_M := make -s -C srcs/libft
 LIBFT_A := libft/libft.a
@@ -68,30 +82,63 @@ HEADER := includes/shell.h
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT_A)
-	@echo "$(BOLD)$(WHITE)$(NAME) Compilation done$(RESET)"
-	@$(CC) $(FLAGS_DB) $(OBJ) $(LIBFT_A) -ltermcap -o $(NAME)
+$(NAME): $(LIBFT_A) $(OBJS_DIR) $(OBJS)
+	@echo "$(BOLD)$(WHITE)----------$(NAME) COMPILATION DONE----------$(RESET)"
+	@$(CC) $(FLAGS_DB) $(OBJS) -o $(NAME) -ltermcap -L ./libft -lft >> makelog.txt
 
-$(OBJ):
-	@ $(CC) $(FLAGS_DB) -c $(ALL_SRCS) -I includes/
+$(OBJS_DIR):
+	@mkdir -p $(OBJS_DIR) >> makelog.txt
+
+$(OBJS_DIR)%.o: $(SRCS_DIR)%.c
+	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
+
+$(OBJS_DIR)%.o: $(CURSOR_DIR)%.c
+	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
+
+$(OBJS_DIR)%.o: $(INIT_DIR)%.c
+	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
+
+$(OBJS_DIR)%.o: $(INPUT_DIR)%.c
+	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
+
+$(OBJS_DIR)%.o: $(KEYS_DIR)%.c
+	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
+
+$(OBJS_DIR)%.o: $(OUTPUT_DIR)%.c
+	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
+
+$(OBJS_DIR)%.o: $(PANIC_DIR)%.c
+	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
+
+$(OBJS_DIR)%.o: $(PARSE_DIR)%.c
+	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
+
+$(OBJS_DIR)%.o: $(RAWMODE_DIR)%.c
+	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
+
+# $(OBJS_DIR)%.o: $(EXECUTE_DIR)%.c
+# 	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@
 
 $(LIBFT_A):
-	@make -C libft/
-
-rori:
-	@make re -C libft
-	@ $(CC) $(FLAGS) $(_KEYS) $(_RAWMODE) $(_CURSOR) $(_PANIC) $(_OUTPUT) $(LIBFT_A) -ltermcap -I includes/
+	-@make -C libft/ >> makelog.txt
 
 clean:
-	@make -C libft clean
-	@rm -f $(OBJ)
-	@echo "$(BOLD)$(RED)OBJ deleted$(RESET)"
+	-@make -C libft clean >> makelog.txt
+	-@rm -f $(OBJS) >> makelog.txt
+	@find . -type f -name '*.o' -print -delete -o -name '#*#' -print -delete >> makelog.txt
+	@find . -type f -name '*~' -print -delete -o -name '#*#' -print -delete >> makelog.txt
+	@find . -type f -name '.DS_Store' -print -delete
+	@echo "$(BOLD)$(RED)----------Objects deleted----------$(RESET)"
 
 fclean: clean
-	@make -C libft fclean
-	@rm -f $(NAME)
-	@echo "$(BOLD)$(RED)$(NAME) deleted$(RESET)"
+	-@make -C libft fclean >> makelog.txt
+	@rm -f $(NAME) >> makelog.txt
+	@rm -rf $(OBJS_DIR) >> makelog.txt
+	@rm -rf makelog.txt
+	@echo "$(BOLD)$(RED)----------$(NAME) deleted----------$(RESET)"
 
 re: fclean all
 
-.PHONY: all, clean, fclean, re
+.SILENT: clean fclean re
+
+.PHONY: all clean fclean re
