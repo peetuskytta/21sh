@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 08:54:50 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/01 15:10:14 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/09 08:20:45 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	*ft_realloc(void *ptr, size_t old_size, size_t new_size)
 	{
 		ft_memcpy(new, ptr, (old_size > new_size ? new_size : old_size));
 		if (new_size > old_size)
-			ft_memset(&new[old_size], 0, new_size - old_size);
+			ft_memset(&new, 0, new_size - old_size);
 		free(ptr);
 	}
 	return (new);
