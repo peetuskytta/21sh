@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   special_keys.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 17:00:36 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/08 09:56:29 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/11 23:41:30 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	is_escape(t_shell *shell, char *input)
 		shell->dir_len = 0;
 		return (0);
 	}
-	
+
 }
 
 static int is_arrow(t_shell *shell, char *input)
@@ -39,7 +39,7 @@ static int is_arrow(t_shell *shell, char *input)
 	else if (input[1] == 91 && input[2] == 66 && input[3] == 0)
 		ft_print_fd(STDOUT_FILENO, "ARROW DOWN\n");
 	else if (input[1] == 91 && input[2] == 65 && input[3] == 0)
-		ft_print_fd(STDOUT_FILENO, "ARROW UP\n");	
+		ft_print_fd(STDOUT_FILENO, "ARROW UP\n");
 	else
 		i = 0;
 	shell->dir_len = 0;

@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/08 11:12:45 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/11 23:41:07 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_shell
 	int			env_iflg;
 	char		*cmd_line;
 	int			cmd_idx;
+	int			end;
 	int			quote;
 	int			q_count;
 	int			dir_len;
