@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:49:29 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/11 21:39:02 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/12 11:04:56 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,31 +31,21 @@
 static void	identify_open_quote(t_shell *shell)
 {
 	int	i;
-
+	int	quote;
 
 	i = 0;
+	quote = 0;
 	while (shell->cmd_line[i] != '\0')
 	{
-		if ((shell->cmd_line[i] == D_QUOTE || shell->cmd_line[i] == S_QUOTE) && shell->quote == EOF)
+		if ((shell->cmd_line[i] == D_QUOTE || shell->cmd_line[i] == S_QUOTE) && quote == 0)
 		{
 			shell->quote = shell->cmd_line[i];
-			shell->cmd_line = &shell->cmd_line [i + 1];
-			i = ft_strchr_index(shell->cmd_line, shell->quote, 'b');
-			if (i != ft_strilen(shell->cmd_line))
-			{
-				shell->quote = EOF;
-			}
-			else
-				return ;
-			// while (shell->cmd_line[i] != '\0' && shell->cmd_line[i] != shell->quote)
-			// {
-			// 	if (shell->cmd_line[i] == shell->quote)
-			// 	{
-			// 		shell->quote = EOF;
-			// 		return ;
-			// 	}
-			// 	i++;
-			// }
+			quote = 1;
+		}
+		else if (shell->cmd_line[i] == shell->quote && quote == 1)
+		{
+			shell->quote = EOF;
+			quote = 0;
 		}
 		i++;
 	}
@@ -67,7 +57,8 @@ static void	identify_open_quote(t_shell *shell)
 */
 void	read_quote(t_shell *shell)
 {
-	identify_open_quote(shell);
+	if (ft_strchr(shell->cmd_line, D_QUOTE) || ft_strchr(shell->cmd_line, S_QUOTE))
+		identify_open_quote(shell);
 	// ft_putnbr_endl(shell->quote);
 	// if (shell->quote != EOF)
 	// 	read_until_quote(shell);

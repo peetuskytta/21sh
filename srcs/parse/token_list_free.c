@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   allocation_check.c                                 :+:      :+:    :+:   */
+/*   token_list_free.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/31 14:49:07 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/12 09:20:42 by pskytta          ###   ########.fr       */
+/*   Created: 2022/12/12 08:10:24 by pskytta           #+#    #+#             */
+/*   Updated: 2022/12/12 08:13:35 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/shell.h"
+#include "../../includes/lexer.h"
 
-void	allocation_check(void **check)
+void	token_list_free(t_tok *list)
 {
-	if (check == NULL)
-	{
-		(void)write(STDERR_FILENO, "unable to allocate memory", 26);
-		exit(MALLOC_ERRNO);
-	}
-}
+	t_tok	*temp;
+	t_tok	*store;
 
-// make into ft_mem style function and add to libft
+	temp = list;
+	while (temp != NULL)
+	{
+		store = temp->next;
+		ft_strdel(&temp->str);
+		ft_memdel((void *)&temp);
+		temp = store;
+		free(temp);
+	}
+	list = NULL;
+}

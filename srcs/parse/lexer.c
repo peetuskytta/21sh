@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 12:02:56 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/11 23:35:31 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/12 10:16:25 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,23 +58,6 @@ static void	change_state(t_tok *tok, int *state, int *k, char ch)
 	(*k)++;
 }
 
-static void free_list(t_tok *list)
-{
-	t_tok	*temp;
-	t_tok	*store;
-
-	temp = list;
-	while (temp != NULL)
-	{
-		store = temp->next;
-		ft_strdel(&temp->str);
-		ft_memdel((void *)&temp);
-		temp = store;
-		free(temp);
-	}
-	list = NULL;
-}
-
 void	lexer(char *input, int size, t_lex *list)
 {
 	t_tok	*token;
@@ -123,7 +106,7 @@ void	lexer(char *input, int size, t_lex *list)
 				if (input[i] == CHAR_SEMICOLON && input[i + 1] == CHAR_SEMICOLON)
 				{
 					ft_print_fd(2, "21sh parse error near `%c%c'\n",input[i], input[i + 1]);
-					free_list(list->token_list);
+					token_list_free(list->token_list);
 					list->token_list = NULL;
 					return ;
 				}

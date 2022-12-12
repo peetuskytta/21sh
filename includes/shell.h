@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/11 23:41:07 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/12 10:37:20 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # include <termcap.h>
 # include <sys/ioctl.h>
 
+# define NL ft_putchar('\n')
+# define DB ft_putstr("\nYOU ARE HERE\n")
 # define HIST_FILE ".shell_history"
 # define NULL_BYTE '\0'
 # define TRUE 1
@@ -54,6 +56,7 @@ typedef struct s_shell
 	int			previous_dir_in_cd;
 	char		*pwd;
 	char		*prev_dir;
+	char		*tty;
 	t_win		window;
 	struct termios	orig_raw;
 	struct termios	raw;
@@ -110,10 +113,8 @@ int		special_keys(t_shell *shell, char *input);
 int		enable_rawmode(t_shell *shell);
 void	kill_mode(const char *str, t_shell *shell);
 
-
-int		env_variable_counter(char **environ);
-void	init_shell(t_shell *shell, char **environ);
-void	allocation_check(void **check);
-
+/*
+** PARSE
+*/
 
 # endif

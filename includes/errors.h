@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:24:46 by zraunio           #+#    #+#             */
-/*   Updated: 2022/11/26 14:35:20 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/12 10:44:36 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,6 @@
 # define ABORT_ERRNO		12
 # define ENV_NAME_ERRNO		13
 # define ENV_INVALID_ERRNO	14
+# define SYSTEM_CALL_FAIL	15
 
 # endif
