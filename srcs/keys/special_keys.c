@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 17:00:36 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/08 09:56:29 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/08 14:06:48 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,5 @@ int	special_keys(t_shell *shell, char *input)
 		return (1);
 	}
 	else
-	{
 		return (0);
-	}
 }

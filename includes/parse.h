@@ -1,17 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.h                                            :+:      :+:    :+:   */
+/*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 13:58:06 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/01 14:29:08 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/12 13:05:08 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEXER_H
-# define LEXER_H
+# ifndef PARSE_H
+# define PARSE_H
+# include "shell.h"
+# include "structs.h"
+
 typedef enum e_tok_type
 {
 	CHAR_PIPE = '|',
@@ -53,4 +56,4 @@ typedef struct s_lexer
 
 void	lexer(char *input, size_t size, t_lexer *lex);
 
-#endif
+# endif
