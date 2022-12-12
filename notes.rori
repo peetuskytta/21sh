@@ -6,6 +6,7 @@ TO BE DONE:
 // HISTORY - together
 // SPECIAL KEYS - rori
 // CURSOR - rori
+// COMMAND TREE - peetu
 // PIPES & REDIRECT - peetu
 // AGRIGATE - peetu
 
@@ -18,3 +19,4 @@ REASONABLY DONE:
 
 DONE DONE:
 - Makefile
+- .h files org
