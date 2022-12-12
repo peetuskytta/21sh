@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 17:00:36 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/12 14:04:33 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/12 17:23:16 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ static int	is_escape(t_shell *shell, char *input)
 	}
 }
 
-static int is_arrow(t_shell *shell, char *input)
+static int is_arrow(t_shell *shell, t_win *window, char *input)
 {
 	int	i;
 
 	i = 1;
 	if (input[1] == 91 && input[2] == 68 && input[3] == 0)
-		ft_print_fd(STDOUT_FILENO, "ARROW LEFT\n");
+		return (goto_sides(window, 'l'));
 	else if (input[1] == 91 && input[2] == 67 && input[3] == 0)
-		ft_print_fd(STDOUT_FILENO, "ARROW RIGHT\n");
+		return (goto_sides(window, 'r'));
 	else if (input[1] == 91 && input[2] == 66 && input[3] == 0)
 		ft_print_fd(STDOUT_FILENO, "ARROW DOWN\n");
 	else if (input[1] == 91 && input[2] == 65 && input[3] == 0)
@@ -48,7 +48,7 @@ static int is_arrow(t_shell *shell, char *input)
 int	special_keys(t_shell *shell, char *input)
 {
 
-	if (input[0] == 27 && !is_arrow(shell, input))
+	if (input[0] == 27 && !is_arrow(shell, &shell->window, input))
 		return (is_escape(shell, input));
 	else if (input[0] == ENTER)
 	{

@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   goto_newline.c                                     :+:      :+:    :+:   */
+/*   goto_sides.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/12 17:48:04 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/12 16:54:38 by zraunio          ###   ########.fr       */
+/*   Created: 2022/12/12 17:06:00 by zraunio           #+#    #+#             */
+/*   Updated: 2022/12/12 17:24:00 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-void	goto_newline(t_shell *shell)
+int	goto_sides(t_win *window, int key)
 {
-		tputs(tgoto(tgetstr("cm", NULL), 0, 1), 1, stdin_char);
-		tputs(tgetstr("cd", NULL), 1, stdin_char);
-		tputs(tgoto(tgetstr("cm", NULL), 0, 1), 1, stdin_char);
-		tputs(tgetstr("cd", NULL), 1, stdin_char);
-		read_quote(shell);
+	if (key == 'l')
+	{
+		window->cols--;
+		tputs(tgoto(tgetstr("le", NULL), 0, 1), 1, stdin_char);
+	}
+	else
+	{
+		window->cols++;
+		tputs(tgoto(tgetstr("nd", NULL), 0, 1), 1, stdin_char);
+	}
+	return (1);
 }

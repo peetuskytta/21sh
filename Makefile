@@ -32,7 +32,8 @@ _SRCS :=  main.c \
 		env_variable_counter.c
 
 _CURSOR := init_window.c \
-		goto_newline.c
+		goto_newline.c \
+		goto_sides.c
 
 # _EXECUTE :=
 
