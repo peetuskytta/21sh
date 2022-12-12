@@ -1,35 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_listen.c                                       :+:      :+:    :+:   */
+/*   input.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 13:35:45 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/12 14:14:39 by zraunio          ###   ########.fr       */
+/*   Created: 2022/12/08 15:34:24 by zraunio           #+#    #+#             */
+/*   Updated: 2022/12/12 13:42:16 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
+# ifndef INPUT_H
+# define INPUT_H
+# include "shell.h"
+# include "structs.h"
 
-void	key_listen(t_shell *shell, char *input)
-{
-	int	i;
-	int	key;
+/*
+** READ_INPUT
+*/
+int		command_prompt_loop(t_shell *shell);
+void	read_quote(t_shell *shell);
+void	cmd_line(t_shell *shell, char c);
+void	input_read(t_shell *shell);
 
-	i = 0;
-	while (input[i] != '\0')
-	{
-		if (input[i] == CTRL_D)
-			kill_mode("exit", shell);
-		key = special_keys(shell, input);
-		if (key == 13)
-			shell->end = 1;
-		else if (!key)
-		{
-			stdin_char(input[i]);
-			cmd_line(shell, input[i]);
-		}
-		i++;
-	}
-}
+#endif

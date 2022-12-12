@@ -1,35 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_listen.c                                       :+:      :+:    :+:   */
+/*   rawmode.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 13:35:45 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/12 14:14:39 by zraunio          ###   ########.fr       */
+/*   Created: 2022/12/08 15:40:33 by zraunio           #+#    #+#             */
+/*   Updated: 2022/12/12 12:56:10 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
+# ifndef RAWMODE_H
+# define RAWMODE_H
+# include "shell.h"
+# include "structs.h"
 
-void	key_listen(t_shell *shell, char *input)
-{
-	int	i;
-	int	key;
+/*
+** RAW
+*/
+int		enable_rawmode(t_shell *shell);
+void	kill_mode(const char *str, t_shell *shell);
 
-	i = 0;
-	while (input[i] != '\0')
-	{
-		if (input[i] == CTRL_D)
-			kill_mode("exit", shell);
-		key = special_keys(shell, input);
-		if (key == 13)
-			shell->end = 1;
-		else if (!key)
-		{
-			stdin_char(input[i]);
-			cmd_line(shell, input[i]);
-		}
-		i++;
-	}
-}
+# endif

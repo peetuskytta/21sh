@@ -1,35 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_listen.c                                       :+:      :+:    :+:   */
+/*   panic.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 13:35:45 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/12 14:14:39 by zraunio          ###   ########.fr       */
+/*   Created: 2022/12/08 15:39:18 by zraunio           #+#    #+#             */
+/*   Updated: 2022/12/12 12:56:02 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
+# ifndef PANIC_H
+# define PANIC_H
+# include "shell.h"
+# include "structs.h"
 
-void	key_listen(t_shell *shell, char *input)
-{
-	int	i;
-	int	key;
+/*
+** PANIC
+*/
+void	ft_abort(void);
+void	ft_perror(const char *s);
+char	*ft_strerror(int errnum);
 
-	i = 0;
-	while (input[i] != '\0')
-	{
-		if (input[i] == CTRL_D)
-			kill_mode("exit", shell);
-		key = special_keys(shell, input);
-		if (key == 13)
-			shell->end = 1;
-		else if (!key)
-		{
-			stdin_char(input[i]);
-			cmd_line(shell, input[i]);
-		}
-		i++;
-	}
-}
+# endif

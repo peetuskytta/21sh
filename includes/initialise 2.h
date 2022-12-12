@@ -1,35 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_listen.c                                       :+:      :+:    :+:   */
+/*   initialise.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 13:35:45 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/12 14:14:39 by zraunio          ###   ########.fr       */
+/*   Created: 2022/12/08 15:31:07 by zraunio           #+#    #+#             */
+/*   Updated: 2022/12/12 12:55:51 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
+# ifndef INITIALISE_H
+# define INITIALISE_H
+# include "shell.h"
+# include "structs.h"
 
-void	key_listen(t_shell *shell, char *input)
-{
-	int	i;
-	int	key;
-
-	i = 0;
-	while (input[i] != '\0')
-	{
-		if (input[i] == CTRL_D)
-			kill_mode("exit", shell);
-		key = special_keys(shell, input);
-		if (key == 13)
-			shell->end = 1;
-		else if (!key)
-		{
-			stdin_char(input[i]);
-			cmd_line(shell, input[i]);
-		}
-		i++;
-	}
-}
+/*
+** INIT
+*/
+void	init_shell(t_shell *shell, char **environ);
+# endif
