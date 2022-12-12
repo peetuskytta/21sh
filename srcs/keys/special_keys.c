@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   special_keys.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 17:00:36 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/12 11:04:24 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/12 13:18:21 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static int	is_escape(t_shell *shell, char *input)
 		shell->dir_len = 0;
 		return (0);
 	}
-
 }
 
 static int is_arrow(t_shell *shell, char *input)
@@ -74,6 +73,7 @@ int	special_keys(t_shell *shell, char *input)
 			}
 			token_list_free(list.token_list);
 			ft_memset(shell->cmd_line, '\0', shell->cmd_idx);
+			shell->cmd_idx = 0;
 			shell->end = 0;
 		}
 		cmd_line_prompt(shell->quote);
