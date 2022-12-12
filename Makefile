@@ -84,8 +84,8 @@ HEADER := includes/shell.h
 all: $(NAME)
 
 $(NAME): $(LIBFT_A) $(OBJS_DIR) $(OBJS)
-	@echo "$(BOLD)$(WHITE)----------$(NAME) COMPILATION DONE----------$(RESET)"
 	@$(CC) $(FLAGS) $(OBJS) -o $(NAME) -ltermcap -L ./libft -lft >> makelog.txt
+	@echo "$(BOLD)$(WHITE)----------$(NAME) COMPILATION DONE----------$(RESET)"
 
 $(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR) >> makelog.txt
