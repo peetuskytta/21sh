@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 16:57:43 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/03 16:58:03 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/12 13:48:17 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ void	read_key(t_shell *shell, char *input)
 		i = read(STDIN_FILENO, input, MAX_BUFF);
 		if (i == -1)
 			return ;
-		keypress(shell, input);
+		key_listen(shell, input);
 	}
 }

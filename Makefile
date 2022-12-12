@@ -40,10 +40,10 @@ _INIT := init_shell.c
 
 _INPUT := read_quote.c \
 		cmd_line.c\
-		read_stdin.c
+		input_read.c
 
 _KEYS := ft_iscntrl.c \
-		keypress.c \
+		key_listen.c \
 		read_key.c \
 		special_keys.c
 
