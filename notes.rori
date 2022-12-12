@@ -1,0 +1,4 @@
+add '\n' if ENTER, if an open quote exists
+
+we have broken termcaps again, emergency, call heikki
+

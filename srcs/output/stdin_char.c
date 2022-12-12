@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   kill_mode.c                                        :+:      :+:    :+:   */
+/*   stdout_char.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 13:28:31 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/12 13:33:37 by zraunio          ###   ########.fr       */
+/*   Created: 2022/11/12 17:53:11 by zraunio           #+#    #+#             */
+/*   Updated: 2022/11/26 10:56:00 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-void kill_mode(const char *str, t_shell *shell)
+int	stdin_char(int c)
 {
-	if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &shell->raw) == -1)
-		ft_perror(ERROR_EXIT);
-	write(STDOUT_FILENO, "\x1b[2J", 4);
-	write(STDOUT_FILENO, "\x1b[H", 3);
-	ft_perror(str);
-	exit(EXIT_SUCCESS);
+	return (write(STDIN_FILENO, &c, 1));
 }

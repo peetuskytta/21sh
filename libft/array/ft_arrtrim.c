@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   kill_mode.c                                        :+:      :+:    :+:   */
+/*   ft_arrtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 13:28:31 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/12 13:33:37 by zraunio          ###   ########.fr       */
+/*   Created: 2022/11/24 13:23:58 by zraunio           #+#    #+#             */
+/*   Updated: 2022/11/24 13:24:29 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
+#include "../incl/libft.h"
 
-void kill_mode(const char *str, t_shell *shell)
+void	ft_arrtrim(char **arr, size_t row)
 {
-	if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &shell->raw) == -1)
-		ft_perror(ERROR_EXIT);
-	write(STDOUT_FILENO, "\x1b[2J", 4);
-	write(STDOUT_FILENO, "\x1b[H", 3);
-	ft_perror(str);
-	exit(EXIT_SUCCESS);
+	while (arr[row + 1] != NULL)
+	{
+		ft_memdel((void *)&arr[row]);
+		arr[row] = ft_strnew(ft_strilen(arr[row + 1]));
+		ft_strcpy(arr[row], arr[row +1]);
+		row++;
+	}
+	ft_memdel((void *)&arr[row]);
 }

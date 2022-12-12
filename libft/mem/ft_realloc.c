@@ -3,36 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 08:54:50 by zraunio           #+#    #+#             */
-/*   Updated: 2022/09/26 14:16:28 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/09 12:18:19 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/libft.h"
 
-void	*ft_realloc(void *ptr, size_t o_size, size_t n_size)
+void	*ft_realloc(void *ptr, size_t old_size, size_t new_size)
 {
-	void	*dest;
-	size_t	i;
+	void	*new;
 
-	if (ptr && n_size == 0)
+	if (new_size == 0 && ptr != NULL)
 	{
 		free(ptr);
-		return (NULL);
+		new = NULL;
 	}
-	dest = (void *)malloc(n_size);
-	if (dest && ptr)
+	else
+		new = (void *)malloc(new_size);
+	if (new != NULL && ptr != NULL)
 	{
-		if (o_size > n_size)
-			i = n_size;
-		else
-			i = o_size;
-		ft_memcpy(dest, ptr, i);
-		if (n_size > o_size)
-			ft_memset((void *)(&((char *)dest)[o_size]), 0, n_size - o_size);
+		ft_memcpy(new, ptr, (old_size > new_size ? new_size : old_size));
+		if (new_size > old_size)
+			ft_memset(&new, 0, new_size - old_size);
 		free(ptr);
 	}
-	return ((void *)dest);
+	return (new);
 }
+
+/*
+** norm errors, ternanries forbidden, change it
+*/

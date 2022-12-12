@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   kill_mode.c                                        :+:      :+:    :+:   */
+/*   input_read.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 13:28:31 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/12 13:33:37 by zraunio          ###   ########.fr       */
+/*   Created: 2022/11/12 18:42:14 by zraunio           #+#    #+#             */
+/*   Updated: 2022/12/12 13:45:58 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-void kill_mode(const char *str, t_shell *shell)
+void input_read(t_shell *shell)
 {
-	if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &shell->raw) == -1)
-		ft_perror(ERROR_EXIT);
-	write(STDOUT_FILENO, "\x1b[2J", 4);
-	write(STDOUT_FILENO, "\x1b[H", 3);
-	ft_perror(str);
-	exit(EXIT_SUCCESS);
+	char	input[MAX_BUFF + 1];
+
+	if (enable_rawmode(shell) == 0)
+		ft_putendl_fd("Error with tcgetattr", STDERR_FILENO);
+	init_window(&shell->window);
+	tcsetattr(STDIN_FILENO, TCSANOW, &shell->raw);
+	read_key(shell, input);
+	tcsetattr(STDIN_FILENO, TCSANOW, &shell->orig_raw);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 13:01:21 by zraunio           #+#    #+#             */
-/*   Updated: 2022/10/26 14:02:19 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/03 17:29:30 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ char				**ft_reallocarray(char **old_arr, int rows);
 void				ft_arr_free(void ***arr);
 char				**ft_arrnew(size_t rows, size_t row_len);
 char				**ft_arrdup(char **arr);
+void				ft_arrtrim(char **arr, size_t row);
+int					ft_array_strcmp(int *array, char *str);
 /*
 ** ascii
 */
@@ -122,7 +124,7 @@ int					ft_memcmp(const void *s1, const void *s2, size_t n);
 void				*ft_memchr(const void *s, int c, size_t n);
 void				*ft_memccpy(void *dest, const void *src, int c,
 						size_t n);
-void				*ft_realloc(void *ptr, size_t o_size, size_t n_size);
+void				*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 void				ft_bzero(void *s, size_t n);
 int					ft_memdel_range(const int nbr, ...);
 /*

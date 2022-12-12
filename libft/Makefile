@@ -3,8 +3,14 @@ NAME = libft.a
 FT_PRINTF = libftprintf.a
 
 CC = gcc
+RED = \033[31m
+WHITE = \033[37m
+RESET = \033[0m
+RED = \033[31m
+BOLD = \033[1m
+GREEN = \\n\033[32;1m
 
-CFLAGS = -Wall -Wextra -Werror -I$(HDR_SRC)
+CFLAGS = -Wall -Wextra -Werror -O3 -I$(HDR_SRC)
 
 # ASCII_DIR = ./ascii/
 # CONV_DIR = ./convert/
@@ -27,7 +33,9 @@ CFLAGS = -Wall -Wextra -Werror -I$(HDR_SRC)
 _ARRAY_SRC = array/ft_arrdup.c \
 			array/ft_arrfree.c \
 			array/ft_arrnew.c \
-			array/ft_reallocarray.c
+			array/ft_reallocarray.c \
+			array/ft_arrtrim.c \
+			array/ft_array_strcmp.c
 
 _ASCII_SRC =  ascii/ft_isalnum.c \
 		ascii/ft_isalpha.c \
@@ -159,30 +167,32 @@ HDR_SRC= ./incl
 all: $(NAME)
 
 $(NAME): $(OBJ_DIR) $(OBJ)
-	@echo "\\n\033[32;1mLIBFT DONE\033[0m \\n"
-	@make -C ft_printf
-	@ $(CC) $(CFLAGS) -c $(LIBFT_SRCS)
-	@mv *.o $(OBJ_DIR)
-	@ar rc $(NAME) $(OBJ) $(PRINTF_OBJ)
+	@echo "$(GREEN)$(BOLD)LIBFT DONE$(RESET)"
+	-@make -C ft_printf
+	-@ $(CC) $(CFLAGS) -c $(LIBFT_SRCS)
+	-@mv *.o $(OBJ_DIR)
+	-@ar rc $(NAME) $(OBJ) $(PRINTF_OBJ)
 	@ranlib $(NAME)
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
 clean:
-	@make clean -C ft_printf
-	@rm -f $(OBJS)
-	@rm -f $(LIBFT_OBJ)
-	@find . -type f -name '*.o' -print -delete -o -name '#*#' -print -delete
-	@find . -type f -name '*~' -print -delete -o -name '#*#' -print -delete
-	@find . -type f -name '.DS_Store' -print -delete
-	@echo "\\n\033[32;1mLIBFT OBJ STUFFS DELETED\033[0m \\n"
+	-@make clean -C ft_printf
+	-@rm -f $(OBJS)
+	-@rm -f $(LIBFT_OBJ)
+	-@find . -type f -name '*.o' -print -delete -o -name '#*#' -print -delete
+	-@find . -type f -name '*~' -print -delete -o -name '#*#' -print -delete
+	-@find . -type f -name '.DS_Store' -print -delete
+	@echo "$(RED)$(BOLD)LIBFT OBJ DELETED$(RESET)"
 
 fclean: clean
-	@rm -f $(NAME)
-	@rm -rf $(OBJ_DIR)
-	@echo "\\n\033[32;1mLIBFT REST OF STUFFS DELETED\033[0m \\n"
+	-@rm -f $(NAME)
+	-@rm -rf $(OBJ_DIR)
+	@echo "$(RED)$(BOLD)LIBFT REST OF STUFFS DELETED $(RESET)"
 
 re: fclean all
+
+.SILENT: clean fclean re
 
 .PHONY: all clean fclean re

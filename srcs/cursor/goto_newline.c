@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   allocation_check.c                                 :+:      :+:    :+:   */
+/*   goto_newline.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/31 14:49:07 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/12 09:20:42 by pskytta          ###   ########.fr       */
+/*   Created: 2022/11/12 17:48:04 by zraunio           #+#    #+#             */
+/*   Updated: 2022/12/12 11:04:35 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/shell.h"
+#include "../../includes/shell.h"
 
-void	allocation_check(void **check)
+void	goto_newline(t_shell *shell)
 {
-	if (check == NULL)
-	{
-		(void)write(STDERR_FILENO, "unable to allocate memory", 26);
-		exit(MALLOC_ERRNO);
-	}
+		tputs(tgoto(tgetstr("cm", NULL), 0, 1), 1, stdin_char);
+		tputs(tgetstr("cd", NULL), 1, stdin_char);
+		tputs(tgoto(tgetstr("cm", NULL), 0, 1), 1, stdin_char);
+		tputs(tgetstr("cd", NULL), 1, stdin_char);
+		read_quote(shell);
+	//	cmd_line_prompt(shell->quote);
 }
-
-// make into ft_mem style function and add to libft

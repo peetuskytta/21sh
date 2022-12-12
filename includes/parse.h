@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.h                                            :+:      :+:    :+:   */
+/*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 13:58:06 by pskytta           #+#    #+#             */
-/*   Updated: 2022/11/22 12:02:56 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/12 13:25:39 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEXER_H
-# define LEXER_H
-
+# ifndef PARSE_H
+# define PARSE_H
 # include "shell.h"
+# include "structs.h"
 
 typedef enum e_tok_type
 {
@@ -62,5 +62,6 @@ typedef struct s_lex
 }			t_lex;
 
 void	lexer(char *input, int size, t_lex *list);
+void	token_list_free(t_tok *list);
 
-#endif
+# endif

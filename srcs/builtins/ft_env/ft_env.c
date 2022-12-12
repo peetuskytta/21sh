@@ -1,21 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_iscntrl.c                                       :+:      :+:    :+:   */
+/*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 12:04:38 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/01 17:05:11 by zraunio          ###   ########.fr       */
+/*   Created: 2022/11/13 10:20:57 by zraunio           #+#    #+#             */
+/*   Updated: 2022/11/24 16:26:49 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
+#include "../../../includes/shell.h"
 
-int	ft_iscntrl(char c)
+static void	env_temp(t_shell *shell, char *args)
 {
-	if ((c >= 1 && c <= 31))
-		return (1);
+	
+}
+
+void	ft_env(t_shell *shell, char **args)
+{
+	int i;
+
+	if (shell->env_iflg == 1)
+		env_temp(shell, args);
+	else if (args)
+	{
+		//env $VALID_ENV_NAME
+		//env temporary env
+		//env misformatted_anything
+		//env command
+	}
 	else
-		return (0);
+	{
+		i = 0;
+		while (shell->environ[i])
+			ft_print_fd(STDOUT_FILENO, "%s\n", shell->environ[i++]);
+	}
 }

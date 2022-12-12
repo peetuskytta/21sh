@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   kill_mode.c                                        :+:      :+:    :+:   */
+/*   panic.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 13:28:31 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/12 13:33:37 by zraunio          ###   ########.fr       */
+/*   Created: 2022/12/08 15:39:18 by zraunio           #+#    #+#             */
+/*   Updated: 2022/12/12 12:56:02 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
+# ifndef PANIC_H
+# define PANIC_H
+# include "shell.h"
+# include "structs.h"
 
-void kill_mode(const char *str, t_shell *shell)
-{
-	if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &shell->raw) == -1)
-		ft_perror(ERROR_EXIT);
-	write(STDOUT_FILENO, "\x1b[2J", 4);
-	write(STDOUT_FILENO, "\x1b[H", 3);
-	ft_perror(str);
-	exit(EXIT_SUCCESS);
-}
+/*
+** PANIC
+*/
+void	ft_abort(void);
+void	ft_perror(const char *s);
+char	*ft_strerror(int errnum);
+
+# endif

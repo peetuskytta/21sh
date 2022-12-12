@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   kill_mode.c                                        :+:      :+:    :+:   */
+/*   ft_abort.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 13:28:31 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/12 13:33:37 by zraunio          ###   ########.fr       */
+/*   Created: 2022/11/13 11:59:10 by zraunio           #+#    #+#             */
+/*   Updated: 2022/11/13 12:08:51 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-void kill_mode(const char *str, t_shell *shell)
+/*
+** The abort() first unblocks the SIGABRT signal, and then raises that signal 
+** for the calling process. This results in the abnormal termination of the 
+** process unless the SIGABRT signal is caught and the signal handler does not
+** return 
+*/
+
+void ft_abort(void)
 {
-	if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &shell->raw) == -1)
-		ft_perror(ERROR_EXIT);
-	write(STDOUT_FILENO, "\x1b[2J", 4);
-	write(STDOUT_FILENO, "\x1b[H", 3);
-	ft_perror(str);
-	exit(EXIT_SUCCESS);
+	ft_perror(ft_strerror(ABORT_ERRNO));
+	//sigabrt process handling here
+	exit(EXIT_FAILURE);
 }

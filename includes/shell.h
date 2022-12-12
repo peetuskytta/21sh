@@ -3,19 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
-/*   Updated: 2022/11/17 15:07:39 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/12 13:29:37 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # ifndef SHELL_H
 # define SHELL_H
 # include "../libft/incl/libft.h"
-# include "keys.h"
-# include "errors.h"
-# include "lexer.h"
+# include "structs.h"
 # include <term.h>
 # include <fcntl.h>
 # include <time.h>
@@ -23,74 +21,32 @@
 # include <termcap.h>
 # include <sys/ioctl.h>
 
+# define NL ft_putchar('\n')
+# define DB ft_putstr("\nYOU ARE HERE\n")
 # define HIST_FILE ".shell_history"
-
+# define NULL_BYTE '\0'
 # define TRUE 1
 # define FALSE 0
 # define BUFFER 1024
 # define S_QUOTE '\''
 # define D_QUOTE '\"'
+# define MAX_BUFF 4096
 
-typedef struct	s_win
-{
-	struct winsize	*win;
-	int				cols;
-	int				rows;
-	int				current_row;
-}					t_win;
-
-typedef struct s_shell
-{
-	char		**environ;
-	char		*cmd_line;
-	char		*minish;
-	int			num_of_variables;
-	int			quote;
-	int			dir_len;
-	int			previous_dir_in_cd;
-	char		*prev_dir;
-	t_win		*window;
-	struct termios	orig_raw;
-	struct termios	raw;
-}				t_shell;
+# include "cursor.h"
+# include "keys.h"
+# include "errors.h"
+# include "parse.h"
+# include "buildin.h"
+# include "initialise.h"
+# include "input.h"
+# include "panic.h"
+# include "rawmode.h"
+# include "output.h"
 
 /*
 ** SHELL
 */
 int		env_variable_counter(char **environ);
-void	init_shell(t_shell *shell, char **environ);
 void	allocation_check(void **check);
-
-/*
-** READ_INPUT
-*/
-int		command_prompt_loop(t_shell *shell);
-char	*handle_open_quotes(t_shell *shell, char *buf, int *quotes);
-
-/*
-** CURSOR
-*/
-void	init_window(t_win *window);
-/*
-** KEYS
-*/
-int		ft_iscntrl(char c);
-void	keypress(t_shell *shell);
-/*
-** RAW
-*/
-int		enable_rawmode(t_shell *shell);
-void	kill_mode(const char *str, t_shell *shell);
-
-#define HIST_FILE ".shell_history"
-
-#define NULL_BYTE '\0'
-#define TRUE 1
-#define FALSE 0
-
-int		env_variable_counter(char **environ);
-void	init_shell(t_shell *shell, char **environ);
-void	allocation_check(void **check);
-
 
 # endif
