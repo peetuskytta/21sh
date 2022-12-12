@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 12:02:56 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/12 10:16:25 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/12 13:30:19 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lexer.h"
+#include "../includes/shell.h"
 
 static void	init_token(t_tok *token, int size)
 {

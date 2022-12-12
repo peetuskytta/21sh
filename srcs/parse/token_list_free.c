@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   token_list_free.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 08:10:24 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/12 08:13:35 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/12 13:30:49 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/lexer.h"
+#include "../../includes/shell.h"
 
 void	token_list_free(t_tok *list)
 {

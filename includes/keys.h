@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   keys.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:58 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/07 08:35:41 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/12 13:25:39 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # ifndef KEYS_H
 # define KEYS_H
+# include "shell.h"
+# include "structs.h"
 /*
 ** mac key codes
 */
@@ -32,5 +34,13 @@
 # define OPTN_DOWN {27, 91, 49, 59, 51, 66}
 # define OPTN_RIGHT {27, 102}
 # define OPTN_LEFT {27, 98}
+
+/*
+** KEYS
+*/
+int		ft_iscntrl(char c);
+void	keypress(t_shell *shell, char *read_str);
+void	read_key(t_shell *shell, char *input);
+int		special_keys(t_shell *shell, char *input);
 
 #endif

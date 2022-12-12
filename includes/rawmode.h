@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   kill_mode.c                                        :+:      :+:    :+:   */
+/*   rawmode.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 13:28:31 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/12 13:33:37 by zraunio          ###   ########.fr       */
+/*   Created: 2022/12/08 15:40:33 by zraunio           #+#    #+#             */
+/*   Updated: 2022/12/12 12:56:10 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
+# ifndef RAWMODE_H
+# define RAWMODE_H
+# include "shell.h"
+# include "structs.h"
 
-void kill_mode(const char *str, t_shell *shell)
-{
-	if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &shell->raw) == -1)
-		ft_perror(ERROR_EXIT);
-	write(STDOUT_FILENO, "\x1b[2J", 4);
-	write(STDOUT_FILENO, "\x1b[H", 3);
-	ft_perror(str);
-	exit(EXIT_SUCCESS);
-}
+/*
+** RAW
+*/
+int		enable_rawmode(t_shell *shell);
+void	kill_mode(const char *str, t_shell *shell);
+
+# endif

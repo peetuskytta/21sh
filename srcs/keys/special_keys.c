@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 17:00:36 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/12 13:18:21 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/12 13:24:56 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,35 +52,19 @@ int	special_keys(t_shell *shell, char *input)
 		return (is_escape(shell, input));
 	else if (input[0] == ENTER)
 	{
-		//read_quote(shell);
 		goto_newline(shell);
 		if (shell->quote == EOF)
-			shell->end = 1;
-		if (shell->end == 1)
 		{
-			/*PRINT FOR DEBUGGING PURPOSES*/
 			t_lex	list;
-			ft_memset((void *)&list, 0, sizeof(list));
-			NL;
-			ft_putendl(shell->cmd_line);
+			ft_memset(&list, 0, sizeof(t_lex));
 			lexer(shell->cmd_line, shell->cmd_idx, &list);
-			int i = 0;
-			NL;
-			while (list.token_list != NULL)
-			{
-				ft_printf("token[%d] type:\t{%d} content:	{%s}\n", i++, list.token_list->type, list.token_list->str);
-				list.token_list = list.token_list->next;
-			}
 			token_list_free(list.token_list);
 			ft_memset(shell->cmd_line, '\0', shell->cmd_idx);
 			shell->cmd_idx = 0;
-			shell->end = 0;
 		}
 		cmd_line_prompt(shell->quote);
 		return (1);
 	}
 	else
-	{
 		return (0);
-	}
 }
