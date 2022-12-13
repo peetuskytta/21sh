@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/12 16:52:49 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/13 14:00:50 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_shell
 	int			env_nbr;
 	int			env_iflg;
 	char		*cmd_line;
+	char		*rev_cmd;
 	int			cmd_idx;
 	int			end;
 	int			quote;

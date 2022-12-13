@@ -49,7 +49,8 @@ _KEYS := ft_iscntrl.c \
 		special_keys.c
 
 _OUTPUT := stdin_char.c \
-		cmd_line_prompt.c
+		cmd_line_prompt.c \
+		cmd_line_stdin.c
 
 _PANIC := ft_strerror.c \
 		ft_perror.c \
@@ -129,7 +130,7 @@ clean:
 	-@rm -f $(OBJS) >> makelog.txt
 	@find . -type f -name '*.o' -print -delete -o -name '#*#' -print -delete >> makelog.txt
 	@find . -type f -name '*~' -print -delete -o -name '#*#' -print -delete >> makelog.txt
-	@find . -type f -name '.DS_Store' -print -delete
+	@find . -type f -name '.DS_Store' -print -delete >> makelog.txt
 	@echo "$(BOLD)$(RED)----------Objects deleted----------$(RESET)"
 
 fclean: clean
