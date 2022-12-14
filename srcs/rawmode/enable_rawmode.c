@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   enable_rawmode.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 12:59:48 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/08 11:13:12 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/14 13:38:45 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ int	enable_rawmode(t_shell *shell)
 	orig_raw.c_cflag &= ~(CSIZE | PARENB);
 	orig_raw.c_cflag |= CS8;
 	orig_raw.c_lflag &= ~(ECHO | ICANON | ISIG);
+	// orig_raw.c_lflag &= ~(ICANON | ECHO);
+	// orig_raw.c_lflag |= ISIG;
+	orig_raw.c_cc[VMIN] = 0;
+	orig_raw.c_cc[VTIME] = 1;
 	shell->raw = orig_raw;
 	return (1);
 }

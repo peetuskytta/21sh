@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/13 14:11:40 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/14 17:57:54 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,14 @@ int	main(int argc, char **argv, char **envp)
 		while (TRUE)
 		{
 			input_read(&shell);
-			if (shell.end == 1)
+			if (shell.end == 1 && shell.quote == EOF)
 			{
 				ft_putendl(shell.cmd_line);
 				ft_putendl(shell.rev_cmd);
+				ft_memset(shell.cmd_line, 0, ft_strlen(shell.cmd_line));
+				ft_memset(shell.rev_cmd, 0, ft_strlen(shell.rev_cmd));
+				shell.cmd_idx = 0;
+				shell.end = 0;
 			}
 			// {
 			// 	t_lex	list;
