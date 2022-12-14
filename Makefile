@@ -55,7 +55,8 @@ _PANIC := ft_strerror.c \
 		ft_abort.c
 
 _PARSE:= lexer.c \
-		token_list_free.c
+		token_list_free.c \
+		parsing.c
 
 _RAWMODE := enable_rawmode.c \
 			kill_mode.c
