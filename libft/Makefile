@@ -10,7 +10,7 @@ RED = \033[31m
 BOLD = \033[1m
 GREEN = \\n\033[32;1m
 
-CFLAGS = -Wall -Wextra -Werror -O3 -I$(HDR_SRC)
+CFLAGS = -Wall -Wextra -Werror -I$(HDR_SRC)
 
 # ASCII_DIR = ./ascii/
 # CONV_DIR = ./convert/
