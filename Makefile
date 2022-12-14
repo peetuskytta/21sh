@@ -16,6 +16,7 @@ NAME := 21sh
 SRCS_DIR = srcs/
 CURSOR_DIR = srcs/cursor/
 EXECUTE_DIR = srcs/execute/
+HISTORY_DIR = srcs/history/
 INIT_DIR = srcs/init/
 INPUT_DIR = srcs/input/
 OUTPUT_DIR = srcs/output/
@@ -36,6 +37,11 @@ _CURSOR := init_window.c \
 		goto_sides.c
 
 # _EXECUTE :=
+
+_HISTORY := history_create.c \
+			history_fetch.c \
+			history_runtime.c \
+			history.c
 
 _INIT := init_shell.c
 
@@ -66,6 +72,7 @@ _RAWMODE := enable_rawmode.c \
 	# $(addprefix $(EXECUTE_DIR), $(_EXECUTE))
 ALL_SRCS := $(addprefix $(SRCS_DIR), $(_SRCS)) \
 			$(addprefix $(CURSOR_DIR), $(_CURSOR)) \
+			$(addprefix $(HISTORY_DIR), $(_HISTORY)) \
 			$(addprefix $(INIT_DIR), $(_INIT)) \
 			$(addprefix $(INPUT_DIR), $(_INPUT)) \
 			$(addprefix $(KEYS_DIR), $(_KEYS)) \
@@ -75,7 +82,7 @@ ALL_SRCS := $(addprefix $(SRCS_DIR), $(_SRCS)) \
 			$(addprefix $(RAWMODE_DIR), $(_RAWMODE))
 
 SRCS = $(_SRCS) $(_CURSOR) $(_INIT) $(_INPUT) $(_KEYS) \
-$(_OUTPUT) $(_PANIC) $(_PARSE) $(_RAWMODE) # $(_EXECUTE)
+$(_OUTPUT) $(_PANIC) $(_PARSE) $(_RAWMODE) $(_HISTORY) # $(_EXECUTE)
 OBJ_FILES = $(SRCS:.c=.o)
 OBJS = $(patsubst %, $(OBJS_DIR)%, $(SRCS:.c=.o))
 #libft
@@ -96,6 +103,9 @@ $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(CURSOR_DIR)%.c
+	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
+
+$(OBJS_DIR)%.o: $(HISTORY_DIR)%.c
 	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(INIT_DIR)%.c

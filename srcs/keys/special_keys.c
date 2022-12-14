@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 17:00:36 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/13 15:22:39 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/14 15:26:41 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	is_escape(t_shell *shell, char *input, int *i)
 	}
 	else
 	{
-		shell->dir_len = 0;
+		ft_putnbr_endl(shell->env_nbr);
 		return (0);
 	}
 }
@@ -48,7 +48,6 @@ static int is_arrow(t_shell *shell, t_win *window, char *input, int *j)
 		ft_print_fd(STDOUT_FILENO, "ARROW UP\n");
 	else
 		i = 0;
-	shell->dir_len = 0;
 	return (i);
 }
 

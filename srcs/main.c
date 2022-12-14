@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/13 14:11:40 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/14 15:31:29 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
-	ft_memset(&shell, EOF, sizeof(shell));
+	ft_memset(&shell, 0, sizeof(t_shell));
 	if (envp)
 	{
 		init_shell(&shell, envp);
@@ -64,10 +64,14 @@ int	main(int argc, char **argv, char **envp)
 		while (TRUE)
 		{
 			input_read(&shell);
-			if (shell.end == 1)
+			if (shell.end == 1 && shell.quote == EOF)
 			{
-				ft_putendl(shell.cmd_line);
-				ft_putendl(shell.rev_cmd);
+				// ft_putendl(shell.cmd_line);
+				// ft_putendl(shell.rev_cmd);
+				history_runtime(&shell);
+				ft_memset(shell.cmd_line, '\0', ft_strlen(shell.cmd_line));
+				shell.cmd_idx = 0;
+				shell.end = 0;
 			}
 			// {
 			// 	t_lex	list;

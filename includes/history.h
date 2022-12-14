@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   kill_mode.c                                        :+:      :+:    :+:   */
+/*   history.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 13:28:31 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/14 15:36:43 by zraunio          ###   ########.fr       */
+/*   Created: 2022/12/14 14:40:58 by zraunio           #+#    #+#             */
+/*   Updated: 2022/12/14 15:24:10 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
+# ifndef HISTORY_H
+# define HISTORY_H
+# include "shell.h"
 
-void kill_mode(const char *str, t_shell *shell)
-{
-	if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &shell->raw) == -1)
-		ft_perror(ERROR_EXIT);
-	write(STDOUT_FILENO, "\x1b[2J", 4);
-	write(STDOUT_FILENO, "\x1b[H", 3);
-	ft_perror(str);
-	ft_arr_free((void *)&shell->environ);
-	exit(EXIT_SUCCESS);
-}
+# define HISTORY "~/.21sh_history"
+
+void	history(t_shell *shell);
+void	history_runtime(t_shell *shell);
+
+# endif

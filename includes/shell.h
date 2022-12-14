@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/12 13:29:37 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/14 14:41:51 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # define MAX_BUFF 4096
 
 # include "cursor.h"
+# include "history.h"
 # include "keys.h"
 # include "errors.h"
 # include "parse.h"
