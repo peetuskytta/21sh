@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/14 15:31:29 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/14 17:20:10 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int	main(int argc, char **argv, char **envp)
 				ft_memset(shell.cmd_line, '\0', ft_strlen(shell.cmd_line));
 				shell.cmd_idx = 0;
 				shell.end = 0;
+				cmd_line_prompt(shell.quote);
 			}
 			// {
 			// 	t_lex	list;

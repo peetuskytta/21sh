@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   special_keys.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 17:00:36 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/14 15:26:41 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/14 17:19:05 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	special_keys(t_shell *shell, char *input, int *i)
 	else if (input[0] == ENTER)
 	{
 		goto_newline(shell);
-		cmd_line_prompt(shell->quote);
+	//	cmd_line_prompt(shell->quote);
 		return (ENTER);
 	}
 	else
