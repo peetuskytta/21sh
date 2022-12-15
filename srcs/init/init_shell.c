@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 09:15:27 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/13 14:05:16 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/15 14:39:13 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void	init_shell(t_shell *shell, char **environ)
 	shell->rev_cmd = (char *)ft_memalloc(sizeof(char) * (MAX_BUFF + 1));
 	allocation_check((void *)&shell->cmd_line);
 	allocation_check((void *)&shell->rev_cmd);
-	DB;
 	shell->cmd_idx = 0;
 	shell->quote = EOF;
+	init_term();
 	fetch_envp(shell, environ, env_variable_counter(environ));
 	fetch_ttyname(shell);
 	// future history fetched from a file or initialized by other means

@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 17:06:00 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/15 13:25:41 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/15 14:31:09 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	goto_sides(t_shell *shell, t_win *window, int key)
 	{
 		window->cols--;
 		chrcpy_left_right(shell->cmd_line, shell->rev_cmd, MAX_BUFF, 1);
-		//tputs(tgoto(tgetstr("le", NULL), 0, 1), 1, stdin_char);
+		tputs(tgetstr("le", NULL), 1, stdin_char);
 	}
 	else if (key == 'r')
 	{

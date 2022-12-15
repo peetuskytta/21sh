@@ -37,7 +37,8 @@ _CURSOR := init_window.c \
 
 # _EXECUTE :=
 
-_INIT := init_shell.c
+_INIT := init_shell.c \
+		init_term.c
 
 _INPUT := read_quote.c \
 		cmd_line.c\
