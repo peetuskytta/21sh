@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 15:10:51 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/14 17:21:01 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/15 07:44:43 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static void	history_truncate(char **history, char *cmd_line)
 	int	i;
 
 	i = 0;
+	ft_strdel(&history[0]);
 	history = (char **)ft_memmove(history, history + 1, sizeof(char *) * 1001);
 	while (history[i] != NULL)
 		i++;
