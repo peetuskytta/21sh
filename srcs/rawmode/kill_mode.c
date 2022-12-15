@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 13:28:31 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/12 13:33:37 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/15 15:43:30 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,7 @@ void kill_mode(const char *str, t_shell *shell)
 	write(STDOUT_FILENO, "\x1b[2J", 4);
 	write(STDOUT_FILENO, "\x1b[H", 3);
 	ft_perror(str);
+	ft_arr_free((void *)&shell->environ);
+	history_create(shell->history);
 	exit(EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/12 13:29:37 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/15 15:39:05 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 
 # define NL ft_putchar('\n')
 # define DB ft_putstr("\nYOU ARE HERE\n")
-# define HIST_FILE ".shell_history"
 # define NULL_BYTE '\0'
 # define TRUE 1
 # define FALSE 0
@@ -34,6 +33,7 @@
 
 # include "cursor.h"
 # include "keys.h"
+# include "history.h"
 # include "errors.h"
 # include "parse.h"
 # include "buildin.h"

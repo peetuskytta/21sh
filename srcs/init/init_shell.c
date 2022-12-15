@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 09:15:27 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/15 14:39:13 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/15 15:36:56 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	init_shell(t_shell *shell, char **environ)
 	init_term();
 	fetch_envp(shell, environ, env_variable_counter(environ));
 	fetch_ttyname(shell);
+	history_fetch(shell);
 	// future history fetched from a file or initialized by other means
 	// if no history file exists.
 }

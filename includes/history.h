@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   goto_newline.c                                     :+:      :+:    :+:   */
+/*   history.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/12 17:48:04 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/15 15:52:25 by zraunio          ###   ########.fr       */
+/*   Created: 2022/12/14 14:40:58 by zraunio           #+#    #+#             */
+/*   Updated: 2022/12/15 15:35:53 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
+# ifndef HISTORY_H
+# define HISTORY_H
+# include "shell.h"
 
-void	goto_newline(t_shell *shell)
-{
-		tputs(tgoto(tgetstr("cm", NULL), 0, 1), 1, stdin_char);
-		tputs(tgetstr("cd", NULL), 1, stdin_char);
-		tputs(tgoto(tgetstr("cm", NULL), 0, 1), 1, stdin_char);
-		tputs(tgetstr("cd", NULL), 1, stdin_char);
-		read_quote(shell);
-}
+# define HIST_FILE ".21sh_history"
+
+void	history(t_shell *shell);
+void	history_runtime(t_shell *shell);
+void	history_create(char **history);
+void	history_fetch(t_shell *shell);
+
+# endif

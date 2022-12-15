@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 17:00:36 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/15 12:04:52 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/15 15:39:48 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	is_escape(t_shell *shell, char *input, int *i)
 	}
 	else
 	{
-		shell->dir_len = 0;
+		(void)shell;
 		return (0);
 	}
 }
