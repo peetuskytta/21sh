@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 13:58:06 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/14 11:26:22 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/15 09:43:57 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,40 @@ typedef struct s_lex
 {
 	t_tok	*token_list;
 }			t_lex;
+
+typedef struct s_simple_cmd
+{
+	char	*cmd;
+	char	**arguments;
+}			t_simple_cmd;
+
+typedef struct s_redir
+{
+	char	*cmd;
+	char	**arguments;
+	char	*file_in;
+	char	*file_out;
+	int		fd[2];
+}			t_redir;
+
+typedef union u_cmd
+{
+	t_simple_cmd	*cmd;
+	t_redir			*redir;
+}					t_cmd;
+
+typedef struct s_ast_node
+{
+	int					type;
+	union u_cmd			*cmd;
+	struct s_ast_node	*next;
+	struct s_ast_node	*previous;
+}						t_ast_node;
+
+typedef struct s_ast
+{
+	t_ast_node	*node;
+}				t_ast;
 
 void	lexer(char *input, int size, t_lex *list);
 void	token_list_free(t_tok *list);
