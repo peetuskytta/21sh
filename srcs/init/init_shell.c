@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 09:15:27 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/14 15:05:53 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/15 16:14:44 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	init_shell(t_shell *shell, char **environ)
 	shell->quote = EOF;
 	fetch_envp(shell, environ, env_variable_counter(environ));
 	fetch_ttyname(shell);
+	history_init(shell);
 	// future history fetched from a file or initialized by other means
 	// if no history file exists.
 }

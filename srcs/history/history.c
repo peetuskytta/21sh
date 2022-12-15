@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:42:49 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/14 15:27:37 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/15 16:12:35 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@ void	history(t_shell *shell)
 {
 	int	fd;
 
-	fd = open(HISTORY, O_RDONLY);
+	fd = open(HIST_FILE, O_RDONLY);
 	if (fd < 0)
 		return ;
 	(void)shell;
+	close(fd);
 	//O_CREAT | O_WRONLY | O_APPEND, S_IRUSR | S_IWUSR
 	// 	| S_IRWXU);
 	// if (fd < 0)

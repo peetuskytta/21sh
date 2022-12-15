@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/14 14:41:51 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/15 14:51:18 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 
 # define NL ft_putchar('\n')
 # define DB ft_putstr("\nYOU ARE HERE\n")
-# define HIST_FILE ".shell_history"
 # define NULL_BYTE '\0'
 # define TRUE 1
 # define FALSE 0

@@ -39,7 +39,7 @@ _CURSOR := init_window.c \
 # _EXECUTE :=
 
 _HISTORY := history_create.c \
-			history_fetch.c \
+			history_init.c \
 			history_runtime.c \
 			history.c
 
