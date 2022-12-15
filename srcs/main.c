@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/14 15:06:04 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/15 09:49:18 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,12 @@ int	main(int argc, char **argv, char **envp)
 			if (shell.end == 1 && shell.quote == EOF)
 			{
 				parsing(&shell);
-				//ast_builder();
+				/*
+				PUT THE BELOW IN SEPARATE ast FOLDER:
+					ast_build();
+					ast_exectute();
+					ast_destroy();
+				*/
 			}
 		}
 	}
