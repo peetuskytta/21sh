@@ -6,13 +6,31 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 17:06:00 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/13 14:18:32 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/15 14:31:09 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-static void	chrcpy_right_left(char *cmd, char *rev, int max, int n)
+static int	ft_finword_rev(char *str)
+{
+	int	i;
+
+	i = ft_strilen(str) - 1;
+	if (i == 0 || i == 1)
+		return (i);
+	while (ft_isspace(str[i]))
+	{
+		i--;
+	}
+	while (!ft_isspace(str[i]) && i >= 0)
+	{
+		i--;
+	}
+	return (i);
+}
+
+static void	chrcpy_left_right(char *cmd, char *rev, int max, int n)
 {
 	int		i;
 	int		j;
@@ -31,16 +49,29 @@ static void	chrcpy_right_left(char *cmd, char *rev, int max, int n)
 
 int	goto_sides(t_shell *shell, t_win *window, int key)
 {
+	int	ws;
+
 	if (key == 'l')
 	{
 		window->cols--;
-		chrcpy_right_left(shell->cmd_line, shell->rev_cmd, 1, 1);
-		tputs(tgoto(tgetstr("le", NULL), 0, 1), 1, stdin_char);
+		chrcpy_left_right(shell->cmd_line, shell->rev_cmd, MAX_BUFF, 1);
+		tputs(tgetstr("le", NULL), 1, stdin_char);
 	}
-	else
+	else if (key == 'r')
 	{
 		window->cols++;
-		tputs(tgoto(tgetstr("nd", NULL), 0, 1), 1, stdin_char);
+		chrcpy_left_right(shell->rev_cmd, shell->cmd_line, MAX_BUFF, 1);
+		// tputs(tgoto(tgetstr("nd", NULL), 0, 1), 1, stdin_char);
+	}
+	else if (key == 98)
+	{
+		ws = ft_finword_rev(shell->cmd_line);
+		chrcpy_left_right(shell->cmd_line, shell->rev_cmd, MAX_BUFF, ft_strilen(shell->cmd_line) - ws);
+	}
+	else if (key == 102)
+	{
+		ws = ft_finword_rev(shell->rev_cmd);
+		chrcpy_left_right( shell->rev_cmd, shell->cmd_line, MAX_BUFF, ft_strilen(shell->rev_cmd) - ws);
 	}
 	return (1);
 }

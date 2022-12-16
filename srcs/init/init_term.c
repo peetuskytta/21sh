@@ -1,32 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   history_create.c                                   :+:      :+:    :+:   */
+/*   init_term.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/14 15:09:56 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/16 14:13:37 by zraunio          ###   ########.fr       */
+/*   Created: 2022/12/15 14:35:28 by zraunio           #+#    #+#             */
+/*   Updated: 2022/12/15 14:39:18 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-/*
-** create the file on exit
-*/
-void	history_create(char **history)
+void init_term(void)
 {
-	int	fd;
-	int	i;
+	char	*term;
+	char	term_buffer[MAX_BUFF];
+	int		status;
 
-	fd = open(HIST_FILE, O_CREAT | O_WRONLY | O_TRUNC, S_IRUSR | S_IWUSR | S_IRWXU);
-	if (fd < 0)
+	term = getenv("TERM");
+	if (term  == NULL)
 	{
-		ft_perror(HIST_ERR_FILE);
+		ft_print_fd(STDERR_FILENO, "could not get the TERM env\n");
 		exit(EXIT_FAILURE);
 	}
-	i = 0;
-	while (history[i] != NULL)
-		ft_putendl_fd(history[i++], fd);
+	status = tgetent(term_buffer, term);
+	if (status < 0)
+	{
+		ft_print_fd(STDERR_FILENO, "could not access the termcap data base\n");
+		exit(EXIT_FAILURE);
+	}
+	else if (status == 0)
+	{
+		ft_print_fd(STDERR_FILENO, "could not find the termtype\n");
+		exit(EXIT_FAILURE);
+	}
 }

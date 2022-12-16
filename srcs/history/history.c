@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:42:49 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/14 15:27:37 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/16 14:16:12 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	history(t_shell *shell)
 {
 	int	fd;
 
-	fd = open(HISTORY, O_RDONLY);
+	fd = open(HIST_FILE, O_RDONLY);
 	if (fd < 0)
 		return ;
 	(void)shell;

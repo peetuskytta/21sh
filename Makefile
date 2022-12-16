@@ -1,7 +1,7 @@
 #Compiler and compiler flags
 CC := gcc
 FLAGS_DB := -Wall -Wextra -Werror -g -fsanitize=address
-FLAGS := -Wall -Wextra -Werror -O3
+FLAGS := -Wall -Wextra -Werror
 
 #Color scheme
 WHITE = \033[37m
@@ -43,11 +43,17 @@ _HISTORY := history_create.c \
 			history_runtime.c \
 			history.c
 
-_INIT := init_shell.c
+_INIT := init_shell.c \
+		init_term.c
 
 _INPUT := read_quote.c \
 		cmd_line.c\
 		input_read.c
+
+_HISTORY := history_create.c \
+			history_fetch.c \
+			history_runtime.c \
+			history.c
 
 _KEYS := ft_iscntrl.c \
 		key_listen.c \
@@ -68,8 +74,7 @@ _PARSE:= lexer.c \
 _RAWMODE := enable_rawmode.c \
 			kill_mode.c
 
-#All to object files
-	# $(addprefix $(EXECUTE_DIR), $(_EXECUTE))
+#All to object files  $(addprefix $(EXECUTE_DIR), $(_EXECUTE))
 ALL_SRCS := $(addprefix $(SRCS_DIR), $(_SRCS)) \
 			$(addprefix $(CURSOR_DIR), $(_CURSOR)) \
 			$(addprefix $(HISTORY_DIR), $(_HISTORY)) \
@@ -82,7 +87,7 @@ ALL_SRCS := $(addprefix $(SRCS_DIR), $(_SRCS)) \
 			$(addprefix $(RAWMODE_DIR), $(_RAWMODE))
 
 SRCS = $(_SRCS) $(_CURSOR) $(_INIT) $(_INPUT) $(_KEYS) \
-$(_OUTPUT) $(_PANIC) $(_PARSE) $(_RAWMODE) $(_HISTORY) # $(_EXECUTE)
+$(_OUTPUT) $(_PANIC) $(_PARSE) $(_RAWMODE)  $(_HISTORY) # $(_EXECUTE)
 OBJ_FILES = $(SRCS:.c=.o)
 OBJS = $(patsubst %, $(OBJS_DIR)%, $(SRCS:.c=.o))
 #libft
@@ -93,41 +98,44 @@ HEADER := includes/shell.h
 all: $(NAME)
 
 $(NAME): $(LIBFT_A) $(OBJS_DIR) $(OBJS)
-	@$(CC) $(FLAGS) $(OBJS) -o $(NAME) -ltermcap -L ./libft -lft >> makelog.txt
+	@$(CC) $(FLAGS_DB) $(OBJS) -o $(NAME) -ltermcap -L ./libft -lft >> makelog.txt
 	@echo "$(BOLD)$(WHITE)----------$(NAME) COMPILATION DONE----------$(RESET)"
 
 $(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR) >> makelog.txt
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
-	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(CURSOR_DIR)%.c
-	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
+
+$(OBJS_DIR)%.o: $(HISTORY_DIR)%.c
+	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(HISTORY_DIR)%.c
 	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(INIT_DIR)%.c
-	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(INPUT_DIR)%.c
-	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(KEYS_DIR)%.c
-	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(OUTPUT_DIR)%.c
-	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(PANIC_DIR)%.c
-	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(PARSE_DIR)%.c
-	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(RAWMODE_DIR)%.c
-	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
 
 # $(OBJS_DIR)%.o: $(EXECUTE_DIR)%.c
 # 	@$(CC) $(FLAGS) $(INCL) -c $< -o $@

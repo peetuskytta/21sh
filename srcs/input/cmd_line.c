@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 13:32:38 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/13 15:03:54 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/14 16:54:38 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,4 @@ void	cmd_line(t_shell *shell, char c)
 		shell->cmd_line[shell->cmd_idx] = c;
 		shell->cmd_idx++;
 	}
-//	cmd_line_prompt(shell->quote);
 }
