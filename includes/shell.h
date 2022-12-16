@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/16 14:14:53 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/16 14:48:21 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@
 # include "cursor.h"
 # include "history.h"
 # include "keys.h"
-# include "history.h"
 # include "errors.h"
 # include "parse.h"
 # include "buildin.h"

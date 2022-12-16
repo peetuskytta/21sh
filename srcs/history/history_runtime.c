@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 15:10:51 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/16 14:13:37 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/16 15:21:21 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,15 @@ void	history_runtime(t_shell *shell)
 	i = 0;
 	while (shell->history[i] != NULL)
 		i++;
-	if (i == 3)
+	if (i == 10)
 	{
 		ft_putendl("TOO MANY HISTORIES TOO MANY PROBLEMS");
 		history_truncate(shell->history, shell->cmd_line);
-		i = 0;
-		while (shell->history[i] != NULL)
-			ft_putendl(shell->history[i++]);
 	}
 	else
 	{
 		shell->history[i] = ft_strdup(shell->cmd_line);
 		allocation_check((void *)&shell->history[i]);
+		shell->hist_idx = i;
 	}
 }

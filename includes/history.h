@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:40:58 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/16 14:14:40 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/16 15:39:27 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@ void	history(t_shell *shell);
 void	history_runtime(t_shell *shell);
 void	history_create(char **history);
 void	history_fetch(t_shell *shell);
+void	history_traverse(t_shell *shell, int *idx, int key);
 
 # endif

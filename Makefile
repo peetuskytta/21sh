@@ -38,11 +38,6 @@ _CURSOR := init_window.c \
 
 # _EXECUTE :=
 
-_HISTORY := history_create.c \
-			history_fetch.c \
-			history_runtime.c \
-			history.c
-
 _INIT := init_shell.c \
 		init_term.c
 
@@ -51,6 +46,7 @@ _INPUT := read_quote.c \
 		input_read.c
 
 _HISTORY := history_create.c \
+			history_traverse.c \
 			history_fetch.c \
 			history_runtime.c \
 			history.c
@@ -112,9 +108,6 @@ $(OBJS_DIR)%.o: $(CURSOR_DIR)%.c
 
 $(OBJS_DIR)%.o: $(HISTORY_DIR)%.c
 	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
-
-$(OBJS_DIR)%.o: $(HISTORY_DIR)%.c
-	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(INIT_DIR)%.c
 	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
