@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 15:09:56 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/15 16:14:55 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/16 07:42:49 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ void	history_create(char **history)
 	}
 	i = 0;
 	while (history[i] != NULL)
-	{
 		ft_putendl_fd(history[i++], fd);
-	}
 	close(fd);
 }
