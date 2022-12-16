@@ -6,7 +6,11 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/12/12 14:27:34 by pskytta          ###   ########.fr       */
+=======
+/*   Updated: 2022/12/15 14:51:18 by pskytta          ###   ########.fr       */
+>>>>>>> history
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +27,6 @@
 
 # define NL ft_putchar('\n')
 # define DB ft_putstr("\nYOU ARE HERE\n")
-# define HIST_FILE ".shell_history"
 # define NULL_BYTE '\0'
 # define TRUE 1
 # define FALSE 0
@@ -33,6 +36,7 @@
 # define MAX_BUFF 4096
 
 # include "cursor.h"
+# include "history.h"
 # include "keys.h"
 # include "errors.h"
 # include "parse.h"

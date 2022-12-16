@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:22:12 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/12 13:02:42 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/13 13:59:46 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@
 */
 void	init_window(t_win *window);
 void	goto_newline(t_shell *shell);
+int		goto_sides(t_shell *shell, t_win *window, int key);
 
 #endif

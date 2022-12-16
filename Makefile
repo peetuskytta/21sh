@@ -16,6 +16,7 @@ NAME := 21sh
 SRCS_DIR = srcs/
 CURSOR_DIR = srcs/cursor/
 EXECUTE_DIR = srcs/execute/
+HISTORY_DIR = srcs/history/
 INIT_DIR = srcs/init/
 INPUT_DIR = srcs/input/
 OUTPUT_DIR = srcs/output/
@@ -32,9 +33,15 @@ _SRCS :=  main.c \
 		env_variable_counter.c
 
 _CURSOR := init_window.c \
-		goto_newline.c
+		goto_newline.c \
+		goto_sides.c
 
 # _EXECUTE :=
+
+_HISTORY := history_create.c \
+			history_init.c \
+			history_runtime.c \
+			history.c
 
 _INIT := init_shell.c
 
@@ -48,7 +55,8 @@ _KEYS := ft_iscntrl.c \
 		special_keys.c
 
 _OUTPUT := stdin_char.c \
-		cmd_line_prompt.c
+		cmd_line_prompt.c \
+		cmd_line_stdin.c
 
 _PANIC := ft_strerror.c \
 		ft_perror.c \
@@ -65,6 +73,7 @@ _RAWMODE := enable_rawmode.c \
 	# $(addprefix $(EXECUTE_DIR), $(_EXECUTE))
 ALL_SRCS := $(addprefix $(SRCS_DIR), $(_SRCS)) \
 			$(addprefix $(CURSOR_DIR), $(_CURSOR)) \
+			$(addprefix $(HISTORY_DIR), $(_HISTORY)) \
 			$(addprefix $(INIT_DIR), $(_INIT)) \
 			$(addprefix $(INPUT_DIR), $(_INPUT)) \
 			$(addprefix $(KEYS_DIR), $(_KEYS)) \
@@ -74,7 +83,7 @@ ALL_SRCS := $(addprefix $(SRCS_DIR), $(_SRCS)) \
 			$(addprefix $(RAWMODE_DIR), $(_RAWMODE))
 
 SRCS = $(_SRCS) $(_CURSOR) $(_INIT) $(_INPUT) $(_KEYS) \
-$(_OUTPUT) $(_PANIC) $(_PARSE) $(_RAWMODE) # $(_EXECUTE)
+$(_OUTPUT) $(_PANIC) $(_PARSE) $(_RAWMODE) $(_HISTORY) # $(_EXECUTE)
 OBJ_FILES = $(SRCS:.c=.o)
 OBJS = $(patsubst %, $(OBJS_DIR)%, $(SRCS:.c=.o))
 #libft
@@ -95,6 +104,9 @@ $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(CURSOR_DIR)%.c
+	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
+
+$(OBJS_DIR)%.o: $(HISTORY_DIR)%.c
 	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(INIT_DIR)%.c
@@ -129,7 +141,7 @@ clean:
 	-@rm -f $(OBJS) >> makelog.txt
 	@find . -type f -name '*.o' -print -delete -o -name '#*#' -print -delete >> makelog.txt
 	@find . -type f -name '*~' -print -delete -o -name '#*#' -print -delete >> makelog.txt
-	@find . -type f -name '.DS_Store' -print -delete
+	@find . -type f -name '.DS_Store' -print -delete >> makelog.txt
 	@echo "$(BOLD)$(RED)----------Objects deleted----------$(RESET)"
 
 fclean: clean

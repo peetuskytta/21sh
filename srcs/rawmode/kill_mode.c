@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 13:28:31 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/16 09:34:40 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/16 14:29:45 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@ void kill_mode(const char *str, t_shell *shell)
 	write(STDOUT_FILENO, "\x1b[H", 3);
 	ft_perror(str);
 	ft_arr_free((void *)&shell->environ);
+	history_create(shell->history);
 	exit(EXIT_SUCCESS);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 09:15:27 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/12 13:27:36 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/15 16:14:44 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,13 @@ static void	fetch_ttyname(t_shell *shell)
 void	init_shell(t_shell *shell, char **environ)
 {
 	shell->cmd_line = (char *)ft_memalloc(sizeof(char) * (MAX_BUFF + 1));
+	shell->rev_cmd = (char *)ft_memalloc(sizeof(char) * (MAX_BUFF + 1));
 	allocation_check((void *)&shell->cmd_line);
-	shell->cmd_idx = 0;
+	allocation_check((void *)&shell->rev_cmd);
 	shell->quote = EOF;
 	fetch_envp(shell, environ, env_variable_counter(environ));
 	fetch_ttyname(shell);
+	history_init(shell);
 	// future history fetched from a file or initialized by other means
 	// if no history file exists.
 }

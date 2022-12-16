@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:58 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/12 13:41:43 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/13 15:21:52 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@
 int		ft_iscntrl(char c);
 void	key_listen (t_shell *shell, char *input);
 void	read_key(t_shell *shell, char *input);
-int		special_keys(t_shell *shell, char *input);
+int		special_keys(t_shell *shell, char *input, int *i);
 
 #endif

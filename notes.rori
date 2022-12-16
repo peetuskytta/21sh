@@ -1,4 +1,22 @@
 add '\n' if ENTER, if an open quote exists
 
-we have broken termcaps again, emergency, call heikki
+TO BE DONE:
+// SIGNAL - together
+// BUILTINS - together
+// HISTORY - together
+// SPECIAL KEYS - rori
+// CURSOR - rori
+// COMMAND TREE - peetu
+// PIPES & REDIRECT - peetu
+// AGRIGATE - peetu
 
+REASONABLY DONE:
+- QUOTES - together but peetu is a hero
+- RAWMODE - rori
+- KEYPRESS LISTEN - rori
+- COMMAND LINE PARSE - peetu
+- READ_INPUT - together
+
+DONE DONE:
+- Makefile
+- .h files org

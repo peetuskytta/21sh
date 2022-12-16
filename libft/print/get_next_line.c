@@ -5,84 +5,69 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/03 15:25:28 by pskytta           #+#    #+#             */
-/*   Updated: 2022/10/26 14:30:11 by pskytta          ###   ########.fr       */
+/*   Created: 2022/12/15 15:22:42 by pskytta           #+#    #+#             */
+/*   Updated: 2022/12/15 15:23:23 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../incl/libft.h"
+/*
+**This function finds the line, places it in *line, then duplicates the
+**rest into a temp pointer. it frees the original pointer, then points it to
+**temp, a.k.a. the rest of the fd not yet read. if EOF is reached, we del s[fd]
+*/
 
-static int	line_return(int ret, char **str, char **line)
+static int    ft_find_line(char **s, int fd, int i, char **line)
 {
-	size_t	nl_position;
-	char	*temp;
+    int        j;
+    char    *tmp;
 
-	if ((ret == 0 && *str == NULL) || ret < 0)
-		return (0);
-	nl_position = (size_t)(ft_strchr(*str, '\n') - *str);
-	if ((ft_strchr(*str, '\n')))
-	{
-		*line = ft_strsub(*str, 0, nl_position);
-		temp = ft_strdup(&((*str)[nl_position + 1]));
-		free(*str);
-		*str = temp;
-		if ((*str)[0] == '\0')
-			ft_strdel(str);
-	}
-	else
-	{
-		*line = ft_strdup(*str);
-		ft_strdel(str);
-	}
-	return (1);
+    j = 0;
+    while (s[fd][j] != '\n' && s[fd][j] != '\0')
+        j++;
+    if (s[fd][j] == '\n')
+    {
+        *line = ft_strsub(s[fd], 0, j);
+        tmp = ft_strdup(&(s[fd][j + 1]));
+        free(s[fd]);
+        s[fd] = tmp;
+        if (s[fd][0] == '\0')
+            ft_strdel(&s[fd]);
+    }
+    else if (s[fd][j] == '\0')
+    {
+        if (i == BUFF_SIZE)
+            return (get_next_line(fd, line));
+        *line = ft_strdup(s[fd]);
+        ft_strdel(&s[fd]);
+    }
+    return (1);
 }
 
-static int	buff_handler(int fd, char **str, char **buff)
+int    get_next_line(const int fd, char **line)
 {
-	int		ret;
-	char	*temp;
+    static char    *s[FD_SIZE];
+    char        buf[BUFF_SIZE + 1];
+    char        *tmp;
+    int            i;
 
-	ret = read(fd, *buff, BUFF_SIZE);
-	while (ret > 0)
-	{
-		(*buff)[ret] = '\0';
-		if (*str == NULL)
-			*str = ft_strdup(*buff);
-		else
-		{
-			temp = ft_strjoin(*str, *buff);
-			if (temp == NULL)
-				return (0);
-			free(*str);
-			*str = temp;
-		}
-		if (ft_strchr(*str, '\n'))
-			break ;
-		ret = read(fd, *buff, BUFF_SIZE);
-	}
-	free(*buff);
-	return (ret);
-}
-
-int	get_next_line(const int fd, char **line)
-{
-	static char		*string[FD_SIZE];
-	char			*buff;
-	int				ret;
-
-	ret = 0;
-	if (fd < 0 || line == NULL || BUFF_SIZE <= 0 || fd > FD_SIZE)
-		return (-1);
-	if (string[fd])
-		if (ft_strchr(string[fd], '\n'))
-			return (line_return(ret, &string[fd], line));
-	buff = (char *)ft_memalloc(sizeof(char) * (BUFF_SIZE + 1));
-	if (buff == NULL)
-		return (-1);
-	ret = buff_handler(fd, &string[fd], &buff);
-	if (ret == -1)
-		return (-1);
-	else if (ret == 0)
-		ft_memdel((void *)&(buff));
-	return (line_return(ret, &string[fd], line));
+    i = read(fd, buf, BUFF_SIZE);
+    while (i > 0)
+    {
+        buf[i] = '\0';
+        if (s[fd] == NULL)
+            s[fd] = ft_strnew(1);
+        tmp = ft_strjoin(s[fd], buf);
+        ft_strdel(&s[fd]);
+        s[fd] = tmp;
+        if (ft_strchr(s[fd], '\n'))
+            break ;
+        i = read(fd, buf, BUFF_SIZE);
+    }
+    if (i < 0)
+        return (-1);
+    if ((i == 0 && s[fd] == NULL) || s[fd] == NULL)
+        return (0);
+    else
+        return (ft_find_line(s, fd, i, line));
 }
