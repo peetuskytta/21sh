@@ -6,11 +6,11 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 13:58:06 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/15 09:43:57 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/16 09:16:55 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef PARSE_H
+#ifndef PARSE_H
 # define PARSE_H
 # include "shell.h"
 # include "structs.h"
@@ -99,6 +99,5 @@ typedef struct s_ast
 void	lexer(char *input, int size, t_lex *list);
 void	token_list_free(t_tok *list);
 void	parsing(t_shell *shell);
-
 
 # endif

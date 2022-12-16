@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 12:02:56 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/12 14:29:03 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/16 13:08:48 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	lexer(char *input, int size, t_lex *list)
 	k = 0;
 	token = NULL;
 	state = STATE_GENERAL;
-	list->token_list = ft_memalloc(sizeof(t_tok));
+	list->token_list = (t_tok *)ft_memalloc(sizeof(t_tok));
 	token = list->token_list;
 	init_token(token, size);
 	c = input[i];
