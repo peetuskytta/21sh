@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 14:29:03 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/16 15:51:24 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/17 12:21:43 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ void	history_traverse(t_shell *shell, int *idx, int key)
 	}
 	else if (key == 66)
 	{
-		if (shell->history[i] != NULL)
+		*idx += 1;
+		i = *idx;
+		if (shell->history[i + 1] != NULL)
 		{
-			*idx += 1;
-			i = *idx;
 			ft_putstr_fd(shell->history[i + 1], STDIN_FILENO);
 		}
 		else
