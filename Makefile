@@ -28,15 +28,16 @@ OBJS_DIR = obj/
 INCL = -I includes/
 
 #Sources by folder
+# _EXECUTE :=
+
 _SRCS :=  main.c \
 		allocation_check.c \
 		env_variable_counter.c
 
 _CURSOR := init_window.c \
 		goto_newline.c \
-		goto_sides.c
-
-# _EXECUTE :=
+		goto_sides.c \
+		goto_position.c
 
 _INIT := init_shell.c \
 		init_term.c

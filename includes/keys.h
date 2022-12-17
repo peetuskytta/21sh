@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:58 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/14 17:34:30 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/17 14:43:38 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 # define CTRL_D 4
 # define ENTER 13
 # define ESC '\x1B'
-# define BACK "\x7F"
+# define BACK "\x7f"
 # define ARW_UP "\x1B[A"
 # define ARW_DOWN "\x1B[B"
 # define ARW_RIGHT "\x1B[C"

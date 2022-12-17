@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/16 14:58:47 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/17 14:31:39 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	main(int argc, char **argv, char **envp)
 				ft_memset(shell.rev_cmd, 0, ft_strlen(shell.rev_cmd));
 				shell.cmd_idx = 0;
 				shell.end = 0;
-				// cmd_line_prompt(shell.quote);
+				cmd_line_prompt(shell.quote);
 			}
 		}
 	}
