@@ -6,14 +6,13 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 13:58:06 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/19 10:15:54 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/19 22:09:00 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSE_H
 # define PARSE_H
 # include "shell.h"
-# include "structs.h"
 
 typedef enum e_tok_type
 {
@@ -49,55 +48,8 @@ typedef enum t_state
 	STATE_IN_ESCAPE,
 }	e_state;
 
-typedef struct s_tok
-{
-	int				type;
-	char			*str;
-	//struct s_tok	*previous;
-	struct s_tok	*next;
-}					t_tok;
-
-typedef struct s_lex
-{
-	t_tok	*token_list;
-}			t_lex;
-
-typedef struct s_simple_cmd
-{
-	char	*cmd;
-	char	**arguments;
-}			t_simple_cmd;
-
-typedef struct s_pipe
-{
-	char	*cmd;
-	char	**arguments;
-	char	*file_in;
-	char	*file_out;
-	int		fd[2];
-}			t_pipe;
-
-typedef union u_cmd
-{
-	t_simple_cmd	*simple;
-	t_pipe			*pipe;
-}					t_cmd;
-
-typedef struct s_ast_node
-{
-	int					type;
-	union u_cmd			*cmd;
-	struct s_ast_node	*next;
-	struct s_ast_node	*previous;
-}						t_ast_node;
-
-typedef struct s_ast
-{
-	t_ast_node	*node;
-}				t_ast;
-
 void	lexer(char *input, int size, t_lex *list);
 void	token_list_free(t_tok *list);
-void	parsing(t_shell *shell);
+t_tok	*parser(t_shell *shell, t_lex *list);
 
 # endif

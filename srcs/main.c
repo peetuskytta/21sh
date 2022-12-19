@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/16 17:12:11 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/19 22:07:55 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,40 @@ static void	print_logo()
 		print_pzlogo();
 }
 
+static void	cmd_line_reset(t_shell *shell)
+{
+	ft_memset(shell->cmd_line, '\0', ft_strlen(shell->cmd_line));
+	shell->cmd_idx = 0;
+	shell->end = 0;
+	cmd_line_prompt(shell->quote);
+}
+
+/*
+** In a loop reads input. Parses. Builds tree. Executes tree.
+** TREE will be split into separate trees by SEMICOLON
+*/
+static void	run_shell(t_shell *shell)
+{
+	t_ast	**tree;
+	t_lex	list;
+
+	(void)tree;
+	while (TRUE)
+	{
+		input_read(shell);
+		if (shell->end == 1 && shell->quote == EOF)
+		{
+			history_runtime(shell);
+			list.token_list = parser(shell, &list);
+			token_list_free(list.token_list);
+			cmd_line_reset(shell);
+		}
+	}
+}
+
 int	main(int argc, char **argv, char **envp)
 {
-	t_shell	shell;
+	t_shell		shell;
 
 	(void)argc;
 	(void)argv;
@@ -61,22 +92,7 @@ int	main(int argc, char **argv, char **envp)
 		init_shell(&shell, envp);
 		print_logo();
 		ft_print_fd(STDOUT_FILENO, "$> ");
-		while (TRUE)
-		{
-			input_read(&shell);
-			if (shell.end == 1 && shell.quote == EOF)
-			{
-				history_runtime(&shell);
-				parsing(&shell);
-				/*
-				PUT THE BELOW IN SEPARATE ast FOLDER:
-					ast_build();
-					ast_exectute();
-					ast_destroy();
-				*/
-				cmd_line_prompt(shell.quote);
-			}
-		}
+		run_shell(&shell);
 	}
 	else
 	{

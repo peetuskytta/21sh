@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/16 16:32:17 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/19 22:10:41 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,38 @@ typedef struct s_exec
 	char	*cmd;
 	char	**args;
 }			t_exec;
+
+typedef struct s_tok
+{
+	int				type;
+	char			*str;
+	struct s_tok	*next;
+}					t_tok;
+
+typedef struct s_lex
+{
+	t_tok	*token_list;
+}			t_lex;
+
+typedef struct s_pipe
+{
+	struct s_exec	command;
+	char			*file_in;
+	char			*file_out;
+	int				fd[2];
+}					t_pipe;
+
+typedef struct s_ast_node
+{
+	int					type;
+	t_pipe				*cmd;
+	struct s_ast_node	*next;
+	//struct s_ast_node	*previous;
+}						t_ast_node;
+
+typedef struct s_ast
+{
+	t_ast_node	*node;
+}				t_ast;
 
 # endif
