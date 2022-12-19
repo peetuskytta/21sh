@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 17:06:00 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/17 14:21:52 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/17 14:57:36 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int	goto_sides(t_shell *shell, t_win *window, int key)
 	{
 		ws = ft_finword_rev(shell->rev_cmd);
 		chrcpy_left_right( shell->rev_cmd, shell->cmd_line, MAX_BUFF, ft_strilen(shell->rev_cmd) - ws);
+		goto_position(shell, window, ft_strilen(shell->rev_cmd) - ws);
 	}
 	return (1);
 }
