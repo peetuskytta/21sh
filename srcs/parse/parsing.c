@@ -15,9 +15,11 @@
 void	parsing(t_shell *shell)
 {
 	t_lex	list;
+	t_tok	*start;
 
 	ft_memset(&list, 0, sizeof(t_lex));
 	lexer(shell->cmd_line, shell->cmd_idx, &list);
+	start = list.token_list;
 	int i = 0;
 	NL;
 	while (list.token_list != NULL)
@@ -27,8 +29,7 @@ void	parsing(t_shell *shell)
 		list.token_list = list.token_list->next;
 		NL;
 	}
-	token_list_free(list.token_list);
-
+	token_list_free(start);
 	ft_memset(shell->cmd_line, '\0', ft_strlen(shell->cmd_line));
 	shell->cmd_idx = 0;
 	shell->end = 0;

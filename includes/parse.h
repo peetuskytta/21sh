@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 13:58:06 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/16 16:32:20 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/19 10:15:54 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,25 +68,19 @@ typedef struct s_simple_cmd
 	char	**arguments;
 }			t_simple_cmd;
 
-typedef struct s_redir_cmd
-{
-	char	*cmd;
-	char	**arguments;
-}			t_redir_cmd;
-
-typedef struct s_redir
+typedef struct s_pipe
 {
 	char	*cmd;
 	char	**arguments;
 	char	*file_in;
 	char	*file_out;
 	int		fd[2];
-}			t_redir;
+}			t_pipe;
 
 typedef union u_cmd
 {
-	t_simple_cmd	*cmd;
-	t_redir			*redir;
+	t_simple_cmd	*simple;
+	t_pipe			*pipe;
 }					t_cmd;
 
 typedef struct s_ast_node
