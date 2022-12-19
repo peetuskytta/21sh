@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 13:58:06 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/16 09:16:55 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/16 16:32:20 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,12 @@ typedef struct s_simple_cmd
 	char	*cmd;
 	char	**arguments;
 }			t_simple_cmd;
+
+typedef struct s_redir_cmd
+{
+	char	*cmd;
+	char	**arguments;
+}			t_redir_cmd;
 
 typedef struct s_redir
 {

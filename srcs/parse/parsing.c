@@ -16,7 +16,6 @@ void	parsing(t_shell *shell)
 {
 	t_lex	list;
 
-	//ft_putendl(shell.cmd_line);
 	ft_memset(&list, 0, sizeof(t_lex));
 	lexer(shell->cmd_line, shell->cmd_idx, &list);
 	int i = 0;
@@ -24,13 +23,12 @@ void	parsing(t_shell *shell)
 	while (list.token_list != NULL)
 	{
 		if (list.token_list->str)
-			ft_printf("token[%d] type [%d] = {%s}", i++, list.token_list->type, list.token_list->str);
+			ft_printf("token[%d] type [%d] = %s", i++, list.token_list->type, list.token_list->str);
 		list.token_list = list.token_list->next;
-		if (list.token_list != NULL)
-			NL;
+		NL;
 	}
 	token_list_free(list.token_list);
-	ft_memdel((void *)&list.token_list);
+
 	ft_memset(shell->cmd_line, '\0', ft_strlen(shell->cmd_line));
 	shell->cmd_idx = 0;
 	shell->end = 0;

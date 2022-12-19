@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 08:10:24 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/16 14:11:54 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/16 17:18:53 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,8 @@ void	token_list_free(t_tok *list)
 	{
 		store = temp->next;
 		ft_strdel(&temp->str);
-		ft_memdel((void *)&temp);
+		ft_memdel((void *)&(temp));
 		temp = store;
-		ft_memdel((void *)&temp);
-		//free(temp);
 	}
 	list = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 12:02:56 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/16 13:08:48 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/16 16:58:42 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	init_token(t_tok *token, int size)
 {
 	token->str = (char *)ft_memalloc(sizeof(char) * size + 1);
 	allocation_check((void *)(token->str));
-	ft_memset(token->str, EOF, size + 1);
+	ft_memset(token->str, NULL_BYTE, size + 1);
 	token->type = CHAR_NULL;
 	token->next = NULL;
 }
@@ -75,7 +75,6 @@ void	lexer(char *input, int size, t_lex *list)
 	token = list->token_list;
 	init_token(token, size);
 	c = input[i];
-
 	while (c != NULL_BYTE)
 	{
 		c = input[i];

@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 15:10:51 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/15 07:59:26 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/16 22:28:26 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ void	history_runtime(t_shell *shell)
 	i = 0;
 	while (shell->history[i] != NULL)
 		i++;
-	if (i == 3)
+	if (i == 10)
 	{
-		ft_putendl("TOO MANY HISTORIES TOO MANY PROBLEMS");
+		//ft_putendl("TOO MANY HISTORIES TOO MANY PROBLEMS");
 		history_truncate(shell->history, shell->cmd_line);
-		i = 0;
-		while (shell->history[i] != NULL)
-			ft_putendl(shell->history[i++]);
+		//i = 0;
+		//while (shell->history[i] != NULL)
+		//	ft_putendl(shell->history[i++]);
 	}
 	else
 	{

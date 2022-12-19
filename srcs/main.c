@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/16 14:23:25 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/16 17:12:11 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ int	main(int argc, char **argv, char **envp)
 		}
 	}
 	else
+	{
 		kill_mode("exit", &shell);
+	}
 	return (EXIT_SUCCESS);
 }
