@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 17:00:36 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/17 14:55:53 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/19 15:16:25 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static int	is_escape(t_shell *shell, char *input, int *i)
 
 static int is_opt_arrow(t_shell *shell, t_win *window, char *input, int *i)
 {
+	DB;
 	if (input[1] == 'b')
 	{
 		*i += 6;
@@ -77,9 +78,6 @@ static int is_arrow(t_shell *shell, t_win *window, char *input, int *i)
 
 int	special_keys(t_shell *shell, char *input, int *i)
 {
-	// int	j = 0;
-	// while (input[j])
-	// 	ft_printf("%p\n", input[j++]);
 	if (input[0] == ESC || input[0] == 127)
 	{
 		if (!(is_arrow(shell, &shell->window, input, i))
@@ -92,7 +90,6 @@ int	special_keys(t_shell *shell, char *input, int *i)
 	else if (input[0] == ENTER)
 	{
 		goto_newline(shell);
-		// cmd_line_prompt(shell->quote);
 		return (ENTER);
 	}
 	else
