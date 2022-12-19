@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/19 22:10:41 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/20 00:18:55 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,23 +61,20 @@ typedef struct s_lex
 
 typedef struct s_pipe
 {
-	struct s_exec	command;
+	struct s_exec	exec;
 	char			*file_in;
 	char			*file_out;
-	int				fd[2];
+	int				fd_in;
+	int				fd_out;
+	int				fd_err;
+	int				fd_close;
 }					t_pipe;
-
-typedef struct s_ast_node
-{
-	int					type;
-	t_pipe				*cmd;
-	struct s_ast_node	*next;
-	//struct s_ast_node	*previous;
-}						t_ast_node;
 
 typedef struct s_ast
 {
-	t_ast_node	*node;
-}				t_ast;
+	int				type;
+	t_pipe			*cmd;
+	struct s_ast	*left;
+}					t_ast;
 
 # endif

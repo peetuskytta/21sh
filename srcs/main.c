@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/19 22:07:55 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/20 00:28:14 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ static void	cmd_line_reset(t_shell *shell)
 static void	run_shell(t_shell *shell)
 {
 	t_ast	**tree;
-	t_lex	list;
 
 	(void)tree;
 	while (TRUE)
@@ -73,8 +72,7 @@ static void	run_shell(t_shell *shell)
 		if (shell->end == 1 && shell->quote == EOF)
 		{
 			history_runtime(shell);
-			list.token_list = parser(shell, &list);
-			token_list_free(list.token_list);
+			tree = ast_build_tree(shell, parser(shell));
 			cmd_line_reset(shell);
 		}
 	}

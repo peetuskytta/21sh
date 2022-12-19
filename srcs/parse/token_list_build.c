@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/02 12:02:56 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/19 18:25:50 by pskytta          ###   ########.fr       */
+/*   Created: 2022/12/19 23:15:32 by pskytta           #+#    #+#             */
+/*   Updated: 2022/12/19 23:21:21 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	change_state(t_tok *tok, int *state, int *k, char ch)
 	(*k)++;
 }
 
-void	lexer(char *input, int size, t_lex *list)
+void	token_list_build(char *input, int size, t_lex *list)
 {
 	t_tok	*token;
 	char	ch_type;

@@ -29,7 +29,7 @@ OBJS_DIR = obj/
 INCL = -I includes/
 
 #Sources by folder
-_AST := ast.c \
+_AST := ast_build.c \
 		#ast_release.c \
 		#ast_execute.c \
 		#ast_.c \
@@ -68,7 +68,7 @@ _PANIC := ft_strerror.c \
 		ft_perror.c \
 		ft_abort.c
 
-_PARSE:= lexer.c \
+_PARSE:= token_list_build.c \
 		token_list_free.c \
 		parser.c
 

@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 13:58:06 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/19 22:09:00 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/19 23:57:05 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ typedef enum t_state
 	STATE_IN_ESCAPE,
 }	e_state;
 
-void	lexer(char *input, int size, t_lex *list);
+void	token_list_build(char *input, int size, t_lex *list);
 void	token_list_free(t_tok *list);
-t_tok	*parser(t_shell *shell, t_lex *list);
+t_tok	*parser(t_shell *shell);
 
 # endif
