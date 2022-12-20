@@ -44,22 +44,23 @@ static t_ast	*ast_create_command(int type, t_tok ***token)
 	}
 	command->commands.exec.args[i] = NULL;
 	DB;
-	i = 0;
-	while (command->commands.exec.args[i] != NULL)
-	{
-		ft_putendl(command->commands.exec.args[i]);
-		i++;
-	}
 	return (command);
 }
 
 static t_ast	*ast_build_branches(t_tok **token)
 {
-	t_ast	*branch;
+	t_ast	*branches;
 
-	branch = ast_create_pipe(PIPE);
-	branch->left = ast_create_command(COMMAND, &(token));
-	return (branch);
+	branches = ast_create_pipe(PIPE);
+	branches->left = ast_create_command(COMMAND, &(token));
+	if (!(*token) || (*token)->type == SEPARATOR)
+		return (branches);
+	else if ((*token)->type == PIPE)
+	{
+		(*token) = (*token)->next;
+		branches->right = ast_build_branches(token);
+	}
+	return (branches);
 }
 
 t_ast	**ast_build(t_shell *shell, t_tok *token)
@@ -70,11 +71,13 @@ t_ast	**ast_build(t_shell *shell, t_tok *token)
 
 	i = 0;
 	temp = token;
-	tree = (t_ast **)ft_memalloc(sizeof(t_ast *) * ft_count_chrstr(shell->cmd_line, CHAR_SEMICOLON) + 2);
-	ft_memset(&tree, 0, sizeof(t_ast));
+	tree = (t_ast **)ft_memalloc(sizeof(t_ast *) * ft_count_chrstr(shell->cmd_line, CHAR_SEMICOLON) + 1);
+	//ft_memset((void *)&tree, 0, sizeof(t_ast));
 	while (token)
 	{
 		tree[i] = ast_build_branches(&token);
+		ft_putendl(tree[i]->commands.exec.args[0]);
+		ft_putendl(tree[i]->commands.exec.args[1]);
 		if (token->type == SEPARATOR && token)
 			token = token->next;
 		i++;
