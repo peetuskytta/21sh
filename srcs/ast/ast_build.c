@@ -18,7 +18,6 @@ static t_ast	*ast_create_pipe(int type)
 
 	branch = (t_ast *)ft_memalloc(sizeof(t_ast));
 	allocation_check((void *)&branch);
-	//ft_memset((void *)&branch, 0, sizeof(t_ast));
 	branch->type = type;
 	return (branch);
 }
@@ -29,7 +28,6 @@ static t_ast	*ast_create_command(int type, t_tok ***token)
 
 	command = (t_ast *)ft_memalloc(sizeof(t_ast));
 	allocation_check((void *)&command);
-	//ft_memset((void *)&command, 0, sizeof(t_ast));
 	command->commands.exec.args = (char **)ft_memalloc(sizeof(char *) * 10);
 	allocation_check((void *)&command->commands.exec.args);
 	command->type = type;
@@ -41,10 +39,19 @@ static t_ast	*ast_create_command(int type, t_tok ***token)
 			command->commands.exec.args[i++] = ft_strdup((**token)->str);
 			(**token) = (**token)->next;
 		}
+		else
+			break;
 	}
+	command->commands.exec.cmd = ft_strdup(command->commands.exec.args[0]);
 	command->commands.exec.args[i] = NULL;
-	DB;
 	return (command);
+}
+
+static bool	ast_sniff_next(int type)
+{
+	if (type == PIPE)
+		return (true);
+	return (false);
 }
 
 static t_ast	*ast_build_branches(t_tok **token)
@@ -53,8 +60,14 @@ static t_ast	*ast_build_branches(t_tok **token)
 
 	branches = ast_create_pipe(PIPE);
 	branches->left = ast_create_command(COMMAND, &(token));
+	DB;
 	if (!(*token) || (*token)->type == SEPARATOR)
 		return (branches);
+	if (ast_sniff_next((*token)->next->type))
+	{
+		(*token) = (*token)->next;
+		branches->right = ast_create_command(COMMAND, &(token));
+	}
 	else if ((*token)->type == PIPE)
 	{
 		(*token) = (*token)->next;
@@ -71,13 +84,13 @@ t_ast	**ast_build(t_shell *shell, t_tok *token)
 
 	i = 0;
 	temp = token;
-	tree = (t_ast **)ft_memalloc(sizeof(t_ast *) * ft_count_chrstr(shell->cmd_line, CHAR_SEMICOLON) + 1);
+	tree = (t_ast **)ft_memalloc(sizeof(t_ast *) * ft_count_chrstr(shell->cmd_line, CHAR_SEMICOLON) + 2);
 	//ft_memset((void *)&tree, 0, sizeof(t_ast));
 	while (token)
 	{
+		DB;
 		tree[i] = ast_build_branches(&token);
-		ft_putendl(tree[i]->commands.exec.args[0]);
-		ft_putendl(tree[i]->commands.exec.args[1]);
+		ft_putendl(tree[i]->commands.exec.cmd);
 		if (token->type == SEPARATOR && token)
 			token = token->next;
 		i++;
