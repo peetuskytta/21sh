@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer.c                                        :+:      :+:    :+:   */
+/*   token_list_build.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 23:15:32 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/19 23:21:21 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/20 22:59:07 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,16 @@ static void	change_state(t_tok *tok, int *state, int *k, char ch)
 		*state = STATE_GENERAL;
 	tok->str[*k] = ch;
 	(*k)++;
+}
+
+static int	set_token_type(char ch_type)
+{
+	if (ch_type == CHAR_PIPE)
+		return (PIPE);
+	else if (ch_type == CHAR_SEMICOLON)
+		return (SEPARATOR);
+	else
+		return (ch_type);
 }
 
 void	token_list_build(char *input, int size, t_lex *list)
@@ -119,7 +129,7 @@ void	token_list_build(char *input, int size, t_lex *list)
 				}
 				token->str[0] = ch_type;
 				token->str[1] = NULL_BYTE;
-				token->type = ch_type;
+				token->type = set_token_type(ch_type);
 				token->next = (t_tok *)ft_memalloc(sizeof(t_tok));
 				token = token->next;
 				init_token(token, size - i);
