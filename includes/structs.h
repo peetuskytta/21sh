@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/20 00:18:55 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/20 10:01:22 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,23 +58,5 @@ typedef struct s_lex
 {
 	t_tok	*token_list;
 }			t_lex;
-
-typedef struct s_pipe
-{
-	struct s_exec	exec;
-	char			*file_in;
-	char			*file_out;
-	int				fd_in;
-	int				fd_out;
-	int				fd_err;
-	int				fd_close;
-}					t_pipe;
-
-typedef struct s_ast
-{
-	int				type;
-	t_pipe			*cmd;
-	struct s_ast	*left;
-}					t_ast;
 
 # endif

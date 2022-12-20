@@ -6,13 +6,13 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/20 00:28:14 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/20 10:41:06 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/shell.h"
 
-static void	print_zplogo()
+/* static void	print_zplogo()
 {
 	ft_putendl(" _____  __      _          _ _");
 	ft_putendl("/ __  \\/  |    | |        | | |");
@@ -47,7 +47,7 @@ static void	print_logo()
 		print_zplogo();
 	else
 		print_pzlogo();
-}
+} */
 
 static void	cmd_line_reset(t_shell *shell)
 {
@@ -65,14 +65,16 @@ static void	run_shell(t_shell *shell)
 {
 	t_ast	**tree;
 
-	(void)tree;
+	//(void)tree;
+	tree = NULL;
 	while (TRUE)
 	{
 		input_read(shell);
 		if (shell->end == 1 && shell->quote == EOF)
 		{
 			history_runtime(shell);
-			tree = ast_build_tree(shell, parser(shell));
+			tree = ast_build(shell, parser(shell));
+			(void)tree;
 			cmd_line_reset(shell);
 		}
 	}
@@ -88,7 +90,7 @@ int	main(int argc, char **argv, char **envp)
 	if (envp)
 	{
 		init_shell(&shell, envp);
-		print_logo();
+		//print_logo();
 		ft_print_fd(STDOUT_FILENO, "$> ");
 		run_shell(&shell);
 	}

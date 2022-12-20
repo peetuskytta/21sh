@@ -14,21 +14,21 @@
 
 t_tok	*parser(t_shell *shell)
 {
-	t_tok	*head;
+	t_tok	*temp;
 	t_lex	list;
 
 	ft_memset(&list, 0, sizeof(t_lex));
 	token_list_build(shell->cmd_line, shell->cmd_idx, &list);
-	head = list.token_list;
-	int i = 0;
+	temp = list.token_list;
 	NL;
-	while (list.token_list != NULL)
+	 int i = 0;
+	while (temp != NULL)
 	{
-		if (list.token_list->str)
-			ft_printf("token[%d] type [%d] = %s", i++, list.token_list->type, list.token_list->str);
-		list.token_list = list.token_list->next;
-		if (list.token_list != NULL)
+		if (temp->str)
+			ft_printf("token[%d] type [%d] = %s", i++, temp->type, temp->str);
+		temp = temp->next;
+		if (temp != NULL)
 			NL;
 	}
-	return (head);
+	return (list.token_list);
 }

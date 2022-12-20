@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/19 17:17:20 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/20 10:00:48 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define SHELL_H
 # include "../libft/incl/libft.h"
 # include "structs.h"
-# include "ast.h"
 # include "parse.h"
+# include "ast.h"
 # include <term.h>
 # include <fcntl.h>
 # include <time.h>
