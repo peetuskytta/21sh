@@ -22,29 +22,29 @@ typedef struct s_fds
 	int				fd_close;
 }					t_fds;
 
-typedef struct s_redir
+typedef struct s_cmd
 {
-	char			*file_in;
-	char			*file_out;
-}					t_redir;
+	struct s_exec	exec;
+}					t_cmd;
 
-typedef struct s_pipe
+
+typedef struct s_redir
 {
 	struct s_exec	exec;
 	struct s_redir	redir;
 	struct s_fds	fds;
-}					t_pipe;
+}					t_redir;
 
-typedef union s_cmd
+typedef union s_data
 {
-	t_pipe	*pipe;
-	
-}			t_cmd;
+	t_redir			redir;
+	t_exec			cmd;
+}			t_data;
 
 typedef struct s_ast
 {
 	int				type;
-	struct s_pipe	command;
+	union s_data	data;
 	struct s_ast	*left;
 	struct s_ast	*right;
 }					t_ast;
