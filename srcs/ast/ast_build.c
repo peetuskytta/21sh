@@ -21,7 +21,7 @@ static t_ast	*ast_create_pipe(int type)
 	branch->type = type;
 	branch->right = NULL;
 	branch->left = NULL;
-	ft_memset(&branch->commands, 0, sizeof(t_pipe));
+	ft_memset(&branch->command, 0, sizeof(t_pipe));
 	return (branch);
 }
 
@@ -29,22 +29,22 @@ static t_ast	*ast_create_command(int type, t_tok ***token, t_ast *branch)
 {
 	branch = (t_ast *)ft_memalloc(sizeof(t_ast));
 	allocation_check((void *)&branch);
-	branch->commands.exec.args = (char **)ft_memalloc(sizeof(char *) * 100);
-	allocation_check((void *)&branch->commands.exec.args);
-	ft_memset((void *)branch->commands.exec.args, 0, 100);
+	branch->command.exec.args = (char **)ft_memalloc(sizeof(char *) * 100);
+	allocation_check((void *)&branch->command.exec.args);
+	ft_memset((void *)branch->command.exec.args, 0, 100);
 	branch->type = type;
 	int i = 0;
 	while (**token)
 	{
 		if ((**token)->type == WORD)
 		{
-			branch->commands.exec.args[i++] = ft_strdup((**token)->str);
+			branch->command.exec.args[i++] = ft_strdup((**token)->str);
 			(**token) = (**token)->next;
 		}
 		else
 			break;
 	}
-	branch->commands.exec.args[i] = NULL;
+	branch->command.exec.args[i] = NULL;
 	return (branch);
 }
 
@@ -106,18 +106,18 @@ t_ast	**ast_build(t_shell *shell, t_tok *token)
 		ft_printf("tree[%d]\n", i);
 		if (tree[i]->right->type == COMMAND || tree[i]->right->type == PIPE)
 		{
-			while (tree[i]->right->commands.exec.args[ii])
+			while (tree[i]->right->command.exec.args[ii])
 			{
-				ft_printf("\targs[%d] = %s\n", ii, tree[i]->right->commands.exec.args[ii]);
+				ft_printf("\targs[%d] = %s\n", ii, tree[i]->right->command.exec.args[ii]);
 				ii++;
 			}
 		}
 		else if (tree[i]->left->type == COMMAND)
 		{
-			while (tree[i]->left->commands.exec.args[ii])
+			while (tree[i]->left->command.exec.args[ii])
 			{
 				DB;
-				ft_printf("\targs[%d] = %s\n", ii, tree[i]->left->commands.exec.args[ii]);
+				ft_printf("\targs[%d] = %s\n", ii, tree[i]->left->command.exec.args[ii]);
 				ii++;
 			}
 		}
@@ -128,7 +128,7 @@ t_ast	**ast_build(t_shell *shell, t_tok *token)
 	}
 	tree[i] = NULL;
 	token_list_free(temp);
-	//ft_putendl(tree[0]->left->commands.exec.args[0]);
+	//ft_putendl(tree[0]->left->command.exec.args[0]);
 	//exit(111);
 	return (tree);
 }

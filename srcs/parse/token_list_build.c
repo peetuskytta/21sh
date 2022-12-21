@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 23:15:32 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/20 22:59:07 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/21 09:08:46 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,10 @@ static int	set_token_type(char ch_type)
 		return (PIPE);
 	else if (ch_type == CHAR_SEMICOLON)
 		return (SEPARATOR);
+	if (ch_type == CHAR_GREATER || ch_type == CHAR_LESSER)
+		return (REDIR);
 	else
-		return (ch_type);
+		return (WORD);
 }
 
 void	token_list_build(char *input, int size, t_lex *list)
@@ -133,7 +135,7 @@ void	token_list_build(char *input, int size, t_lex *list)
 				token->next = (t_tok *)ft_memalloc(sizeof(t_tok));
 				token = token->next;
 				init_token(token, size - i);
-			}
+				}
 		}
 		else if (state == STATE_IN_DQUOTE)
 		{

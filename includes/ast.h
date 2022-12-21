@@ -35,10 +35,16 @@ typedef struct s_pipe
 	struct s_fds	fds;
 }					t_pipe;
 
+typedef union s_cmd
+{
+	t_pipe	*pipe;
+	
+}			t_cmd;
+
 typedef struct s_ast
 {
 	int				type;
-	struct s_pipe	commands;
+	struct s_pipe	command;
 	struct s_ast	*left;
 	struct s_ast	*right;
 }					t_ast;
