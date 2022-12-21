@@ -22,16 +22,16 @@ typedef struct s_fds
 	int				fd_close;
 }					t_fds;
 
-typedef struct s_cmd
+typedef struct s_io
 {
-	struct s_exec	exec;
-}					t_cmd;
-
+	char			*in_file;
+	char			*out_file;
+}					t_io;
 
 typedef struct s_redir
 {
 	struct s_exec	exec;
-	struct s_redir	redir;
+	struct s_io		io;
 	struct s_fds	fds;
 }					t_redir;
 
