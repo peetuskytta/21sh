@@ -132,3 +132,12 @@ t_ast	**ast_build(t_shell *shell, t_tok *token)
 	//exit(111);
 	return (tree);
 }
+/*
+ls -la >>file
+tok >
+tok >
+tok file
+tok  ls -la 2&>1 jee
+	 la -la > jee 2>&1
+	 ls -la > jee .ls
+*/
