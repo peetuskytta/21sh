@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 13:58:06 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/20 10:08:25 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/21 09:04:13 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef enum t_type
 typedef enum t_state
 {
 	STATE_GENERAL,
+	STATE_REDIR,
 	STATE_IN_DQUOTE,
 	STATE_IN_QUOTE,
 	STATE_IN_ESCAPE,
