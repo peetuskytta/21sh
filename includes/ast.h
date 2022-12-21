@@ -24,8 +24,8 @@ typedef struct s_fds
 
 typedef struct s_io
 {
-	char			*in_file;
-	char			*out_file;
+	char			in_file[1024];
+	char			out_file[1024];
 }					t_io;
 
 typedef struct s_redir
@@ -49,7 +49,7 @@ typedef struct s_ast
 	struct s_ast	*right;
 }					t_ast;
 
-t_ast	**ast_build(t_shell *shell, t_tok *token);
+t_ast	**ast_constructor(t_shell *shell, t_tok *token);
 //void	ast_execute(t_ast *root, t_shell *shell);
 //void	ast_release(t_ast *root);
 

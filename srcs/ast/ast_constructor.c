@@ -21,71 +21,97 @@ static t_ast	*ast_create_pipe(int type)
 	branch->type = type;
 	branch->right = NULL;
 	branch->left = NULL;
-	ft_memset(&branch->command, 0, sizeof(t_pipe));
+	ft_memset(&branch->data, 0, sizeof(t_data));
 	return (branch);
 }
 
-static t_ast	*ast_create_command(int type, t_tok ***token, t_ast *branch)
-{
-	branch = (t_ast *)ft_memalloc(sizeof(t_ast));
-	allocation_check((void *)&branch);
-	branch->command.exec.args = (char **)ft_memalloc(sizeof(char *) * 100);
-	allocation_check((void *)&branch->command.exec.args);
-	ft_memset((void *)branch->command.exec.args, 0, 100);
-	branch->type = type;
-	int i = 0;
-	while (**token)
-	{
-		if ((**token)->type == WORD)
-		{
-			branch->command.exec.args[i++] = ft_strdup((**token)->str);
-			(**token) = (**token)->next;
-		}
-		else
-			break;
-	}
-	branch->command.exec.args[i] = NULL;
-	return (branch);
-}
-
-static bool	ast_sniff_next(t_tok *token)
+static bool	ast_sniff_for_pipe(t_tok *token)
 {
 	t_tok	*tmp;
 
 	tmp = token;
-	while (tmp)
+	while (tmp->type != SEPARATOR)
 	{
-		if (token->type == PIPE)
+		if (tmp->type == PIPE)
 			return (false);
-		if (token->type == SEPARATOR)
-			break ;
 		tmp = tmp->next;
+		if (!tmp)
+			break ;
 	}
 	return (true);
 }
 
-static t_ast	*ast_build_branches(t_tok **token)
+static int	ast_sniff_for_type(t_tok *token)
+{
+	t_tok	*tmp;
+
+	tmp = token;
+	while (tmp->type != SEPARATOR || tmp->type != PIPE)
+	{
+		tmp = tmp->next;
+		if (!tmp)
+			return(COMMAND);
+	}
+	if (tmp->type == REDIR)
+		return (REDIR);
+	return (COMMAND);
+}
+
+static int	ast_word_tok_count(t_tok *token)
+{
+	t_tok	*tmp;
+	int		word_count;
+
+	tmp = token;
+	word_count = 1;
+	while (tmp->type != SEPARATOR || tmp->type != PIPE)
+	{
+		if (tmp->type == WORD)
+			word_count++;
+		tmp = tmp->next;
+		if (tmp == NULL)
+			break ;
+	}
+	return (word_count);
+}
+
+static t_ast	*ast_create_left(t_tok ***token, t_ast *branch)
+{
+	int	words;
+
+	words = ast_word_tok_count((**token)->next);
+	branch = (t_ast *)ft_memalloc(sizeof(t_ast));
+	allocation_check((void *)&branch);
+	branch->data.cmd.args = (char **)ft_memalloc(sizeof(char *) * (words + 1));
+	allocation_check((void *)&branch->data.cmd.args);
+	ft_memset((void *)&branch->data, 0, sizeof(t_data));
+	branch->type = ast_sniff_for_type((**token)->next);
+
+	return (branch);
+}
+
+static t_ast	*ast_build_tree(t_tok **token)
 {
 	t_ast	*branch;
 
 	branch = ast_create_pipe(PIPE);
-	branch->left = ast_create_command(COMMAND, &(token), branch);
+	branch->left = ast_create_left(&(token), branch);
 	if (!(*token) || (*token)->type == SEPARATOR)
 		return (branch);
-	if (ast_sniff_next((*token)->next))
+	if (ast_sniff_for_pipe((*token)->next))
 	{
 		(*token) = (*token)->next;
-		branch->right = ast_create_command(COMMAND, &(token), branch);
+		branch->right = ast_create_left(&(token), branch);
 	}
 	else if ((*token)->type == PIPE)
 	{
 		(*token) = (*token)->next;
-		branch->right = ast_build_branches(token);
+		branch->right = ast_build_tree(token);
 	}
 	return (branch);
 }
 
-t_ast	**ast_build(t_shell *shell, t_tok *token)
+t_ast	**ast_constructor(t_shell *shell, t_tok *token)
 {
 	t_ast	**tree;
 	t_tok	*temp;
@@ -97,41 +123,19 @@ t_ast	**ast_build(t_shell *shell, t_tok *token)
 	nbr += ft_count_chrstr(shell->cmd_line, CHAR_SEMICOLON);
 	temp = token;
 	tree = (t_ast **)ft_memalloc(sizeof(t_ast *) * (nbr + 1));
-	int ii = 0;
 	NL;
 	while (token)
 	{
-		tree[i] = ast_build_branches(&token);
-		NL;
-		ft_printf("tree[%d]\n", i);
-		if (tree[i]->right->type == COMMAND || tree[i]->right->type == PIPE)
-		{
-			while (tree[i]->right->command.exec.args[ii])
-			{
-				ft_printf("\targs[%d] = %s\n", ii, tree[i]->right->command.exec.args[ii]);
-				ii++;
-			}
-		}
-		else if (tree[i]->left->type == COMMAND)
-		{
-			while (tree[i]->left->command.exec.args[ii])
-			{
-				DB;
-				ft_printf("\targs[%d] = %s\n", ii, tree[i]->left->command.exec.args[ii]);
-				ii++;
-			}
-		}
+		tree[i] = ast_build_tree(&token);
 		if (token && token->type == SEPARATOR)
 			token = token->next;
-		ii = 0;
 		i++;
 	}
 	tree[i] = NULL;
 	token_list_free(temp);
-	//ft_putendl(tree[0]->left->command.exec.args[0]);
-	//exit(111);
 	return (tree);
 }
+
 /*
 ls -la >>file
 tok >
