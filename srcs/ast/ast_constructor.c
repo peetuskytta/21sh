@@ -12,17 +12,20 @@
 
 #include "../../includes/ast.h"
 
-static t_ast	*ast_create_pipe(int type)
+static int	count_semicolon(char *cmd_line)
 {
-	t_ast	*branch;
+	int	i;
 
-	branch = (t_ast *)ft_memalloc(sizeof(t_ast));
-	allocation_check((void *)&branch);
-	branch->type = type;
-	branch->right = NULL;
-	branch->left = NULL;
-	ft_memset(&branch->data, 0, sizeof(t_data));
-	return (branch);
+	i = 0;
+	while (*cmd_line)
+	{
+		if (*cmd_line == CHAR_SEMICOLON)
+			i++;
+		cmd_line++;
+	}
+	if (i == 0)
+		return (1);
+	return (i);
 }
 
 static bool	ast_sniff_for_pipe(t_tok *token)
@@ -30,7 +33,7 @@ static bool	ast_sniff_for_pipe(t_tok *token)
 	t_tok	*tmp;
 
 	tmp = token;
-	while (tmp->type != SEPARATOR)
+	while (tmp)
 	{
 		if (tmp->type == PIPE)
 			return (false);
@@ -57,6 +60,19 @@ static int	ast_sniff_for_type(t_tok *token)
 	return (COMMAND);
 }
 
+static t_ast	*ast_create_pipe(int type)
+{
+	t_ast	*branch;
+
+	branch = (t_ast *)ft_memalloc(sizeof(t_ast));
+	allocation_check((void *)&branch);
+	branch->type = type;
+	branch->right = NULL;
+	branch->left = NULL;
+	ft_memset(&branch->data, 0, sizeof(t_data));
+	return (branch);
+}
+
 static t_ast	*ast_create_left(t_tok ***token, t_ast *branch)
 {
 	branch = (t_ast *)ft_memalloc(sizeof(t_ast));
@@ -65,6 +81,7 @@ static t_ast	*ast_create_left(t_tok ***token, t_ast *branch)
 	allocation_check((void *)&branch->data.cmd.args);
 	ft_memset((void *)&branch->data, 0, sizeof(t_data));
 	branch->type = ast_sniff_for_type((**token));
+	//while ((**token))
 	(**token) = (**token)->next;
 	return (branch);
 }
@@ -76,7 +93,10 @@ static t_ast	*ast_build_tree(t_tok **token)
 	branch = ast_create_pipe(PIPE);
 	branch->left = ast_create_left(&(token), branch);
 	if (!(*token) || (*token)->type == SEPARATOR)
+	{
+		ft_putendl("No token or SEPARATOR found");
 		return (branch);
+	}
 	if (ast_sniff_for_pipe((*token)->next))
 	{
 		(*token) = (*token)->next;
@@ -87,23 +107,9 @@ static t_ast	*ast_build_tree(t_tok **token)
 		(*token) = (*token)->next;
 		branch->right = ast_build_tree(token);
 	}
+	ft_putendl("Normal return");
+	(*token) = (*token)->next;
 	return (branch);
-}
-
-static int	count_semicolon(char *cmd_line)
-{
-	int	i;
-
-	i = 0;
-	while (*cmd_line)
-	{
-		if (*cmd_line == CHAR_SEMICOLON)
-			i++;
-		cmd_line++;
-	}
-	if (i == 0)
-		return (1);
-	return (i);
 }
 
 t_ast	**ast_constructor(t_shell *shell, t_tok *token)
@@ -122,13 +128,15 @@ t_ast	**ast_constructor(t_shell *shell, t_tok *token)
 	{
 		if (!token)
 			DB;
-		ft_putnbr_endl(i);
-		ft_putendl(token->str);
+		ft_printf("tree[%d]: %s\n", i, token->str);
 		tree[i] = ast_build_tree(&token);
 		if (token && token->type == SEPARATOR)
 			token = token->next;
 		if (!token)
+		{
+			ft_putendl("token is NULL");
 			break ;
+		}
 		i++;
 	}
 	tree[i] = NULL;

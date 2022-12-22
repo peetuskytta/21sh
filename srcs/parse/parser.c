@@ -12,16 +12,30 @@
 
 #include "../../includes/parse.h"
 
-t_tok	*parser(t_shell *shell)
+/*static void	token_list_traverse(t_tok *token)
+{
+	t_tok	*tmp;
+
+	tmp = token;
+	while (tmp)
+	{
+		if (tmp->type == REDIR)
+		{
+			if (tmp->next)
+				tmp->next->type = IO_FILE;
+		}
+		tmp = tmp->next;
+	}
+}*/
+
+static void	token_list_print(t_tok *token)
 {
 	t_tok	*temp;
-	t_lex	list;
+	int i;
 
-	ft_memset(&list, 0, sizeof(t_lex));
-	token_list_build(shell->cmd_line, shell->cmd_idx, &list);
-	temp = list.token_list;
+	i = 0;
+	temp = token;
 	NL;
-	int i = 0;
 	while (temp != NULL)
 	{
 		if (temp->str)
@@ -32,5 +46,19 @@ t_tok	*parser(t_shell *shell)
 	}
 	if (temp == NULL)
 		ft_printf("\ntoken[%d] (NULL)\n", i);
+}
+
+t_tok	*parser(t_shell *shell)
+{
+	t_tok	*temp;
+	t_lex	list;
+
+	ft_memset(&list, 0, sizeof(t_lex));
+	token_list_build(shell->cmd_line, shell->cmd_idx, &list);
+	//temp = list.token_list;
+	//token_list_traverse(temp);
+	temp = list.token_list;
+	token_list_print(temp);
+	exit(10);
 	return (list.token_list);
 }

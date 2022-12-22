@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 13:58:06 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/21 15:44:16 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/22 15:38:30 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef enum e_tok_type
 	CHAR_DQUOTE = '\"',
 	CHAR_SEMICOLON = ';',
 	CHAR_WHITESPACE = ' ',
+	CHAR_AMPERSAND = '&',
 	CHAR_ESCAPE = '\\',
 	CHAR_TAB = '\t',
 	CHAR_NEWLINE = '\n',
@@ -38,6 +39,8 @@ typedef enum t_type
 	REDIR,
 	SEPARATOR,
 	WORD,
+	IO_FILE,
+	AGGR,
 }	e_type;
 
 typedef enum t_state
