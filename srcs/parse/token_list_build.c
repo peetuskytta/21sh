@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 23:15:32 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/21 09:08:46 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/22 07:51:34 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	change_state(t_tok *tok, int *state, int *k, char ch)
 	(*k)++;
 }
 
-static int	set_token_type(char ch_type)
+/*static int	set_token_type(char ch_type)
 {
 	if (ch_type == CHAR_PIPE)
 		return (PIPE);
@@ -68,7 +68,7 @@ static int	set_token_type(char ch_type)
 		return (REDIR);
 	else
 		return (WORD);
-}
+}*/
 
 void	token_list_build(char *input, int size, t_lex *list)
 {
@@ -131,7 +131,7 @@ void	token_list_build(char *input, int size, t_lex *list)
 				}
 				token->str[0] = ch_type;
 				token->str[1] = NULL_BYTE;
-				token->type = set_token_type(ch_type);
+				token->type = ch_type;
 				token->next = (t_tok *)ft_memalloc(sizeof(t_tok));
 				token = token->next;
 				init_token(token, size - i);

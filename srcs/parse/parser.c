@@ -30,5 +30,7 @@ t_tok	*parser(t_shell *shell)
 		if (temp != NULL)
 			NL;
 	}
+	if (temp == NULL)
+		ft_printf("\ntoken[%d] (NULL)\n", i);
 	return (list.token_list);
 }

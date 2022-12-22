@@ -57,36 +57,15 @@ static int	ast_sniff_for_type(t_tok *token)
 	return (COMMAND);
 }
 
-static int	ast_word_tok_count(t_tok *token)
-{
-	t_tok	*tmp;
-	int		word_count;
-
-	tmp = token;
-	word_count = 1;
-	while (tmp->type != SEPARATOR || tmp->type != PIPE)
-	{
-		if (tmp->type == WORD)
-			word_count++;
-		tmp = tmp->next;
-		if (tmp == NULL)
-			break ;
-	}
-	return (word_count);
-}
-
 static t_ast	*ast_create_left(t_tok ***token, t_ast *branch)
 {
-	int	words;
-
-	words = ast_word_tok_count((**token)->next);
 	branch = (t_ast *)ft_memalloc(sizeof(t_ast));
 	allocation_check((void *)&branch);
-	branch->data.cmd.args = (char **)ft_memalloc(sizeof(char *) * (words + 1));
+	branch->data.cmd.args = (char **)ft_memalloc(sizeof(char *) * 100);
 	allocation_check((void *)&branch->data.cmd.args);
 	ft_memset((void *)&branch->data, 0, sizeof(t_data));
-	branch->type = ast_sniff_for_type((**token)->next);
-
+	branch->type = ast_sniff_for_type((**token));
+	(**token) = (**token)->next;
 	return (branch);
 }
 
@@ -111,24 +90,45 @@ static t_ast	*ast_build_tree(t_tok **token)
 	return (branch);
 }
 
+static int	count_semicolon(char *cmd_line)
+{
+	int	i;
+
+	i = 0;
+	while (*cmd_line)
+	{
+		if (*cmd_line == CHAR_SEMICOLON)
+			i++;
+		cmd_line++;
+	}
+	if (i == 0)
+		return (1);
+	return (i);
+}
+
 t_ast	**ast_constructor(t_shell *shell, t_tok *token)
 {
 	t_ast	**tree;
 	t_tok	*temp;
 	int		i;
-	int		nbr;
+	int		count;
 
 	i = 0;
-	nbr = 1;
-	nbr += ft_count_chrstr(shell->cmd_line, CHAR_SEMICOLON);
+	count = count_semicolon(shell->cmd_line);
 	temp = token;
-	tree = (t_ast **)ft_memalloc(sizeof(t_ast *) * (nbr + 1));
+	tree = (t_ast **)ft_memalloc(sizeof(t_ast *) * (count + 1));
 	NL;
 	while (token)
 	{
+		if (!token)
+			DB;
+		ft_putnbr_endl(i);
+		ft_putendl(token->str);
 		tree[i] = ast_build_tree(&token);
 		if (token && token->type == SEPARATOR)
 			token = token->next;
+		if (!token)
+			break ;
 		i++;
 	}
 	tree[i] = NULL;
