@@ -29,7 +29,7 @@ OBJS_DIR = obj/
 INCL = -I includes/
 
 #Sources by folder
-_AST := ast_build.c \
+_AST := ast_constructor.c \
 		#ast_release.c \
 		#ast_execute.c \
 		#ast_.c \
