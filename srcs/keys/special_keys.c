@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 17:00:36 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/19 15:16:25 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/22 11:54:01 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ static int	is_escape(t_shell *shell, char *input, int *i)
 
 static int is_opt_arrow(t_shell *shell, t_win *window, char *input, int *i)
 {
-	DB;
 	if (input[1] == 'b')
 	{
 		*i += 6;
@@ -89,7 +88,7 @@ int	special_keys(t_shell *shell, char *input, int *i)
 	}
 	else if (input[0] == ENTER)
 	{
-		goto_newline(shell);
+		goto_newline(shell, &shell->window);
 		return (ENTER);
 	}
 	else

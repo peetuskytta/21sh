@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input_read.c                                       :+:      :+:    :+:   */
+/*   chrcpy_str_rev.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/12 18:42:14 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/22 11:49:50 by zraunio          ###   ########.fr       */
+/*   Created: 2022/12/22 11:56:39 by zraunio           #+#    #+#             */
+/*   Updated: 2022/12/22 11:59:20 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
+#include "../incl/libft.h"
 
-void input_read(t_shell *shell)
+void	chrcpy_str_rev(char *cmd, char *rev, int max, int n)
 {
-	char	input[MAX_BUFF + 1];
+	int		i;
+	int		j;
 
-	
-	if (enable_rawmode(shell) == 0)
-		ft_putendl_fd("Error with tcgetattr", STDERR_FILENO);
-	tcsetattr(STDIN_FILENO, TCSANOW, &shell->raw);
-	read_key(shell, input);
-	tcsetattr(STDIN_FILENO, TCSANOW, &shell->orig_raw);
+	i = ft_strlen(cmd) - 1;
+	j = ft_strlen(rev);
+	if (i < 0 || j >= max)
+		return ;
+	while (n-- > 0)
+	{
+		rev[j++] = cmd[i];
+		cmd[i--] = '\0';
+	}
+	rev[j] = '\0';
 }

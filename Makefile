@@ -95,41 +95,41 @@ HEADER := includes/shell.h
 all: $(NAME)
 
 $(NAME): $(LIBFT_A) $(OBJS_DIR) $(OBJS)
-	@$(CC) $(FLAGS_DB) $(OBJS) -o $(NAME) -ltermcap -L ./libft -lft >> makelog.txt
+	@$(CC) $(FLAGS) $(OBJS) -o $(NAME) -ltermcap -L ./libft -lft >> makelog.txt
 	@echo "$(BOLD)$(WHITE)----------$(NAME) COMPILATION DONE----------$(RESET)"
 
 $(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR) >> makelog.txt
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
-	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(CURSOR_DIR)%.c
-	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(HISTORY_DIR)%.c
-	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(INIT_DIR)%.c
-	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(INPUT_DIR)%.c
-	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(KEYS_DIR)%.c
-	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(OUTPUT_DIR)%.c
-	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(PANIC_DIR)%.c
-	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(PARSE_DIR)%.c
-	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(RAWMODE_DIR)%.c
-	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
 
 # $(OBJS_DIR)%.o: $(EXECUTE_DIR)%.c
 # 	@$(CC) $(FLAGS) $(INCL) -c $< -o $@
