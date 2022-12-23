@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 23:15:32 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/23 11:03:23 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/23 11:25:21 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,11 +134,10 @@ void	token_list_build(char *input, int size, t_lex *list)
 		{
 			if (k >= 0 && ch_type != CHAR_WHITESPACE)
 			{
-				if (ft_strstr("0123456789", &c) || c == '&' || c == '-' || c == '<'|| c == '>')
+				if (ft_isdigit(c) || ft_strstr("<>&-", &c))
 					token->str[k] = c;
 				else if (!ft_strstr("&<>0123456789-", &c))
 				{
-					//token->str[k] = c;
 					token->str[k + 1] = NULL_BYTE;
 					token->type = REDIR;
 					token->next = (t_tok *)ft_memalloc(sizeof(t_tok));
