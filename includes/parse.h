@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 13:58:06 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/22 15:38:30 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/22 20:34:42 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ typedef enum t_type
 	SEPARATOR,
 	WORD,
 	IO_FILE,
-	AGGR,
 }	e_type;
 
 typedef enum t_state

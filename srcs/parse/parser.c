@@ -54,6 +54,7 @@ t_tok	*parser(t_shell *shell)
 	t_lex	list;
 
 	ft_memset(&list, 0, sizeof(t_lex));
+	shell->cmd_line[ft_strlen(shell->cmd_line) - 1] = NULL_BYTE;
 	token_list_build(shell->cmd_line, shell->cmd_idx, &list);
 	//temp = list.token_list;
 	//token_list_traverse(temp);
