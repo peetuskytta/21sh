@@ -7,4 +7,5 @@
 *.a
 21sh
 .vscode/
+.21sh_history
 libft/ft_printf/.deps/
