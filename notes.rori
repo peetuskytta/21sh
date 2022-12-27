@@ -1,21 +1,22 @@
 add '\n' if ENTER, if an open quote exists
 
 TO BE DONE:
-// SIGNAL - together
-// BUILTINS - together
-// SPECIAL KEYS - rori
-// CURSOR - rori
-// COMMAND TREE - peetu
-// PIPES & REDIRECT - peetu
-// AGRIGATE - peetu
+// SIGNAL - together 0%
+// ERRORS 50%
+// SPECIAL KEYS - rori 70%
+// CURSOR - rori 50%
+// PIPES & REDIRECT - peetu 0%
+// AGREGATE - peetu 0%
+// COMMAND TREE - peetu  50%
+// BUILTINS - together 50%
 
 REASONABLY DONE:
-- QUOTES - together but peetu is a hero
-- RAWMODE - rori
-- COMMAND LINE PARSE - peetu
-- READ_INPUT - together
+- QUOTES - together but peetu is a hero 95%
 
 DONE DONE:
+- COMMAND LINE PARSE - peetu 
+- READ_INPUT - together
+- RAWMODE - rori
 - HISTORY - together
 - KEYPRESS LISTEN - rori
 - Makefile

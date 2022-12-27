@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/27 15:52:33 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/27 16:04:53 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ static void	run_shell(t_shell *shell)
 {
 	t_ast	**tree;
 
-	//(void)tree;
 	tree = NULL;
 	while (TRUE)
 	{
