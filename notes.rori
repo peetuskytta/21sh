@@ -2,7 +2,7 @@ add '\n' if ENTER, if an open quote exists
 
 TO BE DONE:
 // SIGNAL - together 0%
-// ERRORS 50%
+// ERRORS - together 50%
 // SPECIAL KEYS - rori 70%
 // CURSOR - rori 50%
 // PIPES & REDIRECT - peetu 0%
