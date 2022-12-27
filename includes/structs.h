@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/16 14:15:35 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/27 14:59:17 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,17 @@ typedef struct s_exec
 	char	*cmd;
 	char	**args;
 }			t_exec;
+
+typedef struct s_tok
+{
+	int				type;
+	char			*str;
+	struct s_tok	*next;
+}					t_tok;
+
+typedef struct s_lex
+{
+	t_tok	*token_list;
+}			t_lex;
 
 # endif

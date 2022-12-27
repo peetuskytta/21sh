@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_list_free.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 08:10:24 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/12 13:30:49 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/19 10:38:51 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,8 @@ void	token_list_free(t_tok *list)
 	{
 		store = temp->next;
 		ft_strdel(&temp->str);
-		ft_memdel((void *)&temp);
+		ft_memdel((void *)&(temp));
 		temp = store;
-		free(temp);
 	}
 	list = NULL;
 }

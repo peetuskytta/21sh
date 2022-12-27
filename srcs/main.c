@@ -6,13 +6,13 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/27 14:51:17 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/27 15:21:11 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/shell.h"
 
-static void	print_zplogo()
+/* static void	print_zplogo()
 {
 	ft_putendl(" _____  __      _          _ _");
 	ft_putendl("/ __  \\/  |    | |        | | |");
@@ -47,11 +47,44 @@ static void	print_logo()
 		print_zplogo();
 	else
 		print_pzlogo();
+} */
+
+static void	cmd_line_reset(t_shell *shell)
+{
+	ft_memset(shell->cmd_line, '\0', ft_strlen(shell->cmd_line));
+	shell->cmd_idx = 0;
+	shell->end = 0;
+	cmd_line_prompt(shell->quote);
+}
+
+/*
+** In a loop reads input. Parses. Builds tree. Executes tree.
+** TREE will be split into separate trees by SEMICOLON
+*/
+static void	run_shell(t_shell *shell)
+{
+	t_ast	**tree;
+
+	//(void)tree;
+	tree = NULL;
+	while (TRUE)
+	{
+		input_read(shell);
+		if (shell->end == 1 && shell->quote == EOF)
+		{
+			NL;
+			ft_putendl(shell->cmd_line);
+			history_runtime(shell);
+			tree = ast_constructor(shell, parser(shell));
+			(void)tree;
+			cmd_line_reset(shell);
+		}
+	}
 }
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_shell	shell;
+	t_shell		shell;
 
 	(void)argc;
 	(void)argv;
@@ -59,24 +92,27 @@ int	main(int argc, char **argv, char **envp)
 	if (envp)
 	{
 		init_shell(&shell, envp);
-		print_logo();
+		//print_logo();
 		ft_print_fd(STDOUT_FILENO, "$> ");
-		while (TRUE)
-		{
-			input_read(&shell);
-			if (shell.end == 1 && shell.quote == EOF)
-			{
-				history_runtime(&shell);
-				ft_memset(shell.cmd_line, 0, ft_strlen(shell.cmd_line));
-				ft_memset(shell.rev_cmd, 0, ft_strlen(shell.rev_cmd));
-				shell.cmd_idx = 0;
-				shell.end = 0;
-				ft_putendl_fd("", STDOUT_FILENO);
-				cmd_line_prompt(shell.quote);
-			}
-		}
+		// while (TRUE)
+		// {
+		// 	input_read(&shell);
+		// 	if (shell.end == 1 && shell.quote == EOF)
+		// 	{
+		// 		history_runtime(&shell);
+		// 		ft_memset(shell.cmd_line, 0, ft_strlen(shell.cmd_line));
+		// 		ft_memset(shell.rev_cmd, 0, ft_strlen(shell.rev_cmd));
+		// 		shell.cmd_idx = 0;
+		// 		shell.end = 0;
+		// 		ft_putendl_fd("", STDOUT_FILENO);
+		// 		cmd_line_prompt(shell.quote);
+		// 	}
+		// }
+		run_shell(&shell);
 	}
 	else
+	{
 		kill_mode("exit", &shell);
+	}
 	return (EXIT_SUCCESS);
 }

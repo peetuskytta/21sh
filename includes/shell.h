@@ -6,14 +6,16 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/16 14:48:21 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/27 14:59:08 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef SHELL_H
+#ifndef SHELL_H
 # define SHELL_H
 # include "../libft/incl/libft.h"
 # include "structs.h"
+# include "parse.h"
+# include "ast.h"
 # include <term.h>
 # include <fcntl.h>
 # include <time.h>

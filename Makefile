@@ -14,6 +14,7 @@ NAME := 21sh
 
 #Direcory locations
 SRCS_DIR = srcs/
+AST_DIR = srcs/ast/
 CURSOR_DIR = srcs/cursor/
 EXECUTE_DIR = srcs/execute/
 HISTORY_DIR = srcs/history/
@@ -28,7 +29,10 @@ OBJS_DIR = obj/
 INCL = -I includes/
 
 #Sources by folder
-# _EXECUTE :=
+_AST := ast_constructor.c \
+		#ast_release.c \
+		#ast_execute.c \
+		#ast_.c \
 
 _SRCS :=  main.c \
 		allocation_check.c \
@@ -65,14 +69,17 @@ _PANIC := ft_strerror.c \
 		ft_perror.c \
 		ft_abort.c
 
-_PARSE:= lexer.c \
-		token_list_free.c
+_PARSE:= token_list_build.c \
+		token_list_free.c \
+		parser.c
 
 _RAWMODE := enable_rawmode.c \
 			kill_mode.c
 
-#All to object files  $(addprefix $(EXECUTE_DIR), $(_EXECUTE))
-ALL_SRCS := $(addprefix $(SRCS_DIR), $(_SRCS)) \
+#All to object files
+	# $(addprefix $(EXECUTE_DIR), $(_EXECUTE))
+ALL_SRCS :=	$(addprefix $(SRCS_AST), $(_AST)) \
+			$(addprefix $(SRCS_DIR), $(_SRCS)) \
 			$(addprefix $(CURSOR_DIR), $(_CURSOR)) \
 			$(addprefix $(HISTORY_DIR), $(_HISTORY)) \
 			$(addprefix $(INIT_DIR), $(_INIT)) \
@@ -84,7 +91,7 @@ ALL_SRCS := $(addprefix $(SRCS_DIR), $(_SRCS)) \
 			$(addprefix $(RAWMODE_DIR), $(_RAWMODE))
 
 SRCS = $(_SRCS) $(_CURSOR) $(_INIT) $(_INPUT) $(_KEYS) \
-$(_OUTPUT) $(_PANIC) $(_PARSE) $(_RAWMODE)  $(_HISTORY) # $(_EXECUTE)
+$(_OUTPUT) $(_PANIC) $(_PARSE) $(_RAWMODE) $(_HISTORY) $(_AST) # $(_EXECUTE)
 OBJ_FILES = $(SRCS:.c=.o)
 OBJS = $(patsubst %, $(OBJS_DIR)%, $(SRCS:.c=.o))
 #libft
@@ -102,6 +109,9 @@ $(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR) >> makelog.txt
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
+	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
+
+$(OBJS_DIR)%.o: $(AST_DIR)%.c
 	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(CURSOR_DIR)%.c

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 14:02:00 by zraunio           #+#    #+#             */
-/*   Updated: 2021/05/18 15:15:48 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/27 15:15:33 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,6 @@ char	*ft_strtrim(char const *s)
 		start++;
 	}
 	p[i] = '\0';
+	ft_putendl(p);
 	return (p);
 }

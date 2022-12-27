@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:42:49 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/16 14:16:12 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/27 14:59:46 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	history(t_shell *shell)
 	if (fd < 0)
 		return ;
 	(void)shell;
+	close(fd);
 	//O_CREAT | O_WRONLY | O_APPEND, S_IRUSR | S_IWUSR
 	// 	| S_IRWXU);
 	// if (fd < 0)

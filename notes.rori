@@ -3,7 +3,6 @@ add '\n' if ENTER, if an open quote exists
 TO BE DONE:
 // SIGNAL - together
 // BUILTINS - together
-// HISTORY - together
 // SPECIAL KEYS - rori
 // CURSOR - rori
 // COMMAND TREE - peetu
@@ -13,10 +12,11 @@ TO BE DONE:
 REASONABLY DONE:
 - QUOTES - together but peetu is a hero
 - RAWMODE - rori
-- KEYPRESS LISTEN - rori
 - COMMAND LINE PARSE - peetu
 - READ_INPUT - together
 
 DONE DONE:
+- HISTORY - together
+- KEYPRESS LISTEN - rori
 - Makefile
 - .h files org

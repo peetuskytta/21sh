@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 13:58:06 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/12 13:25:39 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/27 10:08:36 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef PARSE_H
+#ifndef PARSE_H
 # define PARSE_H
 # include "shell.h"
-# include "structs.h"
 
 typedef enum e_tok_type
 {
@@ -22,6 +21,7 @@ typedef enum e_tok_type
 	CHAR_DQUOTE = '\"',
 	CHAR_SEMICOLON = ';',
 	CHAR_WHITESPACE = ' ',
+	CHAR_AMPERSAND = '&',
 	CHAR_ESCAPE = '\\',
 	CHAR_TAB = '\t',
 	CHAR_NEWLINE = '\n',
@@ -39,29 +39,20 @@ typedef enum t_type
 	REDIR,
 	SEPARATOR,
 	WORD,
+	IO_FILE,
 }	e_type;
 
 typedef enum t_state
 {
 	STATE_GENERAL,
+	STATE_REDIR,
 	STATE_IN_DQUOTE,
 	STATE_IN_QUOTE,
 	STATE_IN_ESCAPE,
 }	e_state;
 
-typedef struct s_tok
-{
-	int				type;
-	char			*str;
-	struct s_tok	*next;
-}					t_tok;
-
-typedef struct s_lex
-{
-	t_tok	*token_list;
-}			t_lex;
-
-void	lexer(char *input, int size, t_lex *list);
+void	token_list_build(char *input, int size, t_lex *list);
 void	token_list_free(t_tok *list);
+t_tok	*parser(t_shell *shell);
 
 # endif
