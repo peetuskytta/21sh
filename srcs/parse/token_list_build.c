@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 23:15:32 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/23 11:25:21 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/27 11:13:38 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static char	get_char_type(char c)
 
 static void	change_state(t_tok *tok, int *state, int *k, char ch)
 {
-	if (tok->type != IO_FILE)
+	if (tok->type != REDIR)
 		tok->type = WORD;
 	if (ch == CHAR_DQUOTE)
 		*state = STATE_IN_DQUOTE;
@@ -132,24 +132,10 @@ void	token_list_build(char *input, int size, t_lex *list)
 		}
 		else if (state == STATE_REDIR)
 		{
-			if (k >= 0 && ch_type != CHAR_WHITESPACE)
-			{
-				if (ft_isdigit(c) || ft_strstr("<>&-", &c))
-					token->str[k] = c;
-				else if (!ft_strstr("&<>0123456789-", &c))
-				{
-					token->str[k + 1] = NULL_BYTE;
-					token->type = REDIR;
-					token->next = (t_tok *)ft_memalloc(sizeof(t_tok));
-					token = token->next;
-					init_token(token, size - i);
-					k = 0;
-					token->str[k] = c;
-					token->type = IO_FILE;
-					state = STATE_GENERAL;
-				}
-				k++;
-			}
+			token->type = REDIR;
+			token->str[k++] = c;
+			if (!ft_strstr("0123456789&-><", &c))
+				state = STATE_GENERAL;
 		}
 		else if (state == STATE_IN_DQUOTE)
 		{
