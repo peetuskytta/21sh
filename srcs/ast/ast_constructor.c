@@ -83,9 +83,14 @@ static t_ast	*ast_create_left(t_tok ***token, t_ast *branch)
 	allocation_check((void *)&branch->data.cmd.args);
 	ft_memset((void *)&branch->data, 0, sizeof(t_data));
 	branch->type = ast_sniff_for_type((**token));
-	//while ((**token))
-	if (**token)
+	while ((**token))
+	{
+		if ((**token)->next->type != SEPARATOR || (**token)->next->type != PIPE)
+			return (branch);
 		(**token) = (**token)->next;
+		if (!(**token))
+			break ;
+	}
 	return (branch);
 }
 
