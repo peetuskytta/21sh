@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 17:48:04 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/27 15:20:07 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/27 15:50:36 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,4 @@ void	goto_newline(t_shell *shell, t_win *window)
 	window->rows += 1;
 	window->current_row += 1;
 	read_quote(shell);
-	cmd_line_prompt(shell->quote);
 }

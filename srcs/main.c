@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/27 15:21:11 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/27 15:52:33 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static void	cmd_line_reset(t_shell *shell)
 	ft_memset(shell->cmd_line, '\0', ft_strlen(shell->cmd_line));
 	shell->cmd_idx = 0;
 	shell->end = 0;
+	NL;
 	cmd_line_prompt(shell->quote);
 }
 
@@ -72,12 +73,16 @@ static void	run_shell(t_shell *shell)
 		input_read(shell);
 		if (shell->end == 1 && shell->quote == EOF)
 		{
-			NL;
-			ft_putendl(shell->cmd_line);
 			history_runtime(shell);
 			tree = ast_constructor(shell, parser(shell));
 			(void)tree;
 			cmd_line_reset(shell);
+		}
+		else if (shell->end == 1 && shell->quote != EOF)
+		{
+			shell->end = 0;
+			NL;
+			cmd_line_prompt(shell->quote);
 		}
 	}
 }
