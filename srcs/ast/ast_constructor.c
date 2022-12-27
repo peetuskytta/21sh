@@ -37,9 +37,9 @@ static bool	ast_sniff_for_pipe(t_tok *token)
 	{
 		if (tmp->type == PIPE)
 			return (false);
-		tmp = tmp->next;
-		if (!tmp)
+		if (tmp->type == CHAR_SEMICOLON)
 			break ;
+		tmp = tmp->next;
 	}
 	return (true);
 }
@@ -51,7 +51,7 @@ static int	ast_sniff_for_type(t_tok *token)
 	tmp = token;
 	if (!tmp)
 		return(COMMAND);
-	while (tmp->type != SEPARATOR || tmp->type != PIPE)
+	while (tmp->type != CHAR_SEMICOLON || tmp->type != PIPE)
 	{
 		tmp = tmp->next;
 		if (!tmp)
@@ -83,9 +83,13 @@ static t_ast	*ast_create_left(t_tok ***token, t_ast *branch)
 	allocation_check((void *)&branch->data.cmd.args);
 	ft_memset((void *)&branch->data, 0, sizeof(t_data));
 	branch->type = ast_sniff_for_type((**token));
-	//while ((**token))
-	if (**token)
-		(**token) = (**token)->next;
+	while ((**token))
+	{
+		if ((**token)->type == WORD || (**token)->type == REDIR)
+			(**token) = (**token)->next;
+		else
+			break;
+	}
 	return (branch);
 }
 
@@ -95,13 +99,8 @@ static t_ast	*ast_build_tree(t_tok **token)
 
 	branch = ast_create_pipe(PIPE);
 	branch->left = ast_create_left(&(token), branch);
-	if (!(*token) || (*token)->type == SEPARATOR)
-	{
-		//ft_putendl("No token or SEPARATOR found");
-		if (*token)
-			(*token) = (*token)->next;
+	if (!(*token) || (*token)->type == CHAR_SEMICOLON)
 		return (branch);
-	}
 	if (ast_sniff_for_pipe((*token)->next))
 	{
 		(*token) = (*token)->next;
@@ -113,8 +112,8 @@ static t_ast	*ast_build_tree(t_tok **token)
 		branch->right = ast_build_tree(token);
 	}
 	//ft_putendl("Normal return");
-	if (*token)
-		(*token) = (*token)->next;
+	//if (*token && (*token)->type != SEPARATOR)
+	//	(*token) = (*token)->next;
 	return (branch);
 }
 
@@ -134,9 +133,9 @@ t_ast	**ast_constructor(t_shell *shell, t_tok *token)
 	{
 		if (!token)
 			DB;
-		ft_printf("tree[%d]: %s\n", i, token->str);
+		ft_printf("tree[%d]: first token: %s\n", i, token->str);
 		tree[i] = ast_build_tree(&token);
-		if (token && token->type == SEPARATOR)
+		if (token && token->type == CHAR_SEMICOLON)
 			token = token->next;
 		if (!token)
 		{
