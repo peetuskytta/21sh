@@ -49,6 +49,8 @@ static int	ast_sniff_for_type(t_tok *token)
 	t_tok	*tmp;
 
 	tmp = token;
+	if (!tmp)
+		return(COMMAND);
 	while (tmp->type != SEPARATOR || tmp->type != PIPE)
 	{
 		tmp = tmp->next;
@@ -82,7 +84,8 @@ static t_ast	*ast_create_left(t_tok ***token, t_ast *branch)
 	ft_memset((void *)&branch->data, 0, sizeof(t_data));
 	branch->type = ast_sniff_for_type((**token));
 	//while ((**token))
-	(**token) = (**token)->next;
+	if (**token)
+		(**token) = (**token)->next;
 	return (branch);
 }
 
@@ -94,7 +97,9 @@ static t_ast	*ast_build_tree(t_tok **token)
 	branch->left = ast_create_left(&(token), branch);
 	if (!(*token) || (*token)->type == SEPARATOR)
 	{
-		ft_putendl("No token or SEPARATOR found");
+		//ft_putendl("No token or SEPARATOR found");
+		if (*token)
+			(*token) = (*token)->next;
 		return (branch);
 	}
 	if (ast_sniff_for_pipe((*token)->next))
@@ -107,8 +112,9 @@ static t_ast	*ast_build_tree(t_tok **token)
 		(*token) = (*token)->next;
 		branch->right = ast_build_tree(token);
 	}
-	ft_putendl("Normal return");
-	(*token) = (*token)->next;
+	//ft_putendl("Normal return");
+	if (*token)
+		(*token) = (*token)->next;
 	return (branch);
 }
 
@@ -134,7 +140,7 @@ t_ast	**ast_constructor(t_shell *shell, t_tok *token)
 			token = token->next;
 		if (!token)
 		{
-			ft_putendl("token is NULL");
+			ft_putendl("END of token stream");
 			break ;
 		}
 		i++;

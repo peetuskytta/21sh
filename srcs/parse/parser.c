@@ -28,6 +28,7 @@
 	}
 }*/
 
+/*DELETE BEFORE SUBMIT*/
 static void	token_list_print(t_tok *token)
 {
 	t_tok	*temp;
@@ -56,10 +57,7 @@ t_tok	*parser(t_shell *shell)
 	ft_memset(&list, 0, sizeof(t_lex));
 	shell->cmd_line[ft_strlen(shell->cmd_line) - 1] = NULL_BYTE;
 	token_list_build(shell->cmd_line, shell->cmd_idx, &list);
-	//temp = list.token_list;
-	//token_list_traverse(temp);
 	temp = list.token_list;
 	token_list_print(temp);
-	exit(10);
 	return (list.token_list);
 }
