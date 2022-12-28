@@ -79,7 +79,10 @@ static t_ast	*ast_create_left(t_tok ***token, t_ast *branch)
 	branch = (t_ast *)ft_memalloc(sizeof(t_ast));
 	allocation_check((void *)&branch);
 	branch->type = ast_sniff_for_type((**token));
+	ft_memset(&branch->data.redir, 0, sizeof(t_redir) * 512);
 	ast_consume_tokens(token, branch, 0);
+	if (branch->type == COMMAND || branch->type == REDIR)
+		branch->right = NULL;
 	return (branch);
 }
 
@@ -104,6 +107,7 @@ static t_ast	*ast_build_tree(t_tok **token)
 	return (branch);
 }
 
+
 t_ast	**ast_constructor(t_shell *shell, t_tok *token)
 {
 	t_ast	**tree;
@@ -118,8 +122,9 @@ t_ast	**ast_constructor(t_shell *shell, t_tok *token)
 	NL;
 	while (token)
 	{
-		ft_printf("tree[%d]: first token: %s\n", i, token->str);
+		//ft_printf("\ntree[%d]:\n", i);
 		tree[i] = ast_build_tree(&token);
+		ft_printf("arg[0]: %s, ", tree[i]->left->data.args[0]);
 		if (token && token->type == CHAR_SEMICOLON)
 			token = token->next;
 		if (!token)
@@ -137,6 +142,6 @@ tok >
 tok >
 tok file
 tok  ls -la 2&>1 jee
-	 la -la > jee 2>&1
+	 ls -la > jee 2>&1
 	 ls -la > jee .ls
 */
