@@ -13,6 +13,7 @@
 #ifndef AST_H
 # define AST_H
 # include "shell.h"
+# include "structs.h"
 
 typedef struct s_fds
 {

@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 09:15:27 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/27 15:05:20 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/28 15:46:44 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,14 @@ static void	fetch_envp(t_shell *shell, char **environ, int count)
 
 static void	fetch_ttyname(t_shell *shell)
 {
+	if (!isatty(1))
+		shell->stdout_fd = open(ttyname(ttyslot()), O_RDWR);
 	shell->tty = ttyname(STDIN_FILENO);
 	if (!shell->tty)
 	{
 		ft_perror("ttyname() failed to retrieve terminal name.");
 		exit(SYSTEM_CALL_FAIL);
 	}
-	//ft_putendl(shell->tty);
 }
 
 void	init_shell(t_shell *shell, char **environ)
@@ -46,12 +47,11 @@ void	init_shell(t_shell *shell, char **environ)
 	allocation_check((void *)&shell->cmd_line);
 	allocation_check((void *)&shell->rev_cmd);
 	shell->cmd_idx = 0;
+	shell->prmpt_len = 3;
 	shell->quote = EOF;
 	init_term();
 	init_window(&shell->window);
 	fetch_envp(shell, environ, env_variable_counter(environ));
 	fetch_ttyname(shell);
 	history_fetch(shell);
-	// future history fetched from a file or initialized by other means
-	// if no history file exists.
 }

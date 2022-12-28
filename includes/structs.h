@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/27 14:59:17 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/28 16:07:31 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,14 @@ typedef struct s_shell
 	int			env_nbr;
 	int			env_iflg;
 	char		*history[1001];
+	int			stdout_fd;
 	int			hist_idx;
 	char		*cmd_line;
 	char		*rev_cmd;
 	int			cmd_idx;
 	int			end;
 	int			quote;
-	int			q_count;
+	int			prmpt_len;
 	char		*tty;
 	t_win		window;
 	struct termios	orig_raw;

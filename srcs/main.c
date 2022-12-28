@@ -6,13 +6,13 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/27 16:04:53 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/28 15:42:20 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/shell.h"
 
-/* static void	print_zplogo()
+static void	print_zplogo()
 {
 	ft_putendl(" _____  __      _          _ _");
 	ft_putendl("/ __  \\/  |    | |        | | |");
@@ -47,7 +47,7 @@ static void	print_logo()
 		print_zplogo();
 	else
 		print_pzlogo();
-} */
+}
 
 static void	cmd_line_reset(t_shell *shell)
 {
@@ -95,23 +95,9 @@ int	main(int argc, char **argv, char **envp)
 	ft_memset(&shell, 0, sizeof(shell));
 	if (envp)
 	{
+		print_logo();
 		init_shell(&shell, envp);
-		//print_logo();
 		ft_print_fd(STDOUT_FILENO, "$> ");
-		// while (TRUE)
-		// {
-		// 	input_read(&shell);
-		// 	if (shell.end == 1 && shell.quote == EOF)
-		// 	{
-		// 		history_runtime(&shell);
-		// 		ft_memset(shell.cmd_line, 0, ft_strlen(shell.cmd_line));
-		// 		ft_memset(shell.rev_cmd, 0, ft_strlen(shell.rev_cmd));
-		// 		shell.cmd_idx = 0;
-		// 		shell.end = 0;
-		// 		ft_putendl_fd("", STDOUT_FILENO);
-		// 		cmd_line_prompt(shell.quote);
-		// 	}
-		// }
 		run_shell(&shell);
 	}
 	else

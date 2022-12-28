@@ -39,16 +39,19 @@ _SRCS :=  main.c \
 		env_variable_counter.c
 
 _CURSOR := init_window.c \
+		init_prompt.c \
 		goto_newline.c \
 		goto_sides.c \
-		goto_position.c
+		goto_word.c \
+		goto_end.c
 
 _INIT := init_shell.c \
 		init_term.c
 
 _INPUT := read_quote.c \
 		cmd_line.c\
-		input_read.c
+		input_read.c \
+		input_rev_cmd.c
 
 _HISTORY := history_create.c \
 			history_traverse.c \
@@ -56,10 +59,10 @@ _HISTORY := history_create.c \
 			history_runtime.c \
 			history.c
 
-_KEYS := ft_iscntrl.c \
-		key_listen.c \
+_KEYS := key_listen.c \
 		read_key.c \
-		special_keys.c
+		special_keys.c \
+		key_is_ctrl_alpha.c
 
 _OUTPUT := stdin_char.c \
 		cmd_line_prompt.c \

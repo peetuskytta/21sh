@@ -3,7 +3,6 @@ add '\n' if ENTER, if an open quote exists
 TO BE DONE:
 // SIGNAL - together 0%
 // ERRORS - together 50%
-// SPECIAL KEYS - rori 70%
 // CURSOR - rori 50%
 // PIPES & REDIRECT - peetu 0%
 // AGREGATE - peetu 0%
@@ -12,6 +11,7 @@ TO BE DONE:
 
 REASONABLY DONE:
 - QUOTES - together but peetu is a hero 95%
+- SPECIAL KEYS - rori 98%
 
 DONE DONE:
 - COMMAND LINE PARSE - peetu 
@@ -21,3 +21,4 @@ DONE DONE:
 - KEYPRESS LISTEN - rori
 - Makefile
 - .h files org
+

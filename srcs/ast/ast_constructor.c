@@ -128,18 +128,18 @@ t_ast	**ast_constructor(t_shell *shell, t_tok *token)
 	count = count_semicolon(shell->cmd_line);
 	temp = token;
 	tree = (t_ast **)ft_memalloc(sizeof(t_ast *) * (count + 1));
-	NL;
+	// NL;
 	while (token)
 	{
 		if (!token)
 			DB;
-		ft_printf("tree[%d]: first token: %s\n", i, token->str);
+		// ft_printf("tree[%d]: first token: %s\n", i, token->str);
 		tree[i] = ast_build_tree(&token);
 		if (token && token->type == CHAR_SEMICOLON)
 			token = token->next;
 		if (!token)
 		{
-			ft_putendl("END of token stream");
+			// ft_putendl("END of token stream");
 			break ;
 		}
 		i++;

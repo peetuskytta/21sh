@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/27 14:59:08 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/28 15:51:01 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 # define SHELL_H
 # include "../libft/incl/libft.h"
 # include "structs.h"
-# include "parse.h"
-# include "ast.h"
 # include <term.h>
 # include <fcntl.h>
 # include <time.h>
@@ -33,17 +31,18 @@
 # define D_QUOTE '\"'
 # define MAX_BUFF 4096
 
-# include "cursor.h"
-# include "history.h"
-# include "keys.h"
-# include "errors.h"
-# include "parse.h"
+# include "ast.h"
 # include "buildin.h"
+# include "cursor.h"
+# include "errors.h"
+# include "history.h"
 # include "initialise.h"
 # include "input.h"
-# include "panic.h"
-# include "rawmode.h"
+# include "keys.h"
 # include "output.h"
+# include "panic.h"
+# include "parse.h"
+# include "rawmode.h"
 
 /*
 ** SHELL
