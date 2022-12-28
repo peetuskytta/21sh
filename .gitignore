@@ -5,6 +5,7 @@
 *.
 *.out
 *.a
+.21sh_history
 21sh
 .vscode/
 libft/ft_printf/.deps/
