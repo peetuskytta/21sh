@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/27 14:59:17 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/28 09:02:33 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,21 @@ typedef struct s_shell
 	struct termios	raw;
 }				t_shell;
 
+typedef struct s_fds
+{
+	int			fd_in;
+	int			fd_out;
+	int			fd_err;
+	int			fd_close;
+}				t_fds;
+
 typedef struct s_exec
 {
-	char	*cmd;
-	char	**args;
-}			t_exec;
+	char			*cmd;
+	char			**args;
+	struct s_fds	fds;
+	struct
+}					t_exec;
 
 typedef struct s_tok
 {

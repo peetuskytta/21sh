@@ -75,6 +75,21 @@ static t_ast	*ast_create_pipe(int type)
 	return (branch);
 }
 
+static void	ast_consume_tokens(t_tok ***token, t_ast *branch)
+{
+	int	type;
+
+	type = branch->type;
+	ft_putnbr_endl(type);
+	while ((**token))
+	{
+		if ((**token)->type == WORD || (**token)->type == REDIR)
+			(**token) = (**token)->next;
+		else
+			break;
+	}
+}
+
 static t_ast	*ast_create_left(t_tok ***token, t_ast *branch)
 {
 	branch = (t_ast *)ft_memalloc(sizeof(t_ast));
@@ -83,13 +98,15 @@ static t_ast	*ast_create_left(t_tok ***token, t_ast *branch)
 	allocation_check((void *)&branch->data.cmd.args);
 	ft_memset((void *)&branch->data, 0, sizeof(t_data));
 	branch->type = ast_sniff_for_type((**token));
-	while ((**token))
+	ast_consume_tokens(token, branch);
+/*	while ((**token))
 	{
+		// branch->type, **token,
 		if ((**token)->type == WORD || (**token)->type == REDIR)
 			(**token) = (**token)->next;
 		else
 			break;
-	}
+	}*/
 	return (branch);
 }
 
@@ -111,9 +128,6 @@ static t_ast	*ast_build_tree(t_tok **token)
 		(*token) = (*token)->next;
 		branch->right = ast_build_tree(token);
 	}
-	//ft_putendl("Normal return");
-	//if (*token && (*token)->type != SEPARATOR)
-	//	(*token) = (*token)->next;
 	return (branch);
 }
 
@@ -131,17 +145,12 @@ t_ast	**ast_constructor(t_shell *shell, t_tok *token)
 	NL;
 	while (token)
 	{
-		if (!token)
-			DB;
 		ft_printf("tree[%d]: first token: %s\n", i, token->str);
 		tree[i] = ast_build_tree(&token);
 		if (token && token->type == CHAR_SEMICOLON)
 			token = token->next;
 		if (!token)
-		{
-			ft_putendl("END of token stream");
 			break ;
-		}
 		i++;
 	}
 	tree[i] = NULL;
