@@ -56,9 +56,9 @@ static int	ast_sniff_for_type(t_tok *token)
 		tmp = tmp->next;
 		if (!tmp)
 			return(COMMAND);
+		else if (tmp->type == REDIR)
+			return (REDIR);
 	}
-	if (tmp->type == REDIR)
-		return (REDIR);
 	return (COMMAND);
 }
 
@@ -71,42 +71,74 @@ static t_ast	*ast_create_pipe(int type)
 	branch->type = type;
 	branch->right = NULL;
 	branch->left = NULL;
-	ft_memset(&branch->data, 0, sizeof(t_data));
 	return (branch);
 }
 
-static void	ast_consume_tokens(t_tok ***token, t_ast *branch)
+static void	ast_add_arguments(t_tok ***token, t_ast *branch, int *i)
 {
-	int	type;
+	branch->data.args[(*i)++] = ft_strdup((**token)->str);
+	//ft_putendl(branch->data.args[(*i)++]);
+	(**token) = (**token)->next;
+	if (branch->type == COMMAND)
+		branch->data.redir = NULL;
+}
 
-	type = branch->type;
-	ft_putnbr_endl(type);
+static int	ast_redir_count(t_tok *token)
+{
+	t_tok	*tmp;
+	int		count;
+
+	count = 0;
+	tmp = token;
+	while (tmp)
+	{
+		if (tmp->type == REDIR)
+			count++;
+		else if (tmp->type == CHAR_SEMICOLON || (tmp->type == PIPE))
+			break ;
+		tmp = tmp->next;
+	}
+	return (count);
+}
+
+static void	ast_add_redir(t_tok ***token, t_redir *redir)
+{
+	redir->next = (t_redir *)ft_memalloc(sizeof(t_redir));
+	allocation_check((void *)&branch->data.redir);
+	if ()
+	else if ()
+	else
+	redir->next = NULL;
+}
+ /*Consumes the tokens to arguments and redirections*/
+static void	ast_consume_tokens(t_tok ***token, t_ast *branch, int i)
+{
+	t_redir	redir;
+
+	redir = NULL;
 	while ((**token))
 	{
-		if ((**token)->type == WORD || (**token)->type == REDIR)
+		if ((**token)->type == WORD)
+			ast_add_arguments(token, branch, &i);
+		else if ((**token)->type == REDIR)
+		{
+			ast_add_redir(token, &redir);
 			(**token) = (**token)->next;
+		}
 		else
-			break;
+			break ;
 	}
+	branch->data.redir = redir;
 }
 
 static t_ast	*ast_create_left(t_tok ***token, t_ast *branch)
 {
 	branch = (t_ast *)ft_memalloc(sizeof(t_ast));
 	allocation_check((void *)&branch);
-	branch->data.cmd.args = (char **)ft_memalloc(sizeof(char *) * 100);
-	allocation_check((void *)&branch->data.cmd.args);
-	ft_memset((void *)&branch->data, 0, sizeof(t_data));
+	branch->data.args = (char **)ft_memalloc(sizeof(char *) * 100);
+	allocation_check((void *)&branch->data.args);
 	branch->type = ast_sniff_for_type((**token));
-	ast_consume_tokens(token, branch);
-/*	while ((**token))
-	{
-		// branch->type, **token,
-		if ((**token)->type == WORD || (**token)->type == REDIR)
-			(**token) = (**token)->next;
-		else
-			break;
-	}*/
+	ast_consume_tokens(token, branch, 0);
 	return (branch);
 }
 

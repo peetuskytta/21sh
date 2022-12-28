@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/28 09:02:33 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/28 13:10:40 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,22 @@ typedef struct s_fds
 	int			fd_in;
 	int			fd_out;
 	int			fd_err;
-	int			fd_close;
+	int			fd_closed;
 }				t_fds;
+
+typedef struct s_redir
+{
+	int				type;
+	char			*file;
+	struct s_redir	*next;
+}					t_redir;
 
 typedef struct s_exec
 {
 	char			*cmd;
 	char			**args;
+	struct s_redir	redir;
 	struct s_fds	fds;
-	struct
 }					t_exec;
 
 typedef struct s_tok

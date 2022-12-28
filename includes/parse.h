@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 13:58:06 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/28 07:52:36 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/28 10:01:52 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,16 @@ typedef enum t_type
 	REDIR,
 	SEPARATOR,
 	WORD,
-	IO_FILE,
 }	e_type;
+
+typedef enum t_red
+{
+	FILE_IN,
+	FILE_OUT,
+	FILE_AGGR,
+	FILE_APPEND,
+	FILE_TRUNC,
+}	e_red;
 
 typedef enum t_state
 {
