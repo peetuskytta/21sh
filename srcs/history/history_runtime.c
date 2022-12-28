@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history_runtime.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 15:10:51 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/16 22:28:26 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/27 14:59:41 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,11 @@ void	history_runtime(t_shell *shell)
 	{
 		//ft_putendl("TOO MANY HISTORIES TOO MANY PROBLEMS");
 		history_truncate(shell->history, shell->cmd_line);
-		//i = 0;
-		//while (shell->history[i] != NULL)
-		//	ft_putendl(shell->history[i++]);
 	}
 	else
 	{
 		shell->history[i] = ft_strdup(shell->cmd_line);
 		allocation_check((void *)&shell->history[i]);
+		shell->hist_idx = i;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/21 14:51:43 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/27 16:04:53 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static void	cmd_line_reset(t_shell *shell)
 	ft_memset(shell->cmd_line, '\0', ft_strlen(shell->cmd_line));
 	shell->cmd_idx = 0;
 	shell->end = 0;
+	NL;
 	cmd_line_prompt(shell->quote);
 }
 
@@ -65,7 +66,6 @@ static void	run_shell(t_shell *shell)
 {
 	t_ast	**tree;
 
-	//(void)tree;
 	tree = NULL;
 	while (TRUE)
 	{
@@ -77,6 +77,12 @@ static void	run_shell(t_shell *shell)
 			(void)tree;
 			cmd_line_reset(shell);
 		}
+		else if (shell->end == 1 && shell->quote != EOF)
+		{
+			shell->end = 0;
+			NL;
+			cmd_line_prompt(shell->quote);
+		}
 	}
 }
 
@@ -86,12 +92,26 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
-	ft_memset(&shell, 0, sizeof(t_shell));
+	ft_memset(&shell, 0, sizeof(shell));
 	if (envp)
 	{
 		init_shell(&shell, envp);
 		//print_logo();
 		ft_print_fd(STDOUT_FILENO, "$> ");
+		// while (TRUE)
+		// {
+		// 	input_read(&shell);
+		// 	if (shell.end == 1 && shell.quote == EOF)
+		// 	{
+		// 		history_runtime(&shell);
+		// 		ft_memset(shell.cmd_line, 0, ft_strlen(shell.cmd_line));
+		// 		ft_memset(shell.rev_cmd, 0, ft_strlen(shell.rev_cmd));
+		// 		shell.cmd_idx = 0;
+		// 		shell.end = 0;
+		// 		ft_putendl_fd("", STDOUT_FILENO);
+		// 		cmd_line_prompt(shell.quote);
+		// 	}
+		// }
 		run_shell(&shell);
 	}
 	else

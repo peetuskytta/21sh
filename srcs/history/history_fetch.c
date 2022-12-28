@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history_init.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 15:07:37 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/15 16:14:00 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/27 14:59:31 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
 ** grab history from file
 */
-void	history_init(t_shell *shell)
+void	history_fetch(t_shell *shell)
 {
 	char	*line;
 	int		fd;
@@ -30,8 +30,8 @@ void	history_init(t_shell *shell)
 			shell->history[i++] = ft_strdup(line);
 			ft_strdel(&line);
 		}
+		shell->hist_idx = i - 1;
 	}
 	else
 		ft_perror(HIST_ERR_FILE);
-	close(fd);
 }

@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   kill_mode.c                                        :+:      :+:    :+:   */
+/*   chrcpy_str_rev.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 13:28:31 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/27 15:05:30 by zraunio          ###   ########.fr       */
+/*   Created: 2022/12/22 11:56:39 by zraunio           #+#    #+#             */
+/*   Updated: 2022/12/22 11:59:20 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
+#include "../incl/libft.h"
 
-void kill_mode(const char *str, t_shell *shell)
+void	chrcpy_str_rev(char *cmd, char *rev, int max, int n)
 {
-	if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &shell->raw) == -1)
-		ft_perror(ERROR_EXIT);
-	write(STDOUT_FILENO, "\x1b[2J", 4);
-	write(STDOUT_FILENO, "\x1b[H", 3);
-	ft_perror(str);
-	ft_arr_free((void *)&shell->environ);
-	history_create(shell->history);
-	exit(EXIT_SUCCESS);
+	int		i;
+	int		j;
+
+	i = ft_strlen(cmd) - 1;
+	j = ft_strlen(rev);
+	if (i < 0 || j >= max)
+		return ;
+	while (n-- > 0)
+	{
+		rev[j++] = cmd[i];
+		cmd[i--] = '\0';
+	}
+	rev[j] = '\0';
 }

@@ -40,20 +40,21 @@ _SRCS :=  main.c \
 
 _CURSOR := init_window.c \
 		goto_newline.c \
-		goto_sides.c
+		goto_sides.c \
+		goto_position.c
 
-# _EXECUTE :=
-
-_HISTORY := history_create.c \
-			history_init.c \
-			history_runtime.c \
-			history.c
-
-_INIT := init_shell.c
+_INIT := init_shell.c \
+		init_term.c
 
 _INPUT := read_quote.c \
 		cmd_line.c\
 		input_read.c
+
+_HISTORY := history_create.c \
+			history_traverse.c \
+			history_fetch.c \
+			history_runtime.c \
+			history.c
 
 _KEYS := ft_iscntrl.c \
 		key_listen.c \
