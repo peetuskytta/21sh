@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 23:15:32 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/28 11:10:31 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/28 16:16:36 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,6 @@ void	token_list_build(char *input, int size, t_lex *list)
 				}
 				if (k > 0)
 				{
-					token->str[k] = ch_type;
 					token->next = (t_tok *)ft_memalloc(sizeof(t_tok));
 					token = token->next;
 					init_token(token, size - i);
@@ -140,12 +139,16 @@ void	token_list_build(char *input, int size, t_lex *list)
 		else if (state == STATE_IN_DQUOTE)
 		{
 			token->str[k++] = c;
+			if (c == CHAR_GREATER || c == CHAR_LESSER)
+				token->type = REDIR;
 			if (ch_type == CHAR_DQUOTE)
 				state = STATE_GENERAL;
 		}
 		else if (state == STATE_IN_QUOTE)
 		{
 			token->str[k++] = c;
+			if (c == CHAR_GREATER || c == CHAR_LESSER)
+				token->type = REDIR;
 			if (ch_type == CHAR_QUOTE)
 				state = STATE_GENERAL;
 		}

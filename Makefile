@@ -30,6 +30,7 @@ INCL = -I includes/
 
 #Sources by folder
 _AST := ast_constructor.c \
+		ast_consume_tokens.c \
 		#ast_release.c \
 		#ast_execute.c \
 		#ast_.c \

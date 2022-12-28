@@ -45,8 +45,6 @@ static void	token_list_print(t_tok *token)
 		if (temp != NULL)
 			NL;
 	}
-	if (temp == NULL)
-		ft_printf("\ntoken[%d] (NULL)\n", i);
 }
 
 t_tok	*parser(t_shell *shell)
@@ -55,8 +53,9 @@ t_tok	*parser(t_shell *shell)
 	t_lex	list;
 
 	ft_memset(&list, 0, sizeof(t_lex));
-	shell->cmd_line[ft_strlen(shell->cmd_line)] = NULL_BYTE;
-	token_list_build(shell->cmd_line, shell->cmd_idx, &list);
+	shell->cmd_idx *= 2;
+	if (shell->cmd_idx > 0)
+		token_list_build(shell->cmd_line, shell->cmd_idx, &list);
 	temp = list.token_list;
 	token_list_print(temp);
 	return (list.token_list);

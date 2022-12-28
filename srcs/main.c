@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/27 16:04:53 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/28 15:28:49 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,20 @@ static void	cmd_line_reset(t_shell *shell)
 }
 
 /*
+** We have to close the STDIN, STDOUT, and STDERR before re-opening them.
+** This way we get the right 0,1,2 as the filedescriptors.
+*/
+static void	reset_terminal(char *terminal)
+{
+	close(STDIN_FILENO);
+	open(terminal, O_RDWR);
+	close(STDOUT_FILENO);
+	open(terminal, O_RDWR);
+	close(STDERR_FILENO);
+	open(terminal, O_RDWR);
+}
+
+/*
 ** In a loop reads input. Parses. Builds tree. Executes tree.
 ** TREE will be split into separate trees by SEMICOLON
 */
@@ -76,6 +90,7 @@ static void	run_shell(t_shell *shell)
 			tree = ast_constructor(shell, parser(shell));
 			(void)tree;
 			cmd_line_reset(shell);
+			reset_terminal(shell->tty);
 		}
 		else if (shell->end == 1 && shell->quote != EOF)
 		{

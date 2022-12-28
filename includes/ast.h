@@ -23,6 +23,8 @@ typedef struct s_ast
 }					t_ast;
 
 t_ast	**ast_constructor(t_shell *shell, t_tok *token);
+void	ast_consume_tokens(t_tok ***token, t_ast *branch, int i);
+
 //void	ast_execute(t_ast *root, t_shell *shell);
 //void	ast_release(t_ast *root);
 

@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/28 13:10:40 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/28 16:18:51 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define STRUCTS_H
 # include "shell.h"
 # include <termios.h>
+
+# define MAX_REDIR 512
 
 typedef struct	s_win
 {
@@ -53,15 +55,15 @@ typedef struct s_fds
 typedef struct s_redir
 {
 	int				type;
+	int				fildes;
 	char			*file;
-	struct s_redir	*next;
 }					t_redir;
 
 typedef struct s_exec
 {
 	char			*cmd;
-	char			**args;
-	struct s_redir	redir;
+	char			*args[MAX_REDIR];
+	struct s_redir	redir[MAX_REDIR];
 	struct s_fds	fds;
 }					t_exec;
 
