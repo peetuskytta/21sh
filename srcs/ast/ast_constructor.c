@@ -81,8 +81,8 @@ static t_ast	*ast_create_left(t_tok ***token, t_ast *branch)
 	branch->type = ast_sniff_for_type((**token));
 	ft_memset(&branch->data.redir, 0, sizeof(t_redir) * 512);
 	ast_consume_tokens(token, branch, 0);
-	if (branch->type == COMMAND || branch->type == REDIR)
-		branch->right = NULL;
+	//if (branch->type == COMMAND || branch->type == REDIR)
+	branch->right = NULL;
 	return (branch);
 }
 
@@ -120,11 +120,24 @@ t_ast	**ast_constructor(t_shell *shell, t_tok *token)
 	temp = token;
 	tree = (t_ast **)ft_memalloc(sizeof(t_ast *) * (count + 1));
 	NL;
+	int ct = 0;
 	while (token)
 	{
-		//ft_printf("\ntree[%d]:\n", i);
+		ft_printf("\ntree[%d]:\n", i);
 		tree[i] = ast_build_tree(&token);
-		ft_printf("arg[0]: %s, ", tree[i]->left->data.args[0]);
+		ct = 0;
+		while (tree[i]->left->data.args[ct])
+		{
+			ft_printf("1: %s, ", tree[i]->left->data.args[ct++]);
+		}
+		ct = 0;
+		if (tree[i]->right)
+		{
+			if (tree[i]->type == PIPE)
+				DB;
+			while (tree[i]->right->data.args[ct])
+				ft_printf("2: %s, ", tree[i]->right->data.args[ct++]);
+		}
 		if (token && token->type == CHAR_SEMICOLON)
 			token = token->next;
 		if (!token)

@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:05:15 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/28 17:57:16 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/29 07:51:44 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static void	ast_add_arguments(t_tok ***token, t_ast *branch, int *i)
 	if (*i < MAX_REDIR)
 	{
 		branch->data.args[(*i)] = ft_strdup((**token)->str);
-		ft_putendl(branch->data.args[(*i)++]);
+		//ft_putendl(branch->data.args[(*i)++]);
+		(*i)++;
 		(**token) = (**token)->next;
 	}
 	else
@@ -39,6 +40,7 @@ static void	ast_add_redir(t_tok ***token, t_redir *redir, int *idx)
 		redir[(*idx)].file = ft_strdup((**token)->str);
 		redir[(*idx)].type = FILE_OUT;
 		redir[(*idx)].fildes = -1;
+		(*idx)++;
 		//ft_putendl(redir[(*idx)++].file);
 	}
 	else
