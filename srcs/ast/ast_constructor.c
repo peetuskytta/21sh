@@ -35,12 +35,15 @@ static bool	ast_sniff_for_pipe(t_tok *token)
 	tmp = token;
 	while (tmp)
 	{
-		if (tmp->type == PIPE)
+	//	ft_putendl(tmp->str);
+		if (tmp->type == CHAR_PIPE)
 			return (false);
 		if (tmp->type == CHAR_SEMICOLON)
 			break ;
 		tmp = tmp->next;
 	}
+	//ft_putendl(tmp->str);
+	//exit(1);
 	return (true);
 }
 
@@ -83,6 +86,7 @@ static t_ast	*ast_create_left(t_tok ***token, t_ast *branch)
 	ast_consume_tokens(token, branch, 0);
 	//if (branch->type == COMMAND || branch->type == REDIR)
 	branch->right = NULL;
+	branch->left = NULL;
 	return (branch);
 }
 
@@ -96,10 +100,11 @@ static t_ast	*ast_build_tree(t_tok **token)
 		return (branch);
 	if (ast_sniff_for_pipe((*token)->next))
 	{
+		//DB;
 		(*token) = (*token)->next;
 		branch->right = ast_create_left(&(token), branch);
 	}
-	else if ((*token)->type == PIPE)
+	else if ((*token)->type == CHAR_PIPE)
 	{
 		(*token) = (*token)->next;
 		branch->right = ast_build_tree(token);
@@ -120,24 +125,10 @@ t_ast	**ast_constructor(t_shell *shell, t_tok *token)
 	temp = token;
 	tree = (t_ast **)ft_memalloc(sizeof(t_ast *) * (count + 1));
 	NL;
-	int ct = 0;
 	while (token)
 	{
 		ft_printf("\ntree[%d]:\n", i);
 		tree[i] = ast_build_tree(&token);
-		ct = 0;
-		while (tree[i]->left->data.args[ct])
-		{
-			ft_printf("1: %s, ", tree[i]->left->data.args[ct++]);
-		}
-		ct = 0;
-		if (tree[i]->right)
-		{
-			if (tree[i]->type == PIPE)
-				DB;
-			while (tree[i]->right->data.args[ct])
-				ft_printf("2: %s, ", tree[i]->right->data.args[ct++]);
-		}
 		if (token && token->type == CHAR_SEMICOLON)
 			token = token->next;
 		if (!token)
