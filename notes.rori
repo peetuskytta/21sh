@@ -25,7 +25,9 @@ DONE DONE:
 
 
 |-------------------------------------------------------|
-|	TO DO:	|	1. CMD LINE PARSING DOLLAR:				|
+|	TO DO:												|
+|			|-------------------------------------------|											|
+|			|	1. CMD LINE PARSING DOLLAR:				|
 |			|	$> jsdsjdjd  2>&1 | cat -e 				|
 |			|	21sh: jsdsjdjd: command not found$		|
 |-------------------------------------------------------|
