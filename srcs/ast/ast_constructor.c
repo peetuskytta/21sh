@@ -120,7 +120,7 @@ static void ast_print(t_ast *tree)
 			if (ct == 0)
 				ft_putstr("CMD->  ");
 			else
-				ft_putstr("ARG->  ");
+				ft_putstr("ARG->    ");
 			ft_printf("%s\n", tree->data.args[ct++]);
 		}
 		if (tree->type == REDIR)

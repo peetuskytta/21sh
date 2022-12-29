@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 23:15:32 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/29 20:28:29 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/29 20:56:42 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,7 @@ void	token_list_build(char *input, int size, t_lex *list)
 					k = 0;
 				}
 			}
-			else if ((ch_type == CHAR_SEMICOLON || ch_type == CHAR_PIPE) && (input[i + 1] != CHAR_WHITESPACE
-				|| input[i + 1] != CHAR_TAB || input[i + 1] != NULL_BYTE))
+			else if (ch_type == CHAR_SEMICOLON || ch_type == CHAR_PIPE)
 			{
 				if ((input[i] == CHAR_SEMICOLON && input[i + 1] == CHAR_SEMICOLON) || i == 0)
 				{
@@ -124,7 +123,7 @@ void	token_list_build(char *input, int size, t_lex *list)
 					init_token(token, size - i);
 					k = 0;
 				}
-				if (k == 0)
+				if (k == 0 && input[i + 1] == NULL_BYTE)
 					break ;
 				token->str[0] = ch_type;
 				token->str[1] = NULL_BYTE;
