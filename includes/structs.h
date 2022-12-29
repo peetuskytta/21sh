@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/28 16:07:31 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/29 15:09:41 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct	s_win
 	int				cols;
 	int				rows;
 	int				current_row;
+	int				loc;
 }					t_win;
 
 typedef struct s_shell

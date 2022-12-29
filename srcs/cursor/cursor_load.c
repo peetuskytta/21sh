@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input_read.c                                       :+:      :+:    :+:   */
+/*   cursor_load.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/12 18:42:14 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/29 15:23:54 by zraunio          ###   ########.fr       */
+/*   Created: 2022/12/29 12:49:26 by zraunio           #+#    #+#             */
+/*   Updated: 2022/12/29 16:17:29 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-void input_read(t_shell *shell)
+void	cursor_load(t_shell *shell, int x, int y)
 {
-	char	input[MAX_BUFF + 1];
-
-	
-	if (enable_rawmode(shell) == 0)
-		ft_putendl_fd("Error with tcgetattr", STDERR_FILENO);
-	tcsetattr(STDIN_FILENO, TCSANOW, &shell->raw);
-	read_key(shell, input);
-	tcsetattr(STDIN_FILENO, TCSANOW, &shell->orig_raw);
+	if (x >= shell->prmpt_len && x <= shell->cmd_idx + shell->prmpt_len)
+		ft_putstr(tgoto(tgetstr("cm", NULL), x, y));
 }

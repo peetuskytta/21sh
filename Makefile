@@ -39,13 +39,15 @@ _SRCS :=  main.c \
 		env_variable_counter.c
 
 _CURSOR := init_window.c \
-		init_prompt.c \
+		cursor_load.c \
+		cursor_find.c \
 		goto_newline.c \
 		goto_sides.c \
 		goto_word.c \
 		goto_end.c
 
 _INIT := init_shell.c \
+		init_prompt.c \
 		init_term.c
 
 _INPUT := read_quote.c \
@@ -105,44 +107,44 @@ HEADER := includes/shell.h
 all: $(NAME)
 
 $(NAME): $(LIBFT_A) $(OBJS_DIR) $(OBJS)
-	@$(CC) $(FLAGS_DB) $(OBJS) -o $(NAME) -ltermcap -L ./libft -lft >> makelog.txt
+	@$(CC) $(FLAGS) $(OBJS) -o $(NAME) -ltermcap -L ./libft -lft >> makelog.txt
 	@echo "$(BOLD)$(WHITE)----------$(NAME) COMPILATION DONE----------$(RESET)"
 
 $(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR) >> makelog.txt
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
-	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(AST_DIR)%.c
-	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(CURSOR_DIR)%.c
-	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(HISTORY_DIR)%.c
-	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(INIT_DIR)%.c
-	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(INPUT_DIR)%.c
-	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(KEYS_DIR)%.c
-	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(OUTPUT_DIR)%.c
-	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(PANIC_DIR)%.c
-	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(PARSE_DIR)%.c
-	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(RAWMODE_DIR)%.c
-	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
 
 # $(OBJS_DIR)%.o: $(EXECUTE_DIR)%.c
 # 	@$(CC) $(FLAGS) $(INCL) -c $< -o $@

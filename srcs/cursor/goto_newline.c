@@ -6,16 +6,12 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 17:48:04 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/27 15:50:36 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/29 16:22:15 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-		// tputs(tgoto(tgetstr("cm", NULL), 0, 1), 1, stdin_char);
-		// tputs(tgetstr("cd", NULL), 1, stdin_char);
-		// tputs(tgoto(tgetstr("cm", NULL), 0, 1), 1, stdin_char);
-		// tputs(tgetstr("cd", NULL), 1, stdin_char);
 void	goto_newline(t_shell *shell, t_win *window)
 {
 	int	i;
@@ -25,4 +21,8 @@ void	goto_newline(t_shell *shell, t_win *window)
 	window->rows += 1;
 	window->current_row += 1;
 	read_quote(shell);
+	cursor_find(window);
+	if (window->loc < 3 || window->loc > 9)
+		window->loc = shell->prmpt_len;
+	ft_putstr(tgoto(tgetstr("cm", NULL), window->loc, window->current_row - 1));
 }

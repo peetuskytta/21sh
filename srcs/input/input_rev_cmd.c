@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:52:24 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/28 16:21:31 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/29 10:44:17 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@ void	input_rev_cmd(t_shell *shell)
 	int 	i;
 
 	i = ft_strlen(shell->rev_cmd);
-	while (i != 0)
+	while (i >= 0)
 		stdin_char(shell->rev_cmd[i--]);
 }

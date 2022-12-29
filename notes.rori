@@ -22,3 +22,18 @@ DONE DONE:
 - Makefile
 - .h files org
 
+
+
+|-------------------------------------------------------|
+|	TO DO:	|	1. CMD LINE PARSING DOLLAR:				|
+|			|	$> jsdsjdjd  2>&1 | cat -e 				|
+|			|	21sh: jsdsjdjd: command not found$		|
+|-------------------------------------------------------|
+|			|	2. CONTROL THE CURSOR					|
+|			|	know where cursor is at all times		|
+|			|	added cursor_find for the purpose		|
+|-------------------------------------------------------|
+|			|	3. COPY-CUT-PASTE						|
+|			|	this means first edit in middle of line	|
+|			|	output whole str don't be a lil bitch	|
+|-------------------------------------------------------|

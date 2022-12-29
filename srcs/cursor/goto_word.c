@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 13:36:36 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/28 16:08:53 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/29 16:21:47 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,24 @@ void	goto_word(t_shell *shell, t_win *window, int ws, int key)
 	if (key == 98)
 	{
 		x = shell->cmd_idx - ws + shell->prmpt_len;
-		if (x > 4 && x <= shell->cmd_idx)
+		window->loc = x;
+		if (x - 1 > shell->prmpt_len)
 		{
-			tputs(tgoto(tgetstr("cm", NULL), x, y), 1, stdin_char);
-			tputs(tgoto(tgetstr("cd", NULL), x, y), 1, stdin_char);
+			tputs(tgoto(tgetstr("cm", NULL), x - 1, y), 1, stdin_char);
+			tputs(tgoto(tgetstr("cd", NULL), x - 1, y), 1, stdin_char);
+			input_rev_cmd(shell);
+			cursor_load(shell, x, y);
 		}
-		else if (x == 4)
-			tputs(tgoto(tgetstr("cm", NULL), shell->prmpt_len, y), 1, stdin_char);
+		else if (x == shell->prmpt_len + 1)
+			cursor_load(shell, shell->prmpt_len, y);
 	}
 	else
 	{
 		x = ws + shell->prmpt_len;
+		window->loc = x;
 		if (x <= shell->cmd_idx + shell->prmpt_len)
 			tputs(tgoto(tgetstr("cm", NULL), x, y), 1, stdin_char);
 	}
 }
-
-// currently clears the words but doesn't re-output them
 // some blinky shit happening as Juho said
 // what a lil blinky bitch ive made
