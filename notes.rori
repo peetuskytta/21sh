@@ -37,3 +37,7 @@ DONE DONE:
 |			|	this means first edit in middle of line	|
 |			|	output whole str don't be a lil bitch	|
 |-------------------------------------------------------|
+|			|	4. FIX FIND_WORD						|
+|			|	overflowing and causing address errors	|
+|			|	requiers also restructure goto_sides	|
+|-------------------------------------------------------|
