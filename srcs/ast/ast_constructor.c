@@ -12,7 +12,7 @@
 
 #include "../../includes/ast.h"
 
-static int	count_semicolon(char *cmd_line)
+/*static int	count_semicolon(char *cmd_line)
 {
 	int	i;
 
@@ -23,10 +23,10 @@ static int	count_semicolon(char *cmd_line)
 			i++;
 		cmd_line++;
 	}
-//	if (i == 0)
-//		return (1);
+	if (i == 0)
+		return (1);
 	return (i);
-}
+}*/
 
 static bool	ast_sniff_for_pipe(t_tok *token)
 {
@@ -126,7 +126,8 @@ static void ast_print(t_ast *tree)
 		if (tree->type == REDIR)
 		{
 			int i = 0;
-			ft_putstr("  RED->  |  ");
+			if (i == 0)
+				ft_putstr("  RED->  |  ");
 			while (tree->data.redir[i].file)
 				ft_printf("%s  |  ", tree->data.redir[i++].file);
 			NL;
@@ -141,29 +142,30 @@ t_ast	**ast_constructor(t_shell *shell, t_tok *token)
 	t_ast	**tree;
 	t_tok	*temp;
 	int		i;
-	int		count;
 
 	i = 0;
-	count = count_semicolon(shell->cmd_line);
+	(void)shell;
+	if (!token)
+		return (NULL);
 	temp = token;
-	tree = (t_ast **)ft_memalloc(sizeof(t_ast *) * (count + 1));
+	tree = (t_ast **)ft_memalloc(sizeof(t_ast *) * 100);
+	ft_memset((void **)tree, 0, sizeof(t_ast *) * 100);
 	NL;
 	while (token)
 	{
-		//ft_printf("\ntree[%d]:\n", i);
 		tree[i] = ast_build_tree(&token);
 		if (token && token->type == CHAR_SEMICOLON)
+		{
 			token = token->next;
-		if (!token)
-			break ;
-		i++;
+			i++;
+		}
 	}
-	tree[i] = NULL;
 	i = 0;
 	while (tree[i])
 	{
 		ft_printf("\ntree[%d]\n", i);
-		ast_print(tree[i++]);
+		ast_print(tree[i]);
+		i++;
 	}
 	ft_putendl("\nRoot of the tree reached");
 	token_list_free(temp);

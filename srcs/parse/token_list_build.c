@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 23:15:32 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/28 16:16:36 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/29 20:28:29 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static char	get_char_type(char c)
 		return (CHAR_QUOTE);
 	else if (c == CHAR_SEMICOLON)
 		return (CHAR_SEMICOLON);
-	else if (c == CHAR_WHITESPACE)
+	else if (c == CHAR_WHITESPACE || c == CHAR_TAB)
 		return (CHAR_WHITESPACE);
 	else
 		return (CHAR_GENERAL);
@@ -96,18 +96,21 @@ void	token_list_build(char *input, int size, t_lex *list)
 				change_state(token, &state, &k, c);
 			else if (ch_type == CHAR_WHITESPACE)
 			{
-				if (k > 0)
+				if (k > 0 && input[i + 1] != CHAR_WHITESPACE && input[i + 1] != CHAR_TAB)
 				{
 					token->str[k] = NULL_BYTE;
+					if (input[i + 1] == NULL_BYTE)
+						break ;
 					token->next = (t_tok *)ft_memalloc(sizeof(t_tok));
 					token = token->next;
 					init_token(token, size - i);
 					k = 0;
 				}
 			}
-			else if (ch_type == CHAR_SEMICOLON || ch_type == CHAR_PIPE)
+			else if ((ch_type == CHAR_SEMICOLON || ch_type == CHAR_PIPE) && (input[i + 1] != CHAR_WHITESPACE
+				|| input[i + 1] != CHAR_TAB || input[i + 1] != NULL_BYTE))
 			{
-				if (input[i] == CHAR_SEMICOLON && input[i + 1] == CHAR_SEMICOLON)
+				if ((input[i] == CHAR_SEMICOLON && input[i + 1] == CHAR_SEMICOLON) || i == 0)
 				{
 					ft_print_fd(2, "21sh parse error near `%c%c'\n",input[i], input[i + 1]);
 					token_list_free(list->token_list);
@@ -121,6 +124,8 @@ void	token_list_build(char *input, int size, t_lex *list)
 					init_token(token, size - i);
 					k = 0;
 				}
+				if (k == 0)
+					break ;
 				token->str[0] = ch_type;
 				token->str[1] = NULL_BYTE;
 				token->type = ch_type;
@@ -154,6 +159,7 @@ void	token_list_build(char *input, int size, t_lex *list)
 		}
 		else if (ch_type == CHAR_NULL)
 		{
+			DB;
 			if (k > 0)
 			{
 				token->str[k] = NULL_BYTE;
