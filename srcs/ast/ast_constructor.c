@@ -23,8 +23,8 @@ static int	count_semicolon(char *cmd_line)
 			i++;
 		cmd_line++;
 	}
-	if (i == 0)
-		return (1);
+//	if (i == 0)
+//		return (1);
 	return (i);
 }
 
@@ -35,15 +35,12 @@ static bool	ast_sniff_for_pipe(t_tok *token)
 	tmp = token;
 	while (tmp)
 	{
-	//	ft_putendl(tmp->str);
 		if (tmp->type == CHAR_PIPE)
 			return (false);
 		if (tmp->type == CHAR_SEMICOLON)
 			break ;
 		tmp = tmp->next;
 	}
-	//ft_putendl(tmp->str);
-	//exit(1);
 	return (true);
 }
 
@@ -100,7 +97,6 @@ static t_ast	*ast_build_tree(t_tok **token)
 		return (branch);
 	if (ast_sniff_for_pipe((*token)->next))
 	{
-		//DB;
 		(*token) = (*token)->next;
 		branch->right = ast_create_left(&(token), branch);
 	}
@@ -112,6 +108,33 @@ static t_ast	*ast_build_tree(t_tok **token)
 	return (branch);
 }
 
+static void ast_print(t_ast *tree)
+{
+	if (tree == NULL)
+		return ;
+	if (tree->type == COMMAND || tree->type == REDIR)
+	{
+		int ct = 0;
+		while (tree->data.args[ct])
+		{
+			if (ct == 0)
+				ft_putstr("CMD->  ");
+			else
+				ft_putstr("ARG->  ");
+			ft_printf("%s\n", tree->data.args[ct++]);
+		}
+		if (tree->type == REDIR)
+		{
+			int i = 0;
+			ft_putstr("  RED->  |  ");
+			while (tree->data.redir[i].file)
+				ft_printf("%s  |  ", tree->data.redir[i++].file);
+			NL;
+		}
+	}
+	ast_print(tree->left);
+	ast_print(tree->right);
+}
 
 t_ast	**ast_constructor(t_shell *shell, t_tok *token)
 {
@@ -127,7 +150,7 @@ t_ast	**ast_constructor(t_shell *shell, t_tok *token)
 	NL;
 	while (token)
 	{
-		ft_printf("\ntree[%d]:\n", i);
+		//ft_printf("\ntree[%d]:\n", i);
 		tree[i] = ast_build_tree(&token);
 		if (token && token->type == CHAR_SEMICOLON)
 			token = token->next;
@@ -136,6 +159,13 @@ t_ast	**ast_constructor(t_shell *shell, t_tok *token)
 		i++;
 	}
 	tree[i] = NULL;
+	i = 0;
+	while (tree[i])
+	{
+		ft_printf("\ntree[%d]\n", i);
+		ast_print(tree[i++]);
+	}
+	ft_putendl("\nRoot of the tree reached");
 	token_list_free(temp);
 	return (tree);
 }
