@@ -1,35 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   goto_end.c                                         :+:      :+:    :+:   */
+/*   cmd_line_reprint.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/28 15:31:13 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/30 14:16:31 by zraunio          ###   ########.fr       */
+/*   Created: 2022/12/30 13:36:22 by zraunio           #+#    #+#             */
+/*   Updated: 2022/12/30 13:59:20 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-void	goto_end(t_shell *shell, t_win *window, int key)
+void	cmd_line_reprint(t_shell *shell, t_win *window, char c)
 {
-	int	y;
 	int	x;
 
-	y = window->current_row;
-	if (key == 'H')
-	{
-		x = shell->prmpt_len;
-		window->loc = x;
-		cursor_reset_line(window, x);
-		input_rev_cmd(shell);
-		cursor_load(shell, x, y);
-	}
-	else
-	{
-		x = shell->cmd_idx + shell->prmpt_len;
-		window->loc = x;
-		cursor_load(shell, x, y);
-	}
+	x = shell->prmpt_len;
+	cursor_reset_line(window, x);
+	ft_putstr_fd(shell->cmd_line, STDIN_FILENO);
+	stdin_char(c);
+	input_rev_cmd(shell);
+	window->loc += 1;
+	cursor_load(shell, window->loc, window->current_row);
 }

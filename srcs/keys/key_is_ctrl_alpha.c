@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:38:49 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/28 18:04:39 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/30 15:51:13 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	key_is_ctrl_alpha(t_shell *shell, t_win *window, char *input, int *i)
 		ft_putendl("CPY");
 		return (1);
 	}
-	else if (input[0] == CTRL_X)
+	else if (input[0] == CTRL_R)
 	{
 		*i += 1;
 		shell->env_iflg = 0;

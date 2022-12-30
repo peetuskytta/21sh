@@ -1,35 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   goto_end.c                                         :+:      :+:    :+:   */
+/*   cursor_reset_line.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/28 15:31:13 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/30 14:16:31 by zraunio          ###   ########.fr       */
+/*   Created: 2022/12/30 13:46:15 by zraunio           #+#    #+#             */
+/*   Updated: 2022/12/30 14:15:21 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-void	goto_end(t_shell *shell, t_win *window, int key)
+void	cursor_reset_line(t_win *window, int len)
 {
 	int	y;
-	int	x;
 
 	y = window->current_row;
-	if (key == 'H')
-	{
-		x = shell->prmpt_len;
-		window->loc = x;
-		cursor_reset_line(window, x);
-		input_rev_cmd(shell);
-		cursor_load(shell, x, y);
-	}
-	else
-	{
-		x = shell->cmd_idx + shell->prmpt_len;
-		window->loc = x;
-		cursor_load(shell, x, y);
-	}
+	tputs(tgoto(tgetstr("cm", NULL), len, y), 1, stdin_char);
+	tputs(tgoto(tgetstr("cd", NULL), len, y), 1, stdin_char);
 }

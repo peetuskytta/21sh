@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 13:36:36 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/29 16:21:47 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/30 14:59:33 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,15 @@ void	goto_word(t_shell *shell, t_win *window, int ws, int key)
 	y = window->current_row;
 	if (key == 98)
 	{
-		x = shell->cmd_idx - ws + shell->prmpt_len;
-		window->loc = x;
-		if (x - 1 > shell->prmpt_len)
+		x = window->loc;
+		if (x > shell->prmpt_len)
 		{
 			tputs(tgoto(tgetstr("cm", NULL), x - 1, y), 1, stdin_char);
 			tputs(tgoto(tgetstr("cd", NULL), x - 1, y), 1, stdin_char);
 			input_rev_cmd(shell);
-			cursor_load(shell, x, y);
+			cursor_load(shell, x - 1, y);
 		}
-		else if (x == shell->prmpt_len + 1)
+		else if (x == shell->prmpt_len)
 			cursor_load(shell, shell->prmpt_len, y);
 	}
 	else

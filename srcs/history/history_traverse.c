@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 14:29:03 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/19 15:13:03 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/30 15:31:51 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ void	history_traverse(t_shell *shell, int *idx, int key)
 	int	i;
 
 	i = *idx;
-	tputs(tgoto(tgetstr("cb", NULL), 0, shell->window.current_row), 1, stdin_char);
-	tputs(tgoto(tgetstr("cm", NULL), 0, shell->window.current_row), 1, stdin_char);
+	cursor_reset_line(&shell->window, 0);
 	cmd_line_prompt(shell->quote);
 	if (key == 65 && i >= 0)
 	{
@@ -37,9 +36,7 @@ void	history_traverse(t_shell *shell, int *idx, int key)
 		*idx += 1;
 		i = *idx;
 		if (shell->history[i + 1] != NULL)
-		{
 			ft_putstr_fd(shell->history[i + 1], STDIN_FILENO);
-		}
 		else
 			ft_putstr_fd(shell->cmd_line, STDIN_FILENO);
 	}
