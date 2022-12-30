@@ -138,19 +138,17 @@ static void ast_print(t_ast *tree)
 
 t_ast	**ast_constructor(t_shell *shell, t_tok *token)
 {
-	t_ast	*tree[100];
-	t_ast	**ret;
+	t_ast	**tree;
 	t_tok	*temp;
 	int		i;
 
 	i = 0;
-	ret = NULL;
 	(void)shell;
 	if (!token)
 		return (NULL);
 	temp = token;
-	//ret = (t_ast **)ft_memalloc(sizeof(t_ast));
-	ft_memset(tree, 0, sizeof(t_ast *) * (100));
+	tree = (t_ast **)ft_memalloc(sizeof(t_ast *) * (50));
+	ft_memset((void **)tree, 0, sizeof(t_ast *) * (50));
 	NL;
 	while (token)
 	{
@@ -167,11 +165,11 @@ t_ast	**ast_constructor(t_shell *shell, t_tok *token)
 		ft_printf("\ntree[%d]\n", i);
 		ast_print(tree[i]);
 		i++;
+		if (!tree[i])
+			ft_putendl("\nRoot of the tree reached");
 	}
-	ft_putendl("\nRoot of the tree reached");
 	token_list_free(temp);
-	ret = tree;
-	return (ret);
+	return (tree);
 }
 
 /*

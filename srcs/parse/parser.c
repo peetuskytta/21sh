@@ -12,22 +12,6 @@
 
 #include "../../includes/parse.h"
 
-/*static void	token_list_traverse(t_tok *token)
-{
-	t_tok	*tmp;
-
-	tmp = token;
-	while (tmp)
-	{
-		if (tmp->type == REDIR)
-		{
-			if (tmp->next)
-				tmp->next->type = IO_FILE;
-		}
-		tmp = tmp->next;
-	}
-}*/
-
 /*DELETE BEFORE SUBMIT*/
 static void	token_list_print(t_tok *token)
 {

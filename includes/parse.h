@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 13:58:06 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/28 10:01:52 by pskytta          ###   ########.fr       */
+/*   Updated: 2022/12/30 14:54:50 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ typedef enum e_tok_type
 	CHAR_SEMICOLON = ';',
 	CHAR_WHITESPACE = ' ',
 	CHAR_AMPERSAND = '&',
+	CHAR_TILDE = '~',
+	CHAR_DOLLAR = '$',
 	CHAR_ESCAPE = '\\',
 	CHAR_TAB = '\t',
 	CHAR_NEWLINE = '\n',
@@ -48,6 +50,7 @@ typedef enum t_red
 	FILE_AGGR,
 	FILE_APPEND,
 	FILE_TRUNC,
+	FILE_INVALID,
 }	e_red;
 
 typedef enum t_state
