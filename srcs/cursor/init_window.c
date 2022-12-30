@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 15:06:54 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/29 15:20:19 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/30 15:56:54 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,3 @@ void	init_window(t_win *window)
 	window->current_row = window->rows - 14;
 	window->win = &win;
 }
-
-//current row is not recorded right why does it not work exactly? ask Heikki or Alex!

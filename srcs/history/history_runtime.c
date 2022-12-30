@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 15:10:51 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/27 14:59:41 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/30 16:22:33 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,7 @@ void	history_runtime(t_shell *shell)
 	while (shell->history[i] != NULL)
 		i++;
 	if (i == 10)
-	{
-		//ft_putendl("TOO MANY HISTORIES TOO MANY PROBLEMS");
 		history_truncate(shell->history, shell->cmd_line);
-	}
 	else
 	{
 		shell->history[i] = ft_strdup(shell->cmd_line);

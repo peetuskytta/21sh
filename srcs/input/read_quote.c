@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:49:29 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/12 16:56:38 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/30 16:25:25 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ static void	identify_open_quote(t_shell *shell)
 	quote = 0;
 	while (shell->cmd_line[i] != '\0')
 	{
-		if ((shell->cmd_line[i] == D_QUOTE || shell->cmd_line[i] == S_QUOTE) && quote == 0)
+		if ((shell->cmd_line[i] == D_QUOTE || shell->cmd_line[i] == S_QUOTE)
+			&& quote == 0)
 		{
 			shell->quote = shell->cmd_line[i];
 			quote = 1;
@@ -48,6 +49,7 @@ static void	identify_open_quote(t_shell *shell)
 */
 void	read_quote(t_shell *shell)
 {
-	if (ft_strchr(shell->cmd_line, D_QUOTE) || ft_strchr(shell->cmd_line, S_QUOTE))
+	if (ft_strchr(shell->cmd_line, D_QUOTE)
+		|| ft_strchr(shell->cmd_line, S_QUOTE))
 		identify_open_quote(shell);
 }

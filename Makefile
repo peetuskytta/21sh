@@ -69,8 +69,7 @@ _KEYS := key_listen.c \
 		key_is_ctrl_alpha.c
 
 _OUTPUT := stdin_char.c \
-		cmd_line_prompt.c \
-		cmd_line_stdin.c
+		cmd_line_prompt.c
 
 _PANIC := ft_strerror.c \
 		ft_perror.c \

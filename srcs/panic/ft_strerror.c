@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 10:51:14 by zraunio           #+#    #+#             */
-/*   Updated: 2022/11/17 13:21:02 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/30 16:27:20 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,5 @@ char	*ft_strerror(int errnum)
 	else if (errnum == ENV_INVALID_ERRNO)
 		return (INVALID_CHAR);
 	else
-		return("ERROR");
+		return ("ERROR");
 }
