@@ -81,13 +81,12 @@ static t_ast	*ast_create_left(t_tok ***token, t_ast *branch)
 	branch->type = ast_sniff_for_type((**token));
 	ft_memset(&branch->data.redir, 0, sizeof(t_redir) * 512);
 	ast_consume_tokens(token, branch, 0);
-	//if (branch->type == COMMAND || branch->type == REDIR)
 	branch->right = NULL;
 	branch->left = NULL;
 	return (branch);
 }
 
-static t_ast	*ast_build_tree(t_tok **token)
+static t_ast	*ast_create_tree(t_tok **token)
 {
 	t_ast	*branch;
 
@@ -103,7 +102,7 @@ static t_ast	*ast_build_tree(t_tok **token)
 	else if ((*token)->type == CHAR_PIPE)
 	{
 		(*token) = (*token)->next;
-		branch->right = ast_build_tree(token);
+		branch->right = ast_create_tree(token);
 	}
 	return (branch);
 }
@@ -139,21 +138,23 @@ static void ast_print(t_ast *tree)
 
 t_ast	**ast_constructor(t_shell *shell, t_tok *token)
 {
-	t_ast	**tree;
+	t_ast	*tree[100];
+	t_ast	**ret;
 	t_tok	*temp;
 	int		i;
 
 	i = 0;
+	ret = NULL;
 	(void)shell;
 	if (!token)
 		return (NULL);
 	temp = token;
-	tree = (t_ast **)ft_memalloc(sizeof(t_ast *) * 100);
-	ft_memset((void **)tree, 0, sizeof(t_ast *) * 100);
+	//ret = (t_ast **)ft_memalloc(sizeof(t_ast));
+	ft_memset(tree, 0, sizeof(t_ast *) * (100));
 	NL;
 	while (token)
 	{
-		tree[i] = ast_build_tree(&token);
+		tree[i] = ast_create_tree(&token);
 		if (token && token->type == CHAR_SEMICOLON)
 		{
 			token = token->next;
@@ -169,7 +170,8 @@ t_ast	**ast_constructor(t_shell *shell, t_tok *token)
 	}
 	ft_putendl("\nRoot of the tree reached");
 	token_list_free(temp);
-	return (tree);
+	ret = tree;
+	return (ret);
 }
 
 /*
