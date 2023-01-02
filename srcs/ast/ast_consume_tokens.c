@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:05:15 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/30 15:53:29 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/02 08:01:25 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,10 @@ static void	ast_add_redir(t_tok ***token, t_redir *redir, int *idx)
 {
 	if (*idx < MAX_REDIR)
 	{
-		ast_set_redir(redir[(*idx)], (**token)->str);
-
-	//	redir[(*idx)].file = ft_strdup((**token)->str);
+		ast_set_redir(&redir[(*idx)], (**token)->str);
 	//	redir[(*idx)].type = ast_set_redir();
 	//	redir[(*idx)].fildes = -1;
 		(*idx)++;
-		//ft_putendl(redir[(*idx)++].file);
 	}
 	else
 		ft_putendl_fd("too many redirections...", STDERR_FILENO);

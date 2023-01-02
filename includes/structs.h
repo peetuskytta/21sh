@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/29 13:35:11 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/02 07:56:32 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ typedef struct s_fds
 typedef struct s_redir
 {
 	int				type;
-	int				fildes; // check if necessary
+	int				fildes;
+	int				aggr;
 	char			*file;
 }					t_redir;
 
