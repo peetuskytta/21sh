@@ -28,10 +28,7 @@ void	branch_execute(t_ast *branch, t_shell *shell)
 	char	**env_path;
 
 	if (branch == NULL)
-	{
-		ft_putendl("End of execution."); // if only one command is executed this is printed 3 times.
 		return ;
-	}
 	env_path = fetch_path_variable(shell->environ);
 	if (branch->type == COMMAND)
 		cmd_simple_execute(branch->data, env_path);
@@ -41,5 +38,9 @@ void	branch_execute(t_ast *branch, t_shell *shell)
 	branch_execute(branch->right, shell);
 	if (env_path != NULL)
 		ft_arr_free((void *)&env_path);
+	ft_memdel((void *)&branch->left);
+	ft_memdel((void *)&branch->right);
+	branch = NULL;
+	ft_putendl("End of execution.");
 }
 

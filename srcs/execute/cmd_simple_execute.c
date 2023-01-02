@@ -6,16 +6,28 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 10:18:29 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/02 11:25:00 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/02 12:16:17 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/execute.h"
 
+static void	clear_data(t_exec *data)
+{
+	int	i;
+
+	i = 0;
+	while (data->args[i])
+	{
+		ft_strdel((void *)&data->args[i]);
+		i++;
+	}
+}
+
 void	cmd_simple_execute(t_exec data, char **path)
 {
 	// builtin OR binary
 	// if no binary found set ERRNO and STDERR "no command found"
-	(void)data;
+	clear_data(&data);
 	(void)path;
 }
