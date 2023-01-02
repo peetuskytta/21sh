@@ -107,35 +107,6 @@ static t_ast	*ast_create_tree(t_tok **token)
 	return (branch);
 }
 
-static void ast_print(t_ast *tree)
-{
-	if (tree == NULL)
-		return ;
-	if (tree->type == COMMAND || tree->type == REDIR)
-	{
-		int ct = 0;
-		while (tree->data.args[ct])
-		{
-			if (ct == 0)
-				ft_putstr("CMD->  ");
-			else
-				ft_putstr("ARG->    ");
-			ft_printf("%s\n", tree->data.args[ct++]);
-		}
-		if (tree->type == REDIR)
-		{
-			int i = 0;
-			if (i == 0)
-				ft_putstr("  RED->  |  ");
-			while (tree->data.redir[i].file)
-				ft_printf("%s  |  ", tree->data.redir[i++].file);
-			NL;
-		}
-	}
-	ast_print(tree->left);
-	ast_print(tree->right);
-}
-
 t_ast	**ast_constructor(t_shell *shell, t_tok *token)
 {
 	t_ast	**tree;
