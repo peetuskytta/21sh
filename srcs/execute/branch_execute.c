@@ -40,7 +40,7 @@ void	branch_execute(t_ast *branch, t_shell *shell)
 		ft_arr_free((void *)&env_path);
 	ft_memdel((void *)&branch->left);
 	ft_memdel((void *)&branch->right);
-	branch = NULL;
+	branch = NULL; //sets the branch to NULL lol
 	ft_putendl("End of execution.");
 }
 
