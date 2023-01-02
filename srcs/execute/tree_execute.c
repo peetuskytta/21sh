@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 08:36:07 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/02 10:55:20 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/02 14:46:00 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	tree_execute(t_ast **tree, t_shell *shell)
 	{
 		// DO EXPANSIONS HERE?
 		branch_execute(tree[idx], shell);
+		ft_memdel((void *)&tree[idx]);
 		idx++;
 	}
 }

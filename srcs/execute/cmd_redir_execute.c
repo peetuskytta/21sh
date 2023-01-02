@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 10:15:33 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/02 12:16:12 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/02 14:33:55 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,16 @@ static void	clear_data(t_exec *data)
 		ft_strdel((void *)&data->args[i]);
 		i++;
 	}
-	if (data->redir->file != NULL)
+	if (data->redir[0].file != NULL)
 	{
-		ft_strdel((void *)&data->redir->file);
-		data->redir->aggr = -1;
-		data->redir->type = -1;
-		data->redir->fildes = -1;
+		i = 0;
+		while (data->redir[i].file != NULL)
+		{
+			ft_strdel((void *)&data->redir[i].file);
+			data->redir[i].aggr = -1;
+			data->redir[i].type = -1;
+			data->redir[i++].fildes = -1;
+		}
 	}
 }
 
