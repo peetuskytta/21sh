@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 11:53:38 by zraunio           #+#    #+#             */
-/*   Updated: 2022/11/24 13:18:04 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/02 16:16:43 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,3 @@ void	ft_setenv(t_shell *shell, char *args)
 		setenv_update_env(shell, name, value, index);
 	}
 }
-
-// this setenv is not currently quote sensitive, e.g. "na=me"=trap

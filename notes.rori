@@ -3,9 +3,10 @@ TO BE DONE:
 // ERRORS - together 60%
 // PIPES & REDIRECT - peetu 0%
 // AGREGATE - peetu 0%
-// BUILTINS - together 50%
 
 REASONABLY DONE:
+- BUILTINS - together 75%
+		- does setenv need to be sensitive to "na=me"=surname type of argument?
 - CURSOR - rori 75%
 - COMMAND TREE - peetu 75%
 - QUOTES - together but peetu is a hero 95%
@@ -22,7 +23,7 @@ DONE DONE:
 
 |-------------------------------------------------------|
 |	TO DO:												|
-|			|-------------------------------------------|											|
+|			|-------------------------------------------|
 |			|	1. CMD LINE PARSING DOLLAR:				|
 |			|	$> jsdsjdjd  2>&1 | cat -e 				|
 |			|	21sh: jsdsjdjd: command not found$		|
