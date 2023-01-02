@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 10:15:33 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/02 14:33:55 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/02 15:46:39 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,10 @@ static void	clear_data(t_exec *data)
 	}
 }
 
-void	cmd_redir_execute(t_exec data, char **path)
+void	cmd_redir_execute(t_exec data, char **path, char **env_cpy)
 {
 	clear_data(&data);
 	//ft_strdel((void *)&data.redir->file);
 	(void)path;
+	(void)env_cpy;
 }

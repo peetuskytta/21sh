@@ -150,7 +150,7 @@ $(OBJS_DIR)%.o: $(RAWMODE_DIR)%.c
 	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(EXECUTE_DIR)%.c
-	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(LIBFT_A):
 	-@make -C libft/ >> makelog.txt

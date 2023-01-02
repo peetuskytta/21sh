@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 10:18:29 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/02 12:16:17 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/02 16:13:48 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@ static void	clear_data(t_exec *data)
 	}
 }
 
-void	cmd_simple_execute(t_exec data, char **path)
+void	cmd_simple_execute(t_exec data, char **path, char **env_cpy)
 {
-	// builtin OR binary
+	// builtin OR binary (maybe function pointers?)
 	// if no binary found set ERRNO and STDERR "no command found"
 	clear_data(&data);
 	(void)path;
+	(void)env_cpy;
 }

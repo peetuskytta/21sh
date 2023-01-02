@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 09:15:27 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/27 15:05:20 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/02 16:07:16 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	fetch_envp(t_shell *shell, char **environ, int count)
 {
-	int			i;
+	int	i;
 
 	i = 0;
 	shell->environ = (char **)ft_memalloc(sizeof(char *) * (count + 1));
@@ -32,11 +32,7 @@ static void	fetch_ttyname(t_shell *shell)
 {
 	shell->tty = ttyname(STDIN_FILENO);
 	if (!shell->tty)
-	{
 		ft_perror("ttyname() failed to retrieve terminal name.");
-		exit(SYSTEM_CALL_FAIL);
-	}
-	//ft_putendl(shell->tty);
 }
 
 void	init_shell(t_shell *shell, char **environ)
