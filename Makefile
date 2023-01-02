@@ -46,6 +46,11 @@ _CURSOR := init_window.c \
 		goto_sides.c \
 		goto_position.c
 
+_EXECUTE := tree_execute.c \
+		branch_execute.c \
+		cmd_redir_execute.c \
+		cmd_simple_execute.c \
+
 _INIT := init_shell.c \
 		init_term.c
 
@@ -94,7 +99,7 @@ ALL_SRCS :=	$(addprefix $(SRCS_AST), $(_AST)) \
 			$(addprefix $(RAWMODE_DIR), $(_RAWMODE))
 
 SRCS = $(_SRCS) $(_CURSOR) $(_INIT) $(_INPUT) $(_KEYS) \
-$(_OUTPUT) $(_PANIC) $(_PARSE) $(_RAWMODE) $(_HISTORY) $(_AST) # $(_EXECUTE)
+$(_OUTPUT) $(_PANIC) $(_PARSE) $(_RAWMODE) $(_HISTORY) $(_AST) $(_EXECUTE)
 OBJ_FILES = $(SRCS:.c=.o)
 OBJS = $(patsubst %, $(OBJS_DIR)%, $(SRCS:.c=.o))
 #libft
@@ -144,8 +149,8 @@ $(OBJS_DIR)%.o: $(PARSE_DIR)%.c
 $(OBJS_DIR)%.o: $(RAWMODE_DIR)%.c
 	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
 
-# $(OBJS_DIR)%.o: $(EXECUTE_DIR)%.c
-# 	@$(CC) $(FLAGS) $(INCL) -c $< -o $@
+$(OBJS_DIR)%.o: $(EXECUTE_DIR)%.c
+	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(LIBFT_A):
 	-@make -C libft/ >> makelog.txt

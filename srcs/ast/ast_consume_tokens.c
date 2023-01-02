@@ -6,11 +6,12 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:05:15 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/02 08:01:25 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/02 09:44:41 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
+#include "ast.h"
 
 /*
 ** Adds the token type WORD to the arguments array

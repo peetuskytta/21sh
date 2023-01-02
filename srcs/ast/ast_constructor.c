@@ -131,13 +131,14 @@ t_ast	**ast_constructor(t_shell *shell, t_tok *token)
 		}
 	}
 	i = 0;
-	while (tree[i])
+	t_ast **tmp = tree;
+	while (tmp[i])
 	{
 		ft_printf("\ntree[%d]\n", i);
-		ast_print(tree[i]);
+		ast_print(tmp[i]);
 		i++;
-		if (!tree[i])
-			ft_putendl("\nRoot of the tree reached");
+		if (!tmp[i])
+			ft_putendl("Root of the tree reached");
 	}
 	token_list_free(temp);
 	return (tree);

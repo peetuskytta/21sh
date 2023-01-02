@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/02 07:56:32 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/02 09:46:52 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,13 @@ typedef struct s_lex
 {
 	t_tok	*token_list;
 }			t_lex;
+
+typedef struct s_ast
+{
+	int				type;
+	struct s_exec	data;
+	struct s_ast	*left;
+	struct s_ast	*right;
+}					t_ast;
 
 # endif
