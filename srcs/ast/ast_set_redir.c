@@ -47,7 +47,6 @@ void	ast_set_redir(t_redir *redir, char *str)
 		redir->fildes = 0;
 	if (ft_strchr(str, '&'))
 		redir->aggr = FILE_AGGR;
-	redir->file = ft_strdup(str);
 	//ft_putnbr_endl(redir->fildes);
 	//ft_putnbr_endl(redir->type);
 }

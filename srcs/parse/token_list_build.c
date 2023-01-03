@@ -6,11 +6,11 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 23:15:32 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/29 20:56:42 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/03 19:29:46 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/shell.h"
+#include "../includes/parse.h"
 
 static void	init_token(t_tok *token, int size)
 {
@@ -136,9 +136,17 @@ void	token_list_build(char *input, int size, t_lex *list)
 		else if (state == STATE_REDIR)
 		{
 			token->type = REDIR;
-			token->str[k++] = c;
-			if (!ft_strstr("0123456789&-><", &c))
+			if (!ft_strstr("0123456789&><-", &c))
+			{
+				token->next = (t_tok *)ft_memalloc(sizeof(t_tok));
+				token = token->next;
+				init_token(token, size - i);
+				token->type = REDIR;
 				state = STATE_GENERAL;
+				k = 0;
+			}
+			if (c != CHAR_WHITESPACE)
+				token->str[k++] = c;
 		}
 		else if (state == STATE_IN_DQUOTE)
 		{
@@ -158,7 +166,6 @@ void	token_list_build(char *input, int size, t_lex *list)
 		}
 		else if (ch_type == CHAR_NULL)
 		{
-			DB;
 			if (k > 0)
 			{
 				token->str[k] = NULL_BYTE;
