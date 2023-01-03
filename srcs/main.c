@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/30 14:35:40 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/03 17:44:16 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,26 @@
 
 static void	print_zplogo()
 {
-	ft_putendl(" _____  __      _          _ _");
-	ft_putendl("/ __  \\/  |    | |        | | |");
-	ft_putendl("   / /  | | ___| |__   ___| | |");
-	ft_putendl("  / /   | |/ __|  _ \\ / _ \\ | |");
-	ft_putendl(" / /____| |\\__ \\ | | |  __/ | |");
-	ft_putendl("\\_____/\\___/___/_| |_|\\___|_|_|");
-	ft_putendl("\n		~zraunio & pskytta");
-	ft_putchar('\n');
+	ft_putendl_fd(" _____  __      _          _ _", STDIN_FILENO);
+	ft_putendl_fd("/ __  \\/  |    | |        | | |", STDIN_FILENO);
+	ft_putendl_fd("   / /  | | ___| |__   ___| | |", STDIN_FILENO);
+	ft_putendl_fd("  / /   | |/ __|  _ \\ / _ \\ | |", STDIN_FILENO);
+	ft_putendl_fd(" / /____| |\\__ \\ | | |  __/ | |", STDIN_FILENO);
+	ft_putendl_fd("\\_____/\\___/___/_| |_|\\___|_|_|", STDIN_FILENO);
+	ft_putendl_fd("\n		~zraunio & pskytta", STDIN_FILENO);
+	ft_putchar_fd('\n', STDIN_FILENO);
 }
 
 static void	print_pzlogo()
 {
-	ft_putendl(" _____  __      _          _ _");
-	ft_putendl("/ __  \\/  |    | |        | | |");
-	ft_putendl("   / /  | | ___| |__   ___| | |");
-	ft_putendl("  / /   | |/ __|  _ \\ / _ \\ | |");
-	ft_putendl(" / /____| |\\__ \\ | | |  __/ | |");
-	ft_putendl("\\_____/\\___/___/_| |_|\\___|_|_|");
-	ft_putendl("\n		~pskytta & zraunio");
-	ft_putchar('\n');
+	ft_putendl_fd(" _____  __      _          _ _", STDIN_FILENO);
+	ft_putendl_fd("/ __  \\/  |    | |        | | |", STDIN_FILENO);
+	ft_putendl_fd("   / /  | | ___| |__   ___| | |", STDIN_FILENO);
+	ft_putendl_fd("  / /   | |/ __|  _ \\ / _ \\ | |", STDIN_FILENO);
+	ft_putendl_fd(" / /____| |\\__ \\ | | |  __/ | |", STDIN_FILENO);
+	ft_putendl_fd("\\_____/\\___/___/_| |_|\\___|_|_|", STDIN_FILENO);
+	ft_putendl_fd("\n		~pskytta & zraunio", STDIN_FILENO);
+	ft_putchar_fd('\n', STDIN_FILENO);
 }
 
 static void	print_logo()
@@ -54,6 +54,7 @@ static void	cmd_line_reset(t_shell *shell)
 	ft_memset(shell->cmd_line, '\0', ft_strlen(shell->cmd_line));
 	shell->cmd_idx = 0;
 	shell->end = 0;
+	init_row_idx(&shell->window);
 	NL;
 	cmd_line_prompt(shell->quote);
 }
@@ -80,6 +81,15 @@ static void	run_shell(t_shell *shell)
 		else if (shell->end == 1 && shell->quote != EOF)
 		{
 			shell->end = 0;
+			shell->window.rows_q += 1;
+			int	fd;
+			fd = open("txt.txt", O_RDWR, O_APPEND);
+			ft_putnbr_fd(shell->window.current_row, fd);
+			ft_putchar_fd('\n', fd);
+			ft_putendl_fd("rows in quote lvl:", fd);
+			ft_putnbr_fd(shell->window.rows_q, fd);
+			ft_putchar_fd('\n', fd);
+			close(fd);
 			NL;
 			cmd_line_prompt(shell->quote);
 		}

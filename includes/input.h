@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:34:24 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/28 16:18:33 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/03 16:53:51 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 /*
 ** READ_INPUT
 */
-int		command_prompt_loop(t_shell *shell);
+void	cmd_line_reprint(t_shell *shell, t_win *window, char c);
 void	read_quote(t_shell *shell);
 void	cmd_line(t_shell *shell, char c);
 void	input_read(t_shell *shell);

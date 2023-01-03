@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   goto_newline.c                                     :+:      :+:    :+:   */
+/*   cursor_row_idx.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/12 17:48:04 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/03 17:43:57 by zraunio          ###   ########.fr       */
+/*   Created: 2023/01/03 16:36:40 by zraunio           #+#    #+#             */
+/*   Updated: 2023/01/03 16:54:57 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-void	goto_newline(t_shell *shell, t_win *window)
+void	cursor_row_idx(t_win *window, int len)
 {
-	int	i;
+	int	x;
 
-	i = ft_strilen(shell->rev_cmd);
-	if (i > 0)
-		chrcpy_str_rev(shell->rev_cmd, shell->cmd_line, MAX_BUFF, i);
-	window->rows += 1;
-	window->current_row += 1;
-	read_quote(shell);
-	cursor_find(window);
-	if (window->loc < 3 || window->loc > 9)
-		window->loc = shell->prmpt_len;
-	ft_putstr(tgoto(tgetstr("cm", NULL), window->loc, window->current_row - 1));
+	x = 0;
+	while (window->row_idx[x] != -1)
+		x++;
+	if (x == MAX_BUFF)
+		ft_perror(QUOTE_TOO_LONG);
+	else
+		window->row_idx[x] = len;
 }

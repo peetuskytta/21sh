@@ -38,8 +38,9 @@ _SRCS :=  main.c \
 		allocation_check.c \
 		env_variable_counter.c
 
-_CURSOR := init_window.c \
-		cursor_reset_line.c \
+_CURSOR := cursor_reset_line.c \
+		cursor_change_row.c \
+		cursor_row_idx.c \
 		cursor_load.c \
 		cursor_find.c \
 		goto_newline.c \
@@ -48,8 +49,10 @@ _CURSOR := init_window.c \
 		goto_end.c
 
 _INIT := init_shell.c \
+		init_window.c \
 		init_prompt.c \
-		init_term.c
+		init_term.c \
+		init_row_idx.c
 
 _INPUT := read_quote.c \
 		cmd_line.c \

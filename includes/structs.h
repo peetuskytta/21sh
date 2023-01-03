@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/29 15:09:41 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/03 17:07:42 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ typedef struct	s_win
 	int				cols;
 	int				rows;
 	int				current_row;
+	int				row_idx[4096];
+	int				rows_q;
 	int				loc;
 }					t_win;
 
@@ -29,8 +31,9 @@ typedef struct s_shell
 	char		**environ;
 	int			env_nbr;
 	int			env_iflg;
-	char		*history[1001];
 	int			stdout_fd;
+	char		*tty;
+	char		*history[1001];
 	int			hist_idx;
 	char		*cmd_line;
 	char		*rev_cmd;
@@ -38,7 +41,6 @@ typedef struct s_shell
 	int			end;
 	int			quote;
 	int			prmpt_len;
-	char		*tty;
 	t_win		window;
 	struct termios	orig_raw;
 	struct termios	raw;

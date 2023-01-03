@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strilen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 14:59:48 by zraunio           #+#    #+#             */
-/*   Updated: 2021/05/18 15:07:49 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/03 16:20:21 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_strilen(const char *str)
 	int	i;
 
 	i = 0;
-	if (!str)
+	if (!str || str[0] == 0)
 		return (0);
 	while (str[i])
 		i++;

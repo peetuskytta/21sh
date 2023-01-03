@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:24:46 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/15 15:05:50 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/03 16:48:28 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 /*Error message defines*/
 # define CMD_TOO_LONG "command line argument is too long"
+# define QUOTE_TOO_LONG "too many lines. Quote level cannot exceed 4096 lines"
 # define MALLOC_FAIL "malloc failed: serious memory issues"
 # define ARG_REQUIRED ": filename argument required"
 # define ARG_USAGE_1 ": usage: "
