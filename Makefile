@@ -33,7 +33,7 @@ _AST := ast_constructor.c \
 		ast_consume_tokens.c \
 		ast_set_redir.c \
 		ast_print.c \
-		#ast_release.c \
+		ast_release.c \
 		#ast_execute.c \
 		#ast_.c \
 
