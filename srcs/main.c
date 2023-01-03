@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/02 15:37:24 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/03 17:43:11 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static void	run_shell(t_shell *shell)
 			history_runtime(shell);
 			tree = ast_constructor(shell, parser(shell));
 			if (tree)
-				tree_execute(tree, shell);
+				exec_tree(tree, shell);
 			cmd_line_reset(shell);
 			reset_terminal(shell->tty);
 		}

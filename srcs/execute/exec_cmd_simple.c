@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_simple_execute.c                               :+:      :+:    :+:   */
+/*   exec_cmd_simple.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 10:18:29 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/03 15:25:27 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/03 17:53:53 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/execute.h"
 
-static char	**fetch_path_variable(char **env)
-{
-	while (*env)
-	{
-		if (ft_strnstr(*env, "PATH=", 5))
-			return (ft_strsplit(*env + 5, ':'));
-		env++;
-	}
-	return (NULL);
-}
-
-static void	clear_data(t_exec *data, char *path)
+static void	clear_cmd_data(t_exec *data, char *path)
 {
 	int	i;
 
@@ -60,25 +49,14 @@ static void	execute_cmd(t_exec data, char *bin_path, char **env_cpy)
 	}
 }
 
-static bool	path_check(char *bin_path, char *cmd)
-{
-	if (access(bin_path, F_OK) == -1)
-	{
-		ft_putstr_fd(cmd, STDERR_FILENO);
-		ft_perror(CMD_NOT_FOUND);
-		return (false);
-	}
-	return (true);
-}
-
 // if no binary found set ERRNO and STDERR "no command found"
 // builtin OR binary (maybe function pointers?)
-void	cmd_simple_execute(t_exec data, char **env_cpy)
+void	exec_cmd_simple(t_exec data, char **env_cpy)
 {
 	char *bin_path;
 
-	bin_path = fetch_binary_path(fetch_path_variable(env_cpy), data.cmd);
-	if (path_check(bin_path, data.cmd))
+	bin_path = exec_binary_path(exec_fetch_path_var(env_cpy), data.cmd);
+	if (exec_binary_check(bin_path, data.cmd))
 		execute_cmd(data, bin_path, env_cpy);
-	clear_data(&data, bin_path);
+	clear_cmd_data(&data, bin_path);
 }

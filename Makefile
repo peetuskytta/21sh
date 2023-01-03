@@ -44,11 +44,13 @@ _CURSOR := init_window.c \
 		goto_sides.c \
 		goto_position.c
 
-_EXECUTE := tree_execute.c \
-		branch_execute.c \
-		cmd_redir_execute.c \
-		cmd_simple_execute.c \
-		fetch_binary_path.c \
+_EXECUTE := exec_tree.c \
+		exec_branch.c \
+		exec_cmd_redir.c \
+		exec_cmd_simple.c \
+		exec_binary_check.c \
+		exec_binary_path.c \
+		exec_fetch_path_var.c \
 
 _INIT := init_shell.c \
 		init_term.c

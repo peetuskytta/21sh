@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fetch_binary_path.c                                :+:      :+:    :+:   */
+/*   exec_binary_check.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/03 11:06:28 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/03 11:06:28 by pskytta          ###   ########.fr       */
+/*   Created: 2023/01/03 17:18:03 by pskytta           #+#    #+#             */
+/*   Updated: 2023/01/03 17:18:03 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/execute.h"
 
-char	*fetch_binary_path(char **path, char *cmd)
+bool	exec_binary_check(char *bin_path, char *cmd)
 {
-	struct	stat	buf;
-	char			*temp;
-	char			**cpy;
-
-	cpy = path;
-	while (*cpy)
+	if (access(bin_path, F_OK) == -1)
 	{
-		temp = ft_strjoin(*cpy, "/");
-		temp = ft_strjoin_free(temp, cmd, 1);
-		if (lstat(temp, &buf) == 0)
-			break ;
-		else
-			ft_strdel((void *)&temp);
-		cpy++;
+		ft_putstr_fd("shell: ", STDERR_FILENO);
+		ft_putstr_fd(cmd, STDERR_FILENO);
+		ft_perror(CMD_NOT_FOUND);
+		return (false);
 	}
-	ft_arr_free((void *)&path);
-	return (temp);
+	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/03 15:17:22 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/03 17:23:56 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,30 +27,30 @@ typedef struct	s_win
 
 typedef struct s_shell
 {
-	char		**environ;
-	int			env_nbr;
-	int			env_iflg;
-	char		*history[1001];
-	int			hist_idx;
-	char		*cmd_line;
-	char		*rev_cmd;
-	int			cmd_idx;
-	int			end;
-	int			quote;
-	int			q_count;
-	char		*tty;
-	t_win		window;
+	char			**environ;
+	int				env_nbr;
+	int				env_iflg;
+	char			*history[1001];
+	int				hist_idx;
+	char			*cmd_line;
+	char			*rev_cmd;
+	int				cmd_idx;
+	int				end;
+	int				quote;
+	int				q_count;
+	char			*tty;
+	t_win			window;
 	struct termios	orig_raw;
 	struct termios	raw;
-}				t_shell;
+}					t_shell;
 
 typedef struct s_fds
 {
-	int			fd_in;
-	int			fd_out;
-	int			fd_err;
-	int			fd_closed;
-}				t_fds;
+	int				fd_in;
+	int				fd_out;
+	int				fd_err;
+	int				fd_close;
+}					t_fds;
 
 typedef struct s_redir
 {
@@ -65,7 +65,7 @@ typedef struct s_exec
 	char			*cmd;
 	char			*args[MAX_REDIR];
 	struct s_redir	redir[MAX_REDIR];
-	struct s_fds	fds;
+	//struct s_fds	fds;
 }					t_exec;
 
 typedef struct s_tok

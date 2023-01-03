@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   branch_execute.c                                     :+:      :+:    :+:   */
+/*   exec_branch.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -32,7 +32,7 @@ static char	**copy_environment(char **environ)
 /*
 ** Comments
 */
-void	branch_execute(t_ast *branch, t_shell *shell)
+void	exec_branch(t_ast *branch, t_shell *shell)
 {
 	char	**env_cpy;
 
@@ -40,12 +40,12 @@ void	branch_execute(t_ast *branch, t_shell *shell)
 		return ;
 	env_cpy = copy_environment(shell->environ);
 	if (branch->type == COMMAND)
-		cmd_simple_execute(branch->data, env_cpy);
+		exec_cmd_simple(branch->data, env_cpy);
 	else if (branch->type == REDIR)
-		cmd_redir_execute(branch->data, env_cpy);
-	branch_execute(branch->left, shell);
-	branch_execute(branch->right, shell);
-	ast_release(branch, env_cpy); // frees the path and copy of the environment, also the left and right pointers and sets the branch to NULL.
+		exec_cmd_redir(branch->data, env_cpy);
+	exec_branch(branch->left, shell);
+	exec_branch(branch->right, shell);
+	ast_release(branch, env_cpy);
 	//ft_putendl("End of execution.");
 }
 

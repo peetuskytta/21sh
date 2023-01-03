@@ -120,15 +120,11 @@ t_ast	**ast_constructor(t_shell *shell, t_tok *token)
 	temp = token;
 	tree = (t_ast **)ft_memalloc(sizeof(t_ast *) * (50));
 	ft_memset((void **)tree, 0, sizeof(t_ast *) * (50));
-	NL;
 	while (token)
 	{
-		tree[i] = ast_create_tree(&token);
+		tree[i++] = ast_create_tree(&token);
 		if (token && token->type == CHAR_SEMICOLON)
-		{
 			token = token->next;
-			i++;
-		}
 	}
 /*	i = 0;
 	t_ast **tmp = tree;
