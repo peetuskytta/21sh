@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/02 09:46:52 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/03 15:17:22 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ typedef struct s_tok
 
 typedef struct s_lex
 {
-	t_tok	*token_list;
-}			t_lex;
+	t_tok			*token_list;
+}					t_lex;
 
 typedef struct s_ast
 {
@@ -87,5 +87,12 @@ typedef struct s_ast
 	struct s_ast	*left;
 	struct s_ast	*right;
 }					t_ast;
+
+typedef struct s_pid
+{
+	int				child;
+	int				wait;
+	int				status;
+}					t_pid;
 
 # endif

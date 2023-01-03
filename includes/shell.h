@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/02 09:44:17 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/03 14:56:26 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <curses.h>
 # include <termcap.h>
 # include <sys/ioctl.h>
+# include <sys/wait.h>
 
 # define NL ft_putchar('\n')
 # define DB ft_putstr("\nYOU ARE HERE\n")

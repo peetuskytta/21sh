@@ -34,8 +34,6 @@ _AST := ast_constructor.c \
 		ast_set_redir.c \
 		ast_print.c \
 		ast_release.c \
-		#ast_execute.c \
-		#ast_.c \
 
 _SRCS :=  main.c \
 		allocation_check.c \
@@ -50,6 +48,7 @@ _EXECUTE := tree_execute.c \
 		branch_execute.c \
 		cmd_redir_execute.c \
 		cmd_simple_execute.c \
+		fetch_binary_path.c \
 
 _INIT := init_shell.c \
 		init_term.c

@@ -130,7 +130,7 @@ t_ast	**ast_constructor(t_shell *shell, t_tok *token)
 			i++;
 		}
 	}
-	i = 0;
+/*	i = 0;
 	t_ast **tmp = tree;
 	while (tmp[i])
 	{
@@ -139,7 +139,7 @@ t_ast	**ast_constructor(t_shell *shell, t_tok *token)
 		i++;
 		if (!tmp[i])
 			ft_putendl("Root of the tree reached");
-	}
+	}*/
 	token_list_free(temp);
 	return (tree);
 }

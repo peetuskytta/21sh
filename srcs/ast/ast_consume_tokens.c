@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:05:15 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/02 09:44:41 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/03 15:12:47 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,13 @@ static void	ast_add_arguments(t_tok ***token, t_ast *branch, int *i)
 	if (*i < MAX_REDIR)
 	{
 		branch->data.args[(*i)] = ft_strdup((**token)->str);
-		//ft_putendl(branch->data.args[(*i)++]);
+		if (*i == 0)
+			branch->data.cmd = ft_strdup(branch->data.args[0]);
 		(*i)++;
 		(**token) = (**token)->next;
 	}
 	else
-		ft_putendl_fd("too many arguments...", STDERR_FILENO);
+		ft_perror("too many arguments...");
 }
 
 /*
@@ -44,7 +45,7 @@ static void	ast_add_redir(t_tok ***token, t_redir *redir, int *idx)
 		(*idx)++;
 	}
 	else
-		ft_putendl_fd("too many redirections...", STDERR_FILENO);
+		ft_perror("too many redirections...");
 	(**token) = (**token)->next;
 
 	// Needs a way to detect the type of redirection and
