@@ -107,6 +107,24 @@ static t_ast	*ast_create_tree(t_tok **token)
 	return (branch);
 }
 
+//DELETE BEFORE SUBMIT
+void	print_tree(t_ast **tree)
+{
+	t_ast **tmp;
+	int	i;
+
+	tmp = tree;
+	i = 0;
+	while (tmp[i])
+	{
+		ft_printf("\ntree[%d]\n", i);
+		ast_print(tmp[i]);
+		i++;
+		if (!tmp[i])
+			ft_putendl("Root of the tree reached");
+	}
+}
+
 t_ast	**ast_constructor(t_shell *shell, t_tok *token)
 {
 	t_ast	**tree;
@@ -126,16 +144,7 @@ t_ast	**ast_constructor(t_shell *shell, t_tok *token)
 		if (token && token->type == CHAR_SEMICOLON)
 			token = token->next;
 	}
-/*	i = 0;
-	t_ast **tmp = tree;
-	while (tmp[i])
-	{
-		ft_printf("\ntree[%d]\n", i);
-		ast_print(tmp[i]);
-		i++;
-		if (!tmp[i])
-			ft_putendl("Root of the tree reached");
-	}*/
+	//print_tree(tree);
 	token_list_free(temp);
 	return (tree);
 }

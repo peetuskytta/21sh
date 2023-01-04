@@ -19,9 +19,8 @@ int	ft_is_directory(char *filename)
 	if (!filename)
 		return (0);
 	if (lstat(filename, &fileinfo) != 0)
-		return (-1);
+		return (0);
 	if (S_ISDIR(fileinfo.st_mode) == 1)
 		return (1);
-	else
-		return (0);
+	return (0);
 }
