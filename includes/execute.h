@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 08:19:09 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/04 16:03:11 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/04 16:12:38 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define EXECUTE_H
 
 # include "shell.h"
-# include "redirection.h"
 
 void	exec_tree(t_ast **tree, t_shell *shell);
 void	exec_branch(t_ast *branch, t_shell *shell);

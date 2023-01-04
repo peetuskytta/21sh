@@ -37,7 +37,7 @@ static void	clear_redir_data(t_exec *data, char *path)
 
 static void	execute_redir(t_exec data, char *bin_path, char **env_cpy)
 {
-	//redir_start(&data);
+	redir_start(&data);
 	(void)data;
 	(void)env_cpy;
 	(void)bin_path;
