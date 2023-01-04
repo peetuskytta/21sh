@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 09:15:27 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/29 10:58:48 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/04 14:38:18 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	init_shell(t_shell *shell, char **environ)
 	allocation_check((void *)&shell->rev_cmd);
 	shell->cmd_idx = 0;
 	shell->prmpt_len = 3;
-	shell->window.loc = 3;
 	shell->quote = EOF;
 	init_term();
 	init_window(&shell->window);

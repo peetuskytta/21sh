@@ -58,7 +58,8 @@ _INPUT := read_quote.c \
 		cmd_line.c \
 		cmd_line_reprint.c \
 		input_read.c \
-		input_rev_cmd.c
+		input_rev_cmd.c \
+		input_row_len.c
 
 _HISTORY := history_create.c \
 			history_traverse.c \

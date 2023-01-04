@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/03 17:44:16 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/04 14:50:01 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,20 @@ static void	print_logo()
 
 static void	cmd_line_reset(t_shell *shell)
 {
-	ft_memset(shell->cmd_line, '\0', ft_strlen(shell->cmd_line));
+	if (shell->quote == EOF)
+	{
+		ft_memset(shell->cmd_line, '\0', ft_strlen(shell->cmd_line));
+		init_row_idx(&shell->window);
+	}
+	else
+	{
+		input_row_len(shell, &shell->window);
+	}
 	shell->cmd_idx = 0;
 	shell->end = 0;
-	init_row_idx(&shell->window);
 	NL;
 	cmd_line_prompt(shell->quote);
+	init_prompt(shell);
 }
 
 /*
@@ -71,27 +79,17 @@ static void	run_shell(t_shell *shell)
 	while (TRUE)
 	{
 		input_read(shell);
-		if (shell->end == 1 && shell->quote == EOF)
+		if (shell->end == 1)
 		{
-			history_runtime(shell);
-			tree = ast_constructor(shell, parser(shell));
-			(void)tree;
+			if (shell->quote == EOF)
+			{
+				history_runtime(shell);
+				tree = ast_constructor(shell, parser(shell));
+				(void)tree;
+			}
+			// else
+			// 	cursor_row_idx(&shell->window, shell->window.loc);
 			cmd_line_reset(shell);
-		}
-		else if (shell->end == 1 && shell->quote != EOF)
-		{
-			shell->end = 0;
-			shell->window.rows_q += 1;
-			int	fd;
-			fd = open("txt.txt", O_RDWR, O_APPEND);
-			ft_putnbr_fd(shell->window.current_row, fd);
-			ft_putchar_fd('\n', fd);
-			ft_putendl_fd("rows in quote lvl:", fd);
-			ft_putnbr_fd(shell->window.rows_q, fd);
-			ft_putchar_fd('\n', fd);
-			close(fd);
-			NL;
-			cmd_line_prompt(shell->quote);
 		}
 	}
 }
