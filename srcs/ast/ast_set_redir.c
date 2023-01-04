@@ -19,20 +19,41 @@
 	return (false);
 }*/
 
+static bool	type_error_case(char *str)
+{
+	if (ft_strequ(str, "<&>") || ft_strequ(str, ">&>"))
+		return (true);
+	if (ft_strequ(str, "<&<") || ft_strequ(str, ">&>"))
+		return (true);
+	if (ft_strequ(str, "<<>>") || ft_strequ(str, ">>>"))
+		return (true);
+	if (ft_strequ(str, "<<>>") || ft_strequ(str, "<<<"))
+		return (true);
+	if (ft_strequ(str, "><") || ft_strequ(str, "><>"))
+		return (true);
+	return (false);
+}
+
 static int	check_for_type(char *str)
 {
 	int	type;
 
 	type = -1;
-	if (ft_strchr(str, '>'))
-	{
-		if (ft_strstr(str, ">>"))
-			type = FILE_APPEND;
-		else
-			type = FILE_TRUNC;
-	}
-	else if (ft_strchr(str, '<'))
+	if (type_error_case(str) == true)
+		type = FILE_PARSE_ERR;
+	else if (ft_strchr(str, '&'))
+		type = FILE_AGGR;
+	else if (str[0] == '<' && ft_strlen(str) == 1)
 		type = FILE_IN;
+	else if (ft_strchr(str, '>'))
+	{
+		if (ft_strnstr(str, ">>", 2))
+			type = FILE_APPEND;
+		else if (ft_strnstr(str, ">", 1))
+			type = FILE_TRUNC;
+		else
+			type = FILE_PARSE_ERR;
+	}
 	return (type);
 }
 
@@ -45,8 +66,14 @@ void	ast_set_redir(t_redir *redir, char *str)
 		redir->fildes = 1;
 	if (redir->type == FILE_IN)
 		redir->fildes = 0;
-	if (ft_strchr(str, '&'))
-		redir->aggr = FILE_AGGR;
-	//ft_putnbr_endl(redir->fildes);
-	//ft_putnbr_endl(redir->type);
+	if (redir->type == FILE_AGGR)
+		ft_putendl("\nAGGR");
+	if (redir->type == FILE_IN)
+		ft_putendl("\nFILE_IN");
+	if (redir->type == FILE_APPEND)
+		ft_putendl("\nFILE_APPEND");
+	if (redir->type == FILE_TRUNC)
+		ft_putendl("\nFILE_TRUNC");
+	if (redir->type == FILE_PARSE_ERR)
+		ft_putendl("\nFILE_PARSE_ERR");
 }

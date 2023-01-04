@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/03 17:23:56 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/04 10:05:53 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ typedef struct s_redir
 {
 	int				type;
 	int				fildes;
-	int				aggr;
 	char			*file;
 }					t_redir;
 

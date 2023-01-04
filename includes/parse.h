@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 13:58:06 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/01 23:06:27 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/04 10:14:02 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef enum t_red
 	FILE_APPEND,
 	FILE_TRUNC,
 	FILE_INVALID,
+	FILE_PARSE_ERR,
 }	e_red;
 
 typedef enum t_state

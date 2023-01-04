@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 23:15:32 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/04 08:27:30 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/04 11:27:11 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	token_list_build(char *input, int size, t_lex *list)
 			{
 				if ((input[i] == CHAR_SEMICOLON && input[i + 1] == CHAR_SEMICOLON) || i == 0)
 				{
-					ft_print_fd(2, "21sh parse error near `%c%c'\n",input[i], input[i + 1]);
+					ft_print_fd(2, "\n21sh parse error near `%c%c'\n",input[i], input[i + 1]);
 					token_list_free(list->token_list);
 					list->token_list = NULL;
 					return ;
@@ -136,7 +136,7 @@ void	token_list_build(char *input, int size, t_lex *list)
 		else if (state == STATE_REDIR)
 		{
 			token->type = REDIR;
-			if (!ft_strstr("0123456789&><-", &c))
+			if (!ft_strchr("0123456789&><-", c))
 			{
 				token->next = (t_tok *)ft_memalloc(sizeof(t_tok));
 				token = token->next;
@@ -146,6 +146,16 @@ void	token_list_build(char *input, int size, t_lex *list)
 				k = 0;
 			}
 			if (c != CHAR_WHITESPACE)
+			{
+				if (input[i + 1] == NULL_BYTE || (ft_strequ(token->str, ">>") && c == '>')
+					|| ft_strequ(token->str, "<>>"))
+				{
+					ft_print_fd(2, "\n21sh parse error near `%c%c'\n",input[i - 1], input[i]);
+					token_list_free(list->token_list);
+					list->token_list = NULL;
+					return ;
+				}
+			}
 				token->str[k++] = c;
 		}
 		else if (state == STATE_IN_DQUOTE)
