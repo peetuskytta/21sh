@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/04 16:12:52 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/04 16:16:28 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,22 @@
 # define D_QUOTE '\"'
 # define MAX_BUFF 4096
 
-# include "cursor.h"
-# include "history.h"
-# include "keys.h"
-# include "errors.h"
-# include "parse.h"
+
+# include "redirection.h"
+# include "ast.h"
 # include "buildin.h"
+# include "cursor.h"
+# include "errors.h"
+# include "execute.h"
+# include "history.h"
 # include "initialise.h"
 # include "input.h"
-# include "panic.h"
-# include "rawmode.h"
+# include "keys.h"
 # include "output.h"
-# include "redirection.h"
+# include "panic.h"
 # include "parse.h"
-# include "ast.h"
-# include "execute.h"
+# include "rawmode.h"
+
 
 /*
 ** SHELL
