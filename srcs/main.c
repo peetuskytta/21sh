@@ -3,37 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/03 17:43:11 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/04 16:19:28 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/shell.h"
 
-/* static void	print_zplogo()
+static void	print_zplogo()
 {
-	ft_putendl(" _____  __      _          _ _");
-	ft_putendl("/ __  \\/  |    | |        | | |");
-	ft_putendl("   / /  | | ___| |__   ___| | |");
-	ft_putendl("  / /   | |/ __|  _ \\ / _ \\ | |");
-	ft_putendl(" / /____| |\\__ \\ | | |  __/ | |");
-	ft_putendl("\\_____/\\___/___/_| |_|\\___|_|_|");
-	ft_putendl("\n		~zraunio & pskytta");
-	ft_putchar('\n');
+	ft_putendl_fd(" _____  __      _          _ _", STDIN_FILENO);
+	ft_putendl_fd("/ __  \\/  |    | |        | | |", STDIN_FILENO);
+	ft_putendl_fd("   / /  | | ___| |__   ___| | |", STDIN_FILENO);
+	ft_putendl_fd("  / /   | |/ __|  _ \\ / _ \\ | |", STDIN_FILENO);
+	ft_putendl_fd(" / /____| |\\__ \\ | | |  __/ | |", STDIN_FILENO);
+	ft_putendl_fd("\\_____/\\___/___/_| |_|\\___|_|_|", STDIN_FILENO);
+	ft_putendl_fd("\n		~zraunio & pskytta", STDIN_FILENO);
+	ft_putchar_fd('\n', STDIN_FILENO);
 }
 
 static void	print_pzlogo()
 {
-	ft_putendl(" _____  __      _          _ _");
-	ft_putendl("/ __  \\/  |    | |        | | |");
-	ft_putendl("   / /  | | ___| |__   ___| | |");
-	ft_putendl("  / /   | |/ __|  _ \\ / _ \\ | |");
-	ft_putendl(" / /____| |\\__ \\ | | |  __/ | |");
-	ft_putendl("\\_____/\\___/___/_| |_|\\___|_|_|");
-	ft_putendl("\n		~pskytta & zraunio");
-	ft_putchar('\n');
+	ft_putendl_fd(" _____  __      _          _ _", STDIN_FILENO);
+	ft_putendl_fd("/ __  \\/  |    | |        | | |", STDIN_FILENO);
+	ft_putendl_fd("   / /  | | ___| |__   ___| | |", STDIN_FILENO);
+	ft_putendl_fd("  / /   | |/ __|  _ \\ / _ \\ | |", STDIN_FILENO);
+	ft_putendl_fd(" / /____| |\\__ \\ | | |  __/ | |", STDIN_FILENO);
+	ft_putendl_fd("\\_____/\\___/___/_| |_|\\___|_|_|", STDIN_FILENO);
+	ft_putendl_fd("\n		~pskytta & zraunio", STDIN_FILENO);
+	ft_putchar_fd('\n', STDIN_FILENO);
 }
 
 static void	print_logo()
@@ -47,15 +47,24 @@ static void	print_logo()
 		print_zplogo();
 	else
 		print_pzlogo();
-} */
+}
 
 static void	cmd_line_reset(t_shell *shell)
 {
-	ft_memset(shell->cmd_line, '\0', ft_strlen(shell->cmd_line));
+	if (shell->quote == EOF)
+	{
+		ft_memset(shell->cmd_line, '\0', ft_strlen(shell->cmd_line));
+		init_row_idx(&shell->window);
+	}
+	else
+	{
+		input_row_len(shell, &shell->window);
+	}
 	shell->cmd_idx = 0;
 	shell->end = 0;
 	NL;
 	cmd_line_prompt(shell->quote);
+	init_prompt(shell);
 }
 
 /*
@@ -80,24 +89,23 @@ static void	run_shell(t_shell *shell)
 {
 	t_ast	**tree;
 
-	tree = NULL;
+	ft_memset(&tree, 0, sizeof(t_ast *));
 	while (TRUE)
 	{
 		input_read(shell);
-		if (shell->end == 1 && shell->quote == EOF)
+		if (shell->end == 1)
 		{
-			history_runtime(shell);
-			tree = ast_constructor(shell, parser(shell));
-			if (tree)
-				exec_tree(tree, shell);
+			if (shell->quote == EOF)
+			{
+				history_runtime(shell);
+				tree = ast_constructor(shell, parser(shell));
+				if (tree)
+					exec_tree(tree, shell);
+			}
+			// else
+			// 	cursor_row_idx(&shell->window, shell->window.loc);
 			cmd_line_reset(shell);
 			reset_terminal(shell->tty);
-		}
-		else if (shell->end == 1 && shell->quote != EOF)
-		{
-			shell->end = 0;
-			NL;
-			cmd_line_prompt(shell->quote);
 		}
 	}
 }
@@ -111,23 +119,9 @@ int	main(int argc, char **argv, char **envp)
 	ft_memset(&shell, 0, sizeof(shell));
 	if (envp)
 	{
+		print_logo();
 		init_shell(&shell, envp);
-		//print_logo();
 		ft_print_fd(STDOUT_FILENO, "$> ");
-		// while (TRUE)
-		// {
-		// 	input_read(&shell);
-		// 	if (shell.end == 1 && shell.quote == EOF)
-		// 	{
-		// 		history_runtime(&shell);
-		// 		ft_memset(shell.cmd_line, 0, ft_strlen(shell.cmd_line));
-		// 		ft_memset(shell.rev_cmd, 0, ft_strlen(shell.rev_cmd));
-		// 		shell.cmd_idx = 0;
-		// 		shell.end = 0;
-		// 		ft_putendl_fd("", STDOUT_FILENO);
-		// 		cmd_line_prompt(shell.quote);
-		// 	}
-		// }
 		run_shell(&shell);
 	}
 	else

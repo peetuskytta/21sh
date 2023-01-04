@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   goto_newline.c                                     :+:      :+:    :+:   */
+/*   init_prompt.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/12 17:48:04 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/04 13:58:36 by zraunio          ###   ########.fr       */
+/*   Created: 2022/12/28 15:40:37 by zraunio           #+#    #+#             */
+/*   Updated: 2022/12/28 15:47:52 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-void	goto_newline(t_shell *shell, t_win *window)
+void	init_prompt(t_shell *shell)
 {
-	int	i;
-
-	i = ft_strilen(shell->rev_cmd);
-	if (i > 0)
-		chrcpy_str_rev(shell->rev_cmd, shell->cmd_line, MAX_BUFF, i);
-	window->rows += 1;
-	window->current_row += 1;
-	read_quote(shell);
-	cursor_find(window);
-	if (window->loc < 3 || window->loc > 9)
-		window->loc = shell->prmpt_len;
-	ft_putstr(tgoto(tgetstr("cm", NULL), window->loc, window->current_row - 1));
+	if (shell->quote == D_QUOTE)
+		shell->prmpt_len = 9;
+	else if (shell->quote == S_QUOTE)
+		shell->quote = 8;
+	else
+		shell->quote = 3;
 }

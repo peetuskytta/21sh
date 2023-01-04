@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   goto_newline.c                                     :+:      :+:    :+:   */
+/*   cursor_reset_line.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/12 17:48:04 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/04 13:58:36 by zraunio          ###   ########.fr       */
+/*   Created: 2022/12/30 13:46:15 by zraunio           #+#    #+#             */
+/*   Updated: 2022/12/30 15:56:32 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-void	goto_newline(t_shell *shell, t_win *window)
+void	cursor_reset_line(t_win *window, int len)
 {
-	int	i;
+	int	y;
 
-	i = ft_strilen(shell->rev_cmd);
-	if (i > 0)
-		chrcpy_str_rev(shell->rev_cmd, shell->cmd_line, MAX_BUFF, i);
-	window->rows += 1;
-	window->current_row += 1;
-	read_quote(shell);
-	cursor_find(window);
-	if (window->loc < 3 || window->loc > 9)
-		window->loc = shell->prmpt_len;
-	ft_putstr(tgoto(tgetstr("cm", NULL), window->loc, window->current_row - 1));
+	y = window->current_row;
+	tputs(tgoto(tgetstr("cm", NULL), len, y), 1, stdin_char);
+	tputs(tgoto(tgetstr("cd", NULL), len, y), 1, stdin_char);
 }

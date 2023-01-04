@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:37:03 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/13 15:00:32 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/30 16:28:46 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,5 @@
 */
 int		stdin_char(int c);
 void	cmd_line_prompt(int quote);
-void	cmd_line_stdin(t_shell *shell);
 
 # endif

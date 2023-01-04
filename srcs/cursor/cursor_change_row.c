@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   goto_newline.c                                     :+:      :+:    :+:   */
+/*   cursor_change_row.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/12 17:48:04 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/04 13:58:36 by zraunio          ###   ########.fr       */
+/*   Created: 2023/01/03 16:51:41 by zraunio           #+#    #+#             */
+/*   Updated: 2023/01/03 17:48:42 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-void	goto_newline(t_shell *shell, t_win *window)
+void	cursor_change_row(t_shell *shell, t_win *window, int key)
 {
-	int	i;
+	int	x;
 
-	i = ft_strilen(shell->rev_cmd);
-	if (i > 0)
-		chrcpy_str_rev(shell->rev_cmd, shell->cmd_line, MAX_BUFF, i);
-	window->rows += 1;
-	window->current_row += 1;
-	read_quote(shell);
-	cursor_find(window);
-	if (window->loc < 3 || window->loc > 9)
-		window->loc = shell->prmpt_len;
-	ft_putstr(tgoto(tgetstr("cm", NULL), window->loc, window->current_row - 1));
+	x = window->rows_q;
+	if (key == 'A' && x >= 0)
+	{
+		if (x - 1 <= 0)
+			return ;
+		window->current_row -= 1;
+		window->rows_q -= 1;
+		cursor_load(shell, shell->prmpt_len, window->current_row);
+	}
+	else if (key == 'B' && window->row_idx[x + 1] != -1)
+	{
+		window->current_row += 1;
+		window->rows_q += 1;
+		cursor_load(shell, shell->prmpt_len, window->current_row);
+	}
 }

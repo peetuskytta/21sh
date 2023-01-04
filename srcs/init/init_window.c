@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   goto_newline.c                                     :+:      :+:    :+:   */
+/*   init_window.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/12 17:48:04 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/04 13:58:36 by zraunio          ###   ########.fr       */
+/*   Created: 2022/10/29 15:06:54 by zraunio           #+#    #+#             */
+/*   Updated: 2023/01/04 14:45:44 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-void	goto_newline(t_shell *shell, t_win *window)
+void	init_window(t_win *window)
 {
-	int	i;
+	struct winsize	win;
 
-	i = ft_strilen(shell->rev_cmd);
-	if (i > 0)
-		chrcpy_str_rev(shell->rev_cmd, shell->cmd_line, MAX_BUFF, i);
-	window->rows += 1;
-	window->current_row += 1;
-	read_quote(shell);
-	cursor_find(window);
-	if (window->loc < 3 || window->loc > 9)
-		window->loc = shell->prmpt_len;
-	ft_putstr(tgoto(tgetstr("cm", NULL), window->loc, window->current_row - 1));
+	init_row_idx(window);
+	ioctl(STDOUT_FILENO, TIOCGWINSZ, &win);
+	window->cols = win.ws_col;
+	window->rows = win.ws_row;
+	window->current_row = window->rows - 19;
+	window->win = &win;
+	window->loc = 3;
 }

@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 17:00:36 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/27 15:46:54 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/03 17:30:09 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,32 @@ static int	is_escape(t_shell *shell, char *input, int *i)
 		{
 			shell->cmd_line[shell->cmd_idx] = 0;
 			shell->cmd_idx--;
-			pos = shell->cmd_idx + 3;
+			pos = shell->cmd_idx + shell->prmpt_len;
 			tputs(tgoto(tgetstr("cm", NULL), pos, row), row, stdin_char);
 			tputs(tgetstr("dc", NULL), row, stdin_char);
 		}
+		return (1);
+	}
+	else
+		return (0);
+}
+
+static int	is_home_end(t_shell *shell, t_win *window, char *input, int *i)
+{
+	int	len;
+
+	len = shell->cmd_idx;
+	if (input[1] == '[' && input[2] == 'H' && input[3] == 0)
+	{
+		*i += 4;
+		chrcpy_str_rev(shell->cmd_line, shell->rev_cmd, MAX_BUFF, len);
+		goto_end(shell, window, 'H');
+		return (1);
+	}
+	else if (input[1] == '[' && input[2] == 'F' && input[3] == 0)
+	{
+		*i += 4;
+		goto_end(shell, window, 'F');
 		return (1);
 	}
 	else
@@ -48,12 +70,27 @@ static int	is_opt_arrow(t_shell *shell, t_win *window, char *input, int *i)
 		*i += 6;
 		return (goto_sides(shell, window, 98));
 	}
-	if (input[1] == 'f')
+	else if (input[1] == 'f')
 	{
 		*i += 6;
 		return (goto_sides(shell, window, 102));
 	}
-	return (0);
+	else if (input[1] == '[' && input[2] == '1' && input[3] == ';'
+		&& input[4] == '3' && input[5] == 'A' && input[6] == 0)
+	{
+		*i += 7;
+		cursor_change_row(shell, window, 'A');
+		return (1);
+	}
+	else if (input[1] == '[' && input[2] == '1' && input[3] == ';'
+		&& input[4] == '3' && input[5] == 'B' && input[6] == 0)
+	{
+		*i += 7;
+		cursor_change_row(shell, window, 'B');
+		return (1);
+	}
+	else
+		return (0);
 }
 
 static int	is_arrow(t_shell *shell, t_win *window, char *input, int *i)
@@ -85,11 +122,14 @@ static int	is_arrow(t_shell *shell, t_win *window, char *input, int *i)
 
 int	special_keys(t_shell *shell, char *input, int *i)
 {
-	if (input[0] == ESC || input[0] == 127)
+	if (key_is_ctrl_alpha(shell, &shell->window, input, i) == 1)
+		return (1);
+	else if (input[0] == ESC || input[0] == 127)
 	{
 		if (!(is_arrow(shell, &shell->window, input, i))
 			&& !(is_opt_arrow(shell, &shell->window, input, i))
-			&& !(is_escape(shell, input, i)))
+			&& !(is_escape(shell, input, i))
+			&& !(is_home_end(shell, &shell->window, input, i)))
 			return (0);
 		else
 			return (1);

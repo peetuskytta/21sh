@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:31:07 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/15 14:38:11 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/03 16:56:12 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,7 @@
 */
 void	init_shell(t_shell *shell, char **environ);
 void 	init_term(void);
+void	init_prompt(t_shell *shell);
+void	init_row_idx(t_win *window);
+void	init_window(t_win *window);
 # endif

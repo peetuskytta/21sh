@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_iscntrl.c                                       :+:      :+:    :+:   */
+/*   init_row_idx.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 12:04:38 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/01 17:05:11 by zraunio          ###   ########.fr       */
+/*   Created: 2023/01/03 16:03:01 by zraunio           #+#    #+#             */
+/*   Updated: 2023/01/03 17:16:08 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-int	ft_iscntrl(char c)
+void	init_row_idx(t_win *window)
 {
-	if ((c >= 1 && c <= 31))
-		return (1);
-	else
-		return (0);
+	int	x;
+
+	x = 0;
+	while (x <= MAX_BUFF + 1)
+		window->row_idx[x++] = -1;
+	window->rows_q = 0;
 }

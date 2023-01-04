@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_window.c                                      :+:      :+:    :+:   */
+/*   cursor_row_idx.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/29 15:06:54 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/22 11:41:15 by zraunio          ###   ########.fr       */
+/*   Created: 2023/01/03 16:36:40 by zraunio           #+#    #+#             */
+/*   Updated: 2023/01/03 16:54:57 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-void	init_window(t_win *window)
+void	cursor_row_idx(t_win *window, int len)
 {
-	struct winsize	win;
+	int	x;
 
-	ioctl(STDOUT_FILENO, TIOCGWINSZ, &win);
-	window->cols = win.ws_col;
-	window->rows = win.ws_row;
-	window->current_row = window->rows - 13;
-	window->win = &win;
+	x = 0;
+	while (window->row_idx[x] != -1)
+		x++;
+	if (x == MAX_BUFF)
+		ft_perror(QUOTE_TOO_LONG);
+	else
+		window->row_idx[x] = len;
 }

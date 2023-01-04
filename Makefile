@@ -40,10 +40,15 @@ _SRCS :=  main.c \
 		allocation_check.c \
 		env_variable_counter.c
 
-_CURSOR := init_window.c \
+_CURSOR := cursor_reset_line.c \
+		cursor_change_row.c \
+		cursor_row_idx.c \
+		cursor_load.c \
+		cursor_find.c \
 		goto_newline.c \
 		goto_sides.c \
-		goto_position.c
+		goto_word.c \
+		goto_end.c
 
 _EXECUTE := exec_tree.c \
 		exec_branch.c \
@@ -54,11 +59,17 @@ _EXECUTE := exec_tree.c \
 		exec_fetch_path_var.c \
 
 _INIT := init_shell.c \
-		init_term.c
+		init_window.c \
+		init_prompt.c \
+		init_term.c \
+		init_row_idx.c
 
 _INPUT := read_quote.c \
-		cmd_line.c\
-		input_read.c
+		cmd_line.c \
+		cmd_line_reprint.c \
+		input_read.c \
+		input_rev_cmd.c \
+		input_row_len.c
 
 _HISTORY := history_create.c \
 		history_traverse.c \
@@ -66,14 +77,13 @@ _HISTORY := history_create.c \
 		history_runtime.c \
 		history.c
 
-_KEYS := ft_iscntrl.c \
-		key_listen.c \
+_KEYS := key_listen.c \
 		read_key.c \
-		special_keys.c
+		special_keys.c \
+		key_is_ctrl_alpha.c
 
 _OUTPUT := stdin_char.c \
-		cmd_line_prompt.c \
-		cmd_line_stdin.c
+		cmd_line_prompt.c
 
 _PANIC := ft_strerror.c \
 		ft_perror.c \

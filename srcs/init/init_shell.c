@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 09:15:27 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/02 16:07:16 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/04 16:20:27 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static void	fetch_envp(t_shell *shell, char **environ, int count)
 
 static void	fetch_ttyname(t_shell *shell)
 {
+	if (!isatty(1))
+		shell->stdout_fd = open(ttyname(ttyslot()), O_RDWR);
 	shell->tty = ttyname(STDIN_FILENO);
 	if (!shell->tty)
 		ft_perror("ttyname() failed to retrieve terminal name.");
@@ -42,12 +44,11 @@ void	init_shell(t_shell *shell, char **environ)
 	allocation_check((void *)&shell->cmd_line);
 	allocation_check((void *)&shell->rev_cmd);
 	shell->cmd_idx = 0;
+	shell->prmpt_len = 3;
 	shell->quote = EOF;
 	init_term();
 	init_window(&shell->window);
 	fetch_envp(shell, environ, env_variable_counter(environ));
 	fetch_ttyname(shell);
 	history_fetch(shell);
-	// future history fetched from a file or initialized by other means
-	// if no history file exists.
 }

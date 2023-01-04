@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_line.c                                         :+:      :+:    :+:   */
+/*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/01 13:32:38 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/29 10:59:17 by zraunio          ###   ########.fr       */
+/*   Created: 2023/01/02 16:08:12 by zraunio           #+#    #+#             */
+/*   Updated: 2023/01/02 16:13:49 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
+#include "../../../includes/shell.h"
 
-void	cmd_line(t_shell *shell, char c)
+/*
+**	Builtin function to print the tokens after "echo" command
+*/
+int	ft_echo(char **args, bool n_fl)
 {
 	int	i;
 
-	i = ft_strilen(shell->cmd_line);
-	if (i < shell->cmd_idx)
+	i = 0;
+	while (args[i] != NULL)
 	{
-		shell->cmd_line[i] = c;
-		shell->cmd_idx++;
+		ft_putstr(args[i++]);
+		ft_putchar(' ');
 	}
-	else
-	{
-		shell->cmd_line[shell->cmd_idx] = c;
-		shell->cmd_idx++;
-	}
+	if (n_fl == FALSE)
+		ft_putchar('\n');
+	return (TRUE);
 }

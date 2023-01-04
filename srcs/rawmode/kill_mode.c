@@ -6,13 +6,13 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 13:28:31 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/27 15:05:30 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/30 16:26:15 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-void kill_mode(const char *str, t_shell *shell)
+void	kill_mode(const char *str, t_shell *shell)
 {
 	if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &shell->raw) == -1)
 		ft_perror(ERROR_EXIT);

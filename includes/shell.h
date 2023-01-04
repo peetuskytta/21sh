@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/04 16:16:28 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/04 16:22:03 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@
 # include "panic.h"
 # include "parse.h"
 # include "rawmode.h"
-
 
 /*
 ** SHELL

@@ -1,23 +1,45 @@
-add '\n' if ENTER, if an open quote exists
-
 TO BE DONE:
 // SIGNAL - together 0%
-// ERRORS - together 50%
-// SPECIAL KEYS - rori 70%
-// CURSOR - rori 50%
+// ERRORS - together 60%
 // PIPES & REDIRECT - peetu 0%
 // AGREGATE - peetu 0%
-// COMMAND TREE - peetu  50%
-// BUILTINS - together 50%
 
 REASONABLY DONE:
+- BUILTINS - together 75%
+		- does setenv need to be sensitive to "na=me"=surname type of argument?
+- CURSOR - rori 75%
+- COMMAND TREE - peetu 75%
 - QUOTES - together but peetu is a hero 95%
+- SPECIAL KEYS - rori 98%
+- HISTORY - together 95%
 
 DONE DONE:
 - COMMAND LINE PARSE - peetu 
 - READ_INPUT - together
 - RAWMODE - rori
-- HISTORY - together
 - KEYPRESS LISTEN - rori
 - Makefile
 - .h files org
+
+|-------------------------------------------------------|
+|	TO DO:												|
+|			|-------------------------------------------|
+|			|	1. CMD LINE PARSING DOLLAR:				|
+|			|	$> jsdsjdjd  2>&1 | cat -e 				|
+|			|	21sh: jsdsjdjd: command not found$		|
+|-------------------------------------------------------|
+|			|	2. CONTROL THE CURSOR					|
+|			|	line_len[index] for when in open quotes	|
+|-------------------------------------------------------|
+|			|	3. COPY-CUT-PASTE						|
+|			|	edit in middle of line in correct loc	|
+|-------------------------------------------------------|
+|			|	4. HISTORY MULTILINE					|
+|			|	save and recall history with multiline	|
+|			|	at least needs to be fixed in the file	|
+|			|	add '\n' if ENTER, if an open quote		|
+|-------------------------------------------------------|
+|			|	5. HISTORY EDIT							|
+|			|	this requiers history to replace cmd_ln	|
+|			|	that means cmd_line needs to be in tmp	|
+|-------------------------------------------------------|

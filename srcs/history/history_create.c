@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 15:09:56 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/27 15:05:37 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/30 16:22:12 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	history_create(char **history)
 	int	fd;
 	int	i;
 
-	fd = open(HIST_FILE, O_CREAT | O_WRONLY | O_TRUNC, S_IRUSR | S_IWUSR | S_IRWXU);
+	fd = open(HIST_FILE, O_CREAT | O_WRONLY | O_TRUNC, S_IRUSR | S_IWUSR
+			| S_IRWXU);
 	if (fd < 0)
 	{
 		ft_perror(HIST_ERR_FILE);

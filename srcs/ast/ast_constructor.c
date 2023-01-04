@@ -136,6 +136,7 @@ t_ast	**ast_constructor(t_shell *shell, t_tok *token)
 	if (!token)
 		return (NULL);
 	temp = token;
+<<<<<<< HEAD
 	tree = (t_ast **)ft_memalloc(sizeof(t_ast *) * (50));
 	ft_memset((void **)tree, 0, sizeof(t_ast *) * (50));
 	while (token)
@@ -143,6 +144,24 @@ t_ast	**ast_constructor(t_shell *shell, t_tok *token)
 		tree[i++] = ast_create_tree(&token);
 		if (token && token->type == CHAR_SEMICOLON)
 			token = token->next;
+=======
+	tree = (t_ast **)ft_memalloc(sizeof(t_ast *) * (count + 1));
+	// NL;
+	while (token)
+	{
+		if (!token)
+			DB;
+		// ft_printf("tree[%d]: first token: %s\n", i, token->str);
+		tree[i] = ast_build_tree(&token);
+		if (token && token->type == CHAR_SEMICOLON)
+			token = token->next;
+		if (!token)
+		{
+			// ft_putendl("END of token stream");
+			break ;
+		}
+		i++;
+>>>>>>> cursor
 	}
 	//print_tree(tree);
 	token_list_free(temp);

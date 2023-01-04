@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:58 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/17 14:43:38 by zraunio          ###   ########.fr       */
+/*   Updated: 2022/12/30 15:51:49 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@
 */
 # define CTRL_C 3
 # define CTRL_D 4
+# define CTRL_P 16
+# define CTRL_R 18
+# define CTRL_W 23
 # define ENTER 13
 # define ESC '\x1B'
 # define BACK "\x7f"
@@ -53,9 +56,9 @@
 /*
 ** KEYS
 */
-int		ft_iscntrl(char c);
 void	key_listen (t_shell *shell, char *input);
 void	read_key(t_shell *shell, char *input);
 int		special_keys(t_shell *shell, char *input, int *i);
+int		key_is_ctrl_alpha(t_shell *shell, t_win *window, char *input, int *i);
 
 #endif
