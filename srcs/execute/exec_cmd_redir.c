@@ -25,7 +25,6 @@ static void	clear_redir_data(t_exec *data, char *path)
 		while (data->redir[i].file != NULL)
 		{
 			ft_strdel((void *)&data->redir[i].file);
-			data->redir[i].aggr = -1;
 			data->redir[i].type = -1;
 			data->redir[i++].fildes = -1;
 		}
@@ -36,11 +35,21 @@ static void	clear_redir_data(t_exec *data, char *path)
 		ft_strdel((void *)&data->cmd);
 }
 
+static void	execute_redir(t_exec data, char *bin_path, char **env_cpy)
+{
+	//redir_start(&data);
+	(void)data;
+	(void)env_cpy;
+	(void)bin_path;
+}
+
 void	exec_cmd_redir(t_exec data, char **env_cpy)
 {
 	char	*bin_path;
 
 	bin_path = exec_binary_path(exec_fetch_path_var(env_cpy), data.cmd);
+	if (exec_binary_check(bin_path, data.cmd))
+		execute_redir(data, bin_path, env_cpy);
 	clear_redir_data(&data, bin_path);
 
 }

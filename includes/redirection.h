@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute.h                                          :+:      :+:    :+:   */
+/*   redirection.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/02 08:19:09 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/04 16:03:11 by pskytta          ###   ########.fr       */
+/*   Created: 2023/01/04 14:59:36 by pskytta           #+#    #+#             */
+/*   Updated: 2023/01/04 16:02:37 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTE_H
-# define EXECUTE_H
+#ifndef REDIRECTION_H
+# define REDIRECTION_H
 
 # include "shell.h"
-# include "redirection.h"
+# include "structs.h"
 
-void	exec_tree(t_ast **tree, t_shell *shell);
-void	exec_branch(t_ast *branch, t_shell *shell);
-void	exec_cmd_redir(t_exec data, char **env_cpy);
-void	exec_cmd_simple(t_exec data, char **env_cpy);
-bool	exec_binary_check(char *bin_path, char *cmd);
-char	*exec_binary_path(char **path, char *cmd);
-char	**exec_fetch_path_var(char **env);
+typedef enum t_status
+{
+		GO,
+		FILE_PERM,
+		FOLDER_PERM,
+		NO_FILE,
+		FOLDER,
+}		e_status;
+
+void	redir_start(t_exec *data);
+int		redir_file_check(char *str);
+int		redir_folder_check(char *str);
 
 # endif

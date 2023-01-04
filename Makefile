@@ -25,6 +25,7 @@ KEYS_DIR = srcs/keys/
 PANIC_DIR = srcs/panic/
 PARSE_DIR = srcs/parse/
 RAWMODE_DIR = srcs/rawmode/
+REDIRECTION_DIR = srcs/redirection/
 OBJS_DIR = obj/
 INCL = -I includes/
 
@@ -60,10 +61,10 @@ _INPUT := read_quote.c \
 		input_read.c
 
 _HISTORY := history_create.c \
-			history_traverse.c \
-			history_fetch.c \
-			history_runtime.c \
-			history.c
+		history_traverse.c \
+		history_fetch.c \
+		history_runtime.c \
+		history.c
 
 _KEYS := ft_iscntrl.c \
 		key_listen.c \
@@ -83,7 +84,11 @@ _PARSE:= token_list_build.c \
 		parser.c
 
 _RAWMODE := enable_rawmode.c \
-			kill_mode.c
+		kill_mode.c
+
+_REDIRECTION := redir_start.c \
+		redir_file_check.c \
+		redir_folder_check.c
 
 #All to object files
 	# $(addprefix $(EXECUTE_DIR), $(_EXECUTE))
@@ -97,7 +102,8 @@ ALL_SRCS :=	$(addprefix $(SRCS_AST), $(_AST)) \
 			$(addprefix $(OUTPUT_DIR), $(_OUTPUT)) \
 			$(addprefix $(PANIC_DIR), $(_PANIC)) \
 			$(addprefix $(PARSE_DIR), $(_PARSE)) \
-			$(addprefix $(RAWMODE_DIR), $(_RAWMODE))
+			$(addprefix $(RAWMODE_DIR), $(_RAWMODE)) \
+			$(addprefix $(REDIRECTION_DIR), $(_REDIRECTION))
 
 SRCS = $(_SRCS) $(_CURSOR) $(_INIT) $(_INPUT) $(_KEYS) \
 $(_OUTPUT) $(_PANIC) $(_PARSE) $(_RAWMODE) $(_HISTORY) $(_AST) $(_EXECUTE)
@@ -148,6 +154,9 @@ $(OBJS_DIR)%.o: $(PARSE_DIR)%.c
 	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(RAWMODE_DIR)%.c
+	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
+
+$(OBJS_DIR)%.o: $(REDIRECTION_DIR)%.c
 	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(EXECUTE_DIR)%.c

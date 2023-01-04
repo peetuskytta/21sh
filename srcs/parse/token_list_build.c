@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 23:15:32 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/04 13:10:25 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/04 14:40:44 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,20 +152,7 @@ void	token_list_build(char *input, int size, t_lex *list)
 		}
 		else if (state == STATE_REDIR)
 		{
-			if (k > 0)
-			{
-				if (!ft_strchr("&><", token->str[0]) && token->type == WORD)
-				{
-					token->str[k - 1] = NULL_BYTE;
-					token->next = (t_tok *)ft_memalloc(sizeof(t_tok));
-					token = token->next;
-					init_token(token, size - i);
-					token->type = REDIR;
-					k = 0;
-					token->str[k] = input[i - 1];
-				}
-			}
-			if (input[i + 1] == NULL_BYTE || (type_error_case(token->str)))
+			if (input[i + 1] == NULL_BYTE || (type_error_case(token->str)) || token->str[0] == '-')
 			{
 					ft_print_fd(2, "\n21sh parse error near `%c%c'\n",input[i - 1], input[i]);
 					token_list_free(list->token_list);
@@ -174,6 +161,7 @@ void	token_list_build(char *input, int size, t_lex *list)
 			}
 			if (!ft_strchr("0123456789&><-", c))
 			{
+				token->type = REDIR;
 				token->next = (t_tok *)ft_memalloc(sizeof(t_tok));
 				token = token->next;
 				init_token(token, size - i);
@@ -182,7 +170,10 @@ void	token_list_build(char *input, int size, t_lex *list)
 				k = 0;
 			}
 			if (c != CHAR_WHITESPACE)
+			{
+				token->type = REDIR;
 				token->str[k++] = c;
+			}
 		}
 		else if (state == STATE_IN_DQUOTE)
 		{
