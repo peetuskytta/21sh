@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 11:53:38 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/02 16:16:43 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/04 16:49:16 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	setenv_split(char *args, char **name, char **value)
 	}
 }
 
-void	ft_setenv(t_shell *shell, char *args)
+void	builtin_setenv(t_shell *shell, char *args)
 {
 	char	*name;
 	char	*value;

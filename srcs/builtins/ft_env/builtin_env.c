@@ -1,31 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_echo.c                                          :+:      :+:    :+:   */
+/*   builtin_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/02 16:08:12 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/02 16:13:49 by zraunio          ###   ########.fr       */
+/*   Created: 2022/11/13 10:20:57 by zraunio           #+#    #+#             */
+/*   Updated: 2023/01/04 16:49:46 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/shell.h"
 
-/*
-**	Builtin function to print the tokens after "echo" command
-*/
-int	ft_echo(char **args, bool n_fl)
+static void	env_temp(t_shell *shell, char *args)
 {
-	int	i;
+	
+}
 
-	i = 0;
-	while (args[i] != NULL)
+void	builtin_env(t_shell *shell, char **args)
+{
+	int i;
+
+	if (shell->env_iflg == 1)
+		env_temp(shell, args);
+	else if (args)
 	{
-		ft_putstr(args[i++]);
-		ft_putchar(' ');
+		//env $VALID_ENV_NAME
+		//env temporary env
+		//env misformatted_anything
+		//env command
 	}
-	if (n_fl == FALSE)
-		ft_putchar('\n');
-	return (TRUE);
+	else
+	{
+		i = 0;
+		while (shell->environ[i])
+			ft_print_fd(STDOUT_FILENO, "%s\n", shell->environ[i++]);
+	}
 }

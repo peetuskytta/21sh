@@ -1,19 +1,19 @@
 TO BE DONE:
 // SIGNAL - together 0%
 // ERRORS - together 60%
-// PIPES & REDIRECT - peetu 0%
-// AGREGATE - peetu 0%
+// PIPES & REDIRECT - peetu 25%
+// AGREGATE - peetu 25%
 
 REASONABLY DONE:
 - BUILTINS - together 75%
-		- does setenv need to be sensitive to "na=me"=surname type of argument?
-- CURSOR - rori 75%
-- COMMAND TREE - peetu 75%
+	- does setenv need to be sensitive to "na=me"=surname type of argument?
+- CURSOR - rori 80%
 - QUOTES - together but peetu is a hero 95%
 - SPECIAL KEYS - rori 98%
 - HISTORY - together 95%
 
 DONE DONE:
+- COMMAND TREE - peetu
 - COMMAND LINE PARSE - peetu 
 - READ_INPUT - together
 - RAWMODE - rori

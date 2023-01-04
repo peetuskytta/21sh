@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_unsetenv.c                                      :+:      :+:    :+:   */
+/*   builtin_unsetenv.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 11:34:37 by zraunio           #+#    #+#             */
-/*   Updated: 2022/11/24 13:42:21 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/04 16:49:58 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	unset_errors(char *name, int index)
 		return (1);
 }
 
-void	ft_unsetenv(t_shell *shell, char *args)
+void	builtin_unsetenv(t_shell *shell, char *args)
 {
 	int		index;
 	char	*name;

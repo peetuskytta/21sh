@@ -101,11 +101,11 @@ _REDIRECTION := redir_start.c \
 		redir_folder_check.c
 
 #All to object files
-	# $(addprefix $(EXECUTE_DIR), $(_EXECUTE))
 ALL_SRCS :=	$(addprefix $(SRCS_AST), $(_AST)) \
 			$(addprefix $(SRCS_DIR), $(_SRCS)) \
 			$(addprefix $(CURSOR_DIR), $(_CURSOR)) \
 			$(addprefix $(HISTORY_DIR), $(_HISTORY)) \
+			$(addprefix $(EXECUTE_DIR), $(_EXECUTE)) \
 			$(addprefix $(INIT_DIR), $(_INIT)) \
 			$(addprefix $(INPUT_DIR), $(_INPUT)) \
 			$(addprefix $(KEYS_DIR), $(_KEYS)) \
