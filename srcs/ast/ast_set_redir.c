@@ -21,15 +21,15 @@
 
 static bool	type_error_case(char *str)
 {
-	if (ft_strequ(str, "<&>") || ft_strequ(str, ">&>"))
+	if (ft_strstr(str, "<&>") || ft_strstr(str, ">&>"))
 		return (true);
-	if (ft_strequ(str, "<&<") || ft_strequ(str, ">&>"))
+	if (ft_strstr(str, "<&<") || ft_strstr(str, ">&>"))
 		return (true);
-	if (ft_strequ(str, "<<>>") || ft_strequ(str, ">>>"))
+	if (ft_strstr(str, "<<>>") || ft_strstr(str, ">>>"))
 		return (true);
-	if (ft_strequ(str, "<<>>") || ft_strequ(str, "<<<"))
+	if (ft_strstr(str, "<<>>") || ft_strstr(str, "<<<"))
 		return (true);
-	if (ft_strequ(str, "><") || ft_strequ(str, "><>"))
+	if (ft_strstr(str, "><") || ft_strstr(str, "><>"))
 		return (true);
 	return (false);
 }
