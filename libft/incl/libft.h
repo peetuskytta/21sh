@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 13:01:21 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/22 11:57:23 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/04 16:36:23 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,5 +201,9 @@ int					ft_tree_height(t_bitree *root);
 */
 size_t				ft_orfill_bit(size_t nb, size_t *arr);
 size_t				ft_oradd_bit(size_t nb, size_t arr);
+/*
+** permissions
+*/
+int					ft_is_directory(char *filename);
 
 #endif

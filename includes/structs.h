@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/04 16:21:45 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/04 16:24:53 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct	s_win
 typedef struct s_shell
 {
 	char			**environ;
+	int				stdout_fd;
 	int				env_nbr;
 	int				env_iflg;
 	char			*history[1001];
@@ -38,9 +39,9 @@ typedef struct s_shell
 	char			*cmd_line;
 	char			*rev_cmd;
 	int				cmd_idx;
+	int				prmpt_len;
 	int				end;
 	int				quote;
-	int				q_count;
 	char			*tty;
 	t_win			window;
 	struct termios	orig_raw;

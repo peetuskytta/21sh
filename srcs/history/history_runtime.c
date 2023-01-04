@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history_runtime.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 15:10:51 by zraunio           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/01/03 17:04:10 by pskytta          ###   ########.fr       */
-=======
-/*   Updated: 2022/12/30 16:22:33 by zraunio          ###   ########.fr       */
->>>>>>> cursor
+/*   Updated: 2023/01/04 16:25:34 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +38,7 @@ void	history_runtime(t_shell *shell)
 	i = 0;
 	while (shell->history[i] != NULL)
 		i++;
-<<<<<<< HEAD
 	if (i == 100)
-	{
-		//ft_putendl("TOO MANY HISTORIES TOO MANY PROBLEMS");
-=======
-	if (i == 10)
->>>>>>> cursor
 		history_truncate(shell->history, shell->cmd_line);
 	else
 	{

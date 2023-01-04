@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_start.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 14:58:59 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/04 15:58:49 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/04 16:35:10 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	redir_start(t_exec *data)
 	int	idx;
 	int	status;
 
+	idx = 0;
 	// check existence per data.str
 	while (data->redir[idx].file != NULL)
 	{

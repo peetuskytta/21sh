@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/04 16:22:03 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/04 16:30:02 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@
 # define MAX_BUFF 4096
 
 
-# include "redirection.h"
 # include "ast.h"
 # include "buildin.h"
 # include "cursor.h"
@@ -48,6 +47,7 @@
 # include "panic.h"
 # include "parse.h"
 # include "rawmode.h"
+# include "redirection.h"
 
 /*
 ** SHELL
