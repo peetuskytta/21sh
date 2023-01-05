@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:51:41 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/03 17:48:42 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/05 16:09:13 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	cursor_change_row(t_shell *shell, t_win *window, int key)
 	x = window->rows_q;
 	if (key == 'A' && x >= 0)
 	{
-		if (x - 1 <= 0)
+		if (x - 1 < 0)
 			return ;
 		window->current_row -= 1;
 		window->rows_q -= 1;

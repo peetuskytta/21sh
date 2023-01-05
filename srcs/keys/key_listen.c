@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 13:35:45 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/04 17:04:12 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/05 16:03:07 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	key_listen(t_shell *shell, char *input)
 	while (input[i] != '\0')
 	{
 		if (input[i] == CTRL_D)
-			kill_mode("exit", shell);
+			kill_mode("exit\n", shell);
 		key = special_keys(shell, input, &i);
 		if (key == ENTER)
 			shell->end = 1;
