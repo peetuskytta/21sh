@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 14:59:36 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/04 16:33:13 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/05 15:48:34 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef enum t_status
 		FOLDER,
 }		e_status;
 
-void	redir_start(t_exec *data);
+void	redirection_loop(t_exec *data);
 int		redir_file_check(char *str);
 int		redir_folder_check(char *str);
 

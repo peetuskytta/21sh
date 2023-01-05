@@ -57,6 +57,7 @@ _EXECUTE := exec_tree.c \
 		exec_binary_check.c \
 		exec_find_binary.c \
 		exec_fetch_path_var.c \
+		exec_clear_data.c
 
 _INIT := init_shell.c \
 		init_window.c \
@@ -96,7 +97,7 @@ _PARSE:= token_list_build.c \
 _RAWMODE := enable_rawmode.c \
 		kill_mode.c
 
-_REDIRECTION := redir_start.c \
+_REDIRECTION := redirection_loop.c \
 		redir_file_check.c \
 		redir_folder_check.c
 

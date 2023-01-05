@@ -6,24 +6,11 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 10:18:29 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/05 14:23:36 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/05 15:27:11 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/execute.h"
-
-static void	clear_cmd_data(t_exec *data, char *path)
-{
-	int	i;
-
-	i = 0;
-	while (data->args[i])
-		ft_strdel((void *)&data->args[i++]);
-	if (path)
-		ft_strdel((void *)&path);
-	if (data->cmd)
-		ft_strdel((void *)&data->cmd);
-}
 
 static void	execute_cmd(t_exec data, char *bin_path, char **env_cpy)
 {
@@ -59,5 +46,5 @@ void	exec_cmd_simple(t_exec data, char **env_cpy)
 	bin_path = exec_find_binary(exec_fetch_path_var(env_cpy), data.cmd);
 	if (exec_binary_check(bin_path, data.cmd))
 		execute_cmd(data, bin_path, env_cpy);
-	clear_cmd_data(&data, bin_path);
+	exec_clear_data(&data, bin_path);
 }

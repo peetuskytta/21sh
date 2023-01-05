@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redir_start.c                                      :+:      :+:    :+:   */
+/*   redirection_loop.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 14:58:59 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/04 16:35:10 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/05 15:40:18 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,17 @@ static bool	file_or_folders(char *str)
 	return (false);
 }
 
-void	redir_start(t_exec *data)
+void	redir_open_file(t_redir redir)
+{
+	(void)redir;
+
+}
+
+void	redirection_loop(t_exec *data)
 {
 	int	idx;
-	int	status;
 
 	idx = 0;
-	// check existence per data.str
 	while (data->redir[idx].file != NULL)
 	{
 		if (file_or_folders(data->redir[idx].file))
@@ -34,10 +38,16 @@ void	redir_start(t_exec *data)
 			;//do the folder path check
 		}
 		else
-			status = redir_file_check(data->redir[idx].file);
-		if (status == GO)
-			;
-		// open the file
+		{
+			if (redir_file_check(data->redir[idx].file) == GO)
+			{
+				redir_open_file(data->redir[idx]);
+				if (data->redir[idx + 1].file)
+					close(data->redir[idx].fildes);
+			}
+			else
+				return ;
+		}
 		idx++;
 	}
 	//DECIDE WHAT TO DO WITH THE LAST ITEM (CHANGE FDs already or after the fork)
