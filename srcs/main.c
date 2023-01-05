@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/04 17:11:57 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/05 16:03:42 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,12 @@ static void	cmd_line_reset(t_shell *shell)
 {
 	if (shell->quote == EOF)
 	{
-		ft_memset(shell->cmd_line, '\0', ft_strlen(shell->cmd_line));
+		ft_memset(shell->cmd_line, '\0', sizeof(char) * (MAX_BUFF + 1));
+		ft_memset(shell->temp, '\0', sizeof(char) * (MAX_BUFF + 1));
 		init_row_idx(&shell->window);
 	}
 	else
-	{
 		input_row_len(shell, &shell->window);
-	}
 	shell->cmd_idx = 0;
 	shell->end = 0;
 	NL;
@@ -98,22 +97,14 @@ static void	run_shell(t_shell *shell)
 		{
 			if (shell->quote == EOF)
 			{
-				int	fd;
-				fd = open("txt.txt", O_RDWR, O_APPEND);
-				ft_putstr_fd(shell->cmd_line, fd);
-				ft_putchar_fd('\n', fd);
-				// ft_putendl_fd("below is cmd idx plus prmpt len:", fd);
-				// ft_putnbr_fd(shell->cmd_idx + shell->prmpt_len, fd);
-				// ft_putchar_fd('\n', fd);
-				close(fd);
 				history_runtime(shell);
 				tree = ast_constructor(shell, parser(shell));
 				if (tree)
 					exec_tree(tree, shell);
 			}
-			// else
-			// 	cursor_row_idx(&shell->window, shell->window.loc);
+			cursor_find(shell, &shell->window);
 			cmd_line_reset(shell);
+			cursor_load(shell, shell->window.loc, shell->window.current_row);
 			reset_terminal(shell->tty);
 		}
 	}

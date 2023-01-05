@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 15:10:51 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/04 16:25:34 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/05 14:17:44 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,23 @@ static void	history_truncate(char **history, char *cmd_line)
 void	history_runtime(t_shell *shell)
 {
 	int	i;
+	int	ws;
 
-	i = 0;
-	while (shell->history[i] != NULL)
-		i++;
-	if (i == 100)
-		history_truncate(shell->history, shell->cmd_line);
-	else
+	ws = 0;
+	while (ft_isspace(shell->cmd_line[ws]))
+		ws++;
+	if (ft_strilen(shell->cmd_line) > 0 && shell->cmd_line[ws] != '\0')
 	{
-		shell->history[i] = ft_strdup(shell->cmd_line);
-		allocation_check((void *)&shell->history[i]);
-		shell->hist_idx = i;
+		i = 0;
+		while (shell->history[i] != NULL)
+			i++;
+		if (i == 1000)
+			history_truncate(shell->history, shell->cmd_line);
+		else
+		{
+			shell->history[i] = ft_strdup(shell->cmd_line);
+			allocation_check((void *)&shell->history[i]);
+			shell->hist_idx = i;
+		}
 	}
 }
