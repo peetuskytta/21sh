@@ -6,11 +6,11 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:58 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/30 15:51:49 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/05 10:54:56 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef KEYS_H
+#ifndef KEYS_H
 # define KEYS_H
 # include "shell.h"
 # include "structs.h"
@@ -56,7 +56,7 @@
 /*
 ** KEYS
 */
-void	key_listen (t_shell *shell, char *input);
+void	key_listen(t_shell *shell, char *input);
 void	read_key(t_shell *shell, char *input);
 int		special_keys(t_shell *shell, char *input, int *i);
 int		key_is_ctrl_alpha(t_shell *shell, t_win *window, char *input, int *i);

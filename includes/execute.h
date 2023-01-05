@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 08:19:09 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/05 15:28:37 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/05 16:16:56 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,4 @@ void	exec_cmd_redir(t_exec data, char **env_cpy);
 void	exec_cmd_simple(t_exec data, char **env_cpy);
 void	exec_clear_data(t_exec *data, char *path);
 
-# endif
+#endif

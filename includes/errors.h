@@ -6,11 +6,11 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:24:46 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/03 16:48:28 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/05 11:01:12 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef ERRORS_H
+#ifndef ERRORS_H
 # define ERRORS_H
 
 /*Error message defines*/
@@ -25,6 +25,7 @@
 # define ABORTED_ERROR "Process aborted."
 # define ERROR_EXIT "Exit error."
 # define NO_STRING ""
+# define STDOUT_FAIL "Failed to fetch the stdout. Terminate shell and try again."
 
 /*Error message defines for CD*/
 # define CD_NO_HOME " HOME not set"
@@ -73,4 +74,4 @@
 # define ENV_INVALID_ERRNO	14
 # define SYSTEM_CALL_FAIL	15
 
-# endif
+#endif

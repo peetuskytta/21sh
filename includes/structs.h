@@ -6,18 +6,18 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/04 16:24:53 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/05 16:07:28 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef STRUCTS_H
+#ifndef STRUCTS_H
 # define STRUCTS_H
 # include "shell.h"
 # include <termios.h>
 
 # define MAX_REDIR 512
 
-typedef struct	s_win
+typedef struct s_win
 {
 	struct winsize	*win;
 	int				cols;
@@ -36,6 +36,7 @@ typedef struct s_shell
 	int				env_iflg;
 	char			*history[1001];
 	int				hist_idx;
+	char			*temp;
 	char			*cmd_line;
 	char			*rev_cmd;
 	int				cmd_idx;
@@ -98,4 +99,4 @@ typedef struct s_pid
 	int				status;
 }					t_pid;
 
-# endif
+#endif

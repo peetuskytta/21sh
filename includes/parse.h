@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 13:58:06 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/04 10:14:02 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/05 10:56:25 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,16 @@ typedef enum e_tok_type
 	TOKEN = -1,
 }	t_tok_type;
 
-typedef enum t_type
+typedef enum e_type
 {
 	COMMAND,
 	PIPE,
 	REDIR,
 	SEPARATOR,
 	WORD,
-}	e_type;
+}	t_type;
 
-typedef enum t_red
+typedef enum e_red
 {
 	FILE_IN,
 	FILE_OUT,
@@ -52,19 +52,19 @@ typedef enum t_red
 	FILE_TRUNC,
 	FILE_INVALID,
 	FILE_PARSE_ERR,
-}	e_red;
+}	t_red;
 
-typedef enum t_state
+typedef enum e_state
 {
 	STATE_GENERAL,
 	STATE_REDIR,
 	STATE_IN_DQUOTE,
 	STATE_IN_QUOTE,
 	STATE_IN_ESCAPE,
-}	e_state;
+}	t_state;
 
 void	token_list_build(char *input, int size, t_lex *list);
 void	token_list_free(t_tok *list);
 t_tok	*parser(t_shell *shell);
 
-# endif
+#endif

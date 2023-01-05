@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/04 16:30:02 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/05 10:57:33 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@
 # define D_QUOTE '\"'
 # define MAX_BUFF 4096
 
-
 # include "ast.h"
 # include "buildin.h"
 # include "cursor.h"
@@ -55,4 +54,4 @@
 int		env_variable_counter(char **environ);
 void	allocation_check(void **check);
 
-# endif
+#endif

@@ -1,18 +1,18 @@
 TO BE DONE:
 // SIGNAL - together 0%
-// ERRORS - together 60%
+// ERRORS - together 70%
 // PIPES & REDIRECT - peetu 25%
 // AGREGATE - peetu 25%
 
 REASONABLY DONE:
 - BUILTINS - together 75%
 	- does setenv need to be sensitive to "na=me"=surname type of argument?
-- CURSOR - rori 80%
-- QUOTES - together but peetu is a hero 95%
+- CURSOR - rori 85%
 - SPECIAL KEYS - rori 98%
-- HISTORY - together 95%
+- HISTORY - together 98%
 
 DONE DONE:
+- QUOTES - together but peetu is a hero
 - COMMAND TREE - peetu
 - COMMAND LINE PARSE - peetu 
 - READ_INPUT - together
@@ -38,8 +38,4 @@ DONE DONE:
 |			|	save and recall history with multiline	|
 |			|	at least needs to be fixed in the file	|
 |			|	add '\n' if ENTER, if an open quote		|
-|-------------------------------------------------------|
-|			|	5. HISTORY EDIT							|
-|			|	this requiers history to replace cmd_ln	|
-|			|	that means cmd_line needs to be in tmp	|
 |-------------------------------------------------------|

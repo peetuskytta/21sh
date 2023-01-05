@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:50:18 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/30 15:56:21 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/05 16:02:11 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	grep_coordinates(t_win *window, char *buf)
 	i = 2;
 	x = 0;
 	y = 0;
-	if (!ft_strequ("\x1B[6n", buf))
+	if (buf[0] != ESC)
 		return ;
 	while (buf[i] != ';')
 	{
@@ -37,13 +37,17 @@ static void	grep_coordinates(t_win *window, char *buf)
 	window->loc = x;
 }
 
-void	cursor_find(t_win *window)
+void	cursor_find(t_shell *shell, t_win *window)
 {
 	char	buf[MAX_BUFF + 1];
 
+	if (enable_rawmode(shell) == 0)
+		ft_putendl_fd("Error with tcgetattr", STDERR_FILENO);
+	tcsetattr(STDIN_FILENO, TCSANOW, &shell->raw);
 	ft_putstr_fd("\x1B[6n", STDOUT_FILENO);
 	ft_memset(buf, 0, sizeof(char) * (MAX_BUFF + 1));
 	if (read(STDOUT_FILENO, &buf, MAX_BUFF) > 0)
 		grep_coordinates(window, buf);
 	ft_memset(buf, 0, sizeof(char) * (MAX_BUFF + 1));
+	tcsetattr(STDIN_FILENO, TCSANOW, &shell->orig_raw);
 }
