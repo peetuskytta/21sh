@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 09:15:27 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/04 16:20:27 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/05 11:11:22 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ static void	fetch_ttyname(t_shell *shell)
 {
 	if (!isatty(1))
 		shell->stdout_fd = open(ttyname(ttyslot()), O_RDWR);
+	if (shell->stdout_fd == -1)
+		ft_perror(STDOUT_FAIL);
 	shell->tty = ttyname(STDIN_FILENO);
 	if (!shell->tty)
 		ft_perror("ttyname() failed to retrieve terminal name.");

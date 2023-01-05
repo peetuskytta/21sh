@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 08:19:09 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/04 16:32:48 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/05 10:53:44 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,4 @@ bool	exec_binary_check(char *bin_path, char *cmd);
 char	*exec_binary_path(char **path, char *cmd);
 char	**exec_fetch_path_var(char **env);
 
-# endif
+#endif

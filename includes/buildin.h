@@ -6,11 +6,11 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:25:24 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/04 16:48:52 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/05 10:53:25 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef BUILDIN_H
+#ifndef BUILDIN_H
 # define BUILDIN_H
 # include "shell.h"
 # include "structs.h"
@@ -28,4 +28,4 @@ void	builtin_env(t_shell *shell, char **args);
 void	builtin_unsetenv(t_shell *shell, char *args);
 int		builtin_echo(char **args, bool n_fl);
 
-# endif
+#endif

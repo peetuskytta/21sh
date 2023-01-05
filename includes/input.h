@@ -6,11 +6,11 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:34:24 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/04 14:47:52 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/05 10:54:09 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef INPUT_H
+#ifndef INPUT_H
 # define INPUT_H
 # include "shell.h"
 # include "structs.h"

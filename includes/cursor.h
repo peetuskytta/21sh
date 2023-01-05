@@ -6,11 +6,11 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:22:12 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/04 14:49:23 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/05 10:53:32 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef CURSOR_H
+#ifndef CURSOR_H
 # define CURSOR_H
 # include "structs.h"
 # include "shell.h"
