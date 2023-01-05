@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_perror.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 11:11:12 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/29 15:39:19 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/05 16:01:54 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void	ft_perror(const char *s)
 {
-	ft_print_fd(STDERR_FILENO, "%s\n", s);
+	ft_print_fd(STDERR_FILENO, "%s", s);
 }

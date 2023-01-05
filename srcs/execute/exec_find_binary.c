@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_binary_path.c                                :+:      :+:    :+:   */
+/*   exec_find_binary.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "../../includes/execute.h"
 
-char	*exec_binary_path(char **path, char *cmd)
+static char	*exec_binary_path(char **path, char *cmd)
 {
 	struct	stat	buf;
 	char			*temp;
@@ -31,4 +31,16 @@ char	*exec_binary_path(char **path, char *cmd)
 	}
 	ft_arr_free((void *)&path);
 	return (temp);
+}
+
+char	*exec_find_binary(char **path, char *cmd)
+{
+	if (ft_is_directory(cmd))
+	{
+		ft_print_fd(STDERR_FILENO, "21sh: %s: Is a directory", cmd);
+		return (NULL);
+	}
+	if (cmd[0] == '\0')
+		return (NULL);
+	return (exec_binary_path(path, cmd));
 }
