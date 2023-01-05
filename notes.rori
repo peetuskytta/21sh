@@ -39,7 +39,6 @@ DONE DONE:
 |			|	at least needs to be fixed in the file	|
 |			|	add '\n' if ENTER, if an open quote		|
 |-------------------------------------------------------|
-|			|	5. HISTORY EDIT							|
-|			|	this requiers history to replace cmd_ln	|
-|			|	that means cmd_line needs to be in tmp	|
+|			|	5. HISTORY SAVE							|
+|			|	saving none of the empty strings		|
 |-------------------------------------------------------|
