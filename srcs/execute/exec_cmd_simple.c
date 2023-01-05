@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 10:18:29 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/03 17:53:53 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/05 14:23:36 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static void	execute_cmd(t_exec data, char *bin_path, char **env_cpy)
 	t_pid	pid;
 
 	pid.child = fork();
+
 	if (pid.child == 0)
 	{
 		if (execve(bin_path, data.args, env_cpy) == -1)
@@ -55,7 +56,7 @@ void	exec_cmd_simple(t_exec data, char **env_cpy)
 {
 	char *bin_path;
 
-	bin_path = exec_binary_path(exec_fetch_path_var(env_cpy), data.cmd);
+	bin_path = exec_find_binary(exec_fetch_path_var(env_cpy), data.cmd);
 	if (exec_binary_check(bin_path, data.cmd))
 		execute_cmd(data, bin_path, env_cpy);
 	clear_cmd_data(&data, bin_path);

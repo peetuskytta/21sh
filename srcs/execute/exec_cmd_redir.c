@@ -47,7 +47,7 @@ void	exec_cmd_redir(t_exec data, char **env_cpy)
 {
 	char	*bin_path;
 
-	bin_path = exec_binary_path(exec_fetch_path_var(env_cpy), data.cmd);
+	bin_path = exec_find_binary(exec_fetch_path_var(env_cpy), data.cmd);
 	if (exec_binary_check(bin_path, data.cmd))
 		execute_redir(data, bin_path, env_cpy);
 	clear_redir_data(&data, bin_path);
