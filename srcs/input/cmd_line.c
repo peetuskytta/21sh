@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 13:32:38 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/04 17:02:24 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/05 16:56:25 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@ void	cmd_line(t_shell *shell, char c)
 	int	i;
 
 	i = ft_strilen(shell->cmd_line);
-	if (i < shell->cmd_idx)
-	{
+	// if (i < shell->cmd_idx)
+	// {
 		shell->cmd_line[i] = c;
 		shell->cmd_idx++;
 		shell->window.loc += 1;
-	}
-	else
-	{
-		shell->cmd_line[shell->cmd_idx] = c;
-		shell->cmd_idx++;
-		shell->window.loc += 1;
-	}
+	// }
+	// else
+	// {
+	// 	shell->cmd_line[shell->cmd_idx] = c;
+	// 	shell->cmd_idx++;
+	// 	shell->window.loc += 1;
+	// }
 }
