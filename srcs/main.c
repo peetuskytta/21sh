@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/06 11:41:51 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/06 11:44:40 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ static void	run_shell(t_shell *shell)
 					exec_tree(tree, shell);
 			}
 			cursor_find(shell, &shell->window);
-			cmd_line_reset(shell);
 			cursor_load(shell, shell->window.loc, shell->window.current_row);
+			cmd_line_reset(shell);
 			reset_terminal(shell->tty);
 		}
 	}
