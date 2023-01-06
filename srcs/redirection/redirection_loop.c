@@ -12,12 +12,12 @@
 
 #include "../../includes/redirection.h"
 
-static bool	redir_folders(char *str)
-{
-	if (ft_strchr(str, '/'))
-		return (true);
-	return (false);
-}
+// static bool	redir_folders(char *str)
+// {
+// 	if (ft_strchr(str, '/'))
+// 		return (true);
+// 	return (false);
+// }
 
 bool	redirection_loop(t_exec *data)
 {
@@ -26,16 +26,11 @@ bool	redirection_loop(t_exec *data)
 	idx = 0;
 	while (data->redir[idx].file)
 	{
-		if (redir_folders(data->redir[idx].file))
-		{
-			//status = data->redir_folder_check();
-			;//do the folder path check
-		}
-		else if (redir_file_check(&data->redir[idx]) == GO)
+		if (redir_file_check(&data->redir[idx]) == GO)
 		{
 			if (data->redir[idx + 1].file)
 			{
-				close(data->redir[idx].fildes);
+				close(data->redir->fildes);
 				data->redir[idx].fildes = -1;
 			}
 			else
@@ -49,5 +44,4 @@ bool	redirection_loop(t_exec *data)
 		idx++;
 	}
 	return (false);
-	//DECIDE WHAT TO DO WITH THE LAST ITEM (CHANGE FDs already or after the fork)
 }
