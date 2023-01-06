@@ -38,7 +38,8 @@ _AST := ast_constructor.c \
 
 _SRCS :=  main.c \
 		allocation_check.c \
-		env_variable_counter.c
+		env_variable_counter.c \
+		logo.c
 
 _CURSOR := cursor_reset_line.c \
 		cursor_change_row.c \
