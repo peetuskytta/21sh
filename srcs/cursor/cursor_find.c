@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:50:18 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/05 17:34:49 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/06 14:16:55 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,12 @@ void	cursor_find(t_shell *shell, t_win *window)
 	char	buf[MAX_BUFF + 1];
 
 	if (enable_rawmode(shell) == 0)
-		ft_putendl_fd("Error with tcgetattr", STDERR_FILENO);
+		ft_perror("Error with tcgetattr\n");
 	tcsetattr(STDIN_FILENO, TCSANOW, &shell->raw);
+	DB;
 	ft_putstr_fd("\x1B[6n", STDOUT_FILENO);
 	ft_memset(buf, 0, sizeof(char) * (MAX_BUFF + 1));
-	if (read(STDOUT_FILENO, &buf, MAX_BUFF) > 0)
+	if (read(STDIN_FILENO, &buf, MAX_BUFF) > 0)
 		grep_coordinates(window, buf);
 	tcsetattr(STDIN_FILENO, TCSANOW, &shell->orig_raw);
 	ft_memset(buf, 0, sizeof(char) * (MAX_BUFF + 1));

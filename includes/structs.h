@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/05 16:07:28 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/06 14:01:34 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ typedef struct s_win
 	int				cols;
 	int				rows;
 	int				current_row;
-	int				row_idx[4096];
-	int				rows_q;
+	char			*row_idx[4096];
+	int				idx;
 	int				loc;
 }					t_win;
 
@@ -37,6 +37,7 @@ typedef struct s_shell
 	char			*history[1001];
 	int				hist_idx;
 	char			*temp;
+	char			*input;
 	char			*cmd_line;
 	char			*rev_cmd;
 	int				cmd_idx;

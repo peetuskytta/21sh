@@ -42,8 +42,6 @@ _SRCS :=  main.c \
 		logo.c
 
 _CURSOR := cursor_reset_line.c \
-		cursor_change_row.c \
-		cursor_row_idx.c \
 		cursor_load.c \
 		cursor_find.c \
 		goto_newline.c \
@@ -63,15 +61,13 @@ _EXECUTE := exec_tree.c \
 _INIT := init_shell.c \
 		init_window.c \
 		init_prompt.c \
-		init_term.c \
-		init_row_idx.c
+		init_term.c
 
 _INPUT := read_quote.c \
 		cmd_line.c \
 		cmd_line_reprint.c \
 		input_read.c \
-		input_rev_cmd.c \
-		input_row_len.c
+		input_rev_cmd.c
 
 _HISTORY := history_create.c \
 		history_traverse.c \

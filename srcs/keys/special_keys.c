@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 17:00:36 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/05 17:30:33 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/06 12:34:21 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,14 @@ static int	is_opt_arrow(t_shell *shell, t_win *window, char *input, int *i)
 		&& input[4] == '3' && input[5] == 'A' && input[6] == 0)
 	{
 		*i += 7;
-		cursor_change_row(shell, window, 'A');
+		// cursor_change_row(shell, window, 'A');
 		return (1);
 	}
 	else if (input[1] == '[' && input[2] == '1' && input[3] == ';'
 		&& input[4] == '3' && input[5] == 'B' && input[6] == 0)
 	{
 		*i += 7;
-		cursor_change_row(shell, window, 'B');
+		// cursor_change_row(shell, window, 'B');
 		return (1);
 	}
 	else

@@ -29,7 +29,9 @@ DONE DONE:
 |			|	21sh: jsdsjdjd: command not found$		|
 |-------------------------------------------------------|
 |			|	2. CONTROL THE CURSOR					|
-|			|	line_len[index] for when in open quotes	|
+|			|	cmd_line and rev_cmd are split			|
+|			|	need an input holding everything		|
+|			|	to be able to point at it with rows		|
 |-------------------------------------------------------|
 |			|	3. COPY-CUT-PASTE						|
 |			|	edit in middle of line in correct loc	|

@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 11:17:52 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/06 11:19:06 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/06 11:49:27 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ void	print_logo()
 {
 	int	i;
 
+	ft_putstr_fd("\e[1;1H\e[2J", STDIN_FILENO);
 	srand(time(NULL));
 	i = (rand() % 2) + 1;
-	ft_printf("\e[1;1H\e[2J");
 	if (i == 1)
 		print_zplogo();
 	else
