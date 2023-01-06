@@ -6,25 +6,28 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/06 14:20:16 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/06 15:35:36 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/shell.h"
 
-static void	cmd_line_reset(t_shell *shell)
+static void	cmd_line_reset(t_shell *shell, t_win *window)
 {
 	if (shell->quote == EOF)
 	{
 		ft_memset(shell->cmd_line, '\0', sizeof(char) * (MAX_BUFF + 1));
 		ft_memset(shell->temp, '\0', sizeof(char) * (MAX_BUFF + 1));
+		ft_memset(window->row_idx, 0, sizeof(char *) * (MAX_BUFF));
+		window->idx = 0;
 		shell->cmd_idx = 0;
+		window->row_idx[window->idx] = &shell->cmd_line[0];
 	}
 	shell->end = 0;
 	NL;
 	cmd_line_prompt(shell->quote);
 	init_prompt(shell);
-	shell->window.loc = shell->prmpt_len;
+	window->loc = shell->prmpt_len;
 }
 
 /*
@@ -63,7 +66,7 @@ static void	run_shell(t_shell *shell)
 					exec_tree(tree, shell);
 			}
 			cursor_find(shell, &shell->window);
-			cmd_line_reset(shell);
+			cmd_line_reset(shell, &shell->window);
 			cursor_load(shell, shell->window.loc, shell->window.current_row);
 			reset_terminal(shell->tty);
 		}
@@ -80,7 +83,6 @@ int	main(int argc, char **argv, char **envp)
 	if (envp)
 	{
 		init_shell(&shell, envp);
-		DB;
 		print_logo();
 		ft_print_fd(STDOUT_FILENO, "$> ");
 		run_shell(&shell);

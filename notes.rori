@@ -1,18 +1,18 @@
 TO BE DONE:
 // SIGNAL - together 0%
-// ERRORS - together 70%
 // PIPES & REDIRECT - peetu 25%
 // AGREGATE - peetu 25%
 
 REASONABLY DONE:
+- ERRORS - together 70%
 - BUILTINS - together 75%
 	- does setenv need to be sensitive to "na=me"=surname type of argument?
-- CURSOR - rori 85%
-- SPECIAL KEYS - rori 98%
-- HISTORY - together 98%
+- CURSOR - rori 75%
+- HISTORY - together 95%
+- QUOTES - together but peetu is a hero 98%
 
 DONE DONE:
-- QUOTES - together but peetu is a hero
+- SPECIAL KEYS - rori
 - COMMAND TREE - peetu
 - COMMAND LINE PARSE - peetu 
 - READ_INPUT - together
@@ -29,9 +29,12 @@ DONE DONE:
 |			|	21sh: jsdsjdjd: command not found$		|
 |-------------------------------------------------------|
 |			|	2. CONTROL THE CURSOR					|
-|			|	cmd_line and rev_cmd are split			|
-|			|	need an input holding everything		|
-|			|	to be able to point at it with rows		|
+|			|	need to account for cols and row_idx:	|
+|			|	key_listen if condition for window.loc	|
+|			|	cmd_line_reprint, shell->rev_cmd?		|
+|			|	goto_sides, goto_word, goto_end			|
+|			|	delete_key reprints string on new line	|
+|			| 	cursor_r_c.c moves crsr along col & row	|
 |-------------------------------------------------------|
 |			|	3. COPY-CUT-PASTE						|
 |			|	edit in middle of line in correct loc	|
@@ -40,4 +43,8 @@ DONE DONE:
 |			|	save and recall history with multiline	|
 |			|	at least needs to be fixed in the file	|
 |			|	add '\n' if ENTER, if an open quote		|
+|-------------------------------------------------------|
+|			|	5. QUOTES								|
+|			|	need to check input has enough space	|
+|			|	to hold a long long line w/ open quote	|
 |-------------------------------------------------------|

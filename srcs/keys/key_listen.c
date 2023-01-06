@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 13:35:45 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/06 14:21:48 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/06 17:24:06 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	key_listen(t_shell *shell, char *input)
 			shell->end = 1;
 		else if (key == 0 && shell->cmd_idx <= MAX_BUFF)
 		{
+			if (input[i] == '\t')
+				input[i] = ' ';
 			if (shell->window.loc < shell->cmd_idx + shell->prmpt_len)
 				cmd_line_reprint(shell, &shell->window, input[i]);
 			else
