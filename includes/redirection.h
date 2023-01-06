@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 14:59:36 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/05 10:56:50 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/05 16:16:56 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef enum e_status
 	FOLDER,
 }		t_status;
 
-void	redir_start(t_exec *data);
+void	redirection_loop(t_exec *data);
 int		redir_file_check(char *str);
 int		redir_folder_check(char *str);
 

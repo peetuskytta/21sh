@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 13:36:22 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/04 17:06:11 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/05 17:27:40 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,5 @@ void	cmd_line_reprint(t_shell *shell, t_win *window, char c)
 	ft_putstr_fd(shell->cmd_line, STDIN_FILENO);
 	stdin_char(c);
 	input_rev_cmd(shell);
-	// window->loc += 1;
 	cursor_load(shell, window->loc, window->current_row);
 }

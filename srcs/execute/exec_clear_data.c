@@ -1,30 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_cmd_redir.c                                :+:      :+:    :+:   */
+/*   exec_clear_data.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/02 10:15:33 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/03 17:38:02 by pskytta          ###   ########.fr       */
+/*   Created: 2023/01/05 15:26:16 by pskytta           #+#    #+#             */
+/*   Updated: 2023/01/05 15:26:38 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/execute.h"
 
-static void	redirection_start(t_exec data, char *bin_path, char **env_cpy)
+void	exec_clear_data(t_exec *data, char *path)
 {
-	redirection_loop(&data);
-	(void)env_cpy;
-	(void)bin_path;
-}
+	int	i;
 
-void	exec_cmd_redir(t_exec data, char **env_cpy)
-{
-	char	*bin_path;
-
-	bin_path = exec_find_binary(exec_fetch_path_var(env_cpy), data.cmd);
-	if (exec_binary_check(bin_path, data.cmd))
-		redirection_start(data, bin_path, env_cpy);
-	exec_clear_data(&data, bin_path);
+	i = 0;
+	while (data->args[i])
+		ft_strdel((void *)&data->args[i++]);
+	if (path)
+		ft_strdel((void *)&path);
+	if (data->cmd)
+		ft_strdel((void *)&data->cmd);
+	if (data->redir[0].file != NULL)
+	{
+		i = 0;
+		while (data->redir[i].file != NULL)
+		{
+			ft_strdel((void *)&data->redir[i].file);
+			data->redir[i].type = -1;
+			data->redir[i++].fildes = -1;
+		}
+	}
 }
