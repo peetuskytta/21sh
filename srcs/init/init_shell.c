@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 09:15:27 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/05 15:28:59 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/05 17:37:10 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ void	init_shell(t_shell *shell, char **environ)
 	shell->prmpt_len = 3;
 	shell->quote = EOF;
 	init_term();
-	init_window(&shell->window);
 	cursor_find(shell, &shell->window);
+	init_window(&shell->window);
 	fetch_envp(shell, environ, env_variable_counter(environ));
 	fetch_ttyname(shell);
 	history_fetch(shell);
