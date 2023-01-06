@@ -14,7 +14,7 @@ REASONABLY DONE:
 DONE DONE:
 - QUOTES - together but peetu is a hero
 - COMMAND TREE - peetu
-- COMMAND LINE PARSE - peetu 
+- COMMAND LINE PARSE - peetu
 - READ_INPUT - together
 - RAWMODE - rori
 - KEYPRESS LISTEN - rori
@@ -38,4 +38,9 @@ DONE DONE:
 |			|	save and recall history with multiline	|
 |			|	at least needs to be fixed in the file	|
 |			|	add '\n' if ENTER, if an open quote		|
+|-------------------------------------------------------|
+|			|	5. HISTORY TRAVERSE DOWN				|
+|			|	when at last item we lose the temp		|
+|			|											|
+|			|											|
 |-------------------------------------------------------|

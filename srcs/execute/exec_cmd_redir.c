@@ -12,9 +12,45 @@
 
 #include "../../includes/execute.h"
 
+static void redir_change_io(int fildes)
+{
+	dup2(fildes, STDOUT_FILENO);
+	close (fildes);
+}
+
+static void	execute_redir(t_exec data, char *bin_path, char **env_cpy)
+{
+	t_pid	pid;
+
+	//ft_putnbr_endl(data.redir[0].fildes);
+	//ft_putendl(data.redir[0].file);
+	//exit(10);
+	pid.child = fork();
+	if (pid.child == 0)
+	{
+		redir_change_io(data.redir->fildes);
+		if (execve(bin_path, data.args, env_cpy) == -1)
+		{
+			ft_perror(EXECVE_ERROR);
+			exit(EXIT_FAILURE);
+		}
+		close (data.redir->fildes);
+		exit(EXIT_SUCCESS);
+	}
+	else if (pid.child < 0)
+		ft_perror(FORK_FAIL);
+	else
+	{
+		pid.wait = waitpid(pid.child, &pid.status, 0);
+		if (pid.wait == -1)
+			ft_perror(WAITPID_FAIL);
+	}
+}
+
 static void	redirection_start(t_exec data, char *bin_path, char **env_cpy)
 {
-	redirection_loop(&data);
+	if (redirection_loop(&data))
+		execute_redir(data, bin_path, env_cpy);
 	(void)env_cpy;
 	(void)bin_path;
 }

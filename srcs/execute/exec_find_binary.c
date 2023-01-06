@@ -19,6 +19,7 @@ static char	*exec_binary_path(char **path, char *cmd)
 	char			**cpy;
 
 	cpy = path;
+	temp = NULL;
 	while (*cpy)
 	{
 		temp = ft_strjoin(*cpy, "/");

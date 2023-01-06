@@ -6,41 +6,72 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 15:11:08 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/05 16:08:13 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/06 15:58:49 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/redirection.h"
 
-static void	file_error(int status)
+static void	file_error(int *status, char *str)
 {
-	if (status == FILE_PERM)
+	if (*status == FILE_PERM)
+	{
+		ft_perror("21sh:");
+		ft_print_fd(STDERR_FILENO, " %s", str);
 		ft_perror(EXEC_NO_ACCESS);
-	else if (status == FOLDER)
-		return ;
-	else if (status == NO_FILE)
+	}
+	if (ft_is_directory(str) == 1)
+	{
+		ft_perror("21sh:");
+		ft_print_fd(STDERR_FILENO, " %s", str);
+		ft_perror(IS_A_DIR);
+	}
+	if (*status == NO_FILE)
+	{
+		ft_perror("21sh:");
+		ft_print_fd(STDERR_FILENO, " %s", str);
 		ft_perror(NO_FILE_OR_DIR);
+	}
+	*status = FILE_ERR;
 }
 
-int	redir_file_check(char *str)
+static void	open_redirection(t_redir *redir, int *status)
 {
-	struct stat	buf;
+	if (redir->type == FILE_TRUNC)
+	{
+		if (access(redir->file, W_OK) == -1)
+			*status = FILE_PERM;
+		redir->fildes = open(redir->file, O_CREAT | O_WRONLY | O_TRUNC, 0664);
+		if (redir->fildes < 0 && *status != FILE_PERM)
+			*status = NO_FILE;
+		if (redir->fildes > 0)
+			*status = GO;
+	}
+	if (redir->type == FILE_APPEND)
+	{
+		if (access(redir->file, W_OK) == -1)
+			*status = FILE_PERM;
+		redir->fildes = open(redir->file, O_CREAT | O_WRONLY | O_APPEND, 0664);
+		if (redir->fildes < 0 && *status != FILE_PERM)
+			*status = NO_FILE;
+		if (redir->fildes > 0)
+			*status = GO;
+	}
+	ft_putnbr_endl(*status);
+}
+
+int	redir_file_check(t_redir *redir)
+{
 	int			status;
 
-	if (stat(str, &buf) != -1)
-	{
-		if (access(str, F_OK) && ft_is_directory(str) != 1)
-		{
-			if (access(str, X_OK))
-				return (GO);
-			else
-				status = FILE_PERM;
-		}
-		else
-			status = FOLDER;
-	}
+	status = -1;
+	if (access(redir->file, F_OK) == 0 && !ft_is_directory(redir->file))
+		open_redirection(redir, &status);
+	else if (ft_is_directory(redir->file))
+		status = FOLDER;
 	else
-		status = NO_FILE;
-	file_error(status);
+		open_redirection(redir, &status);
+	if (status != GO)
+		file_error(&status, redir->file);
 	return (status);
 }

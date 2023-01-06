@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 14:59:36 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/05 16:16:56 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/06 16:00:24 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,12 @@ typedef enum e_status
 	FILE_PERM,
 	FOLDER_PERM,
 	NO_FILE,
+	FILE_ERR,
 	FOLDER,
 }		t_status;
 
-void	redirection_loop(t_exec *data);
-int		redir_file_check(char *str);
+bool	redirection_loop(t_exec *data);
+int		redir_file_check(t_redir *redir);
 int		redir_folder_check(char *str);
 
 #endif

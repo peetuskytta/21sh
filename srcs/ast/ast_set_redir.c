@@ -60,12 +60,12 @@ static int	check_for_type(char *str)
 void	ast_set_redir(t_redir *redir, char *str)
 {
 	redir->type = check_for_type(str);
-	if (ft_isdigit(str[0]))
-		redir->fildes = ft_atoi(str);
-	else
-		redir->fildes = 1;
-	if (redir->type == FILE_IN)
-		redir->fildes = 0;
+	//if (ft_isdigit(str[0]))
+	//	redir->fildes = ft_atoi(str);
+	// else
+	redir->fildes = -1;
+	// if (redir->type == FILE_IN)
+	// 	redir->fildes = 0;
 	if (redir->type == FILE_AGGR)
 		ft_putendl("\nAGGR");
 	if (redir->type == FILE_IN)

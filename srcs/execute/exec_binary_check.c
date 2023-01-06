@@ -14,8 +14,8 @@
 
 bool	exec_binary_check(char *bin_path, char *cmd)
 {
-	if (bin_path == NULL)
-		return (false);
+	// if (bin_path == NULL)
+	// 	return (false);
 	if (access(bin_path, F_OK) == -1)
 	{
 		ft_putstr_fd("shell: ", STDERR_FILENO);
