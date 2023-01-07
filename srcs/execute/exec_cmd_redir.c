@@ -22,9 +22,6 @@ static void	execute_redir(t_exec data, char *bin_path, char **env_cpy)
 {
 	t_pid	pid;
 
-	//ft_putnbr_endl(data.redir[0].fildes);
-	//ft_putendl(data.redir[0].file);
-	//exit(10);
 	pid.child = fork();
 	if (pid.child == 0)
 	{
@@ -49,7 +46,7 @@ static void	execute_redir(t_exec data, char *bin_path, char **env_cpy)
 
 static void	redirection_start(t_exec data, char *bin_path, char **env_cpy)
 {
-	if (redirection_loop(&data))
+	if (redirection_loop(&data) && exec_binary_check(bin_path, data.cmd))
 		execute_redir(data, bin_path, env_cpy);
 	(void)env_cpy;
 	(void)bin_path;
@@ -60,7 +57,6 @@ void	exec_cmd_redir(t_exec data, char **env_cpy)
 	char	*bin_path;
 
 	bin_path = exec_find_binary(exec_fetch_path_var(env_cpy), data.cmd);
-	if (exec_binary_check(bin_path, data.cmd))
-		redirection_start(data, bin_path, env_cpy);
+	redirection_start(data, bin_path, env_cpy);
 	exec_clear_data(&data, bin_path);
 }
