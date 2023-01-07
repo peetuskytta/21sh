@@ -30,6 +30,8 @@ DONE DONE:
 |-------------------------------------------------------|
 |			|	2. CONTROL THE CURSOR					|
 |			|	line_len[index] for when in open quotes	|
+|			|	delete in middle of line also opt+arrw	|
+|			| 	where is cursor end with open quotes ^	|
 |-------------------------------------------------------|
 |			|	3. COPY-CUT-PASTE						|
 |			|	edit in middle of line in correct loc	|
