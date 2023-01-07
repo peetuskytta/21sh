@@ -31,10 +31,9 @@ DONE DONE:
 |			|	2. CONTROL THE CURSOR					|
 |			|	need to account for cols and row_idx:	|
 |			|	key_listen if condition for window.loc	|
-|			|	cmd_line_reprint, shell->rev_cmd?		|
+|			|	shell->rev_cmd?							|
 |			|	goto_sides, goto_word, goto_end			|
 |			|	delete_key reprints string on new line	|
-|			| 	cursor_r_c.c moves crsr along col & row	|
 |-------------------------------------------------------|
 |			|	3. COPY-CUT-PASTE						|
 |			|	edit in middle of line in correct loc	|

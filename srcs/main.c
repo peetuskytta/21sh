@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/06 15:35:36 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/07 14:24:25 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,14 +82,12 @@ int	main(int argc, char **argv, char **envp)
 	ft_memset(&shell, 0, sizeof(shell));
 	if (envp)
 	{
-		init_shell(&shell, envp);
 		print_logo();
+		init_shell(&shell, envp);
 		ft_print_fd(STDOUT_FILENO, "$> ");
 		run_shell(&shell);
 	}
 	else
-	{
-		kill_mode("exit", &shell);
-	}
+		kill_mode("exit\n", &shell);
 	return (EXIT_SUCCESS);
 }

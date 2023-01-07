@@ -6,11 +6,25 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 13:32:38 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/06 17:20:57 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/07 15:04:38 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
+
+static int	check_cursor_loc(t_win *window)
+{
+	if (window->cols == window->loc)
+	{
+		if (window->idx > 0)
+		{
+			window->loc = 1;
+			window->current_row += 1;
+			return (1);
+		}
+	}
+	return (0);
+}
 
 static void	check_cmd_line_row(t_shell *shell, t_win *window)
 {
@@ -29,9 +43,6 @@ static void	check_cmd_line_row(t_shell *shell, t_win *window)
 			idx++;
 		}
 		window->idx = idx - 1;
-		cursor_find(shell, window);
-		// ft_putchar_fd('\n', open("txt.txt", O_WRONLY | O_APPEND));
-		// ft_putnbr_fd(window->loc, open("txt.txt", O_WRONLY | O_APPEND));
 	}
 }
 
@@ -55,7 +66,8 @@ void	cmd_line(t_shell *shell, t_win *window, char c)
 	i = ft_strilen(shell->cmd_line);
 	shell->cmd_line[i] = c;
 	shell->cmd_idx++;
-	window->loc += 1;
 	reset_input(shell);
 	check_cmd_line_row(shell, window);
+	if (check_cursor_loc(window) == 0)
+		window->loc += 1;
 }
