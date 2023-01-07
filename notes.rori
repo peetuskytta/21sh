@@ -30,8 +30,7 @@ DONE DONE:
 |-------------------------------------------------------|
 |			|	2. CONTROL THE CURSOR					|
 |			|	need to account for cols and row_idx:	|
-|			|	key_listen if condition for window.loc	|
-|			|	shell->rev_cmd?							|
+|			|	cmd_line_reprint reprints wrongly		|
 |			|	goto_sides, goto_word, goto_end			|
 |			|	delete_key reprints string on new line	|
 |-------------------------------------------------------|
