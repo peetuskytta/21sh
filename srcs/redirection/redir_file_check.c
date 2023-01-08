@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 15:11:08 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/06 16:14:26 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/07 19:15:05 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,6 @@ int	redir_file_check(t_redir *redir)
 		open_redirection(redir, &status);
 	if (status != GO)
 		file_error(&status, redir->file);
-	ft_putnbr_endl(status);
+//	ft_putnbr_endl(status);
 	return (status);
 }

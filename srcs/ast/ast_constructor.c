@@ -103,6 +103,7 @@ static t_ast	*ast_create_tree(t_tok **token)
 	{
 		(*token) = (*token)->next;
 		branch->right = ast_create_tree(token);
+		branch->type = PIPE;
 	}
 	return (branch);
 }
@@ -144,7 +145,7 @@ t_ast	**ast_constructor(t_shell *shell, t_tok *token)
 		if (token && token->type == CHAR_SEMICOLON)
 			token = token->next;
 	}
-	//print_tree(tree);
+//	print_tree(tree);
 	token_list_free(temp);
 	return (tree);
 }

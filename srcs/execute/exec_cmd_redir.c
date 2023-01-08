@@ -25,7 +25,8 @@ static void	execute_redir(t_exec data, char *bin_path, char **env_cpy)
 	pid.child = fork();
 	if (pid.child == 0)
 	{
-		redir_change_io(data.redir->fildes);
+		if (data.redir->file != NULL)
+			redir_change_io(data.redir->fildes);
 		if (execve(bin_path, data.args, env_cpy) == -1)
 		{
 			ft_perror(EXECVE_ERROR);

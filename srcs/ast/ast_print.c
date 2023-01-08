@@ -27,5 +27,6 @@ void ast_print(t_ast *tree)
 		}
 	}
 	ast_print(tree->left);
-	ast_print(tree->right);
+	if (tree->type == PIPE)
+		ast_print(tree->right);
 }

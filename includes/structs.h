@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/05 16:07:28 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/08 15:41:41 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,11 @@ typedef struct s_pid
 	int				wait;
 	int				status;
 }					t_pid;
+
+typedef enum e_fd
+{
+	FD_READ,
+	FD_WRITE,
+}			t_fd;
 
 #endif
