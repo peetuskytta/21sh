@@ -12,15 +12,15 @@
 
 #include "../../includes/execute.h"
 
-// static void	reset_terminal(char *terminal)
-// {
-// 	close(STDIN_FILENO);
-// 	open(terminal, O_RDWR);
-// 	close(STDOUT_FILENO);
-// 	open(terminal, O_RDWR);
-// 	close(STDERR_FILENO);
-// 	open(terminal, O_RDWR);
-// }
+/* static void	reset_terminal(char *terminal)
+{
+	close(STDIN_FILENO);
+	open(terminal, O_RDWR);
+	close(STDOUT_FILENO);
+	open(terminal, O_RDWR);
+	close(STDERR_FILENO);
+	open(terminal, O_RDWR);
+} */
 
 /*
 ** Begin execution of tree or multiple trees. Calls the tree_execute function

@@ -43,5 +43,5 @@ bool	redirection_loop(t_exec *data)
 			return (false);
 		idx++;
 	}
-	return (false);
+	return (true);
 }
