@@ -32,7 +32,13 @@ static char	**copy_environment(char **environ)
 
 static void	open_pipes(t_fds *fds)
 {
-	(void)fds;
+	int	fd[2];
+
+	ft_memset((void *)fds, 0, sizeof(t_fds));
+	if (pipe(fd) == -1)
+		ft_perror(PIPE_ERR);
+	fds->fd_in = fd[FD_READ];
+	fds->fd_out = fd[FD_WRITE];
 }
 
 /*
@@ -70,9 +76,16 @@ void	exec_branch(t_ast *branch, t_shell *shell)
 		{
 			open_pipes(&fds[idx]); // copy data from branch->type PIPE to the branch->letf.fds (later used to change the IO of the cmd)
 			branch = branch->right;
+			idx++;
 		}
 		else
 		 	exec_branch(branch->left, shell);
+		int i = 0;
+		while (fds[i].fd_out != -1)
+		{
+			ft_printf("in %d, out %d\n", fds[i].fd_in, fds[i].fd_out);
+			i++;
+		}
 	}
 	ast_release(branch, env_cpy);
 	//reset_terminal(shell->tty);
