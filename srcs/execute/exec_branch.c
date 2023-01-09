@@ -53,7 +53,7 @@ void	open_pipes(t_ast *branch, char **env_cpy)
 		close(fd[0]);
 		close(fd[1]);
 		exec_cmd_redir(branch->right->data, env_cpy);
-		exit(1);
+		//exit(1);
 	}
 	else if (pid[0].child < 0 || pid[1].child < 0)
 		ft_perror(FORK_FAIL);
@@ -63,9 +63,8 @@ void	open_pipes(t_ast *branch, char **env_cpy)
 		close(fd[0]);
 		pid[0].wait = waitpid(pid[0].child, &pid[0].status, 0);
 		pid[1].wait = waitpid(pid[1].child, &pid[1].status, 0);
+		exit(1);
 	}
-	//wait(0);
-	//wait(0);
 }
 
 void	reset_terminal(char *terminal)
@@ -108,13 +107,12 @@ void	exec_branch(t_ast *branch, t_shell *shell)
 	if (branch->right)
 	{
  		//if (branch->type == PIPE)
-		//{
 			ft_putendl("\nPIIPPUINEN");
 			open_pipes(branch, env_cpy);
-			reset_terminal(shell->tty);
 		//}
 		//exec_branch(branch->right, shell);
 	}
 	ast_release(branch, env_cpy);
+	//reset_terminal(shell->tty);
 }
 

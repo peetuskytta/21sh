@@ -12,7 +12,7 @@
 
 #include "../../includes/execute.h"
 
-/* static void	reset_terminal(char *terminal)
+static void	reset_terminal(char *terminal)
 {
 	close(STDIN_FILENO);
 	open(terminal, O_RDWR);
@@ -20,7 +20,7 @@
 	open(terminal, O_RDWR);
 	close(STDERR_FILENO);
 	open(terminal, O_RDWR);
-} */
+}
 
 /*
 ** Begin execution of tree or multiple trees. Calls the tree_execute function
@@ -37,7 +37,7 @@ void	exec_tree(t_ast **tree, t_shell *shell)
 		NL;
 		exec_branch(tree[idx], shell);
 		ft_memdel((void *)&tree[idx]);
-		//reset_terminal(shell->tty);
+		reset_terminal(shell->tty);
 		idx++;
 	}
 	ft_memdel((void *)&tree);
