@@ -30,51 +30,9 @@ static char	**copy_environment(char **environ)
 }
 
 
-void	open_pipes(t_ast *branch, char **env_cpy)
+static void	open_pipes(t_fds *fds)
 {
-	int		fd[2];
-	t_pid	pid[2];
-
-	if (pipe(fd) < 0)
-		ft_perror(PIPE_ERR);
-	pid[0].child = fork();
-	if (pid[0].child == 0)
-	{
-		dup2(fd[1], STDOUT_FILENO);
-		close(fd[0]);
-		close(fd[1]);
-		exec_cmd_redir(branch->left->data, env_cpy);
-		exit(1);
-	}
-	pid[1].child = fork();
-	if (pid[1].child == 0)
-	{
-		dup2(fd[0], STDIN_FILENO);
-		close(fd[0]);
-		close(fd[1]);
-		exec_cmd_redir(branch->right->data, env_cpy);
-		//exit(1);
-	}
-	else if (pid[0].child < 0 || pid[1].child < 0)
-		ft_perror(FORK_FAIL);
-	else
-	{
-		close(fd[1]);
-		close(fd[0]);
-		pid[0].wait = waitpid(pid[0].child, &pid[0].status, 0);
-		pid[1].wait = waitpid(pid[1].child, &pid[1].status, 0);
-		exit(1);
-	}
-}
-
-void	reset_terminal(char *terminal)
-{
-	close(STDIN_FILENO);
-	open(terminal, O_RDWR);
-	close(STDOUT_FILENO);
-	open(terminal, O_RDWR);
-	close(STDERR_FILENO);
-	open(terminal, O_RDWR);
+	(void)fds;
 }
 
 /*
@@ -82,7 +40,9 @@ void	reset_terminal(char *terminal)
 */
 void	exec_branch(t_ast *branch, t_shell *shell)
 {
+	t_fds	fds[MAX_REDIR];
 	char	**env_cpy;
+	int		idx = 0;
 
 	if (branch == NULL)
 		return ;
@@ -101,18 +61,24 @@ void	exec_branch(t_ast *branch, t_shell *shell)
 	NL;
 	env_cpy = copy_environment(shell->environ);
 	if ((branch->type == REDIR || branch->type == COMMAND) && branch->right == NULL)
-		exec_cmd_redir(branch->data, env_cpy);
-	if (branch->left && branch->right == NULL)
+		exec_cmd(branch->data, env_cpy);
+	if (branch->left)
 		exec_branch(branch->left, shell);
 	if (branch->right)
 	{
- 		//if (branch->type == PIPE)
-			ft_putendl("\nPIIPPUINEN");
-			open_pipes(branch, env_cpy);
-		//}
-		//exec_branch(branch->right, shell);
+		if (branch->type == PIPE)
+		{
+			open_pipes(&fds[idx]); // copy data from branch->type PIPE to the branch->letf.fds (later used to change the IO of the cmd)
+			branch = branch->right;
+		}
+		else
+		 	exec_branch(branch->left, shell);
 	}
 	ast_release(branch, env_cpy);
 	//reset_terminal(shell->tty);
 }
+
+//ls -l | grep file | awk '{print $1, $9}'
+//ls -l | grep file | grep Makefile | wc -l
+//ls -l | grep file | grep Makefile | wc -l
 

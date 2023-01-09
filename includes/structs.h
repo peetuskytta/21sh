@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/09 00:24:47 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/09 15:04:10 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ typedef struct s_exec
 	char			*cmd;
 	char			*args[MAX_REDIR];
 	struct s_redir	redir[MAX_REDIR];
-	struct s_fds	fds;
 }					t_exec;
 
 typedef struct s_tok
@@ -90,6 +89,7 @@ typedef struct s_ast
 	struct s_exec	data;
 	struct s_ast	*left;
 	struct s_ast	*right;
+	struct s_fds	fds;
 }					t_ast;
 
 typedef struct s_pid

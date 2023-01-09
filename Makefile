@@ -52,8 +52,7 @@ _CURSOR := cursor_reset_line.c \
 
 _EXECUTE := exec_tree.c \
 		exec_branch.c \
-		exec_cmd_redir.c \
-		exec_cmd_simple.c \
+		exec_cmd.c \
 		exec_binary_check.c \
 		exec_find_binary.c \
 		exec_fetch_path_var.c \

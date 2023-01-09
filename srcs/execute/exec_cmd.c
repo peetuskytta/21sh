@@ -18,7 +18,7 @@ static void redir_change_io(int fildes)
 	close (fildes);
 }
 
-static void	execute_redir(t_exec data, char *bin_path, char **env_cpy)
+static void	execute_command(t_exec data, char *bin_path, char **env_cpy)
 {
 	t_pid	pid;
 
@@ -45,19 +45,19 @@ static void	execute_redir(t_exec data, char *bin_path, char **env_cpy)
 	}
 }
 
-static void	redirection_start(t_exec data, char *bin_path, char **env_cpy)
+static void	execution_start(t_exec data, char *bin_path, char **env_cpy)
 {
 	if (redirection_loop(&data) && exec_binary_check(bin_path, data.cmd))
-		execute_redir(data, bin_path, env_cpy);
+		execute_command(data, bin_path, env_cpy);
 	(void)env_cpy;
 	(void)bin_path;
 }
 
-void	exec_cmd_redir(t_exec data, char **env_cpy)
+void	exec_cmd(t_exec data, char **env_cpy)
 {
 	char	*bin_path;
 
 	bin_path = exec_find_binary(exec_fetch_path_var(env_cpy), data.cmd);
-	redirection_start(data, bin_path, env_cpy);
+	execution_start(data, bin_path, env_cpy);
 	exec_clear_data(&data, bin_path);
 }
