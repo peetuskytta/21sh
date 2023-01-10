@@ -30,15 +30,28 @@ static char	**copy_environment(char **environ)
 }
 
 
-static void	open_pipes(t_fds *fds)
+static void	open_pipes(t_ast *branch)
 {
+	//t_fds	fds[MAX_REDIR];
+	t_ast	*temp;
 	int	fd[2];
 
-	ft_memset((void *)fds, 0, sizeof(t_fds));
-	if (pipe(fd) == -1)
-		ft_perror(PIPE_ERR);
-	fds->fd_in = fd[FD_READ];
-	fds->fd_out = fd[FD_WRITE];
+	//ft_memset((void *)fds, -1, sizeof(t_fds) * MAX_REDIR);
+	temp = branch;
+	while (temp)
+	{
+		if ((temp->type == PIPE || temp->type == COMMAND || temp->type == REDIR) && temp->right != NULL)
+		{
+			if (pipe(fd) == -1)
+				ft_perror(PIPE_ERR);
+			else
+			{
+				temp->left->fds.fd_in = fd[FD_READ];
+				temp->left->fds.fd_out = fd[FD_WRITE];
+			}
+		}
+		temp = temp->right;
+	}
 }
 
 /*
@@ -46,9 +59,8 @@ static void	open_pipes(t_fds *fds)
 */
 void	exec_branch(t_ast *branch, t_shell *shell)
 {
-	t_fds	fds[MAX_REDIR];
 	char	**env_cpy;
-	int		idx = 0;
+//	int		idx = 0;
 
 	if (branch == NULL)
 		return ;
@@ -60,32 +72,25 @@ void	exec_branch(t_ast *branch, t_shell *shell)
 	}
 	if (branch->right)
 	{
-		ft_printf("cmd: %s\n", branch->right->data.cmd);
 		ft_printf("	right: %p", branch->right);
 		ft_printf("	right type: %d\n", branch->right->type);
 	}
-	NL;
+	if (branch->right != NULL)
+		open_pipes(branch->right);
 	env_cpy = copy_environment(shell->environ);
 	if ((branch->type == REDIR || branch->type == COMMAND) && branch->right == NULL)
 		exec_cmd(branch->data, env_cpy);
-	if (branch->left)
+	if (branch->left && branch->right == NULL)
 		exec_branch(branch->left, shell);
 	if (branch->right)
 	{
-		if (branch->type == PIPE)
-		{
-			open_pipes(&fds[idx]); // copy data from branch->type PIPE to the branch->letf.fds (later used to change the IO of the cmd)
+	//	if (branch->right->type == PIPE)
+	//	{
+	//		open_pipes(&fds[idx], idx); // copy data from branch->type PIPE to the branch->letf.fds (later used to change the IO of the cmd)
 			branch = branch->right;
-			idx++;
-		}
-		else
-		 	exec_branch(branch->left, shell);
-		int i = 0;
-		while (fds[i].fd_out != -1)
-		{
-			ft_printf("in %d, out %d\n", fds[i].fd_in, fds[i].fd_out);
-			i++;
-		}
+	//		idx++;
+	//		change the fd in or out before exec.
+			exec_branch(branch->left, shell);
 	}
 	ast_release(branch, env_cpy);
 	//reset_terminal(shell->tty);
