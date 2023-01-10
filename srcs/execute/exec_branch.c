@@ -36,9 +36,19 @@ void	set_pipes(t_ast *temp2, t_pipe *pipes)
 	idx = 0;
 	while (temp2)
 	{
-		temp2->left->data.fds.fd_in = pipes[idx].fd[PIPE_READ];
-		temp2->left->data.fds.fd_out = pipes[idx].fd[PIPE_WRITE];
-		idx++;
+		if (temp2->type == COMMAND || temp2->type == REDIR || temp2->type == PIPE)
+		{
+			if (temp2->data.fds.pipe == PIPE_FIRST)
+				temp2->data.fds.fd_out = pipes[idx].fd[1];
+			if (temp2->data.fds.pipe == PIPE_LAST)
+				temp2->data.fds.fd_in = pipes[idx + 1].fd[1];
+			if (temp2->data.fds.pipe == -1)
+			{
+				temp2->data.fds.fd_in = pipes[idx - 1].fd[1];
+				temp2->data.fds.fd_out = pipes[idx].fd[1];
+			}
+			idx++;
+		}
 		temp2 = temp2->right;
 	}
 }
@@ -67,18 +77,21 @@ static void	open_pipes(t_ast *temp, t_pipe *pipes)
 void	piping(t_ast *branch)
 {
 	t_ast	*temp;
+	t_ast	*temp2;
 
 	temp = branch;
+	temp2 = branch;
 	open_pipes(temp, branch->pipes);
-	int idx = 0;
+	set_pipes(temp2, branch->pipes);
+	ft_printf("IN: %d\n", temp2->left->data.fds.fd_in);
+/* 	int idx = 0;
 	while (branch->pipes[idx].fd[0] != -1 || branch->pipes[idx].fd[1] != -1)
 	{
 		ft_printf("pipes[%d]\n", idx);
-		ft_printf("	READ: %d", branch->pipes[idx].fd[0]);
-		ft_printf("	WRITE %d\n", branch->pipes[idx].fd[1]);
+		ft_printf("  READ:[%d],", branch->pipes[idx].fd[0]);
+		ft_printf("	WRITE:[%d]\n", branch->pipes[idx].fd[1]);
 		idx++;
-	}
-	//set_pipes(temp2, (int **)fd);
+	} */
 }
 
 /*

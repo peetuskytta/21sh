@@ -44,8 +44,10 @@ static void	change_io(t_exec *data)
 		}
 	}
 	if (data->redir->file != NULL) //not working with infile yet
+	{
 		dup2(data->redir->fildes, STDOUT_FILENO);
-	close (data->redir->fildes);
+		close (data->redir->fildes);
+	}
 }
 
 static void	execute_command(t_exec data, char *bin_path, char **env_cpy)
@@ -55,7 +57,10 @@ static void	execute_command(t_exec data, char *bin_path, char **env_cpy)
 	pid.child = fork();
 	if (pid.child == 0)
 	{
+		ft_printf("pipe:{%d}  ", data.fds.pipe);
 		change_io(&data);
+		ft_printf("in:{%d}, out:{%d}\n", data.fds.fd_in, data.fds.fd_out);
+		//exit(111);
 		if (execve(bin_path, data.args, env_cpy) == -1)
 		{
 			ft_perror(EXECVE_ERROR);
