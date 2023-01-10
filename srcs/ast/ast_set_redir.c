@@ -66,14 +66,14 @@ void	ast_set_redir(t_redir *redir, char *str)
 	redir->fildes = -1;
 	// if (redir->type == FILE_IN)
 	// 	redir->fildes = 0;
-	if (redir->type == FILE_AGGR)
-		ft_putendl("\nAGGR");
-	if (redir->type == FILE_IN)
-		ft_putendl("\nFILE_IN");
-	if (redir->type == FILE_APPEND)
-		ft_putendl("\nFILE_APPEND");
-	if (redir->type == FILE_TRUNC)
-		ft_putendl("\nFILE_TRUNC");
-	if (redir->type == FILE_PARSE_ERR)
-		ft_putendl("\nFILE_PARSE_ERR");
+	// if (redir->type == FILE_AGGR)
+	// 	ft_putendl("\nAGGR");
+	// if (redir->type == FILE_IN)
+	// 	ft_putendl("\nFILE_IN");
+	// if (redir->type == FILE_APPEND)
+	// 	ft_putendl("\nFILE_APPEND");
+	// if (redir->type == FILE_TRUNC)
+	// 	ft_putendl("\nFILE_TRUNC");
+	// if (redir->type == FILE_PARSE_ERR)
+	// 	ft_putendl("\nFILE_PARSE_ERR");
 }

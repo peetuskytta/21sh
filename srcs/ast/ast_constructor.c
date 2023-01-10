@@ -68,6 +68,8 @@ static t_ast	*ast_create_pipe(int type)
 
 	branch = (t_ast *)ft_memalloc(sizeof(t_ast));
 	allocation_check((void *)&branch);
+	ft_memset((void *)&branch->pipes, -1, sizeof(t_pipe) * 512);
+	ft_memset((void *)&branch->data.fds, -1, sizeof(t_fds));
 	branch->type = type;
 	branch->right = NULL;
 	branch->left = NULL;
@@ -80,6 +82,8 @@ static t_ast	*ast_create_left(t_tok ***token, t_ast *branch)
 	allocation_check((void *)&branch);
 	branch->type = ast_sniff_for_type((**token));
 	ft_memset(&branch->data.redir, 0, sizeof(t_redir) * 512);
+	ft_memset(&branch->pipes, -1, sizeof(t_pipe) * 512);
+	ft_memset(&branch->data.fds, -1, sizeof(t_fds));
 	ast_consume_tokens(token, branch, 0);
 	branch->right = NULL;
 	branch->left = NULL;
@@ -145,7 +149,7 @@ t_ast	**ast_constructor(t_shell *shell, t_tok *token)
 		if (token && token->type == CHAR_SEMICOLON)
 			token = token->next;
 	}
-//	print_tree(tree);
+	//print_tree(tree);
 	token_list_free(temp);
 	return (tree);
 }

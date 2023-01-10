@@ -12,10 +12,40 @@
 
 #include "../../includes/execute.h"
 
-static void redir_change_io(int fildes)
+static void pipe_last_first(int pipe, int *fd_in, int *fd_out)
 {
-	dup2(fildes, STDOUT_FILENO);
-	close (fildes);
+	if (pipe == PIPE_FIRST)
+	{
+		close(*fd_in);
+		*fd_in = -1;
+	}
+	else if (pipe == PIPE_LAST)
+	{
+		close(*fd_out);
+		*fd_out = -1;
+	}
+}
+
+static void	change_io(t_exec *data)
+{
+	if (data->fds.pipe != -1)
+		pipe_last_first(data->fds.pipe, &data->fds.fd_in, &data->fds.fd_out);
+	else
+	{
+		if (data->fds.fd_out > 0)
+		{
+			dup2(data->fds.fd_out, STDOUT_FILENO);
+			close(data->fds.fd_out);
+		}
+		if (data->fds.fd_in > 0)
+		{
+			dup2(data->fds.fd_in, STDIN_FILENO);
+			close(data->fds.fd_in);
+		}
+	}
+	if (data->redir->file != NULL) //not working with infile yet
+		dup2(data->redir->fildes, STDOUT_FILENO);
+	close (data->redir->fildes);
 }
 
 static void	execute_command(t_exec data, char *bin_path, char **env_cpy)
@@ -25,8 +55,7 @@ static void	execute_command(t_exec data, char *bin_path, char **env_cpy)
 	pid.child = fork();
 	if (pid.child == 0)
 	{
-		if (data.redir->file != NULL)
-			redir_change_io(data.redir->fildes);
+		change_io(&data);
 		if (execve(bin_path, data.args, env_cpy) == -1)
 		{
 			ft_perror(EXECVE_ERROR);
