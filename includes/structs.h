@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/10 13:08:36 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/10 22:41:14 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,3 +115,5 @@ typedef enum e_pipe_fd
 }			t_pipe_fd;
 
 #endif
+
+// ls -l | grep file | wc -l

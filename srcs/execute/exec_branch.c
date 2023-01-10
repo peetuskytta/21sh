@@ -29,27 +29,16 @@ static char	**copy_environment(char **environ)
 	return (copy);
 }
 
-void	set_pipes(t_ast *temp2, t_pipe *pipes)
+void	set_pipe(t_ast *temp2, t_pipe *pipes, int *idx)
 {
-	int	idx;
-
-	idx = 0;
-	while (temp2)
+	if (temp2->data.fds.pipe == PIPE_FIRST)
+		temp2->data.fds.fd_out = pipes[*idx].fd[1];
+	if (temp2->data.fds.pipe == PIPE_LAST)
+		temp2->data.fds.fd_in = pipes[*idx].fd[1];
+	if (temp2->data.fds.pipe == -1)
 	{
-		if (temp2->type == COMMAND || temp2->type == REDIR || temp2->type == PIPE)
-		{
-			if (temp2->data.fds.pipe == PIPE_FIRST)
-				temp2->data.fds.fd_out = pipes[idx].fd[1];
-			if (temp2->data.fds.pipe == PIPE_LAST)
-				temp2->data.fds.fd_in = pipes[idx + 1].fd[1];
-			if (temp2->data.fds.pipe == -1)
-			{
-				temp2->data.fds.fd_in = pipes[idx - 1].fd[1];
-				temp2->data.fds.fd_out = pipes[idx].fd[1];
-			}
-			idx++;
-		}
-		temp2 = temp2->right;
+		temp2->data.fds.fd_in = pipes[*idx].fd[1];
+		temp2->data.fds.fd_out = pipes[*idx].fd[1];
 	}
 }
 
@@ -62,7 +51,7 @@ static void	open_pipes(t_ast *temp, t_pipe *pipes)
 		temp->data.fds.pipe = PIPE_FIRST;
 	while (temp)
 	{
-		if ((temp->type == PIPE || temp->type == COMMAND || temp->type == REDIR))
+		if (temp->type == PIPE || temp->type == COMMAND || temp->type == REDIR)
 		{
 			if (pipe(pipes[idx].fd) == -1)
 				ft_perror(PIPE_ERR);
@@ -78,20 +67,32 @@ void	piping(t_ast *branch)
 {
 	t_ast	*temp;
 	t_ast	*temp2;
+	int		idx;
 
-	temp = branch;
+	idx = 0;
+	temp = branch->right;
 	temp2 = branch;
 	open_pipes(temp, branch->pipes);
-	set_pipes(temp2, branch->pipes);
-	ft_printf("IN: %d\n", temp2->left->data.fds.fd_in);
-/* 	int idx = 0;
+	while (temp2)
+	{
+		if (temp2->type == PIPE || temp2->type == COMMAND || temp2->type == REDIR)
+		{
+			set_pipe(temp2, branch->pipes, &idx);
+			idx++;
+		}
+		temp2 = temp2->right;
+	}
+//	set_pipe(temp2, branch->pipes);
+	ft_printf("OUT: %d\n", branch->data.fds.fd_out);
+	ft_printf("OUT: %d\n", branch->right->data.fds.fd_out);
+ 	idx = 0;
 	while (branch->pipes[idx].fd[0] != -1 || branch->pipes[idx].fd[1] != -1)
 	{
 		ft_printf("pipes[%d]\n", idx);
 		ft_printf("  READ:[%d],", branch->pipes[idx].fd[0]);
-		ft_printf("	WRITE:[%d]\n", branch->pipes[idx].fd[1]);
+		ft_printf(" WRITE:[%d]\n", branch->pipes[idx].fd[1]);
 		idx++;
-	} */
+	}
 }
 
 /*
@@ -115,7 +116,7 @@ void	exec_branch(t_ast *branch, t_shell *shell)
 	// 	ft_printf("	right type: %d\n", branch->right->type);
 	// }
 	if (branch->right != NULL)
-		piping(branch->right);
+		piping(branch); // maybe here is problem
 	env_cpy = copy_environment(shell->environ);
 	if ((branch->type == REDIR || branch->type == COMMAND) && branch->right == NULL)
 		exec_cmd(branch->data, env_cpy);

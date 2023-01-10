@@ -107,7 +107,7 @@ static t_ast	*ast_create_tree(t_tok **token)
 	{
 		(*token) = (*token)->next;
 		branch->right = ast_create_tree(token);
-		//branch->type = PIPE;
+		branch->type = PIPE;
 	}
 	return (branch);
 }
