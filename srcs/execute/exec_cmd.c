@@ -74,19 +74,12 @@ static void	execute_command(t_exec data, char *bin_path, char **env_cpy)
 	}
 }
 
-static void	execution_start(t_exec data, char *bin_path, char **env_cpy)
-{
-	if (redirection_loop(&data) && exec_binary_check(bin_path, data.cmd))
-		execute_command(data, bin_path, env_cpy);
-	(void)env_cpy;
-	(void)bin_path;
-}
-
 void	exec_cmd(t_exec data, char **env_cpy)
 {
 	char	*bin_path;
 
 	bin_path = exec_find_binary(exec_fetch_path_var(env_cpy), data.cmd);
-	execution_start(data, bin_path, env_cpy);
+	if (redirection_loop(&data) && exec_binary_check(bin_path, data.cmd))
+		execute_command(data, bin_path, env_cpy);
 	exec_clear_data(&data, bin_path);
 }
