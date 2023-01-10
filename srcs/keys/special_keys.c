@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 17:00:36 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/06 16:05:24 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/10 18:15:27 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	is_escape(t_shell *shell, char *input, int *i)
 			shell->cmd_line[pos] = 0;
 			shell->window.loc -= 1;
 			pos = shell->cmd_idx + shell->prmpt_len;
-			cmd_line_reprint(shell, &shell->window, 0);
+			cmd_line_reprint(shell, &shell->window, shell->window.current_row);
 		}
 		return (1);
 	}

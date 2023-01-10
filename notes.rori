@@ -33,6 +33,8 @@ DONE DONE:
 |			|	cmd_line_reprint reprints wrongly		|
 |			|	goto_sides, goto_word, goto_end			|
 |			|	delete_key reprints string on new line	|
+|			|	 instead of each tracking, one ft which	|
+|			| 	keeps an eye on idx and loc constantly	|
 |-------------------------------------------------------|
 |			|	3. COPY-CUT-PASTE						|
 |			|	edit in middle of line in correct loc	|

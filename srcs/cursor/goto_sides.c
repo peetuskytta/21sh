@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 17:06:00 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/06 15:49:02 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/10 18:12:03 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,57 @@ static int	ft_finword_rev(char *str)
 	return (i + 1);
 }
 
+static void	goto_coordinates(t_shell *shell, t_win *window, int key)
+{
+	if (key == 'l')
+	{
+		if (window->loc == 0 && window->idx > 0)
+		{
+			window->loc = window->cols;
+			window->current_row--;
+			window->idx--;
+		}
+		else
+		{
+			if (window->idx == 0 && window->loc <= shell->prmpt_len)
+				return ;
+			window->loc -= 1;
+		}
+		cursor_load(shell, window->loc, window->current_row);
+	}
+	else
+	{
+		if (window->cols == window->loc && window->row_idx[window->idx + 1])
+		{
+			window->loc = 0;
+			window->current_row += 1;
+			window->idx += 1;
+		}
+		else
+		{
+			if (window->idx == 0
+				&& window->loc > shell->cmd_idx + shell->prmpt_len)
+				return ;
+			else if (window->idx > 0 
+				&& window->loc >= ft_strilen(window->row_idx[window->idx]))
+				return ;
+			window->loc += 1;
+		}
+		cursor_load(shell, window->loc, window->current_row);
+	}
+}
+
 int	goto_sides(t_shell *shell, t_win *window, int key)
 {
 	int	ws;
 
-	if (key == 'l')
+	if (key == 'l' || key == 'r')
 	{
-		chrcpy_str_rev(shell->cmd_line, shell->rev_cmd, MAX_BUFF, 1);
-		tputs(tgetstr("le", NULL), 1, stdin_char);
-		window->loc -= 1;
-	}
-	else if (key == 'r')
-	{
-		chrcpy_str_rev(shell->rev_cmd, shell->cmd_line, MAX_BUFF, 1);
-		tputs(tgetstr("nd", NULL), 1, stdin_char);
-		window->loc += 1;
+		if (key == 'l')
+			chrcpy_str_rev(shell->cmd_line, shell->rev_cmd, MAX_BUFF, 1);
+		else
+			chrcpy_str_rev(shell->rev_cmd, shell->cmd_line, MAX_BUFF, 1);
+		goto_coordinates(shell, window, key);
 	}
 	else if (key == 98)
 	{
