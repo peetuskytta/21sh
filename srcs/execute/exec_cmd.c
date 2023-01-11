@@ -12,36 +12,30 @@
 
 #include "../../includes/execute.h"
 
-static void pipe_last_first(int pipe, int *fd_in, int *fd_out)
+void pipe_last_first(int pipe, int *fd_in, int *fd_out)
 {
 	if (pipe == PIPE_FIRST)
 	{
-		close(*fd_in);
 		*fd_in = -1;
+		dup2(*fd_out, STDOUT_FILENO);
 	}
 	else if (pipe == PIPE_LAST)
 	{
-		close(*fd_out);
 		*fd_out = -1;
+		dup2(*fd_in, STDIN_FILENO);
 	}
 }
 
-static void	change_io(t_exec *data)
+void	change_io(t_exec *data)
 {
 	if (data->fds.pipe != -1)
 		pipe_last_first(data->fds.pipe, &data->fds.fd_in, &data->fds.fd_out);
 	else
 	{
 		if (data->fds.fd_out > 0)
-		{
 			dup2(data->fds.fd_out, STDOUT_FILENO);
-			close(data->fds.fd_out);
-		}
 		if (data->fds.fd_in > 0)
-		{
 			dup2(data->fds.fd_in, STDIN_FILENO);
-			close(data->fds.fd_in);
-		}
 	}
 	if (data->redir->file != NULL) //not working with infile yet
 	{
@@ -57,15 +51,14 @@ static void	execute_command(t_exec data, char *bin_path, char **env_cpy)
 	pid.child = fork();
 	if (pid.child == 0)
 	{
-		ft_printf("pipe:{%d}  ", data.fds.pipe);
 		change_io(&data);
-		ft_printf("in:{%d}, out:{%d}\n", data.fds.fd_in, data.fds.fd_out);
-		//exit(111);
 		if (execve(bin_path, data.args, env_cpy) == -1)
 		{
 			ft_perror(EXECVE_ERROR);
 			exit(EXIT_FAILURE);
 		}
+		close(data.fds.fd_in);
+		close(data.fds.fd_out);
 		close (data.redir->fildes);
 		exit(EXIT_SUCCESS);
 	}
@@ -77,6 +70,8 @@ static void	execute_command(t_exec data, char *bin_path, char **env_cpy)
 		if (pid.wait == -1)
 			ft_perror(WAITPID_FAIL);
 	}
+	close(data.fds.fd_in);
+	close(data.fds.fd_out);
 }
 
 void	exec_cmd(t_exec data, char **env_cpy)

@@ -23,7 +23,7 @@ void ast_print(t_ast *tree)
 				ft_putstr("  RED->  |  ");
 			while (tree->data.redir[i].file)
 				ft_printf("%s  |  ", tree->data.redir[i++].file);
-			NL;
+			//NL;
 		}
 	}
 	ast_print(tree->left);
