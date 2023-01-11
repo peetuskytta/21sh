@@ -12,7 +12,11 @@
 
 #include "../../includes/execute.h"
 
-void pipe_last_first(int pipe, int *fd_in, int *fd_out)
+/*
+**	Closes the STDIN_FILENO or STDOUT_FILENO for the start and end of the pipe
+**	We don't want to read in the pipe beginning and write to the pipe end.
+*/
+static void pipe_ends(int pipe, int *fd_in, int *fd_out)
 {
 	if (pipe == PIPE_FIRST)
 	{
@@ -26,40 +30,58 @@ void pipe_last_first(int pipe, int *fd_in, int *fd_out)
 	}
 }
 
-void	change_io(t_exec *data)
+/*
+**	Closes the STDIN_FILENO or STDOUT_FILENO and sets the in and out
+**	of the command to be executed for pipes and redirections.
+*/
+static void	change_in_and_out(t_exec *data)
 {
 	if (data->fds.pipe != -1)
-		pipe_last_first(data->fds.pipe, &data->fds.fd_in, &data->fds.fd_out);
+		pipe_ends(data->fds.pipe, &data->fds.fd_in, &data->fds.fd_out);
 	else
 	{
-		if (data->fds.fd_out > 0)
+		if (data->fds.fd_out >= 0)
 			dup2(data->fds.fd_out, STDOUT_FILENO);
-		if (data->fds.fd_in > 0)
+		if (data->fds.fd_in >= 0)
 			dup2(data->fds.fd_in, STDIN_FILENO);
 	}
 	if (data->redir->file != NULL) //not working with infile yet
 	{
 		dup2(data->redir->fildes, STDOUT_FILENO);
-		close (data->redir->fildes);
+		close(data->redir->fildes);
 	}
 }
 
-static void	execute_command(t_exec data, char *bin_path, char **env_cpy)
+/*
+**	Closes all the filedescriptors. Moved to a separate function
+**	to fit the NORM.
+*/
+static void close_fds(int fd_in, int fd_out)
+{
+	if (fd_in >= 0)
+		close(fd_in);
+	if (fd_out >= 0)
+		close(fd_out);
+}
+
+/*
+**	Performs input/output change before fork and execution of a command.
+*/
+void	exec_cmd(t_exec data, char *bin_path, char **env_cpy)
 {
 	t_pid	pid;
 
 	pid.child = fork();
 	if (pid.child == 0)
 	{
-		change_io(&data);
+		change_in_and_out(&data);
 		if (execve(bin_path, data.args, env_cpy) == -1)
 		{
 			ft_perror(EXECVE_ERROR);
 			exit(EXIT_FAILURE);
 		}
-		close(data.fds.fd_in);
-		close(data.fds.fd_out);
-		close (data.redir->fildes);
+		close_fds(data.fds.fd_in, data.fds.fd_out);
+		close(data.redir->fildes);
 		exit(EXIT_SUCCESS);
 	}
 	else if (pid.child < 0)
@@ -70,16 +92,5 @@ static void	execute_command(t_exec data, char *bin_path, char **env_cpy)
 		if (pid.wait == -1)
 			ft_perror(WAITPID_FAIL);
 	}
-	close(data.fds.fd_in);
-	close(data.fds.fd_out);
-}
-
-void	exec_cmd(t_exec data, char **env_cpy)
-{
-	char	*bin_path;
-
-	bin_path = exec_find_binary(exec_fetch_path_var(env_cpy), data.cmd);
-	if (redirection_loop(&data) && exec_binary_check(bin_path, data.cmd))
-		execute_command(data, bin_path, env_cpy);
-	exec_clear_data(&data, bin_path);
+	close_fds(data.fds.fd_in, data.fds.fd_out);
 }

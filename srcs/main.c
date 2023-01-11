@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/11 16:54:34 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/12 00:04:18 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,25 +61,11 @@ static void	cmd_line_reset(t_shell *shell)
 		input_row_len(shell, &shell->window);
 	shell->cmd_idx = 0;
 	shell->end = 0;
-	//NL;
+	NL;
 	cmd_line_prompt(shell->quote);
 	init_prompt(shell);
 	shell->window.loc = shell->prmpt_len;
 }
-
-/*
-** We have to close the STDIN, STDOUT, and STDERR before re-opening them.
-** This way we get the right 0,1,2 as the filedescriptors.
-*/
-/* static void	reset_terminal(char *terminal)
-{
-	close(STDIN_FILENO);
-	open(terminal, O_RDWR);
-	close(STDOUT_FILENO);
-	open(terminal, O_RDWR);
-	close(STDERR_FILENO);
-	open(terminal, O_RDWR);
-} */
 
 /*
 ** In a loop reads input. Parses. Builds tree. Executes tree.
@@ -105,7 +91,6 @@ static void	run_shell(t_shell *shell)
 			cursor_find(shell, &shell->window);
 			cmd_line_reset(shell);
 			cursor_load(shell, shell->window.loc, shell->window.current_row);
-		//	reset_terminal(shell->tty);
 		}
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialise.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:31:07 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/05 10:54:31 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/12 00:00:53 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ void	init_term(void);
 void	init_prompt(t_shell *shell);
 void	init_row_idx(t_win *window);
 void	init_window(t_win *window);
+void	init_in_out_err(char *terminal);
 
 #endif

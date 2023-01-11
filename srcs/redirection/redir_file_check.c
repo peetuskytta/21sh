@@ -6,12 +6,15 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 15:11:08 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/07 19:15:05 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/12 00:11:20 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/redirection.h"
 
+/*
+**	Outputs the error message according to the status.
+*/
 static void	file_error(int *status, char *str)
 {
 	if (*status == FILE_PERM)
@@ -35,6 +38,10 @@ static void	file_error(int *status, char *str)
 	*status = FILE_ERR;
 }
 
+/*
+**	Opens file to write in APPEND or TRUNCATE mode. Checks existense
+**	and file permissions and sets the status for later use.
+*/
 static void	open_redirection(t_redir *redir, int *status)
 {
 	if (redir->type == FILE_TRUNC)
@@ -59,6 +66,10 @@ static void	open_redirection(t_redir *redir, int *status)
 	}
 }
 
+/*
+**	Checks that the redirection file is not a directory and if it exists
+**	or not. Performs a set of checks and if all is fine status GO is returned.
+*/
 int	redir_file_check(t_redir *redir)
 {
 	int			status;
@@ -72,6 +83,5 @@ int	redir_file_check(t_redir *redir)
 		open_redirection(redir, &status);
 	if (status != GO)
 		file_error(&status, redir->file);
-//	ft_putnbr_endl(status);
 	return (status);
 }

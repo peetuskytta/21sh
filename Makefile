@@ -62,7 +62,8 @@ _INIT := init_shell.c \
 		init_window.c \
 		init_prompt.c \
 		init_term.c \
-		init_row_idx.c
+		init_row_idx.c \
+		init_in_out_err.c
 
 _INPUT := read_quote.c \
 		cmd_line.c \

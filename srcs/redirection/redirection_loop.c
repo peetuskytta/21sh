@@ -12,13 +12,11 @@
 
 #include "../../includes/redirection.h"
 
-// static bool	redir_folders(char *str)
-// {
-// 	if (ft_strchr(str, '/'))
-// 		return (true);
-// 	return (false);
-// }
-
+/*
+**	Opens all the redirection files in one command and closes the previous
+**	if there are more to be opened. Last one stays "active" and is used
+**	later when FDs are set.
+*/
 bool	redirection_loop(t_exec *data)
 {
 	int	idx;

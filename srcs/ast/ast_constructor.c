@@ -12,22 +12,6 @@
 
 #include "../../includes/ast.h"
 
-/*static int	count_semicolon(char *cmd_line)
-{
-	int	i;
-
-	i = 0;
-	while (*cmd_line)
-	{
-		if (*cmd_line == CHAR_SEMICOLON)
-			i++;
-		cmd_line++;
-	}
-	if (i == 0)
-		return (1);
-	return (i);
-}*/
-
 static bool	ast_sniff_for_pipe(t_tok *token)
 {
 	t_tok	*tmp;

@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/10 22:41:14 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/11 22:33:22 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,14 +105,6 @@ typedef struct s_pid
 	int				wait;
 	int				status;
 }					t_pid;
-
-typedef enum e_pipe_fd
-{
-	PIPE_READ,
-	PIPE_WRITE,
-	PIPE_FIRST,
-	PIPE_LAST,
-}			t_pipe_fd;
 
 #endif
 

@@ -12,6 +12,10 @@
 
 #include "../../includes/execute.h"
 
+/*
+**	copies the environment for the execution. Used to change environment
+**	before execution so we don't mess up the parent's environment.
+*/
 static char	**copy_environment(char **environ)
 {
 	char	**copy;
@@ -29,6 +33,27 @@ static char	**copy_environment(char **environ)
 	return (copy);
 }
 
+/*
+**	Begins the process of finding the binary, opening redirections, checking
+**	binary file's execution rights before executing the command.
+**	Clears data after each command, succesful or not.
+*/
+static void	command_execution(t_exec data, char **env_cpy)
+{
+	char	*bin_path;
+
+	bin_path = exec_find_binary(exec_fetch_path_var(env_cpy), data.cmd);
+	if (redirection_loop(&data) && exec_binary_check(bin_path, data.cmd))
+		exec_cmd(data, bin_path, env_cpy);
+	exec_clear_data(&data, bin_path);
+}
+
+/*
+**	Recursive approach to execute the commands in the tree branches. First
+**	call itself on the left branch (where command info is stored) and then
+**	if the right is valid it calls itself on the right and continues.
+**	ast_release will clear the branch.
+*/
 void	exec_branch(t_ast *branch, t_shell *shell)
 {
 	char	**env_cpy;
@@ -37,7 +62,7 @@ void	exec_branch(t_ast *branch, t_shell *shell)
 		return ;
 	env_cpy = copy_environment(shell->environ);
 	if ((branch->type == REDIR || branch->type == COMMAND))
-		exec_cmd(branch->data, env_cpy);
+		command_execution(branch->data, env_cpy);
 	exec_branch(branch->left, shell);
 	if (branch->type == PIPE)
 		exec_branch(branch->right, shell);
