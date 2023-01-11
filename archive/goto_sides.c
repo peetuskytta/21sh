@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 17:06:00 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/10 18:12:03 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/11 17:11:09 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	goto_coordinates(t_shell *shell, t_win *window, int key)
 			if (window->idx == 0
 				&& window->loc > shell->cmd_idx + shell->prmpt_len)
 				return ;
-			else if (window->idx > 0 
+			else if (window->idx > 0
 				&& window->loc >= ft_strilen(window->row_idx[window->idx]))
 				return ;
 			window->loc += 1;

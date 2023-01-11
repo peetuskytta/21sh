@@ -6,14 +6,20 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 12:49:26 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/10 17:58:16 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/11 18:13:17 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-void	cursor_load(t_shell *shell, int x, int y)
+void	cursor_load(t_shell *shell, t_win *win, int len)
 {
-	shell->env_iflg = 0;
-	ft_putstr(tgoto(tgetstr("cm", NULL), x, y));
+	int	max;
+	int	min;
+
+	if (win->idx == 0)
+	{
+		
+	}
+	ft_putstr(tgoto(tgetstr("cm", NULL), x, ));
 }

@@ -42,13 +42,13 @@ _SRCS :=  main.c \
 		logo.c
 
 _CURSOR := cursor_reset_line.c \
-		cursor_row_col.c \
 		cursor_load.c \
-		cursor_find.c \
-		goto_newline.c \
-		goto_sides.c \
-		goto_word.c \
-		goto_end.c
+		cursor_find.c 
+# cursor_row_col.c \
+# goto_newline.c \
+# goto_sides.c \
+# goto_word.c \
+# goto_end.c
 
 _EXECUTE := exec_tree.c \
 		exec_branch.c \
