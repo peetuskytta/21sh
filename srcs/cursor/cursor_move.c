@@ -6,18 +6,20 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 12:49:26 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/12 14:51:32 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/12 18:03:43 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-static int	move_cursor_right(t_win *win, int len)
+static int	move_cursor_right(t_shell *shell, t_win *win, int len)
 {
 	int	max;
 
 	len = win->loc + len;
-	if (win->row_idx[win->idx + 1] == NULL)
+	if (win->idx == 0 && win->row_idx[win->idx + 1] == NULL)
+		max = shell->prmpt_len + shell->cmd_idx;
+	else if (win->idx > 0 && win->row_idx[win->idx + 1] == NULL)
 		max = ft_strilen(win->row_idx[win->idx]);
 	else
 		max = win->cols;
@@ -61,7 +63,7 @@ int	cursor_move(t_shell *shell, t_win *win, int len, int key)
 	if (key == 'l')
 		return (move_cursor_left(shell, win, len));
 	else if (key == 'r')
-		return (move_cursor_right(win, len));
+		return (move_cursor_right(shell, win, len));
 	else
 		return (0);
 }

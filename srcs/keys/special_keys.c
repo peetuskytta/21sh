@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 17:00:36 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/12 10:38:40 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/12 17:57:38 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,18 +99,19 @@ static int	is_opt_arrow(t_shell *shell, t_win *window, char *input, int *i)
 
 static int	is_arrow(t_shell *shell, t_win *window, char *input, int *i)
 {
-	(void)window;
 	if (input[1] == 91 && input[2] == 68 && input[3] == 0)
 	{
 		*i += 3;
+		if (cursor_move(shell, window, 1, 'l') == 1)
+			cursor_load(shell, window);
 		return (1);
-		// goto_sides(shell, window, 'l'));
 	}
 	else if (input[1] == 91 && input[2] == 67 && input[3] == 0)
 	{
 		*i += 3;
+		if (cursor_move(shell, window, 1, 'r') == 1)
+			cursor_load(shell, window);
 		return (1);
-		// goto_sides(shell, window, 'r'));
 	}
 	else if (input[1] == 91 && input[2] == 66 && input[3] == 0)
 	{
