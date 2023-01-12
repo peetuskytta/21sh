@@ -42,8 +42,9 @@ _SRCS :=  main.c \
 		logo.c
 
 _CURSOR := cursor_reset_line.c \
-		cursor_load.c \
+		cursor_move.c \
 		cursor_find.c \
+		cursor_load.c \
 		goto_newline.c
 # cursor_row_col.c \
 # goto_sides.c \

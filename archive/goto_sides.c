@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 17:06:00 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/11 17:11:09 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/12 14:42:50 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	goto_coordinates(t_shell *shell, t_win *window, int key)
 				return ;
 			window->loc -= 1;
 		}
-		cursor_load(shell, window->loc, window->current_row);
+		// cursor_load(shell, window->loc, window->current_row);
 	}
 	else
 	{
@@ -69,7 +69,7 @@ static void	goto_coordinates(t_shell *shell, t_win *window, int key)
 				return ;
 			window->loc += 1;
 		}
-		cursor_load(shell, window->loc, window->current_row);
+		// cursor_load(shell, window->loc, window->current_row);
 	}
 }
 

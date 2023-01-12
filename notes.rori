@@ -5,7 +5,7 @@ TO BE DONE:
 
 REASONABLY DONE:
 - ERRORS - together 70%
-- BUILTINS - together 75%
+- BUILTINS - together 75% >> "\nexit\n" for exit builtin sent to kill_mode
 	- does setenv need to be sensitive to "na=me"=surname type of argument?
 - CURSOR - rori 75%
 - HISTORY - together 95%
@@ -29,22 +29,14 @@ DONE DONE:
 |			|	21sh: jsdsjdjd: command not found$		|
 |-------------------------------------------------------|
 |			|	2. CONTROL THE CURSOR					|
-|			|	need to account for cols and row_idx:	|
-|			|	cmd_line_reprint reprints wrongly		|
-|			|	goto_sides, goto_word, goto_end			|
-|			|	delete_key reprints string on new line	|
-|			|	 instead of each tracking, one ft which	|
-|			| 	keeps an eye on idx and loc constantly	|
+|			|	if (cursor_move == 1) > cursor_load		|
+|			|	need to make sure idx & loc don't		|
+|			|	break when typing or pasting in middle	|
 |-------------------------------------------------------|
 |			|	3. COPY-CUT-PASTE						|
 |			|	edit in middle of line in correct loc	|
 |-------------------------------------------------------|
-|			|	4. HISTORY MULTILINE					|
-|			|	save and recall history with multiline	|
-|			|	at least needs to be fixed in the file	|
-|			|	add '\n' if ENTER, if an open quote		|
-|-------------------------------------------------------|
-|			|	5. QUOTES								|
+|			|	4. QUOTES								|
 |			|	need to check input has enough space	|
 |			|	to hold a long long line w/ open quote	|
 |-------------------------------------------------------|

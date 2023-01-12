@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/12 11:04:11 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/12 14:48:20 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	run_shell(t_shell *shell)
 			}
 			cursor_find(shell, &shell->window);
 			cmd_line_reset(shell, &shell->window);
-			cursor_load(shell, &shell->window, shell->prmpt_len);
+			cursor_load(shell, &shell->window);
 		}
 	}
 }
