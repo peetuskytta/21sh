@@ -29,7 +29,7 @@ DONE DONE:
 |			|	21sh: jsdsjdjd: command not found$		|
 |-------------------------------------------------------|
 |			|	2. CONTROL THE CURSOR					|
-|			|	if (cursor_move == 1) > cursor_load		|
+|			|	cursor moves NOW MEMORY NEEDS TO AS WELL|
 |			|	need to make sure idx & loc don't		|
 |			|	break when typing or pasting in middle	|
 |-------------------------------------------------------|
