@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_cmd_redir.c                                :+:      :+:    :+:   */
+/*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/02 10:15:33 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/03 17:38:02 by pskytta          ###   ########.fr       */
+/*   Created: 2023/01/12 12:40:28 by pskytta           #+#    #+#             */
+/*   Updated: 2023/01/12 14:29:36 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 **	Closes the STDIN_FILENO or STDOUT_FILENO for the start and end of the pipe
 **	We don't want to read in the pipe beginning and write to the pipe end.
 */
-static void pipe_ends(int pipe, int *fd_in, int *fd_out)
+static void	pipe_ends(int pipe, int *fd_in, int *fd_out)
 {
 	if (pipe == PIPE_FIRST)
 	{
@@ -34,8 +34,13 @@ static void pipe_ends(int pipe, int *fd_in, int *fd_out)
 **	Closes the STDIN_FILENO or STDOUT_FILENO and sets the in and out
 **	of the command to be executed for pipes and redirections.
 */
+//not working with infile yet
 static void	change_in_and_out(t_exec *data)
 {
+	if (data->redir->type == FILE_IN)
+	{
+		
+	}
 	if (data->fds.pipe != -1)
 		pipe_ends(data->fds.pipe, &data->fds.fd_in, &data->fds.fd_out);
 	else
@@ -45,7 +50,7 @@ static void	change_in_and_out(t_exec *data)
 		if (data->fds.fd_in >= 0)
 			dup2(data->fds.fd_in, STDIN_FILENO);
 	}
-	if (data->redir->file != NULL) //not working with infile yet
+	if (data->redir->file != NULL)
 	{
 		dup2(data->redir->fildes, STDOUT_FILENO);
 		close(data->redir->fildes);
@@ -56,7 +61,7 @@ static void	change_in_and_out(t_exec *data)
 **	Closes all the filedescriptors. Moved to a separate function
 **	to fit the NORM.
 */
-static void close_fds(int fd_in, int fd_out)
+static void	close_fds(int fd_in, int fd_out)
 {
 	if (fd_in >= 0)
 		close(fd_in);

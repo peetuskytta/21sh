@@ -42,6 +42,7 @@ static void	command_execution(t_exec data, char **env_cpy)
 {
 	char	*bin_path;
 
+	// check for builtin
 	bin_path = exec_find_binary(exec_fetch_path_var(env_cpy), data.cmd);
 	if (redirection_loop(&data) && exec_binary_check(bin_path, data.cmd))
 		exec_cmd(data, bin_path, env_cpy);
