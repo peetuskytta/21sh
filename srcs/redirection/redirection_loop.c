@@ -12,43 +12,34 @@
 
 #include "../../includes/redirection.h"
 
-static bool	file_or_folders(char *str)
-{
-	if (ft_strchr(str, '/'))
-		return (true);
-	return (false);
-}
-
-void	redir_open_file(t_redir redir)
-{
-	(void)redir;
-
-}
-
-void	redirection_loop(t_exec *data)
+/*
+**	Opens all the redirection files in one command and closes the previous
+**	if there are more to be opened. Last one stays "active" and is used
+**	later when FDs are set.
+*/
+bool	redirection_loop(t_exec *data)
 {
 	int	idx;
 
 	idx = 0;
-	while (data->redir[idx].file != NULL)
+	while (data->redir[idx].file)
 	{
-		if (file_or_folders(data->redir[idx].file))
+		if (redir_file_check(&data->redir[idx]) == GO)
 		{
-			//status = data->redir_folder_check();
-			;//do the folder path check
-		}
-		else
-		{
-			if (redir_file_check(data->redir[idx].file) == GO)
+			if (data->redir[idx + 1].file)
 			{
-				redir_open_file(data->redir[idx]);
-				if (data->redir[idx + 1].file)
-					close(data->redir[idx].fildes);
+				close(data->redir->fildes);
+				data->redir[idx].fildes = -1;
 			}
 			else
-				return ;
+			{
+				data->redir[0].fildes = data->redir[idx].fildes;
+				return (true);
+			}
 		}
+		else
+			return (false);
 		idx++;
 	}
-	//DECIDE WHAT TO DO WITH THE LAST ITEM (CHANGE FDs already or after the fork)
+	return (true);
 }

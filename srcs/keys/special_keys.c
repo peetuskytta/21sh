@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 17:00:36 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/10 18:15:27 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/12 10:38:40 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,18 @@ static int	is_home_end(t_shell *shell, t_win *window, char *input, int *i)
 	int	len;
 
 	len = shell->cmd_idx;
+	(void)window;
 	if (input[1] == '[' && input[2] == 'H' && input[3] == 0)
 	{
 		*i += 4;
 		chrcpy_str_rev(shell->cmd_line, shell->rev_cmd, MAX_BUFF, len);
-		goto_end(shell, window, 'H');
+		// goto_end(shell, window, 'H');
 		return (1);
 	}
 	else if (input[1] == '[' && input[2] == 'F' && input[3] == 0)
 	{
 		*i += 4;
-		goto_end(shell, window, 'F');
+		// goto_end(shell, window, 'F');
 		return (1);
 	}
 	else
@@ -64,15 +65,19 @@ static int	is_home_end(t_shell *shell, t_win *window, char *input, int *i)
 
 static int	is_opt_arrow(t_shell *shell, t_win *window, char *input, int *i)
 {
+	(void)shell;
+		(void)window;
 	if (input[1] == 'b')
 	{
 		*i += 6;
-		return (goto_sides(shell, window, 98));
+		return (1);
+		// goto_sides(shell, window, 98));
 	}
 	else if (input[1] == 'f')
 	{
 		*i += 6;
-		return (goto_sides(shell, window, 102));
+		return (1);
+		// goto_sides(shell, window, 102));
 	}
 	else if (input[1] == '[' && input[2] == '1' && input[3] == ';'
 		&& input[4] == '3' && input[5] == 'A' && input[6] == 0)
@@ -94,15 +99,18 @@ static int	is_opt_arrow(t_shell *shell, t_win *window, char *input, int *i)
 
 static int	is_arrow(t_shell *shell, t_win *window, char *input, int *i)
 {
+	(void)window;
 	if (input[1] == 91 && input[2] == 68 && input[3] == 0)
 	{
 		*i += 3;
-		return (goto_sides(shell, window, 'l'));
+		return (1);
+		// goto_sides(shell, window, 'l'));
 	}
 	else if (input[1] == 91 && input[2] == 67 && input[3] == 0)
 	{
 		*i += 3;
-		return (goto_sides(shell, window, 'r'));
+		return (1);
+		// goto_sides(shell, window, 'r'));
 	}
 	else if (input[1] == 91 && input[2] == 66 && input[3] == 0)
 	{

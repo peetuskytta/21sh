@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:05:15 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/04 10:04:45 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/12 00:16:30 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "ast.h"
 
 /*
-** Adds the token type WORD to the arguments array
+** Adds the token type WORD to the arguments array.
 */
 static void	ast_add_arguments(t_tok ***token, t_ast *branch, int *i)
 {

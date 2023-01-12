@@ -19,6 +19,7 @@ static char	*exec_binary_path(char **path, char *cmd)
 	char			**cpy;
 
 	cpy = path;
+	temp = NULL;
 	while (*cpy)
 	{
 		temp = ft_strjoin(*cpy, "/");
@@ -35,6 +36,8 @@ static char	*exec_binary_path(char **path, char *cmd)
 
 char	*exec_find_binary(char **path, char *cmd)
 {
+	if (cmd == NULL)
+		return (NULL);
 	if (ft_is_directory(cmd))
 	{
 		ft_print_fd(STDERR_FILENO, "21sh: %s: Is a directory", cmd);

@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 13:36:22 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/10 17:23:03 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/12 10:35:15 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	cmd_line_reprint(t_shell *shell, t_win *window, char c)
 		ft_putstr_fd(shell->cmd_line, STDIN_FILENO);
 		stdin_char(c);
 		input_rev_cmd(shell);
-		cursor_load(shell, window->loc + 1, window->current_row);
+		cursor_load(shell, window, x);
 	}
 	else
 	{
@@ -39,7 +39,7 @@ void	cmd_line_reprint(t_shell *shell, t_win *window, char c)
 		//ft_putstr_fd(window->row_idx[window->idx], STDIN_FILENO);
 		stdin_char(c);
 		input_rev_cmd(shell);
-		cursor_load(shell, window->loc - 1, window->current_row - window->idx);
+		cursor_load(shell, window, x);
 	}
 	close(fd);
 }

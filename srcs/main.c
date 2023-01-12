@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/07 14:24:25 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/12 11:04:11 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void	cmd_line_reset(t_shell *shell, t_win *window)
 		ft_memset(shell->cmd_line, '\0', sizeof(char) * (MAX_BUFF + 1));
 		ft_memset(shell->temp, '\0', sizeof(char) * (MAX_BUFF + 1));
 		ft_memset(window->row_idx, 0, sizeof(char *) * (MAX_BUFF));
+		ft_memset(shell->input, 0, sizeof(char *) * (MAX_BUFF + 1));
 		window->idx = 0;
 		shell->cmd_idx = 0;
 		window->row_idx[window->idx] = &shell->cmd_line[0];
@@ -28,20 +29,6 @@ static void	cmd_line_reset(t_shell *shell, t_win *window)
 	cmd_line_prompt(shell->quote);
 	init_prompt(shell);
 	window->loc = shell->prmpt_len;
-}
-
-/*
-** We have to close the STDIN, STDOUT, and STDERR before re-opening them.
-** This way we get the right 0,1,2 as the filedescriptors.
-*/
-static void	reset_terminal(char *terminal)
-{
-	close(STDIN_FILENO);
-	open(terminal, O_RDWR);
-	close(STDOUT_FILENO);
-	open(terminal, O_RDWR);
-	close(STDERR_FILENO);
-	open(terminal, O_RDWR);
 }
 
 /*
@@ -67,8 +54,7 @@ static void	run_shell(t_shell *shell)
 			}
 			cursor_find(shell, &shell->window);
 			cmd_line_reset(shell, &shell->window);
-			cursor_load(shell, shell->window.loc, shell->window.current_row);
-			reset_terminal(shell->tty);
+			cursor_load(shell, &shell->window, shell->prmpt_len);
 		}
 	}
 }

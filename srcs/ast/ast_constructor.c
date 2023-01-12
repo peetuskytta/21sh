@@ -12,22 +12,6 @@
 
 #include "../../includes/ast.h"
 
-/*static int	count_semicolon(char *cmd_line)
-{
-	int	i;
-
-	i = 0;
-	while (*cmd_line)
-	{
-		if (*cmd_line == CHAR_SEMICOLON)
-			i++;
-		cmd_line++;
-	}
-	if (i == 0)
-		return (1);
-	return (i);
-}*/
-
 static bool	ast_sniff_for_pipe(t_tok *token)
 {
 	t_tok	*tmp;
@@ -68,6 +52,8 @@ static t_ast	*ast_create_pipe(int type)
 
 	branch = (t_ast *)ft_memalloc(sizeof(t_ast));
 	allocation_check((void *)&branch);
+	ft_memset((void *)&branch->pipes, -1, sizeof(t_pipe) * 512);
+	ft_memset((void *)&branch->data.fds, -1, sizeof(t_fds));
 	branch->type = type;
 	branch->right = NULL;
 	branch->left = NULL;
@@ -80,6 +66,8 @@ static t_ast	*ast_create_left(t_tok ***token, t_ast *branch)
 	allocation_check((void *)&branch);
 	branch->type = ast_sniff_for_type((**token));
 	ft_memset(&branch->data.redir, 0, sizeof(t_redir) * 512);
+	ft_memset(&branch->pipes, -1, sizeof(t_pipe) * 512);
+	ft_memset(&branch->data.fds, -1, sizeof(t_fds));
 	ast_consume_tokens(token, branch, 0);
 	branch->right = NULL;
 	branch->left = NULL;
@@ -103,6 +91,7 @@ static t_ast	*ast_create_tree(t_tok **token)
 	{
 		(*token) = (*token)->next;
 		branch->right = ast_create_tree(token);
+		branch->type = PIPE;
 	}
 	return (branch);
 }

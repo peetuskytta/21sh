@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:24:46 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/05 11:01:12 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/12 10:27:58 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define ABORTED_ERROR "Process aborted."
 # define ERROR_EXIT "Exit error."
 # define NO_STRING ""
-# define STDOUT_FAIL "Failed to fetch the stdout. Terminate shell and try again."
+# define STDOUT_FAIL "Fail to fetch the stdout. Terminate shell and try again."
 
 /*Error message defines for CD*/
 # define CD_NO_HOME " HOME not set"

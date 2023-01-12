@@ -43,17 +43,16 @@ _SRCS :=  main.c \
 
 _CURSOR := cursor_reset_line.c \
 		cursor_load.c \
-		cursor_find.c 
+		cursor_find.c \
+		goto_newline.c
 # cursor_row_col.c \
-# goto_newline.c \
 # goto_sides.c \
 # goto_word.c \
 # goto_end.c
 
 _EXECUTE := exec_tree.c \
 		exec_branch.c \
-		exec_cmd_redir.c \
-		exec_cmd_simple.c \
+		exec_cmd.c \
 		exec_binary_check.c \
 		exec_find_binary.c \
 		exec_fetch_path_var.c \
@@ -62,7 +61,8 @@ _EXECUTE := exec_tree.c \
 _INIT := init_shell.c \
 		init_window.c \
 		init_prompt.c \
-		init_term.c
+		init_term.c \
+		init_in_out_err.c
 
 _INPUT := read_quote.c \
 		cmd_line.c \

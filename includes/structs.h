@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/06 15:41:23 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/12 10:27:22 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_fds
 	int				fd_out;
 	int				fd_err;
 	int				fd_close;
+	int				pipe;
 }					t_fds;
 
 typedef struct s_redir
@@ -70,7 +71,7 @@ typedef struct s_exec
 	char			*cmd;
 	char			*args[MAX_REDIR];
 	struct s_redir	redir[MAX_REDIR];
-	//struct s_fds	fds;
+	struct s_fds	fds;
 }					t_exec;
 
 typedef struct s_tok
@@ -85,12 +86,18 @@ typedef struct s_lex
 	t_tok			*token_list;
 }					t_lex;
 
+typedef struct s_pipe
+{
+	int				fd[2];
+}					t_pipe;
+
 typedef struct s_ast
 {
 	int				type;
 	struct s_exec	data;
 	struct s_ast	*left;
 	struct s_ast	*right;
+	struct s_pipe	pipes[MAX_REDIR];
 }					t_ast;
 
 typedef struct s_pid
