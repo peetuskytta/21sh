@@ -12,13 +12,6 @@
 
 #include "ast.h"
 
-/*static bool	ft_charcmp(char one, char two)
-{
-	if (one == two)
-		return (true);
-	return (false);
-}*/
-
 static bool	type_error_case(char *str)
 {
 	if (ft_strstr(str, "<&>") || ft_strstr(str, ">&>"))

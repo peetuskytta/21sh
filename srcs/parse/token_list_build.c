@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 23:15:32 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/04 14:40:44 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/12 13:14:44 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ static bool	type_error_case(char *str)
 	return (false);
 }
 
+// error if ||| amount of sequencial pipes is more than one
 void	token_list_build(char *input, int size, t_lex *list)
 {
 	t_tok	*token;
@@ -126,7 +127,7 @@ void	token_list_build(char *input, int size, t_lex *list)
 			}
 			else if (ch_type == CHAR_SEMICOLON || ch_type == CHAR_PIPE)
 			{
-				if ((input[i] == CHAR_SEMICOLON && input[i + 1] == CHAR_SEMICOLON) || i == 0)
+				if (((input[i] == CHAR_SEMICOLON && input[i + 1] == CHAR_SEMICOLON) || (input[i] == CHAR_PIPE && input[i + 1] == CHAR_PIPE)) || i == 0)
 				{
 					ft_print_fd(2, "\n21sh parse error near `%c%c'\n",input[i], input[i + 1]);
 					token_list_free(list->token_list);

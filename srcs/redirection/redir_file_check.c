@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 15:11:08 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/13 11:08:20 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/13 11:24:16 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,21 @@ static void	file_error(int *status, char *str)
 	*status = FILE_ERR;
 }
 
+static void	open_file_in(t_redir *redir, int *status)
+{
+	if (access(redir->file, R_OK) == -1)
+		*status = FILE_PERM;
+	redir->fd_in = open(redir->file, O_RDONLY);
+	if (redir->fd_in < 0 && *status != FILE_PERM)
+		*status = NO_FILE;
+	if (redir->fd_in > 0)
+		*status = FILE_GO;
+}
+
 /*
 **	Opens file to write in APPEND or TRUNCATE mode. Checks existense
 **	and file permissions and sets the status for later use.
+**	In case of a file in open it for reading only.
 */
 static void	open_redirection_out(t_file *out, int *status)
 {
@@ -53,31 +65,10 @@ static void	open_redirection_out(t_file *out, int *status)
 			*status = NO_FILE;
 		if (out->file_fd > 0)
 			*status = GO;
-	}
 	if (out->type == FILE_APPEND)
-	{
-		if (access(out->file, W_OK) == -1)
-			*status = FILE_PERM;
-		out->file_fd = open(out->file, O_CREAT | O_WRONLY | O_APPEND, 0664);
-		if (out->file_fd < 0 && *status != FILE_PERM)
-			*status = NO_FILE;
-		if (out->file_fd > 0)
-			*status = GO;
 	}
-}
-
-static void	open_redirection_in(t_file *in, int *status)
-{
-	if (in->type == FILE_IN)
-	{
-		if (access(in->file, W_OK) == -1)
-			*status = FILE_PERM;
-		in->file_fd = open(in->file, O_RDONLY);
-		if (in->file_fd < 0 && *status != FILE_PERM)
-			*status = NO_FILE;
-		if (in->file_fd > 0)
-			*status = GO;
-	}
+	 if (redir->type_in == FILE_IN)
+		open_file_in(redir, status);
 }
 
 /*
@@ -86,7 +77,7 @@ static void	open_redirection_in(t_file *in, int *status)
 */
 int	redir_file_check(t_redir *redir)
 {
-	int			status;
+	int	status;
 
 	status = -1;
 	if (redir->file_out.file)

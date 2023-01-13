@@ -24,7 +24,7 @@ bool	redirection_loop(t_exec *data)
 	idx = 0;
 	while (data->redir[idx].file_in.file || data->redir[idx].file_out.file)
 	{
-		if (redir_file_check(&data->redir[idx]) == GO)
+		if (redir_file_check(&data->redir[idx]) == FILE_GO)
 		{
 			if (data->redir[idx + 1].file_out.file)
 			{

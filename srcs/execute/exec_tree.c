@@ -35,14 +35,11 @@ static void	setup_pipes(t_ast *temp, t_pipe *pipes, int idx)
 		return ;
 	if (temp->type == COMMAND || temp->type == REDIR)
 	{
-		//ft_putendl(temp->data.cmd);
 		if (idx == 0)
 			temp->data.fds.pipe = PIPE_FIRST;
 		if (pipes[idx].fd[PIPE_READ] == -1)
 			temp->data.fds.pipe = PIPE_LAST;
 		save_pipe_fd(&temp->data.fds, pipes, idx++);
-		//ft_putnbr_endl(idx);
-		//ft_printf("PIPE: [%d] IN: {%d}, OUT: {%d}\n\n", temp->data.fds.pipe, temp->data.fds.fd_in,temp->data.fds.fd_out);
 	}
 	setup_pipes(temp->left, pipes, idx++);
 	if (temp->type == PIPE)
@@ -50,6 +47,7 @@ static void	setup_pipes(t_ast *temp, t_pipe *pipes, int idx)
 		setup_pipes(temp->right, pipes, idx++);
 	}
 }
+
 /*
 *	Init_pipes function will open the correct number of pipes according to the
 *	type of the branch. Command "ls -l | grep file" will have one pipe opened.
@@ -106,13 +104,13 @@ void	exec_tree(t_ast **tree, t_shell *shell)
 	int	idx;
 
 	idx = 0;
-	NL;
+	ft_putendl("");
 	while (tree[idx])
 	{
 		piping(tree[idx]);
 		exec_branch(tree[idx], shell);
 		ft_memdel((void *)&tree[idx]);
-		init_in_out_err(shell->tty);
+		//init_in_out_err(shell->tty);
 		idx++;
 	}
 	ft_memdel((void *)&tree);
