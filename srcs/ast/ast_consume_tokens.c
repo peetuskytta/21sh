@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:05:15 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/12 00:16:30 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/13 08:58:15 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,16 @@ static void	ast_add_redir(t_tok ***token, t_redir *redir, int *idx)
 		if ((**token)->next->type == REDIR)
 		{
 			(**token) = (**token)->next;
-			redir[(*idx)].file = ft_strdup((**token)->str);
+			if (redir[(*idx)].file_in.type == FILE_IN)
+				redir[(*idx)].file_in.file = ft_strdup((**token)->str);
+			if (redir[(*idx)].file_out.type == FILE_APPEND || redir[(*idx)].file_out.type == FILE_TRUNC)
+				redir[(*idx)].file_out.file = ft_strdup((**token)->str);
 		}
 		else
-			redir[(*idx)].file = NULL;
+		{
+			redir[(*idx)].file_in.file = NULL;
+			redir[(*idx)].file_out.file = NULL;
+		}
 		(*idx)++;
 	}
 	else

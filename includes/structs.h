@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/11 22:33:22 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/13 08:51:43 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,17 @@ typedef struct s_fds
 	int				pipe;
 }					t_fds;
 
-typedef struct s_redir
+typedef struct s_file
 {
 	int				type;
-	int				fildes;
+	int				file_fd;
 	char			*file;
+}					t_file;
+
+typedef struct s_redir
+{
+	struct s_file	file_in;
+	struct s_file	file_out;
 }					t_redir;
 
 typedef struct s_exec

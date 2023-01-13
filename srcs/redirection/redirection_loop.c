@@ -22,18 +22,24 @@ bool	redirection_loop(t_exec *data)
 	int	idx;
 
 	idx = 0;
-	while (data->redir[idx].file)
+	while (data->redir[idx].file_in.file || data->redir[idx].file_out.file)
 	{
 		if (redir_file_check(&data->redir[idx]) == GO)
 		{
-			if (data->redir[idx + 1].file)
+			if (data->redir[idx + 1].file_out.file)
 			{
-				close(data->redir->fildes);
-				data->redir[idx].fildes = -1;
+				close(data->redir->file_out.file_fd);
+				data->redir[idx].file_out.file_fd = -1;
 			}
-			else
+			if (data->redir[idx + 1].file_in.file)
 			{
-				data->redir[0].fildes = data->redir[idx].fildes;
+				close(data->redir->file_in.file_fd);
+				data->redir[idx].file_in.file_fd = -1;
+			}
+			if (!data->redir[idx + 1].file_out.file || !data->redir[idx + 1].file_out.file)
+			{
+				data->redir[0].file_in.file_fd = data->redir[idx].file_in.file_fd;
+				data->redir[0].file_out.file_fd = data->redir[idx].file_out.file_fd;
 				return (true);
 			}
 		}

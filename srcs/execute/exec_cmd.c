@@ -45,11 +45,16 @@ static void	change_in_and_out(t_exec *data)
 		if (data->fds.fd_in >= 0)
 			dup2(data->fds.fd_in, STDIN_FILENO);
 	}
-	if (data->redir->file != NULL) //not working with infile yet
+	if (data->redir->file_out.file != NULL)
 	{
-		dup2(data->redir->fildes, STDOUT_FILENO);
-		close(data->redir->fildes);
+		dup2(data->redir->file_out.file_fd, STDOUT_FILENO);
+		close(data->redir->file_out.file_fd);
 	}
+	if (data->redir->file_in.file != NULL && data->fds.pipe == -1)
+	{
+
+	}
+
 }
 
 /*
