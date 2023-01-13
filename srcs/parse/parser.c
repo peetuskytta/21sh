@@ -13,7 +13,7 @@
 #include "../../includes/parse.h"
 
 /*DELETE BEFORE SUBMIT*/
-static void	token_list_print(t_tok *token)
+void	token_list_print(t_tok *token)
 {
 	t_tok	*temp;
 	int i;
@@ -34,14 +34,14 @@ static void	token_list_print(t_tok *token)
 
 t_tok	*parser(t_shell *shell)
 {
-	t_tok	*temp;
+	//t_tok	*temp;
 	t_lex	list;
 
 	ft_memset(&list, 0, sizeof(t_lex));
 	shell->cmd_idx *= 2;
 	if (shell->cmd_idx > 0)
 		token_list_build(shell->cmd_line, shell->cmd_idx, &list);
-	temp = list.token_list;
-	token_list_print(temp);
+	//temp = list.token_list;
+	//token_list_print(temp);
 	return (list.token_list);
 }

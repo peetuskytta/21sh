@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 15:11:08 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/13 11:24:16 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/13 14:40:50 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,37 +38,44 @@ static void	file_error(int *status, char *str)
 	*status = FILE_ERR;
 }
 
-static void	open_file_in(t_redir *redir, int *status)
-{
-	if (access(redir->file, R_OK) == -1)
-		*status = FILE_PERM;
-	redir->fd_in = open(redir->file, O_RDONLY);
-	if (redir->fd_in < 0 && *status != FILE_PERM)
-		*status = NO_FILE;
-	if (redir->fd_in > 0)
-		*status = FILE_GO;
-}
-
 /*
 **	Opens file to write in APPEND or TRUNCATE mode. Checks existense
 **	and file permissions and sets the status for later use.
-**	In case of a file in open it for reading only.
 */
-static void	open_redirection_out(t_file *out, int *status)
+static void	open_redirection(t_redir *redir, int *status)
 {
-	if (out->type == FILE_TRUNC)
+	if (redir->type == FILE_TRUNC)
 	{
-		if (access(out->file, W_OK) == -1)
+		if (access(redir->file, W_OK) == -1)
 			*status = FILE_PERM;
-		out->file_fd = open(out->file, O_CREAT | O_WRONLY | O_TRUNC, 0664);
-		if (out->file_fd < 0 && *status != FILE_PERM)
+		redir->fd_out = open(redir->file, O_CREAT | O_WRONLY | O_TRUNC, 0664);
+		if (redir->fd_out < 0 && *status != FILE_PERM)
 			*status = NO_FILE;
-		if (out->file_fd > 0)
-			*status = GO;
-	if (out->type == FILE_APPEND)
+		if (redir->fd_out > 0)
+			*status = FILE_OUT;
 	}
-	 if (redir->type_in == FILE_IN)
-		open_file_in(redir, status);
+	else if (redir->type == FILE_APPEND)
+	{
+		if (access(redir->file, W_OK) == -1)
+			*status = FILE_PERM;
+		redir->fd_out = open(redir->file, O_CREAT | O_WRONLY | O_APPEND, 0664);
+		if (redir->fd_out < 0 && *status != FILE_PERM)
+			*status = NO_FILE;
+		if (redir->fd_out > 0)
+			*status = FILE_OUT;
+	}
+	else if (redir->type == FILE_IN)
+	{
+		if (access(redir->file, F_OK) == -1)
+			*status = NO_FILE;
+		else if (access(redir->file, R_OK) == -1)
+			*status = FILE_PERM;
+		redir->fd_in = open(redir->file, O_RDONLY);
+		if (redir->fd_in < 0 && *status != FILE_PERM)
+			*status = NO_FILE;
+		if (redir->fd_in > 0)
+			*status = FILE_IN;
+	}
 }
 
 /*
@@ -77,28 +84,16 @@ static void	open_redirection_out(t_file *out, int *status)
 */
 int	redir_file_check(t_redir *redir)
 {
-	int	status;
+	int			status;
 
 	status = -1;
-	if (redir->file_out.file)
-	{
-		if (access(redir->file_out.file, F_OK) == 0 && !ft_is_directory(redir->file_out.file))
-			open_redirection_out(&redir->file_out, &status);
-		else if (ft_is_directory(redir->file_out.file))
-			status = FOLDER;
-		else
-			open_redirection_out(redir, &status);
-		if (status != GO)
-			file_error(&status, redir->file_out.file);
-	}
-	if (redir->file_in.file)
-	{
-		if (access(redir->file_in.file, F_OK) == 0 && !ft_is_directory(redir->file_in.file))
-			open_redirection_in(&redir->file_in, &status);
-		else
-			status = NO_FILE;
-		if (status != GO)
-			file_error(&status, redir->file_in.file);
-	}
+	if (access(redir->file, F_OK) == 0 && !ft_is_directory(redir->file))
+		open_redirection(redir, &status);
+	else if (ft_is_directory(redir->file))
+		status = FOLDER;
+	else
+		open_redirection(redir, &status);
+	if (status != FILE_IN || status != FILE_OUT)
+		file_error(&status, redir->file);
 	return (status);
 }

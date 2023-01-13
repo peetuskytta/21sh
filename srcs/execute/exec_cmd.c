@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:40:28 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/13 11:25:48 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/13 13:41:51 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 **	Closes the STDIN_FILENO or STDOUT_FILENO for the start and end of the pipe
 **	We don't want to read in the pipe beginning and write to the pipe end.
 */
-static void	pipe_ends(int pipe, int *fd_in, int *fd_out)
+static void pipe_ends(int pipe, int *fd_in, int *fd_out)
 {
 	if (pipe == PIPE_FIRST)
 	{
@@ -34,43 +34,41 @@ static void	pipe_ends(int pipe, int *fd_in, int *fd_out)
 **	Closes the STDIN_FILENO or STDOUT_FILENO and sets the in and out
 **	of the command to be executed for pipes and redirections.
 */
-//not working with infile yet
 static void	change_in_and_out(t_exec *data)
 {
-	if (data->redir->type == FILE_IN)
-	{
-
-	}
 	if (data->fds.pipe != -1)
 		pipe_ends(data->fds.pipe, &data->fds.fd_in, &data->fds.fd_out);
 	else
 	{
-		if (data->fds.fd_out >= 0)
+		if (data->fds.fd_out > 0)
 			dup2(data->fds.fd_out, STDOUT_FILENO);
-		if (data->fds.fd_in >= 0)
+		if (data->fds.fd_in > 0)
 			dup2(data->fds.fd_in, STDIN_FILENO);
 	}
-	if (data->redir->file_out.file != NULL)
+	if (data->redir->type == FILE_IN || data->redir->type == FILE_OUT)
 	{
-		dup2(data->redir->file_out.file_fd, STDOUT_FILENO);
-		close(data->redir->file_out.file_fd);
+		if (data->redir->fd_out > 0)
+		{
+			dup2(data->redir->fd_out, STDOUT_FILENO);
+			close(data->redir->fd_out);
+		}
+		if (data->redir->fd_in > 0)
+		{
+			dup2(data->redir->fd_in, STDIN_FILENO);
+			close(data->redir->fd_in);
+		}
 	}
-	if (data->redir->file_in.file != NULL && data->fds.pipe == -1)
-	{
-
-	}
-
 }
 
 /*
 **	Closes all the filedescriptors. Moved to a separate function
 **	to fit the NORM.
 */
-static void	close_fds(int fd_in, int fd_out)
+static void close_fds(int fd_in, int fd_out)
 {
-	if (fd_in >= 0)
+	if (fd_in > 0)
 		close(fd_in);
-	if (fd_out >= 0)
+	if (fd_out > 0)
 		close(fd_out);
 }
 
@@ -91,7 +89,6 @@ void	exec_cmd(t_exec data, char *bin_path, char **env_cpy)
 			exit(EXIT_FAILURE);
 		}
 		close_fds(data.fds.fd_in, data.fds.fd_out);
-		close(data.redir->fildes);
 		exit(EXIT_SUCCESS);
 	}
 	else if (pid.child < 0)

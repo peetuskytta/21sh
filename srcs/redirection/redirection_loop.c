@@ -12,6 +12,31 @@
 
 #include "../../includes/redirection.h"
 
+static bool	out_files(t_redir *redir, char *file)
+{
+	if (file)
+	{
+		close(redir->fd_out);
+		redir->fd_out = -1;
+		return (true);
+	}
+	else
+		return (false);
+}
+
+static bool	in_files(t_redir *redir, char *file)
+{
+	if (file)
+	{
+		close(redir->fd_in);
+		redir->fd_in = -1;
+		return (true);
+	}
+	else
+		return (false);
+}
+
+
 /*
 **	Opens all the redirection files in one command and closes the previous
 **	if there are more to be opened. Last one stays "active" and is used
@@ -20,26 +45,30 @@
 bool	redirection_loop(t_exec *data)
 {
 	int	idx;
+	int	status;
 
 	idx = 0;
-	while (data->redir[idx].file_in.file || data->redir[idx].file_out.file)
+	status = -1;
+	while (data->redir[idx].file)
 	{
-		if (redir_file_check(&data->redir[idx]) == FILE_GO)
+		status = redir_file_check(&data->redir[idx]);
+		if (status == FILE_OUT)
 		{
-			if (data->redir[idx + 1].file_out.file)
+			if (out_files(&data->redir[idx], data->redir[idx + 1].file))
+				;
+			else
 			{
-				close(data->redir->file_out.file_fd);
-				data->redir[idx].file_out.file_fd = -1;
+				data->redir[0].fd_out = data->redir[idx].fd_out;
+				return (true);
 			}
-			if (data->redir[idx + 1].file_in.file)
+		}
+		else if (status == FILE_IN)
+		{
+			if (in_files(&data->redir[idx], data->redir[idx + 1].file))
+				;
+			else
 			{
-				close(data->redir->file_in.file_fd);
-				data->redir[idx].file_in.file_fd = -1;
-			}
-			if (!data->redir[idx + 1].file_out.file || !data->redir[idx + 1].file_out.file)
-			{
-				data->redir[0].file_in.file_fd = data->redir[idx].file_in.file_fd;
-				data->redir[0].file_out.file_fd = data->redir[idx].file_out.file_fd;
+				data->redir[0].fd_in = data->redir[idx].fd_in;
 				return (true);
 			}
 		}
