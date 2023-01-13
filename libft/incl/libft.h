@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 13:01:21 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/04 16:36:23 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/13 17:08:56 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ size_t				ft_strstr_start(const char *haystack, const char *needle);
 int					ft_strchr_index(char *str, char c, char start);
 void				ft_swap(int *a, int *b);
 int					ft_count_chrstr(char *str, char c);
+int					ft_finword_rev(char *str);
 /*
 ** convertions
 */

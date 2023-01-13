@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input.h                                            :+:      :+:    :+:   */
+/*   ft_findword_rev.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/08 15:34:24 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/13 16:32:31 by zraunio          ###   ########.fr       */
+/*   Created: 2023/01/13 17:07:51 by zraunio           #+#    #+#             */
+/*   Updated: 2023/01/13 17:09:23 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INPUT_H
-# define INPUT_H
-# include "shell.h"
-# include "structs.h"
+#include "../incl/libft.h"
 
-/*
-** READ_INPUT
-*/
-void	cmd_line_reprint(t_shell *shell, t_win *windowc);
-void	cmd_line_check_row(t_shell *shell, t_win *window);
-void	read_quote(t_shell *shell);
-void	cmd_line(t_shell *shell, t_win *window, char c);
-void	input_read(t_shell *shell);
-void	input_rev_cmd(t_shell *shell);
+int	ft_finword_rev(char *str)
+{
+	int	i;
 
-#endif
+	i = ft_strilen(str) - 1;
+	if (i <= 1)
+	{
+		if (i == -1 || i == 0)
+			return (0);
+		else
+			return (1);
+	}
+	while (ft_isspace(str[i]) && i > 0)
+		i--;
+	while (!ft_isspace(str[i]) && i > 0)
+		i--;
+	if (i == 0 || i == 1)
+		return (i);
+	return (i + 1);
+}

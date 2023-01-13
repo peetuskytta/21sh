@@ -45,9 +45,9 @@ _CURSOR := cursor_reset_line.c \
 		cursor_move.c \
 		cursor_find.c \
 		cursor_load.c \
+		cursor_goto_sides.c \
 		goto_newline.c
 # cursor_row_col.c \
-# goto_sides.c \
 # goto_word.c \
 # goto_end.c
 
@@ -67,6 +67,7 @@ _INIT := init_shell.c \
 
 _INPUT := read_quote.c \
 		cmd_line.c \
+		cmd_line_check.c \
 		cmd_line_reprint.c \
 		input_read.c \
 		input_rev_cmd.c
@@ -80,7 +81,8 @@ _HISTORY := history_create.c \
 _KEYS := key_listen.c \
 		read_key.c \
 		special_keys.c \
-		key_is_ctrl_alpha.c
+		key_is_ctrl_alpha.c \
+		key_is_arrow.c
 
 _OUTPUT := stdin_char.c \
 		cmd_line_prompt.c

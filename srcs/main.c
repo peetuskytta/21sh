@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/12 14:48:20 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/13 09:19:51 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static void	cmd_line_reset(t_shell *shell, t_win *window)
 	{
 		ft_memset(shell->cmd_line, '\0', sizeof(char) * (MAX_BUFF + 1));
 		ft_memset(shell->temp, '\0', sizeof(char) * (MAX_BUFF + 1));
-		ft_memset(window->row_idx, 0, sizeof(char *) * (MAX_BUFF));
-		ft_memset(shell->input, 0, sizeof(char *) * (MAX_BUFF + 1));
+		ft_memset(window->row_idx, '\0', sizeof(char *) * (MAX_BUFF));
+		ft_memset(shell->input, '\0', sizeof(char) * (MAX_BUFF + 1));
 		window->idx = 0;
 		shell->cmd_idx = 0;
 		window->row_idx[window->idx] = &shell->cmd_line[0];
@@ -54,7 +54,7 @@ static void	run_shell(t_shell *shell)
 			}
 			cursor_find(shell, &shell->window);
 			cmd_line_reset(shell, &shell->window);
-			cursor_load(shell, &shell->window);
+			cursor_load(&shell->window, shell->window.current_row--);
 		}
 	}
 }

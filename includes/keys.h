@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:58 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/06 12:50:56 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/13 15:43:35 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,6 @@ void	key_listen(t_shell *shell, char *input);
 void	read_key(t_shell *shell, char *input);
 int		special_keys(t_shell *shell, char *input, int *i);
 int		key_is_ctrl_alpha(t_shell *shell, t_win *window, char *input, int *i);
+int		key_is_arrow(t_shell *shell, t_win *window, char *input, int *i);
 
 #endif

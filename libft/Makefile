@@ -74,6 +74,7 @@ _MATH_SRC = math/dig_count_base.c \
 		math/ft_wdcounter.c \
 		math/ft_powerof.c \
 		math/ft_strstr_start.c \
+		math/ft_findword_rev.c \
 		math/ft_strchr_index.c \
 		math/ft_count_chrstr.c \
 		math/ft_long_abs.c \

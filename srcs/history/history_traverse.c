@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 14:29:03 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/12 12:35:12 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/13 15:59:20 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ static void	history_down(t_shell *shell, int *idx)
 	}
 	else if (shell->temp != NULL)
 	{
-			ft_memset(shell->cmd_line, '\0', sizeof(char) * MAX_BUFF);
-			shell->cmd_line = ft_strcpy(shell->cmd_line, shell->temp);
-			shell->cmd_idx = ft_strilen(shell->cmd_line);
-			ft_putstr_fd(shell->cmd_line, STDIN_FILENO);
-			ft_memset(shell->temp, '\0', sizeof(char) * MAX_BUFF);
+		ft_memset(shell->cmd_line, '\0', sizeof(char) * MAX_BUFF);
+		shell->cmd_line = ft_strcpy(shell->cmd_line, shell->temp);
+		shell->cmd_idx = ft_strilen(shell->cmd_line);
+		ft_putstr_fd(shell->cmd_line, STDIN_FILENO);
+		ft_memset(shell->temp, '\0', sizeof(char) * MAX_BUFF);
 	}
 }
 
@@ -69,4 +69,5 @@ void	history_traverse(t_shell *shell, int *idx, int key)
 		history_up(shell, idx);
 	else if (key == 66 && shell->history[i + 1] != NULL && shell->temp != NULL)
 		history_down(shell, idx);
+	cmd_line_check_row(shell, &shell->window);
 }

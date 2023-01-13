@@ -6,33 +6,33 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 17:00:36 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/12 17:57:38 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/13 16:41:00 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-static int	is_escape(t_shell *shell, char *input, int *i)
+static int	is_escape(t_shell *shell, t_win *win, char *input, int *i)
 {
-	int	pos;
+	int	flg;
 
+	flg = 0;
+	if (win->row_idx[1] != NULL)
+		flg = 1;
 	if (input[0] == 27 && input[1] == '\0')
 	{
 		*i += 2;
-		ft_print_fd(STDOUT_FILENO, "ESCAPE\n");
 		return (1);
 	}
 	else if (input[0] == 127)
 	{
 		*i += 2;
-		if (shell->cmd_idx > 0)
+		if (shell->cmd_idx > 0 && cursor_move(shell, win, 1, 'l') == 1)
 		{
+			shell->cmd_line[ft_strilen(shell->cmd_line) - 1] = '\0';
 			shell->cmd_idx--;
-			pos = ft_strilen(shell->cmd_line) - 1;
-			shell->cmd_line[pos] = 0;
-			shell->window.loc -= 1;
-			pos = shell->cmd_idx + shell->prmpt_len;
-			cmd_line_reprint(shell, &shell->window, shell->window.current_row);
+			cmd_line_reprint(shell, win);
+			cursor_load(win, win->current_row + win->idx - flg);
 		}
 		return (1);
 	}
@@ -63,80 +63,14 @@ static int	is_home_end(t_shell *shell, t_win *window, char *input, int *i)
 		return (0);
 }
 
-static int	is_opt_arrow(t_shell *shell, t_win *window, char *input, int *i)
-{
-	(void)shell;
-		(void)window;
-	if (input[1] == 'b')
-	{
-		*i += 6;
-		return (1);
-		// goto_sides(shell, window, 98));
-	}
-	else if (input[1] == 'f')
-	{
-		*i += 6;
-		return (1);
-		// goto_sides(shell, window, 102));
-	}
-	else if (input[1] == '[' && input[2] == '1' && input[3] == ';'
-		&& input[4] == '3' && input[5] == 'A' && input[6] == 0)
-	{
-		*i += 7;
-		// cursor_change_row(shell, window, 'A');
-		return (1);
-	}
-	else if (input[1] == '[' && input[2] == '1' && input[3] == ';'
-		&& input[4] == '3' && input[5] == 'B' && input[6] == 0)
-	{
-		*i += 7;
-		// cursor_change_row(shell, window, 'B');
-		return (1);
-	}
-	else
-		return (0);
-}
-
-static int	is_arrow(t_shell *shell, t_win *window, char *input, int *i)
-{
-	if (input[1] == 91 && input[2] == 68 && input[3] == 0)
-	{
-		*i += 3;
-		if (cursor_move(shell, window, 1, 'l') == 1)
-			cursor_load(shell, window);
-		return (1);
-	}
-	else if (input[1] == 91 && input[2] == 67 && input[3] == 0)
-	{
-		*i += 3;
-		if (cursor_move(shell, window, 1, 'r') == 1)
-			cursor_load(shell, window);
-		return (1);
-	}
-	else if (input[1] == 91 && input[2] == 66 && input[3] == 0)
-	{
-		*i += 3;
-		history_traverse(shell, &shell->hist_idx, 66);
-		return (1);
-	}
-	else if (input[1] == 91 && input[2] == 65 && input[3] == 0)
-	{
-		*i += 3;
-		history_traverse(shell, &shell->hist_idx, 65);
-		return (1);
-	}
-	return (0);
-}
-
 int	special_keys(t_shell *shell, char *input, int *i)
 {
 	if (key_is_ctrl_alpha(shell, &shell->window, input, i) == 1)
 		return (1);
 	else if (input[0] == ESC || input[0] == 127)
 	{
-		if (!(is_arrow(shell, &shell->window, input, i))
-			&& !(is_opt_arrow(shell, &shell->window, input, i))
-			&& !(is_escape(shell, input, i))
+		if (!(key_is_arrow(shell, &shell->window, input, i))
+			&& !(is_escape(shell, &shell->window, input, i))
 			&& !(is_home_end(shell, &shell->window, input, i)))
 			return (0);
 		else

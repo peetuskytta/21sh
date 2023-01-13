@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 13:32:38 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/12 10:28:10 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/13 16:18:24 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,31 +19,10 @@ static int	check_cursor_loc(t_win *window)
 		if (window->idx > 0)
 		{
 			window->loc = 1;
-			window->current_row += 1;
 			return (1);
 		}
 	}
 	return (0);
-}
-
-static void	check_cmd_line_row(t_shell *shell, t_win *window)
-{
-	int	idx;
-	int	loc;
-
-	if (window->cols < shell->cmd_idx + shell->prmpt_len)
-	{
-		ft_memset(&window->row_idx[1], 0, sizeof(char *) * (MAX_BUFF - 1));
-		loc = window->cols - shell->prmpt_len;
-		idx = 1;
-		while (shell->input[loc] != '\0' && loc <= MAX_BUFF && idx <= MAX_BUFF)
-		{
-			window->row_idx[idx] = &shell->input[loc];
-			loc += window->cols;
-			idx++;
-		}
-		window->idx = idx - 1;
-	}
 }
 
 static void	reset_input(t_shell *shell)
@@ -67,7 +46,7 @@ void	cmd_line(t_shell *shell, t_win *window, char c)
 	shell->cmd_line[i] = c;
 	shell->cmd_idx++;
 	reset_input(shell);
-	check_cmd_line_row(shell, window);
+	cmd_line_check_row(shell, window);
 	if (check_cursor_loc(window) == 0)
 		window->loc += 1;
 }

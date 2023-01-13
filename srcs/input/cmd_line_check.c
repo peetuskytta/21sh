@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_window.c                                      :+:      :+:    :+:   */
+/*   cmd_line_check.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/29 15:06:54 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/13 16:21:16 by zraunio          ###   ########.fr       */
+/*   Created: 2023/01/13 15:57:40 by zraunio           #+#    #+#             */
+/*   Updated: 2023/01/13 16:04:39 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-void	init_window(t_shell *shell, t_win *window)
+void	cmd_line_check_row(t_shell *shell, t_win *window)
 {
-	struct winsize	win;
+	int	idx;
+	int	loc;
 
-	ioctl(STDOUT_FILENO, TIOCGWINSZ, &win);
-	window->cols = win.ws_col;
-	window->rows = win.ws_row;
-	window->win = &win;
-	window->loc = 3;
-	window->idx = 0;
-	ft_memset(window->row_idx, 0, (sizeof(char *) * MAX_BUFF));
-	window->row_idx[window->idx] = &shell->cmd_line[0];
+	if (window->cols < shell->cmd_idx + shell->prmpt_len)
+	{
+		ft_memset(&window->row_idx[1], 0, sizeof(char *) * (MAX_BUFF - 1));
+		loc = window->cols - shell->prmpt_len;
+		idx = 1;
+		while (shell->input[loc] != '\0' && loc <= MAX_BUFF && idx <= MAX_BUFF)
+		{
+			window->row_idx[idx] = &shell->input[loc];
+			loc += window->cols;
+			idx++;
+		}
+		window->idx = idx - 1;
+	}
 }
