@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 14:29:03 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/13 15:59:20 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/14 12:08:20 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,24 @@ static void	history_down(t_shell *shell, int *idx)
 	}
 }
 
-void	history_traverse(t_shell *shell, int *idx, int key)
+void	history_traverse(t_shell *shell, t_win *win, int *idx, int key)
 {
 	int	i;
+	int	flg;
 
 	i = *idx;
+	flg = 0;
 	if (key == 65 && i >= 0)
 		history_up(shell, idx);
 	else if (key == 66 && shell->history[i + 1] != NULL && shell->temp != NULL)
 		history_down(shell, idx);
-	cmd_line_check_row(shell, &shell->window);
+	cmd_line_check_row(shell, win);
+	if (win->idx > 0)
+	{
+		flg = 1;
+		win->loc = ft_strilen(win->row_idx[win->idx]);
+	}
+	else
+		win->loc = shell->cmd_idx + shell->prmpt_len;
+	cursor_load(win, win->current_row + win->idx - flg);
 }

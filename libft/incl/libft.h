@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 13:01:21 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/13 17:08:56 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/14 14:50:19 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,7 @@ int					get_next_line(const int fd, char **line);
 ** string manipulation
 */
 char				*ft_charstr(char c);
+void				ft_strcpyrev(char *cmd, char *rev, int max, int n);
 char				*ft_strtrim(char const *s);
 char				*ft_strctrim(char const *s, char c);
 char				*ft_strtrim_top(const char *s, char c);

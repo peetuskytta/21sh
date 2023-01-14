@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 13:32:38 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/13 16:18:24 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/14 14:42:28 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,6 @@ static int	check_cursor_loc(t_win *window)
 	return (0);
 }
 
-static void	reset_input(t_shell *shell)
-{
-	int	i;
-
-	ft_memset(shell->input, 0, sizeof(char) * (MAX_BUFF + 1));
-	i = ft_strilen(shell->cmd_line) - 1;
-	if (i > 0)
-		shell->input = ft_strcpy(shell->input, shell->cmd_line);
-	i = ft_strilen(shell->rev_cmd) - 1;
-	if (i > 0)
-		chrcpy_str_rev(shell->rev_cmd, &shell->input[i], MAX_BUFF, i);
-}
-
 void	cmd_line(t_shell *shell, t_win *window, char c)
 {
 	int	i;
@@ -45,8 +32,11 @@ void	cmd_line(t_shell *shell, t_win *window, char c)
 	i = ft_strilen(shell->cmd_line);
 	shell->cmd_line[i] = c;
 	shell->cmd_idx++;
-	reset_input(shell);
+	ft_print_fd(open("txt.txt", O_WRONLY | O_APPEND), "1.\ncmd: %s\nrev: %s\n",
+		shell->cmd_line, shell->rev_cmd);
 	cmd_line_check_row(shell, window);
+	ft_print_fd(open("txt.txt", O_WRONLY | O_APPEND), "2.\ncmd: %s\nrev: %s\n",
+		shell->cmd_line, shell->rev_cmd);
 	if (check_cursor_loc(window) == 0)
 		window->loc += 1;
 }

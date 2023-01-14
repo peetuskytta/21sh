@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 13:36:22 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/13 16:37:13 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/14 15:16:04 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,15 @@ void	cmd_line_reprint(t_shell *shell, t_win *window)
 	}
 	else
 	{
-		cursor_reset_line(window, x);
-		tputs(tgoto(tgetstr("cm", NULL), x, window->current_row - window->idx
-				+ 1), 1, stdin_char);
-		tputs(tgoto(tgetstr("cd", NULL), x, window->current_row - window->idx
-				+ 1), 1, stdin_char);
-		ft_putstr_fd(shell->cmd_line, STDIN_FILENO);
+		x = window->loc;
+		tputs(tgoto(tgetstr("cm", NULL), x, window->current_row
+				- 1), 1, stdin_char);
+		tputs(tgoto(tgetstr("cd", NULL), x, window->current_row
+				- 1), 1, stdin_char);
+		stdin_char(shell->cmd_line[ft_strilen(shell->cmd_line)]);
 		input_rev_cmd(shell);
 	}
-	cursor_load(window, window->current_row - flg);
+	cursor_load(window, window->current_row + window->idx - flg);
 }
+/*
+*/

@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input_rev_cmd.c                                    :+:      :+:    :+:   */
+/*   ft_strcpyrev.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/28 15:52:24 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/14 14:17:36 by zraunio          ###   ########.fr       */
+/*   Created: 2023/01/14 14:49:21 by zraunio           #+#    #+#             */
+/*   Updated: 2023/01/14 14:50:15 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
+#include "../incl/libft.h"
 
-void	input_rev_cmd(t_shell *shell)
+void	ft_strcpyrev(char *cmd, char *rev, int max, int n)
 {
-	int	i;
+	int		i;
+	int		j;
 
-	i = ft_strlen(shell->rev_cmd);
-	while (i >= 0)
-		stdin_char(shell->rev_cmd[i--]);
+	i = ft_strlen(cmd) - 1;
+	j = ft_strlen(rev);
+	if (i < 0 || j >= max)
+		return ;
+	while (n-- > 0)
+		rev[j++] = cmd[i++];
+	rev[j] = '\0';
 }

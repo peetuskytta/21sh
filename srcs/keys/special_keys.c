@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 17:00:36 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/13 16:41:00 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/14 13:47:51 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,21 @@ static int	is_home_end(t_shell *shell, t_win *window, char *input, int *i)
 	int	len;
 
 	len = shell->cmd_idx;
-	(void)window;
-	if (input[1] == '[' && input[2] == 'H' && input[3] == 0)
+	if (input[1] == '[' && input[3] == 0 && (input[2] == 'H'
+			|| input[2] == 'F'))
 	{
+		if (input[2] == 'H')
+		{
+			chrcpy_str_rev(shell->cmd_line, shell->rev_cmd, MAX_BUFF, len);
+			cursor_goto_end(shell, window, 'H');
+		}
+		else if (input[2] == 'F')
+		{
+			*i += 4;
+			chrcpy_str_rev(shell->rev_cmd, shell->cmd_line, MAX_BUFF, len);
+			cursor_goto_end(shell, window, 'F');
+		}
 		*i += 4;
-		chrcpy_str_rev(shell->cmd_line, shell->rev_cmd, MAX_BUFF, len);
-		// goto_end(shell, window, 'H');
-		return (1);
-	}
-	else if (input[1] == '[' && input[2] == 'F' && input[3] == 0)
-	{
-		*i += 4;
-		// goto_end(shell, window, 'F');
 		return (1);
 	}
 	else

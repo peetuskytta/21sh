@@ -6,16 +6,17 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 17:06:00 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/13 17:07:14 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/14 13:10:01 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-void	cursor_goto_sides(t_shell *shell, int key)
+void	cursor_goto_sides(t_shell *shell, t_win *window, int key)
 {
 	int	ws;
 
+	(void)window;
 	if (key == 'l' || key == 'r')
 	{
 		if (key == 'l')

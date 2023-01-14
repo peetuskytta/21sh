@@ -45,11 +45,11 @@ _CURSOR := cursor_reset_line.c \
 		cursor_move.c \
 		cursor_find.c \
 		cursor_load.c \
+		cursor_goto_end.c \
 		cursor_goto_sides.c \
 		goto_newline.c
 # cursor_row_col.c \
-# goto_word.c \
-# goto_end.c
+# cursor_goto_word.c \
 
 _EXECUTE := exec_tree.c \
 		exec_branch.c \

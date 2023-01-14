@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 12:49:26 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/13 15:50:58 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/14 13:15:25 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	move_cursor_left(t_shell *shell, t_win *win, int len)
 		min = shell->prmpt_len;
 	else
 		min = 1;
-	if ((len < min && win->idx - 1 == 0) || (len < min && win->idx > 0))
+	if ((len < 0 && win->idx - 1 == 0) || (len < min && win->idx > 0))
 	{
 		win->loc = win->cols + len;
 		win->idx -= 1;
