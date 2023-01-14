@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 15:40:44 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/14 14:41:08 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/14 15:58:28 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static int	is_opt_arrow(t_shell *shell, t_win *win, char *input, int *i)
 	int	ws;
 
 	flg = 0;
-	if (win->row_idx[1] != NULL)
-		flg = 1;
+	while (win->row_idx[flg + 1] != NULL)
+		flg++;
 	if ((input[1] == 'b' || input[1] == 'f') && input[6] == '\0')
 	{
 		if (input[1] == 'b')
@@ -77,8 +77,8 @@ static int	is_arrow_side(t_shell *shell, t_win *window, char *input, int *i)
 	int	flg;
 
 	flg = 0;
-	if (window->row_idx[1] != NULL)
-		flg = 1;
+	while (window->row_idx[flg + 1] != NULL)
+		flg++;
 	if (input[1] == 91 && input[3] == 0 && (input[2] == 67 || input[2] == 68))
 	{
 		if (input[2] == 68)

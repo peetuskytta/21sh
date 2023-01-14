@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 14:29:03 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/14 12:08:20 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/14 15:44:17 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	history_traverse(t_shell *shell, t_win *win, int *idx, int key)
 
 	i = *idx;
 	flg = 0;
+	ft_memset(shell->rev_cmd, '\0', sizeof(char) * MAX_BUFF + 1);
 	if (key == 65 && i >= 0)
 		history_up(shell, idx);
 	else if (key == 66 && shell->history[i + 1] != NULL && shell->temp != NULL)

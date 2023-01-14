@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 15:57:40 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/14 14:50:51 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/14 16:00:55 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,12 @@ void	cmd_line_check_row(t_shell *shell, t_win *window)
 {
 	int	idx;
 	int	loc;
+	int	c_row;
 
 	reset_input(shell);
+	c_row = -1;
+	if (window->row_idx[1] != NULL && ft_strilen(shell->rev_cmd) > 0)
+		c_row = window->idx;
 	if (window->cols < shell->cmd_idx + shell->prmpt_len)
 	{
 		loc = window->cols - shell->prmpt_len;
@@ -44,4 +48,6 @@ void	cmd_line_check_row(t_shell *shell, t_win *window)
 		}
 		window->idx = idx - 1;
 	}
+	if (c_row > -1)
+		window->idx = c_row;
 }
