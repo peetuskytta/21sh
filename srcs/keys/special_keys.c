@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 17:00:36 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/14 13:47:51 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/15 11:36:37 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	is_escape(t_shell *shell, t_win *win, char *input, int *i)
 			shell->cmd_line[ft_strilen(shell->cmd_line) - 1] = '\0';
 			shell->cmd_idx--;
 			cmd_line_reprint(shell, win);
-			cursor_load(win, win->current_row + win->idx - flg);
+			cursor_load(win, 0);
 		}
 		return (1);
 	}
@@ -49,16 +49,9 @@ static int	is_home_end(t_shell *shell, t_win *window, char *input, int *i)
 			|| input[2] == 'F'))
 	{
 		if (input[2] == 'H')
-		{
-			chrcpy_str_rev(shell->cmd_line, shell->rev_cmd, MAX_BUFF, len);
 			cursor_goto_end(shell, window, 'H');
-		}
 		else if (input[2] == 'F')
-		{
-			*i += 4;
-			chrcpy_str_rev(shell->rev_cmd, shell->cmd_line, MAX_BUFF, len);
 			cursor_goto_end(shell, window, 'F');
-		}
 		*i += 4;
 		return (1);
 	}

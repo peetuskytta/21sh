@@ -6,29 +6,46 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:31:13 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/14 13:46:54 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/15 11:47:04 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
+static void	cursor_go_end(t_shell *shell, t_win *window)
+{
+	int	len;
+
+	len = ft_strilen(shell->rev_cmd) - 1;
+	if (len > 0)
+	{
+		while (window->row_idx[window->idx + 1] != NULL)
+			window->idx++;
+		chrcpy_str_rev(shell->rev_cmd, shell->cmd_line, MAX_BUFF, len);
+		window->loc = ft_strilen(window->row_idx[window->idx]);
+		if (window->idx == 0)
+			window->loc += shell->prmpt_len + 1;
+	}
+}
+
+static void	cursor_go_start(t_shell *shell, t_win *window)
+{
+	int	len;
+
+	len = ft_strilen(shell->cmd_line) - 1;
+	if (len > 0)
+	{
+		chrcpy_str_rev(shell->cmd_line, shell->rev_cmd, MAX_BUFF, len);
+		window->loc = shell->prmpt_len;
+		window->idx = 0;
+	}
+}
+
 void	cursor_goto_end(t_shell *shell, t_win *window, int key)
 {
-	int	y;
-	int	x;
-
-	y = window->current_row;
 	if (key == 'H')
-	{
-		x = shell->prmpt_len;
-		window->loc = x;
-		// cursor_reset_line(window, x);
-		// input_rev_cmd(shell);
-	}
+		cursor_go_start(shell, window);
 	else
-	{
-		x = shell->cmd_idx + shell->prmpt_len;
-		window->loc = x;
-	}
-	cursor_load(window, y);
+		cursor_go_end(shell, window);
+	cursor_load(window, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 15:40:44 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/14 15:58:28 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/15 13:46:47 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,19 @@
 
 static int	is_opt_updwn(t_shell *shell, t_win *win, char *input, int *i)
 {
-	(void)shell;
-	(void)win;
+	int	len;
+
+	len = win->cols;
 	if (input[1] == '[' && input[2] == '1' && input[3] == ';'
 		&& input[4] == '3' && input[6] == 0 && (input[5] == 'A'
 			|| input[5] == 'B'))
 	{
+		if (input[5] == 'A' && cursor_move(shell, win, len, 'l') == 1)
+			chrcpy_str_rev(shell->cmd_line, shell->rev_cmd, MAX_BUFF, len);
+		else if (input[5] == 'B' && cursor_move(shell, win, len, 'r') == 1)
+			chrcpy_str_rev(shell->rev_cmd, shell->cmd_line, MAX_BUFF, len);
 		*i += 7;
+		cursor_load(win, 0);
 		return (1);
 	}
 	return (0);
@@ -28,12 +34,8 @@ static int	is_opt_updwn(t_shell *shell, t_win *win, char *input, int *i)
 
 static int	is_opt_arrow(t_shell *shell, t_win *win, char *input, int *i)
 {
-	int	flg;
 	int	ws;
 
-	flg = 0;
-	while (win->row_idx[flg + 1] != NULL)
-		flg++;
 	if ((input[1] == 'b' || input[1] == 'f') && input[6] == '\0')
 	{
 		if (input[1] == 'b')
@@ -48,7 +50,7 @@ static int	is_opt_arrow(t_shell *shell, t_win *win, char *input, int *i)
 			if (cursor_move(shell, win, ws, 'r') == 1)
 				chrcpy_str_rev(shell->rev_cmd, shell->cmd_line, MAX_BUFF, ws);
 		}
-		cursor_load(win, win->current_row + win->idx - flg);
+		cursor_load(win, 0);
 		*i += 6;
 		return (1);
 	}
@@ -74,11 +76,6 @@ static int	is_arrow_updwn(t_shell *shell, t_win *window, char *input, int *i)
 
 static int	is_arrow_side(t_shell *shell, t_win *window, char *input, int *i)
 {
-	int	flg;
-
-	flg = 0;
-	while (window->row_idx[flg + 1] != NULL)
-		flg++;
 	if (input[1] == 91 && input[3] == 0 && (input[2] == 67 || input[2] == 68))
 	{
 		if (input[2] == 68)
@@ -91,7 +88,7 @@ static int	is_arrow_side(t_shell *shell, t_win *window, char *input, int *i)
 			if (cursor_move(shell, window, 1, 'r') == 1)
 				cursor_goto_sides(shell, window, 'r');
 		}
-		cursor_load(window, window->current_row + window->idx - flg);
+		cursor_load(window, 0);
 		*i += 3;
 		return (1);
 	}

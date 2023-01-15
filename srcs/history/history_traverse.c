@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 14:29:03 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/14 15:44:17 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/15 11:02:44 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	history_traverse(t_shell *shell, t_win *win, int *idx, int key)
 	int	flg;
 
 	i = *idx;
-	flg = 0;
+	flg = -1;
 	ft_memset(shell->rev_cmd, '\0', sizeof(char) * MAX_BUFF + 1);
 	if (key == 65 && i >= 0)
 		history_up(shell, idx);
@@ -75,10 +75,10 @@ void	history_traverse(t_shell *shell, t_win *win, int *idx, int key)
 	cmd_line_check_row(shell, win);
 	if (win->idx > 0)
 	{
-		flg = 1;
+		flg = 0;
 		win->loc = ft_strilen(win->row_idx[win->idx]);
 	}
 	else
 		win->loc = shell->cmd_idx + shell->prmpt_len;
-	cursor_load(win, win->current_row + win->idx - flg);
+	cursor_load(win, flg);
 }

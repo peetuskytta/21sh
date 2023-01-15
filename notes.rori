@@ -1,17 +1,17 @@
 TO BE DONE:
 // SIGNAL - together 0%
-// PIPES & REDIRECT - peetu 25%
-// AGREGATE - peetu 25%
 
 REASONABLY DONE:
+- AGREGATE - peetu 30%
+- PIPES & REDIRECT - peetu 95%
 - ERRORS - together 70%
 - BUILTINS - together 75% >> "\nexit\n" for exit builtin sent to kill_mode
 	- does setenv need to be sensitive to "na=me"=surname type of argument?
-- CURSOR - rori 75%
-- HISTORY - together 95%
+- CURSOR - rori 85%
 - QUOTES - together but peetu is a hero 98%
 
 DONE DONE:
+- HISTORY - together 
 - SPECIAL KEYS - rori
 - COMMAND TREE - peetu
 - COMMAND LINE PARSE - peetu
@@ -29,9 +29,8 @@ DONE DONE:
 |			|	21sh: jsdsjdjd: command not found$		|
 |-------------------------------------------------------|
 |			|	2. CONTROL THE CURSOR					|
-|			|	cursor moves NOW MEMORY NEEDS TO AS WELL|
-|			|	need to make sure idx & loc don't		|
-|			|	break when typing or pasting in middle	|
+|			|	reprint in multiline shaky bc reprint	|
+			|	cursor_load breaks? without logic		|
 |-------------------------------------------------------|
 |			|	3. COPY-CUT-PASTE						|
 |			|	edit in middle of line in correct loc	|
@@ -39,4 +38,5 @@ DONE DONE:
 |			|	4. QUOTES								|
 |			|	need to check input has enough space	|
 |			|	to hold a long long line w/ open quote	|
+|			|	means need q_input 2 not break muiltiln	|
 |-------------------------------------------------------|
