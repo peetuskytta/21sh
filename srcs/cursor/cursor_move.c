@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 12:49:26 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/15 13:49:36 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/15 16:07:40 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	move_cursor_right(t_shell *shell, t_win *win, int len)
 	int	max;
 
 	len = win->loc + len;
-	while (len > win->cols)
+	while (len > win->cols && win->row_idx[win->idx + 1] != NULL)
 	{
 		len -= win->cols;
 		win->idx++;

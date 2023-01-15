@@ -7,8 +7,8 @@ REASONABLY DONE:
 - ERRORS - together 70%
 - BUILTINS - together 75% >> "\nexit\n" for exit builtin sent to kill_mode
 	- does setenv need to be sensitive to "na=me"=surname type of argument?
-- CURSOR - rori 85%
 - QUOTES - together but peetu is a hero 98%
+- CURSOR - rori 95%
 
 DONE DONE:
 - HISTORY - together 
@@ -28,14 +28,11 @@ DONE DONE:
 |			|	$> jsdsjdjd  2>&1 | cat -e 				|
 |			|	21sh: jsdsjdjd: command not found$		|
 |-------------------------------------------------------|
-|			|	2. CONTROL THE CURSOR					|
-|			|	reprint in multiline shaky bc reprint	|
-			|	cursor_load breaks? without logic		|
+|			|	2. COPY-CUT-PASTE						|
+|			|	if paste in mid when not cut, reprint!	|
+|			|	paste sometimes funny? cpy_rev's fault?	|
 |-------------------------------------------------------|
-|			|	3. COPY-CUT-PASTE						|
-|			|	edit in middle of line in correct loc	|
-|-------------------------------------------------------|
-|			|	4. QUOTES								|
+|			|	3. QUOTES								|
 |			|	need to check input has enough space	|
 |			|	to hold a long long line w/ open quote	|
 |			|	means need q_input 2 not break muiltiln	|
