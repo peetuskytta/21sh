@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/12 14:35:38 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/15 14:28:15 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_shell
 	char			*input;
 	char			*cmd_line;
 	char			*rev_cmd;
+	char			*clipbrd;
 	int				cmd_idx;
 	int				prmpt_len;
 	int				end;

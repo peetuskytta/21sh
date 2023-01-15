@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:58 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/13 15:43:35 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/15 15:17:47 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 # define CTRL_C 3
 # define CTRL_D 4
 # define CTRL_P 16
-# define CTRL_R 18
+# define CTRL_V 22
 # define CTRL_W 23
 # define ENTER 13
 # define ESC '\x1B'

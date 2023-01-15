@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 14:29:03 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/15 11:02:44 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/15 14:36:30 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ static void	history_up(t_shell *shell, int *idx)
 	int	i;
 
 	i = *idx;
-	cursor_reset_line(&shell->window, 0);
+	cursor_reset_line(&shell->window, shell->prmpt_len, -1);
 	cmd_line_prompt(shell->quote);
 	if (shell->history[i + 1] == NULL)
-			shell->temp = ft_strcpy(shell->temp, shell->cmd_line);
+		shell->temp = ft_strcpy(shell->temp, shell->cmd_line);
 	ft_memset(shell->cmd_line, '\0', sizeof(char) * MAX_BUFF);
 	shell->cmd_line = ft_strcpy(shell->cmd_line, shell->history[i]);
 	shell->cmd_idx = ft_strilen(shell->cmd_line);
@@ -41,7 +41,7 @@ static void	history_down(t_shell *shell, int *idx)
 
 	*idx += 1;
 	i = *idx;
-	cursor_reset_line(&shell->window, 0);
+	cursor_reset_line(&shell->window, shell->prmpt_len, -1);
 	cmd_line_prompt(shell->quote);
 	if (shell->history[i + 1] != NULL)
 	{

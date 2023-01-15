@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:22:12 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/15 14:14:03 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/15 14:26:00 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,5 @@ void	cursor_load(t_win *window, int flg);
 void	cursor_goto_sides(t_shell *shell, t_win *window, int key);
 void	cursor_goto_end(t_shell *shell, t_win *window, int key);
 int		cursor_move(t_shell *shell, t_win *win, int len, int key);
-/* 
-** void	cursor_row_col(t_shell *shell, t_win *window);
-** void	goto_word(t_shell *shell, t_win *window, int ws, int key);
-*/
 
 #endif
