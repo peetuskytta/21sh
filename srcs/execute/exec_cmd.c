@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:40:28 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/16 09:55:53 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/16 15:43:08 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,13 @@ static void close_fds(int fd_in, int fd_out)
 		close(fd_out);
 }
 
+static void	wait_for_finish(t_pid pid)
+{
+	pid.wait = waitpid(pid.child, &pid.status, 0);
+	if (pid.wait == -1)
+		ft_perror(WAITPID_FAIL);
+}
+
 /*
 **	Performs input/output change before fork and execution of a command.
 */
@@ -95,10 +102,6 @@ void	exec_cmd(t_exec data, char *bin_path, char **env_cpy)
 	else if (pid.child < 0)
 		ft_perror(FORK_FAIL);
 	else
-	{
-		pid.wait = waitpid(pid.child, &pid.status, 0);
-		if (pid.wait == -1)
-			ft_perror(WAITPID_FAIL);
-	}
+		wait_for_finish(pid);
 	close_fds(data.fds.fd_in, data.fds.fd_out);
 }

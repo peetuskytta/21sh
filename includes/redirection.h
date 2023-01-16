@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 14:59:36 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/16 09:48:21 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/16 14:47:59 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 
 typedef enum e_status
 {
-	FILE_GO,
 	FILE_ERR,
 	FILE_PERM,
 	FOLDER_PERM,

@@ -38,19 +38,18 @@ static char	**copy_environment(char **environ)
 **	binary file's execution rights before executing the command.
 **	Clears data after each command, succesful or not.
 */
-static void	command_execution(t_exec data, char **env_cpy)
+static void	command_execution(t_exec data, char **env_cpy, int *output)
 {
 	char	*bin_path;
 
-	// check for builtin
+	(void)output;
 	bin_path = exec_find_binary(exec_fetch_path_var(env_cpy), data.cmd);
 	if (redirection_loop(&data) && exec_binary_check(bin_path, data.cmd))
 	{
-		//DB;
 		exec_cmd(data, bin_path, env_cpy);
 	}
 	exec_clear_data(&data, bin_path);
-	// need STDOUT signal for RORI!!!
+
 }
 
 /*
@@ -67,7 +66,7 @@ void	exec_branch(t_ast *branch, t_shell *shell)
 		return ;
 	env_cpy = copy_environment(shell->environ);
 	if ((branch->type == REDIR || branch->type == COMMAND))
-		command_execution(branch->data, env_cpy);
+		command_execution(branch->data, env_cpy, &shell->output);
 	exec_branch(branch->left, shell);
 	if (branch->type == PIPE)
 		exec_branch(branch->right, shell);

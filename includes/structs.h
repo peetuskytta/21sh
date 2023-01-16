@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/13 12:04:14 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/16 15:38:16 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_shell
 	int				prmpt_len;
 	int				end;
 	int				quote;
+	int			output;
 	char			*tty;
 	t_win			window;
 	struct termios	orig_raw;
