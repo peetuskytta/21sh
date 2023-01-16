@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 13:01:21 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/14 14:50:19 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/16 12:38:07 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,7 +191,7 @@ char				*ft_strtrim_end(const char *s, char c);
 char				*ft_strrev(char *str);
 char				*ft_strcdup(char *str, char c);
 char				*ft_strtrimdup(char *str);
-void				chrcpy_str_rev(char *cmd, char *rev, int max, int n);
+int					chrcpy_str_rev(char *cmd, char *rev, int max, int n);
 /*
 ** binary trees
 */

@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:58 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/15 15:17:47 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/16 12:26:52 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,6 @@
 # include "structs.h"
 /*
 ** mac key codes
-** # define CTRL_C 3
-** # define CTRL_D 4
-** # define ENTER 13
-** # define ESC 27
-** # define SPACE 32
-** # define BACK 127
 ** # define ARW_UP {27, 91, 65}
 ** # define ARW_DOWN {27, 91, 66}
 ** # define ARW_RIGHT {27, 91, 67}

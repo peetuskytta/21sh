@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 14:29:03 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/15 15:58:04 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/16 12:16:54 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	reset_history(t_shell *shell, t_win *window)
 	}
 }
 
-static void	history_up(t_shell *shell, int *idx)
+static void	history_up(t_shell *shell, t_win *win, int *idx)
 {
 	int	i;
 
@@ -44,12 +44,14 @@ static void	history_up(t_shell *shell, int *idx)
 	ft_memset(shell->cmd_line, '\0', sizeof(char) * MAX_BUFF);
 	shell->cmd_line = ft_strcpy(shell->cmd_line, shell->history[i]);
 	shell->cmd_idx = ft_strilen(shell->cmd_line);
-	reset_history(shell, &shell->window);
+	win->loc = shell->cmd_idx + shell->prmpt_len;
+	cmd_line_check_row(shell, win);
+	reset_history(shell, win);
 	ft_putstr_fd(shell->history[i], STDIN_FILENO);
 	*idx -= 1;
 }
 
-static void	history_down(t_shell *shell, int *idx)
+static void	history_down(t_shell *shell, t_win *win, int *idx)
 {
 	int	i;
 
@@ -60,17 +62,21 @@ static void	history_down(t_shell *shell, int *idx)
 		ft_memset(shell->cmd_line, '\0', sizeof(char) * MAX_BUFF);
 		shell->cmd_line = ft_strcpy(shell->cmd_line, shell->history[i + 1]);
 		shell->cmd_idx = ft_strilen(shell->cmd_line);
+		win->loc = shell->cmd_idx + shell->prmpt_len;
+		cmd_line_check_row(shell, win);
+		reset_history(shell, win);
 		ft_putstr_fd(shell->history[i + 1], STDIN_FILENO);
-		reset_history(shell, &shell->window);
 	}
 	else if (shell->temp != NULL)
 	{
 		ft_memset(shell->cmd_line, '\0', sizeof(char) * MAX_BUFF);
 		shell->cmd_line = ft_strcpy(shell->cmd_line, shell->temp);
 		shell->cmd_idx = ft_strilen(shell->cmd_line);
+		win->loc = shell->cmd_idx + shell->prmpt_len;
+		cmd_line_check_row(shell, win);
+		reset_history(shell, win);
 		ft_putstr_fd(shell->cmd_line, STDIN_FILENO);
 		ft_memset(shell->temp, '\0', sizeof(char) * MAX_BUFF);
-		reset_history(shell, &shell->window);
 	}
 }
 
@@ -81,8 +87,7 @@ void	history_traverse(t_shell *shell, t_win *win, int *idx, int key)
 	i = *idx;
 	ft_memset(shell->rev_cmd, '\0', sizeof(char) * MAX_BUFF + 1);
 	if (key == 65 && i >= 0)
-		history_up(shell, idx);
+		history_up(shell, win, idx);
 	else if (key == 66 && shell->history[i + 1] != NULL && shell->temp != NULL)
-		history_down(shell, idx);
-	cmd_line_check_row(shell, win);
+		history_down(shell, win, idx);
 }
