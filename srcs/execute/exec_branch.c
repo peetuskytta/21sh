@@ -45,7 +45,10 @@ static void	command_execution(t_exec data, char **env_cpy)
 	// check for builtin
 	bin_path = exec_find_binary(exec_fetch_path_var(env_cpy), data.cmd);
 	if (redirection_loop(&data) && exec_binary_check(bin_path, data.cmd))
+	{
+		//DB;
 		exec_cmd(data, bin_path, env_cpy);
+	}
 	exec_clear_data(&data, bin_path);
 	// need STDOUT signal for RORI!!!
 }

@@ -12,6 +12,31 @@
 
 #include "../../includes/redirection.h"
 
+static bool	out_files(t_redir *redir, char *file)
+{
+	if (file)
+	{
+		close(redir->fd_out);
+		redir->fd_out = -1;
+		return (true);
+	}
+	else
+		return (false);
+}
+
+static bool	in_files(t_redir *redir, char *file)
+{
+	if (file)
+	{
+		close(redir->fd_in);
+		redir->fd_in = -1;
+		return (true);
+	}
+	else
+		return (false);
+}
+
+
 /*
 **	Opens all the redirection files in one command and closes the previous
 **	if there are more to be opened. Last one stays "active" and is used
@@ -20,27 +45,27 @@
 bool	redirection_loop(t_exec *data)
 {
 	int	idx;
+	int	status;
 
 	idx = 0;
-	while (data->redir[idx].file_in || data->redir[idx].file_out)
+	status = -1;
+	while (data->redir[idx].file)
 	{
-		if (redir_file_check(&data->redir[idx]) == FILE_GO)
+		status = redir_file_check(&data->redir[idx]);
+		if (status == FILE_OUT)
 		{
-			if (data->redir[idx + 1].file_out && data->redir[idx].type_out == FILE_OUT)
-			{
-				close(data->redir->fd_out);
-				data->redir[idx].fd_out = -1;
-			}
+			if (out_files(&data->redir[idx], data->redir[idx + 1].file))
+				;
 			else
 			{
 				data->redir[0].fd_out = data->redir[idx].fd_out;
 				return (true);
 			}
-			if (data->redir[idx + 1].file_in && data->redir[idx].type_in == FILE_IN)
-			{
-				close(data->redir->fd_in);
-				data->redir[idx].fd_in = -1;
-			}
+		}
+		else if (status == FILE_IN)
+		{
+			if (in_files(&data->redir[idx], data->redir[idx + 1].file))
+				;
 			else
 			{
 				data->redir[0].fd_in = data->redir[idx].fd_in;

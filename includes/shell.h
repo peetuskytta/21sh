@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/16 12:55:22 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/16 13:31:35 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include <termcap.h>
 # include <sys/ioctl.h>
 # include <sys/wait.h>
-
 # define NL ft_putchar('\n')
 # define DB ft_putstr("\nYOU ARE HERE\n")
 # define NULL_BYTE '\0'
@@ -53,6 +52,6 @@
 */
 int		env_variable_counter(char **environ);
 void	allocation_check(void **check);
-void	print_logo();
+void	print_logo(void);
 
 #endif

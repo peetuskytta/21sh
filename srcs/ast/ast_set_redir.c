@@ -52,19 +52,11 @@ static int	check_for_type(char *str)
 
 void	ast_set_redir(t_redir *redir, char *str)
 {
-	int	temp;
-	temp = check_for_type(str);
-	if (temp == FILE_IN)
-		redir->type_in = temp;
-	else if (temp == FILE_APPEND || temp == FILE_TRUNC)
-		redir->type_out = temp;
-/*	if (ft_isdigit(str[0]))
+	redir->type = check_for_type(str);
+/* 	if (ft_isdigit(str[0]))
 		redir->fildes = ft_atoi(str);
-	else */
 	redir->fd_in = -1;
 	redir->fd_out = -1;
-/* 	if (redir->type == FILE_IN)
-		redir->fildes = 0;
 	if (redir->type == FILE_AGGR)
 		ft_putendl("\nAGGR");
 	if (redir->type == FILE_IN)

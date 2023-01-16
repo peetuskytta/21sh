@@ -6,13 +6,13 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 11:17:52 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/06 11:49:27 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/16 13:31:50 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/shell.h"
 
-static void	print_zplogo()
+static void	print_zplogo(void)
 {
 	ft_putendl_fd(" _____  __      _          _ _", STDIN_FILENO);
 	ft_putendl_fd("/ __  \\/  |    | |        | | |", STDIN_FILENO);
@@ -24,7 +24,7 @@ static void	print_zplogo()
 	ft_putchar_fd('\n', STDIN_FILENO);
 }
 
-static void	print_pzlogo()
+static void	print_pzlogo(void)
 {
 	ft_putendl_fd(" _____  __      _          _ _", STDIN_FILENO);
 	ft_putendl_fd("/ __  \\/  |    | |        | | |", STDIN_FILENO);
@@ -36,7 +36,7 @@ static void	print_pzlogo()
 	ft_putchar_fd('\n', STDIN_FILENO);
 }
 
-void	print_logo()
+void	print_logo(void)
 {
 	int	i;
 

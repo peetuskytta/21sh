@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:05:15 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/12 15:01:33 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/13 13:51:34 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,24 +48,19 @@ static void	ast_add_redir(t_tok ***token, t_redir *redir, int *idx)
 		if ((**token)->next->type == REDIR)
 		{
 			(**token) = (**token)->next;
-			if (redir[(*idx)].type_in == FILE_IN)
-				redir[(*idx)].file_in = ft_strdup((**token)->str);
-			if (redir[(*idx)].type_out == FILE_OUT)
-				redir[(*idx)].file_out = ft_strdup((**token)->str);
+			redir[(*idx)].file = ft_strdup((**token)->str);
 		}
 		else
-		{
-			redir[(*idx)].file_in = NULL;
-			redir[(*idx)].file_out = NULL;
-		}
+			redir[(*idx)].file = NULL;
 		(*idx)++;
 	}
 	else
 		ft_perror("too many redirections...");
 	(**token) = (**token)->next;
-}
+
 	// Needs a way to detect the type of redirection and
 	// separate the filename from the redirection
+}
 
 /*
 ** Consumes the tokens to arguments and redirections
