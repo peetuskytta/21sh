@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:40:28 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/13 13:41:51 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/16 09:55:53 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ static void	change_in_and_out(t_exec *data)
 		if (data->fds.fd_in > 0)
 			dup2(data->fds.fd_in, STDIN_FILENO);
 	}
-	if (data->redir->type == FILE_IN || data->redir->type == FILE_OUT)
+	if (data->redir->type == FILE_IN || data->redir->type == FILE_TRUNC \
+		|| data->redir->type == FILE_APPEND)
 	{
 		if (data->redir->fd_out > 0)
 		{

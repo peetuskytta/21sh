@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/05 10:57:33 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/16 09:55:17 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@
 # include <termcap.h>
 # include <sys/ioctl.h>
 # include <sys/wait.h>
+
+#if __WINDOWS__
+  # define R_OK 4
+  # define W_OK 2
+  # define F_OK 0
+#endif
 
 # define NL ft_putchar('\n')
 # define DB ft_putstr("\nYOU ARE HERE\n")
