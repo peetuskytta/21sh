@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 09:15:27 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/15 14:41:53 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/16 14:24:16 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,13 @@ static void	init_allocations(t_shell *shell)
 	shell->temp = (char *)ft_memalloc(sizeof(char) * (MAX_BUFF + 1));
 	shell->input = (char *)ft_memalloc(sizeof(char) * (MAX_BUFF + 1));
 	shell->clipbrd = (char *)ft_memalloc(sizeof(char) * (MAX_BUFF + 1));
+	shell->q_input = (char *)ft_memalloc(sizeof(char) * (MAX_BUFF * 2 + 1));
 	allocation_check((void *)&shell->cmd_line);
 	allocation_check((void *)&shell->rev_cmd);
 	allocation_check((void *)&shell->temp);
 	allocation_check((void *)&shell->input);
 	allocation_check((void *)&shell->clipbrd);
+	allocation_check((void *)&shell->q_input);
 }
 
 void	init_shell(t_shell *shell, char **environ)

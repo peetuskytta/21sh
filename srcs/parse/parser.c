@@ -40,7 +40,7 @@ t_tok	*parser(t_shell *shell)
 	ft_memset(&list, 0, sizeof(t_lex));
 	shell->cmd_idx *= 2;
 	if (shell->cmd_idx > 0)
-		token_list_build(shell->cmd_line, shell->cmd_idx, &list);
+		token_list_build(shell->q_input, ft_strilen(shell->q_input), &list);
 	//temp = list.token_list;
 	//token_list_print(temp);
 	return (list.token_list);

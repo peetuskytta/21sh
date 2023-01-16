@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/16 13:26:37 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/16 15:28:45 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,16 @@
 static void	cmd_line_reset(t_shell *shell, t_win *window)
 {
 	if (shell->quote == EOF)
-	{
-		ft_memset(shell->cmd_line, '\0', sizeof(char) * (MAX_BUFF + 1));
-		ft_memset(shell->temp, '\0', sizeof(char) * (MAX_BUFF + 1));
-		ft_memset(window->row_idx, '\0', sizeof(char *) * (MAX_BUFF));
-		ft_memset(shell->input, '\0', sizeof(char) * (MAX_BUFF + 1));
-		window->idx = 0;
-		shell->cmd_idx = 0;
-		window->row_idx[window->idx] = &shell->cmd_line[0];
-	}
+		ft_memset(shell->q_input, '\0', sizeof(char) * (MAX_BUFF * 2 + 1));
+	if (shell->quote != EOF)
+		window->current_row++;
+	window->idx = 0;
+	ft_memset(window->row_idx, '\0', sizeof(char *) * (MAX_BUFF));
+	window->row_idx[window->idx] = &shell->cmd_line[0];
+	ft_memset(shell->cmd_line, '\0', sizeof(char) * (MAX_BUFF + 1));
+	ft_memset(shell->temp, '\0', sizeof(char) * (MAX_BUFF + 1));
+	ft_memset(shell->input, '\0', sizeof(char) * (MAX_BUFF + 1));
+	shell->cmd_idx = 0;
 	shell->end = 0;
 	NL;
 	cmd_line_prompt(shell->quote);

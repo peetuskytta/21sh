@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 17:00:36 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/15 11:36:37 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/16 15:56:27 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	is_escape(t_shell *shell, t_win *win, char *input, int *i)
 		flg = 1;
 	if (input[0] == 27 && input[1] == '\0')
 	{
-		*i += 2;
+		*i += 1;
 		return (1);
 	}
 	else if (input[0] == 127)
@@ -32,7 +32,6 @@ static int	is_escape(t_shell *shell, t_win *win, char *input, int *i)
 			shell->cmd_line[ft_strilen(shell->cmd_line) - 1] = '\0';
 			shell->cmd_idx--;
 			cmd_line_reprint(shell, win);
-			cursor_load(win, 0);
 		}
 		return (1);
 	}

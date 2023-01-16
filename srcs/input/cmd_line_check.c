@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 15:57:40 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/15 15:15:03 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/16 14:17:48 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	reset_input(t_shell *shell)
 {
 	int	i;
 
-	ft_memset(shell->input, 0, sizeof(char) * (MAX_BUFF + 1));
+	ft_memset(shell->input, '\0', sizeof(char) * (MAX_BUFF + 1));
 	i = ft_strilen(shell->cmd_line) - 1;
 	if (i > 0)
 		shell->input = ft_strcpy(shell->input, shell->cmd_line);

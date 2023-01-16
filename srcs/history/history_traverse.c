@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 14:29:03 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/16 12:16:54 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/16 15:58:04 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static void	reset_history(t_shell *shell, t_win *window)
 		cursor_reset_line(window, shell->prmpt_len, -1);
 	else
 	{
-		i = 0;
-		while (window->row_idx[i] != NULL)
+		i = 1;
+		while (window->row_idx[i + 1] != NULL)
 			i++;
 		cursor_reset_line(window, shell->prmpt_len, i);
 	}
@@ -90,4 +90,5 @@ void	history_traverse(t_shell *shell, t_win *win, int *idx, int key)
 		history_up(shell, win, idx);
 	else if (key == 66 && shell->history[i + 1] != NULL && shell->temp != NULL)
 		history_down(shell, win, idx);
+	cursor_load(win, win->idx);
 }

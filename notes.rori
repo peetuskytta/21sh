@@ -4,7 +4,7 @@ TO BE DONE:
 REASONABLY DONE:
 - AGREGATE - peetu 30%
 - PIPES & REDIRECT - peetu 95%
-- ERRORS - together 70%
+- ERRORS - together 90%
 - BUILTINS - together 75% >> "\nexit\n" for exit builtin sent to kill_mode
 	- does setenv need to be sensitive to "na=me"=surname type of argument?
 - QUOTES - together but peetu is a hero 98%

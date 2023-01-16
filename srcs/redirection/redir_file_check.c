@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_file_check.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 15:11:08 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/16 09:52:38 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/16 13:39:41 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	redir_file_check(t_redir *redir)
 	}
 	else if (redir->type == FILE_IN)
 		open_redirection_in(redir, &status);
-	if (status != FILE_IN || status != FILE_OUT)
+	if (status != FILE_IN && status != FILE_OUT)
 		file_error(&status, redir->file);
 	return (status);
 }

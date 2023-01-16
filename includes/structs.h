@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/16 13:32:06 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/16 13:58:27 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,11 @@ typedef struct s_shell
 	int				env_iflg;
 	char			*history[1001];
 	int				hist_idx;
-	char			*temp;
+	char			*q_input;
 	char			*input;
 	char			*cmd_line;
 	char			*rev_cmd;
+	char			*temp;
 	char			*clipbrd;
 	int				cmd_idx;
 	int				prmpt_len;
