@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 23:15:32 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/12 13:14:44 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/16 20:35:25 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	change_state(t_tok *tok, int *state, int *k, char ch)
 	(*k)++;
 }
 
-static bool	type_error_case(char *str)
+/* static bool	type_error_case(char *str)
 {
 	if (ft_strstr(str, "<&>") || ft_strstr(str, ">&>"))
 		return (true);
@@ -76,9 +76,8 @@ static bool	type_error_case(char *str)
 	if (ft_strstr(str, "<<>") || ft_strstr(str, "<>>"))
 		return (true);
 	return (false);
-}
+} */
 
-// error if ||| amount of sequencial pipes is more than one
 void	token_list_build(char *input, int size, t_lex *list)
 {
 	t_tok	*token;
@@ -153,13 +152,13 @@ void	token_list_build(char *input, int size, t_lex *list)
 		}
 		else if (state == STATE_REDIR)
 		{
-			if (input[i + 1] == NULL_BYTE || (type_error_case(token->str)) || token->str[0] == '-')
+/* 			if (input[i + 1] == NULL_BYTE || (type_error_case(token->str)) || token->str[0] == '-')
 			{
 					ft_print_fd(2, "\n21sh parse error near `%c%c'\n",input[i - 1], input[i]);
 					token_list_free(list->token_list);
 					list->token_list = NULL;
 					return ;
-			}
+			} */
 			if (!ft_strchr("0123456789&><-", c))
 			{
 				token->type = REDIR;

@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:40:28 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/16 15:43:08 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/16 16:00:01 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,11 @@ static void	wait_for_finish(t_pid pid)
 /*
 **	Performs input/output change before fork and execution of a command.
 */
-void	exec_cmd(t_exec data, char *bin_path, char **env_cpy)
+void	exec_cmd(t_exec data, char *bin_path, char **env_cpy, int *output)
 {
 	t_pid	pid;
 
+	(void)output;
 	pid.child = fork();
 	if (pid.child == 0)
 	{
