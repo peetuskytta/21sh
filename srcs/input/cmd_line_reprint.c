@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 13:36:22 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/16 15:56:00 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/16 22:41:41 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	cmd_line_reprint(t_shell *shell, t_win *window)
 	if (window->idx == 0)
 		cursor_load(window, -1);
 	else
-		cursor_load(window, window->idx);
+		cursor_load(window, 0);
 }
 /*
 */

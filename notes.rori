@@ -28,12 +28,10 @@ DONE DONE:
 |			|	$> jsdsjdjd  2>&1 | cat -e 				|
 |			|	21sh: jsdsjdjd: command not found$		|
 |-------------------------------------------------------|
-|			|	2. COPY-CUT-PASTE						|
-|			|	if paste in mid when not cut, reprint!	|
-|			|	paste sometimes funny? cpy_rev's fault?	|
+|			|	2. CURSOR!								|
+|			|	everything about inserting in middle	|
+|			|	is broken. idk what i changed or did.	|
+|			|	i wanna cry								|
 |-------------------------------------------------------|
-|			|	3. QUOTES								|
-|			|	need to check input has enough space	|
-|			|	to hold a long long line w/ open quote	|
-|			|	means need q_input 2 not break muiltiln	|
+|			|	3. ERROS & IS_BUILTIN					|
 |-------------------------------------------------------|

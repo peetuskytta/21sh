@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 15:40:44 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/16 15:08:16 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/16 21:33:24 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,14 @@ static int	is_arrow_updwn(t_shell *shell, t_win *window, char *input, int *i)
 {
 	if (input[1] == 91 && input[2] == 66 && input[3] == 0)
 	{
-		*i += 3;
 		history_traverse(shell, window, &shell->hist_idx, 66);
+		*i += 3;
 		return (1);
 	}
 	else if (input[1] == 91 && input[2] == 65 && input[3] == 0)
 	{
-		*i += 3;
 		history_traverse(shell, window, &shell->hist_idx, 65);
+		*i += 3;
 		return (1);
 	}
 	return (0);

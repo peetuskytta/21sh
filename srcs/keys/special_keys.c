@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 17:00:36 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/16 15:56:27 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/16 23:07:50 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,10 @@
 
 static int	is_escape(t_shell *shell, t_win *win, char *input, int *i)
 {
-	int	flg;
-
-	flg = 0;
-	if (win->row_idx[1] != NULL)
-		flg = 1;
-	if (input[0] == 27 && input[1] == '\0')
+	if (input[0] == 27)
 	{
-		*i += 1;
+		while (input[*i])
+			*i += 1;
 		return (1);
 	}
 	else if (input[0] == 127)
@@ -65,8 +61,8 @@ int	special_keys(t_shell *shell, char *input, int *i)
 	else if (input[0] == ESC || input[0] == 127)
 	{
 		if (!(key_is_arrow(shell, &shell->window, input, i))
-			&& !(is_escape(shell, &shell->window, input, i))
-			&& !(is_home_end(shell, &shell->window, input, i)))
+			&& !(is_home_end(shell, &shell->window, input, i))
+			&& !(is_escape(shell, &shell->window, input, i)))
 			return (0);
 		else
 			return (1);
