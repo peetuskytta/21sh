@@ -14,7 +14,7 @@
 
 static char	*exec_binary_path(char **path, char *cmd)
 {
-	struct	stat	buf;
+	struct stat		buf;
 	char			*temp;
 	char			**cpy;
 
