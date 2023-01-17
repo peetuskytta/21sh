@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:40:28 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/17 12:52:22 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/17 13:27:12 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,23 @@ static void pipe_ends(int pipe, int *fd_in, int *fd_out)
 {
 	if (pipe == PIPE_FIRST)
 	{
+		// DB;
+		// ft_putstr("First in:  ");
+		// ft_putnbr_endl(*fd_in);
+		// ft_putstr("First out:  ");
+		// ft_putnbr_endl(*fd_out);
+		close(*fd_in);
 		*fd_in = -1;
 		dup2(*fd_out, STDOUT_FILENO);
 	}
 	else if (pipe == PIPE_LAST)
 	{
+		// DB;
+		// ft_putstr("Last in:  ");
+		// ft_putnbr_endl(*fd_in);
+		// ft_putstr("Last out:  ");
+		// ft_putnbr_endl(*fd_out);
+		close(*fd_out);
 		*fd_out = -1;
 		dup2(*fd_in, STDIN_FILENO);
 	}
@@ -51,12 +63,12 @@ static void	change_in_and_out(t_exec *data)
 		if (data->redir->fd_out > 0)
 		{
 			dup2(data->redir->fd_out, STDOUT_FILENO);
-			close(data->redir->fd_out);
+			//close(data->redir->fd_out);
 		}
 		if (data->redir->fd_in > 0)
 		{
 			dup2(data->redir->fd_in, STDIN_FILENO);
-			close(data->redir->fd_in);
+			//close(data->redir->fd_in);
 		}
 	}
 }
