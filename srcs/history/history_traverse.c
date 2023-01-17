@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 14:29:03 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/17 14:12:38 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/17 17:04:25 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,11 @@ static void	history_cursor(t_shell *shell, t_win *win)
 	cmd_line_check_row(shell, win);
 	ft_putstr_fd(shell->cmd_line, STDIN_FILENO);
 	if (win->row_idx[1] == NULL)
+	{
+		cursor_find(shell, win);
+		win->loc = shell->prmpt_len + shell->cmd_idx;
 		cursor_load(win, 0);
+	}
 	else
 	{
 		cursor_find(shell, win);
@@ -41,21 +45,14 @@ static void	reset_history(t_shell *shell, t_win *window)
 	int	i;
 
 	ft_memset(shell->rev_cmd, '\0', sizeof(char) * MAX_BUFF);
-	i = 1;
+	i = 0;
 	while (window->row_idx[i] != NULL)
 		i++;
-	if (window->idx == 0)
-	{
-		cursor_reset_line(window, shell->prmpt_len, -1);
-		if (window->idx != i)
-			window->current_row = window->current_row - i + 1;
-	}
-	else
-	{
-		cursor_reset_line(window, shell->prmpt_len, i);
-		if (i != window->idx)
-			window->current_row = window->current_row - i + 1;
-	}
+	cursor_row_find(shell, window);
+	if (window->idx == 0 && window->idx != i)
+		window->current_row = window->current_row - i - 1;
+	else if (i != window->idx)
+		window->current_row = window->current_row - i + 1;
 }
 
 static void	history_up(t_shell *shell, t_win *win, int *idx)

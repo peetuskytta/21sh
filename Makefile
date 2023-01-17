@@ -47,8 +47,8 @@ _CURSOR := cursor_reset_line.c \
 		cursor_load.c \
 		cursor_goto_end.c \
 		cursor_goto_sides.c \
+		cursor_row_find.c \
 		goto_newline.c
-# cursor_row_col.c \
 # cursor_goto_word.c \
 
 _EXECUTE := exec_tree.c \
