@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 13:58:06 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/05 10:56:25 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/17 12:48:33 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ typedef enum e_type
 
 typedef enum e_red
 {
-	FILE_IN,
-	FILE_OUT,
-	FILE_AGGR,
-	FILE_APPEND,
-	FILE_TRUNC,
-	FILE_INVALID,
-	FILE_PARSE_ERR,
+	FILE_IN = 2,
+	FILE_OUT = 3,
+	FILE_AGGR = 4,
+	FILE_APPEND = 5,
+	FILE_TRUNC = 6,
+	FILE_INVALID = 7,
+	FILE_PARSE_ERR = 8,
 }	t_red;
 
 typedef enum e_state

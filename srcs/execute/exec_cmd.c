@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:40:28 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/16 16:00:01 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/17 12:52:22 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,10 @@ static void close_fds(int fd_in, int fd_out)
 		close(fd_out);
 }
 
-static void	wait_for_finish(t_pid pid)
+static void	wait_for_finish(t_pid *pid)
 {
-	pid.wait = waitpid(pid.child, &pid.status, 0);
-	if (pid.wait == -1)
+	pid->wait = waitpid(pid->child, &pid->status, 0);
+	if (pid->wait == -1)
 		ft_perror(WAITPID_FAIL);
 }
 
@@ -103,6 +103,6 @@ void	exec_cmd(t_exec data, char *bin_path, char **env_cpy, int *output)
 	else if (pid.child < 0)
 		ft_perror(FORK_FAIL);
 	else
-		wait_for_finish(pid);
+		wait_for_finish(&pid);
 	close_fds(data.fds.fd_in, data.fds.fd_out);
 }
