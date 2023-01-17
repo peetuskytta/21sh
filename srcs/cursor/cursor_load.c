@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:43:42 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/16 21:10:43 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/17 13:55:17 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 void	cursor_load(t_win *window, int flg)
 {
 	if (flg == -1)
+	{
 		ft_putstr(tgoto(tgetstr("cm", NULL), window->loc, window->current_row
 				- 1));
+	}
 	else
 	{
 		while (window->row_idx[flg] != NULL)

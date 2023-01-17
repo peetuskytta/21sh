@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 14:29:03 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/16 23:00:39 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/17 14:12:38 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,19 @@
 
 static void	history_cursor(t_shell *shell, t_win *win)
 {
-	win->loc = shell->prmpt_len + shell->cmd_idx;
 	win->idx = 0;
+	win->loc = shell->prmpt_len + shell->cmd_idx;
 	ft_memset(&win->row_idx[1], '\0', sizeof(char *) * (MAX_BUFF - 1));
 	cmd_line_check_row(shell, win);
-	if (win->idx > 0)
+	ft_putstr_fd(shell->cmd_line, STDIN_FILENO);
+	if (win->row_idx[1] == NULL)
+		cursor_load(win, 0);
+	else
+	{
+		cursor_find(shell, win);
 		win->loc = ft_strilen(win->row_idx[win->idx]);
-	cmd_line_reprint(shell, win);
+		cursor_load(win, 0);
+	}
 }
 
 static void	reset_history(t_shell *shell, t_win *window)
@@ -35,14 +41,20 @@ static void	reset_history(t_shell *shell, t_win *window)
 	int	i;
 
 	ft_memset(shell->rev_cmd, '\0', sizeof(char) * MAX_BUFF);
+	i = 1;
+	while (window->row_idx[i] != NULL)
+		i++;
 	if (window->idx == 0)
+	{
 		cursor_reset_line(window, shell->prmpt_len, -1);
+		if (window->idx != i)
+			window->current_row = window->current_row - i + 1;
+	}
 	else
 	{
-		i = 1;
-		while (window->row_idx[i] != NULL)
-			i++;
 		cursor_reset_line(window, shell->prmpt_len, i);
+		if (i != window->idx)
+			window->current_row = window->current_row - i + 1;
 	}
 }
 
