@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:40:28 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/17 13:27:12 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/18 10:34:14 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,16 @@ static void	change_in_and_out(t_exec *data)
 */
 static void close_fds(int fd_in, int fd_out)
 {
-	if (fd_in > 0)
+	if (fd_in >= 0)
 		close(fd_in);
-	if (fd_out > 0)
+	if (fd_out >= 0)
 		close(fd_out);
 }
 
-static void	wait_for_finish(t_pid *pid)
+void	wait_for_finish(t_pid *pid, int pipe)
 {
+	if (pipe != PIPE_LAST)
+		return ;
 	pid->wait = waitpid(pid->child, &pid->status, 0);
 	if (pid->wait == -1)
 		ft_perror(WAITPID_FAIL);
@@ -95,11 +97,11 @@ static void	wait_for_finish(t_pid *pid)
 /*
 **	Performs input/output change before fork and execution of a command.
 */
-void	exec_cmd(t_exec data, char *bin_path, char **env_cpy, int *output)
+void	exec_cmd(t_exec data, char *bin_path, char **env_cpy, char *terminal)
 {
 	t_pid	pid;
 
-	(void)output;
+	//(void)output;
 	pid.child = fork();
 	if (pid.child == 0)
 	{
@@ -115,6 +117,16 @@ void	exec_cmd(t_exec data, char *bin_path, char **env_cpy, int *output)
 	else if (pid.child < 0)
 		ft_perror(FORK_FAIL);
 	else
-		wait_for_finish(&pid);
+	{
+		if (data.fds.pipe >= 0)
+			wait_for_finish(&pid, data.fds.pipe);
+		else
+		{
+			pid.wait = waitpid(pid.child, &pid.status, 0);
+			if (pid.wait == -1)
+				ft_perror(WAITPID_FAIL);
+		}
+	}
+	init_in_out_err(terminal);
 	close_fds(data.fds.fd_in, data.fds.fd_out);
 }
