@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:38:49 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/17 17:48:12 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/18 17:08:04 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@ static void	ctrl_paste(t_shell *shell, t_win *window)
 			shell->clipbrd, len);
 		shell->cmd_line[shell->cmd_idx + 1] = '\0';
 		cursor_move(shell, window, len, 'r');
-		cursor_row_find(shell, window);
 		cmd_line_check_row(shell, window);
-		cmd_line_reprint(shell, window);
+		input_midline(shell, window);
+		// cursor_row_find(shell, window);
+		// cmd_line_reprint(shell, window);
 		// else
 		// {
 		// if (window->row_idx[1] == NULL)
