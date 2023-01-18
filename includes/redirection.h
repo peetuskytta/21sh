@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 14:59:36 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/17 12:40:45 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/18 12:46:12 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef enum e_status
 	FOLDER_PERM = 13,
 	NO_FILE = 14,
 	FOLDER = 15,
+	HEREDOC = 16,
 }		t_status;
 
 bool	redirection_loop(t_exec *data);

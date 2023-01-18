@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/16 15:38:16 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/18 14:48:51 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <termios.h>
 
 # define MAX_REDIR 512
+# define MAX_PIPE 700
 
 typedef struct s_win
 {
@@ -43,7 +44,7 @@ typedef struct s_shell
 	int				prmpt_len;
 	int				end;
 	int				quote;
-	int			output;
+	pid_t			child;
 	char			*tty;
 	t_win			window;
 	struct termios	orig_raw;
@@ -57,6 +58,7 @@ typedef struct s_fds
 	int				fd_err;
 	int				fd_close;
 	int				pipe;
+	int				heredoc;
 }					t_fds;
 
 typedef struct s_redir
@@ -105,9 +107,12 @@ typedef struct s_pid
 {
 	int				child;
 	int				wait;
-	int				status;
+	pid_t			status;
 }					t_pid;
+
+
 
 #endif
 
 // ls -l | grep file | wc -l
+// ls -lRl | grep Makefile | cat -e ; ps aux | grep

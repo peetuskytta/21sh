@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:40:28 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/18 10:34:14 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/18 14:47:46 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,23 @@ static void pipe_ends(int pipe, int *fd_in, int *fd_out)
 	}
 }
 
+static void	change_redir_io(t_redir	*redir)
+{
+	if (redir->type == FILE_IN || redir->type == FILE_TRUNC || redir->type == FILE_APPEND)
+	{
+		if (redir->fd_out > 0)
+		{
+			dup2(redir->fd_out, STDOUT_FILENO);
+			close(redir->fd_out);
+		}
+		if (redir->fd_in > 0)
+		{
+			dup2(redir->fd_in, STDIN_FILENO);
+			close(redir->fd_in);
+		}
+	}
+}
+
 /*
 **	Closes the STDIN_FILENO or STDOUT_FILENO and sets the in and out
 **	of the command to be executed for pipes and redirections.
@@ -52,25 +69,14 @@ static void	change_in_and_out(t_exec *data)
 		pipe_ends(data->fds.pipe, &data->fds.fd_in, &data->fds.fd_out);
 	else
 	{
-		if (data->fds.fd_out > 0)
+		if (data->redir->type == HEREDOC)
+			DB;
+		if (data->fds.fd_out > 0 && data->redir->type != HEREDOC)
 			dup2(data->fds.fd_out, STDOUT_FILENO);
-		if (data->fds.fd_in > 0)
+		if (data->fds.fd_in > 0 && data->redir->type != HEREDOC)
 			dup2(data->fds.fd_in, STDIN_FILENO);
 	}
-	if (data->redir->type == FILE_IN || data->redir->type == FILE_TRUNC \
-		|| data->redir->type == FILE_APPEND)
-	{
-		if (data->redir->fd_out > 0)
-		{
-			dup2(data->redir->fd_out, STDOUT_FILENO);
-			//close(data->redir->fd_out);
-		}
-		if (data->redir->fd_in > 0)
-		{
-			dup2(data->redir->fd_in, STDIN_FILENO);
-			//close(data->redir->fd_in);
-		}
-	}
+	change_redir_io(data->redir);
 }
 
 /*
@@ -97,15 +103,18 @@ void	wait_for_finish(t_pid *pid, int pipe)
 /*
 **	Performs input/output change before fork and execution of a command.
 */
-void	exec_cmd(t_exec data, char *bin_path, char **env_cpy, char *terminal)
+void	exec_cmd(t_exec data, char *bin_path, char **env_cpy, pid_t *child/*char *terminal*/)
 {
 	t_pid	pid;
 
-	//(void)output;
-	pid.child = fork();
+	pid.child = fork();// store these in an array.
 	if (pid.child == 0)
 	{
-		change_in_and_out(&data);
+		if (data.redir->type == HEREDOC)
+		{
+			ft_printf("Delimiter: [%s]\n", data.redir->file);
+		}
+		change_in_and_out(&data);	// in the CHILD process
 		if (execve(bin_path, data.args, env_cpy) == -1)
 		{
 			ft_perror(EXECVE_ERROR);
@@ -116,10 +125,14 @@ void	exec_cmd(t_exec data, char *bin_path, char **env_cpy, char *terminal)
 	}
 	else if (pid.child < 0)
 		ft_perror(FORK_FAIL);
-	else
+	else	// in the PARENT process
 	{
-		if (data.fds.pipe >= 0)
-			wait_for_finish(&pid, data.fds.pipe);
+		if (data.fds.pipe == PIPE_FIRST)
+		{
+			//wait_for_finish(&pid, data.fds.pipe);
+			*child = pid.status;
+			pid.wait = waitpid(pid.child, &(*child), 0);
+		}
 		else
 		{
 			pid.wait = waitpid(pid.child, &pid.status, 0);
@@ -127,6 +140,7 @@ void	exec_cmd(t_exec data, char *bin_path, char **env_cpy, char *terminal)
 				ft_perror(WAITPID_FAIL);
 		}
 	}
-	init_in_out_err(terminal);
+	//(void)terminal;
+	//init_in_out_err(terminal);
 	close_fds(data.fds.fd_in, data.fds.fd_out);
 }

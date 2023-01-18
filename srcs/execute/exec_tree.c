@@ -90,7 +90,7 @@ static void	piping(t_ast *branch)
 		ft_printf("  READ:[%d],", branch->pipes[idx].fd[0]);
 		ft_printf(" WRITE:[%d]\n", branch->pipes[idx].fd[1]);
 		idx++;
-	} */
+	}*/
 }
 
 /*
@@ -104,9 +104,10 @@ void	exec_tree(t_ast **tree, t_shell *shell)
 	int	idx;
 
 	idx = 0;
-	ft_putendl("");
+	//ft_putendl("");
 	while (tree[idx])
 	{
+		// logical operator pursue to continue or not.
 		piping(tree[idx]);
 		exec_branch(tree[idx], shell);
 		ft_memdel((void *)&tree[idx]);
