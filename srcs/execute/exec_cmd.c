@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:40:28 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/18 18:52:05 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/18 22:14:06 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,16 +103,17 @@ void	wait_for_finish(t_pid *pid, int pipe)
 /*
 **	Performs input/output change before fork and execution of a command.
 */
-void	exec_cmd(t_exec data, char *bin_path, char **env_cpy, pid_t *child/*char *terminal*/)
+void	exec_cmd(t_exec data, char *bin_path, char **env_cpy)
 {
 	t_pid	pid;
 
-	pid.child = fork();// store these in an array.
-	if (pid.child == 0)
+	pid.child = fork();	// store these in an array?
+	if (pid.child == 0)	// in the CHILD process
 	{
 		if (data.redir->type == HEREDOC)
 			ft_printf("Delimiter: [%s]\n", data.redir->file);
-		change_in_and_out(&data);	// in the CHILD process
+		change_in_and_out(&data);
+		ft_printf("\nstarting execution of: (%s)\n", data.cmd);
 		if (execve(bin_path, data.args, env_cpy) == -1)
 		{
 			ft_perror(EXECVE_ERROR);
@@ -128,7 +129,6 @@ void	exec_cmd(t_exec data, char *bin_path, char **env_cpy, pid_t *child/*char *t
 		if (data.fds.pipe == PIPE_FIRST)
 		{
 			data.process_pid = pid.child;
-			(void)child;
 			//wait_for_finish(&pid, data.fds.pipe);
 			//*child = pid.status;
 			//pid.wait = waitpid(data.process_pid, &(*child), 0);
