@@ -71,6 +71,8 @@ static t_ast	*ast_create_left(t_tok ***token, t_ast *branch)
 	ft_memset(&branch->data.redir, 0, sizeof(t_redir) * 512);
 	branch->data.redir->fd_in = -1;
 	branch->data.redir->fd_out = -1;
+	branch->data.process_pid = -1;
+	branch->data.status = -1;
 	ft_memset(&branch->pipes, -1, sizeof(t_pipe) * 512);
 	ft_memset(&branch->data.fds, -1, sizeof(t_fds));
 	ast_consume_tokens(token, branch, 0);

@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:40:28 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/18 14:47:46 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/18 18:52:05 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,9 +111,7 @@ void	exec_cmd(t_exec data, char *bin_path, char **env_cpy, pid_t *child/*char *t
 	if (pid.child == 0)
 	{
 		if (data.redir->type == HEREDOC)
-		{
 			ft_printf("Delimiter: [%s]\n", data.redir->file);
-		}
 		change_in_and_out(&data);	// in the CHILD process
 		if (execve(bin_path, data.args, env_cpy) == -1)
 		{
@@ -129,9 +127,11 @@ void	exec_cmd(t_exec data, char *bin_path, char **env_cpy, pid_t *child/*char *t
 	{
 		if (data.fds.pipe == PIPE_FIRST)
 		{
+			data.process_pid = pid.child;
+			(void)child;
 			//wait_for_finish(&pid, data.fds.pipe);
-			*child = pid.status;
-			pid.wait = waitpid(pid.child, &(*child), 0);
+			//*child = pid.status;
+			//pid.wait = waitpid(data.process_pid, &(*child), 0);
 		}
 		else
 		{
