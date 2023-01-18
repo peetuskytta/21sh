@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:40:28 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/18 14:47:46 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/18 16:08:01 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,11 +127,12 @@ void	exec_cmd(t_exec data, char *bin_path, char **env_cpy, pid_t *child/*char *t
 		ft_perror(FORK_FAIL);
 	else	// in the PARENT process
 	{
-		if (data.fds.pipe == PIPE_FIRST)
+		if (data.fds.pipe >= 0)
 		{
-			//wait_for_finish(&pid, data.fds.pipe);
-			*child = pid.status;
-			pid.wait = waitpid(pid.child, &(*child), 0);
+			wait_for_finish(&pid, data.fds.pipe);
+			//*child = pid.status;
+			 (void)child;
+			//pid.wait = waitpid(pid.child, &(*child), 0);
 		}
 		else
 		{

@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/18 14:48:51 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/18 16:18:24 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ typedef struct s_exec
 	char			*args[MAX_REDIR];
 	struct s_redir	redir[MAX_REDIR];
 	struct s_fds	fds;
+	pid_t			pid;
+	int				status;
 }					t_exec;
 
 typedef struct s_tok
