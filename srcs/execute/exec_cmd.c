@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:40:28 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/19 14:43:31 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/19 22:20:57 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	change_in_and_out(t_exec *data)
 	else
 	{
 		if (data->redir->type == HEREDOC)
-			DB;
+			;//redir_heredoc(data); // WE NEED TO BRING THE TERMCAPS FOR HEREDOC
 		if (data->fds.fd_out > 0 && data->redir->type != HEREDOC)
 			dup2(data->fds.fd_out, STDOUT_FILENO);
 		if (data->fds.fd_in > 0 && data->redir->type != HEREDOC)
@@ -97,8 +97,6 @@ void	exec_cmd(t_exec data, char *bin_path, char **env_cpy)
 	data.pid.child = fork();	// store these in an array?
 	if (data.pid.child == 0)	// in the CHILD process
 	{
-		if (data.redir->type == HEREDOC)
-			ft_printf("Delimiter: [%s]\n", data.redir->file);
 		change_in_and_out(&data);
 		if (execve(bin_path, data.args, env_cpy) == -1)
 		{

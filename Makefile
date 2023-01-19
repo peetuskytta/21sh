@@ -100,7 +100,8 @@ _RAWMODE := enable_rawmode.c \
 
 _REDIRECTION := redirection_loop.c \
 		redir_file_check.c \
-		redir_folder_check.c
+		redir_folder_check.c \
+		redir_heredoc.c
 
 #All to object files
 ALL_SRCS :=	$(addprefix $(SRCS_AST), $(_AST)) \
