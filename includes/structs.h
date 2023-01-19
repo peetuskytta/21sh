@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/18 16:18:24 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/19 10:51:50 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ typedef struct s_exec
 	char			*args[MAX_REDIR];
 	struct s_redir	redir[MAX_REDIR];
 	struct s_fds	fds;
-	pid_t			pid;
+	int				process_pid;
 	int				status;
 }					t_exec;
 
@@ -118,3 +118,5 @@ typedef struct s_pid
 
 // ls -l | grep file | wc -l
 // ls -lRl | grep Makefile | cat -e ; ps aux | grep
+// ls -R | grep Makefile | cat -e ; ps -j
+// ls -R / | grep Makefile | cat -e ; ps -j

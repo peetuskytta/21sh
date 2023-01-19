@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   history_init.c                                     :+:      :+:    :+:   */
+/*   history_fetch.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 15:07:37 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/27 14:59:31 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/19 11:04:34 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	history_fetch(t_shell *shell)
 		}
 		shell->hist_idx = i - 1;
 	}
-	else
+	else if (fd < 0)
 		ft_perror(HIST_ERR_FILE);
+	if (!close(fd))
+		ft_perror(FILE_CLOSE_ERR);
 }

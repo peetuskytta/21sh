@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:40:28 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/18 16:08:01 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/19 10:49:48 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,8 @@ static void close_fds(int fd_in, int fd_out)
 		close(fd_out);
 }
 
-void	wait_for_finish(t_pid *pid, int pipe)
+static void	wait_for_finish(t_pid *pid)
 {
-	if (pipe != PIPE_LAST)
-		return ;
 	pid->wait = waitpid(pid->child, &pid->status, 0);
 	if (pid->wait == -1)
 		ft_perror(WAITPID_FAIL);
@@ -103,18 +101,17 @@ void	wait_for_finish(t_pid *pid, int pipe)
 /*
 **	Performs input/output change before fork and execution of a command.
 */
-void	exec_cmd(t_exec data, char *bin_path, char **env_cpy, pid_t *child/*char *terminal*/)
+void	exec_cmd(t_exec data, char *bin_path, char **env_cpy)
 {
 	t_pid	pid;
 
-	pid.child = fork();// store these in an array.
-	if (pid.child == 0)
+	ft_printf("starting execution of: (%s)\n", data.cmd); // delete before submit
+	pid.child = fork();	// store these in an array?
+	if (pid.child == 0)	// in the CHILD process
 	{
 		if (data.redir->type == HEREDOC)
-		{
 			ft_printf("Delimiter: [%s]\n", data.redir->file);
-		}
-		change_in_and_out(&data);	// in the CHILD process
+		change_in_and_out(&data);
 		if (execve(bin_path, data.args, env_cpy) == -1)
 		{
 			ft_perror(EXECVE_ERROR);
@@ -127,21 +124,10 @@ void	exec_cmd(t_exec data, char *bin_path, char **env_cpy, pid_t *child/*char *t
 		ft_perror(FORK_FAIL);
 	else	// in the PARENT process
 	{
-		if (data.fds.pipe >= 0)
-		{
-			wait_for_finish(&pid, data.fds.pipe);
-			//*child = pid.status;
-			 (void)child;
-			//pid.wait = waitpid(pid.child, &(*child), 0);
-		}
+		if (data.fds.pipe == PIPE_FIRST)
+			data.process_pid = pid.child;
 		else
-		{
-			pid.wait = waitpid(pid.child, &pid.status, 0);
-			if (pid.wait == -1)
-				ft_perror(WAITPID_FAIL);
-		}
+			wait_for_finish(&pid);
 	}
-	//(void)terminal;
-	//init_in_out_err(terminal);
 	close_fds(data.fds.fd_in, data.fds.fd_out);
 }

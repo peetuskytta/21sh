@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:24:46 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/05 11:01:12 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/19 11:04:03 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,10 @@
 # define PIPE_ERR "shell: pipe error"
 # define BAD_FD "shell: Bad file descriptor:"
 # define SYNTAX_ERR "shell: syntax error near unexpected token"
+
+/*Error messages for file descriptors*/
+# define FILE_CLOSE_ERR "shell: error when closing a file"
+# define FILE_OPEN_ERR "shell: error when opening a file"
 
 # define MALLOC_ERRNO		2
 # define FORK_ERRNO			3

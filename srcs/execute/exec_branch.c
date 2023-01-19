@@ -41,16 +41,12 @@ static char	**copy_environment(char **environ)
 static void	command_execution(t_exec data, char **env_cpy)
 {
 	char	*bin_path;
-	pid_t	pid = 0;
 
 	bin_path = exec_find_binary(exec_fetch_path_var(env_cpy), data.cmd);
 	if (redirection_loop(&data) && exec_binary_check(bin_path, data.cmd))
-	{
-		//DB;
-		exec_cmd(data, bin_path, env_cpy, &pid);
-		//ft_putnbr_endl(*output);
-	}
-	exec_clear_data(&data, bin_path);
+		exec_cmd(data, bin_path, env_cpy);
+	ft_strdel((void *)&bin_path);
+	//exec_clear_data(&data, bin_path);
 }
 
 /*
@@ -62,15 +58,19 @@ static void	command_execution(t_exec data, char **env_cpy)
 void	exec_branch(t_ast *branch, t_shell *shell)
 {
 	char	**env_cpy;
+	t_pid	pid;
 
 	if (branch == NULL)
 		return ;
+	if (branch->data.fds.pipe == PIPE_LAST)
+		pid.wait = waitpid(branch->data.process_pid, &pid.status, 0);
 	env_cpy = copy_environment(shell->environ);
 	if ((branch->type == REDIR || branch->type == COMMAND))
 		command_execution(branch->data, env_cpy);
 	exec_branch(branch->left, shell);
 	if (branch->type == PIPE)
 		exec_branch(branch->right, shell);
+	//exec_clear_data(&branch->data);
 	ast_release(branch, env_cpy);
 }
 
