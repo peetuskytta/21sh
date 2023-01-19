@@ -43,7 +43,7 @@ static void	command_execution(t_exec data, char **env_cpy)
 	char	*bin_path;
 
 	bin_path = exec_find_binary(exec_fetch_path_var(env_cpy), data.cmd);
-	if (redirection_loop(&data) && exec_binary_check(bin_path, data.cmd))
+	if (redirection_loop(&data) && exec_binary_check(bin_path, data))
 		exec_cmd(data, bin_path, env_cpy);
 	ft_strdel((void *)&bin_path);
 	//exec_clear_data(&data, bin_path);
@@ -70,7 +70,6 @@ void	exec_branch(t_ast *branch, t_shell *shell)
 	exec_branch(branch->left, shell);
 	if (branch->type == PIPE)
 		exec_branch(branch->right, shell);
-	//exec_clear_data(&branch->data);
 	ast_release(branch, env_cpy);
 }
 

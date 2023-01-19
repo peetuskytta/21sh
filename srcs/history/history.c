@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:42:49 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/30 16:23:25 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/19 11:46:23 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** on re-launch, file contents are copied back into the array
 ** to a limit of a 1000
 ** same process if you call ./21sh while running ./21sh
-** older commands deleted once limit is reached 
+** older commands deleted once limit is reached
 */
 
 #include "../../includes/shell.h"

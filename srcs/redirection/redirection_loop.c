@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirection_loop.c                                      :+:      :+:    :+:   */
+/*   redirection_loop.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/04 14:58:59 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/05 15:40:18 by pskytta          ###   ########.fr       */
+/*   Created: 2023/01/19 14:22:02 by pskytta           #+#    #+#             */
+/*   Updated: 2023/01/19 14:22:35 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ static bool	in_files(t_redir *redir, char *file)
 	else
 		return (false);
 }
-
 
 /*
 **	Opens all the redirection files in one command and closes the previous

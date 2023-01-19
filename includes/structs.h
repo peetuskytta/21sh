@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/19 10:51:50 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/19 14:33:49 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,20 @@ typedef struct s_redir
 	char			*file;
 }					t_redir;
 
+typedef struct s_pid
+{
+	int				child;
+	int				wait;
+	pid_t			status;
+}					t_pid;
+
 typedef struct s_exec
 {
 	char			*cmd;
 	char			*args[MAX_REDIR];
 	struct s_redir	redir[MAX_REDIR];
 	struct s_fds	fds;
+	struct s_pid	pid;
 	int				process_pid;
 	int				status;
 }					t_exec;
@@ -104,15 +112,6 @@ typedef struct s_ast
 	struct s_ast	*right;
 	struct s_pipe	pipes[MAX_REDIR];
 }					t_ast;
-
-typedef struct s_pid
-{
-	int				child;
-	int				wait;
-	pid_t			status;
-}					t_pid;
-
-
 
 #endif
 

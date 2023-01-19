@@ -6,11 +6,11 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 15:11:08 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/18 13:50:07 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/19 14:26:29 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../includes/redirection.h"
+#include "../../includes/redirection.h"
 
 /*
 **	Outputs the error message according to the status.
@@ -103,6 +103,5 @@ int	redir_file_check(t_redir *redir)
 		return (FILE_IN);
 	if (status != FILE_IN && status != FILE_OUT)
 		file_error(&status, redir->file);
-	//ft_putnbr_endl(status);
 	return (status);
 }

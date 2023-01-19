@@ -92,6 +92,7 @@ _PANIC := ft_strerror.c \
 
 _PARSE:= token_list_build.c \
 		token_list_free.c \
+		parse_errors.c \
 		parser.c
 
 _RAWMODE := enable_rawmode.c \

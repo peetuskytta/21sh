@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 15:07:37 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/19 11:04:34 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/19 11:48:07 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ void	history_fetch(t_shell *shell)
 	}
 	else if (fd < 0)
 		ft_perror(HIST_ERR_FILE);
-	if (!close(fd))
+	if (close(fd) < 0)
 		ft_perror(FILE_CLOSE_ERR);
 }

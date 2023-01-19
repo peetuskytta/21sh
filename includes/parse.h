@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 13:58:06 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/18 12:45:50 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/19 14:37:08 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,7 @@ typedef enum e_state
 void	token_list_build(char *input, int size, t_lex *list);
 void	token_list_free(t_tok *list);
 t_tok	*parser(t_shell *shell);
+void	parse_errors(t_tok **first);
+
 
 #endif
