@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/16 13:58:27 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/19 12:57:50 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define STRUCTS_H
 # include "shell.h"
 # include <termios.h>
-
 # define MAX_REDIR 512
 
 typedef struct s_win

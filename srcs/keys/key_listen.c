@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 13:35:45 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/18 17:08:58 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/19 12:50:59 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	key_listen(t_shell *shell, char *input)
 		key = special_keys(shell, input, &i);
 		if (key == ENTER)
 			shell->end = 1;
-		else if (key == 0 && shell->cmd_idx <= MAX_BUFF)
+		else if (key == 0 && shell->cmd_idx + 1 <= MAX_BUFF)
 		{
 			if (input[i] == '\t')
 				input[i] = ' ';
@@ -41,3 +41,4 @@ void	key_listen(t_shell *shell, char *input)
 	}
 }
 				// cmd_line_reprint(shell, &shell->window);
+				// input_midline(shell, &shell->window);

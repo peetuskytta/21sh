@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 15:57:40 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/16 22:29:57 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/19 12:30:55 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	cmd_line_check_row(t_shell *shell, t_win *window)
 	{
 		loc = window->cols - shell->prmpt_len;
 		idx = 1;
-		while (shell->input[loc] != '\0' && loc <= MAX_BUFF && idx <= MAX_BUFF)
+		while (loc <= MAX_BUFF && idx <= MAX_BUFF && shell->input[loc] != '\0')
 		{
 			window->row_idx[idx] = NULL;
 			window->row_idx[idx] = &shell->input[loc];
