@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:40:28 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/19 08:13:08 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/19 08:53:47 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,8 @@ static void close_fds(int fd_in, int fd_out)
 		close(fd_out);
 }
 
-void	wait_for_finish(t_pid *pid, int pipe)
+static void	wait_for_finish(t_pid *pid)
 {
-	if (pipe != PIPE_LAST)
-		return ;
 	pid->wait = waitpid(pid->child, &pid->status, 0);
 	if (pid->wait == -1)
 		ft_perror(WAITPID_FAIL);
@@ -107,7 +105,7 @@ void	exec_cmd(t_exec data, char *bin_path, char **env_cpy)
 {
 	t_pid	pid;
 
-	ft_printf("\nstarting execution of: (%s)", data.cmd); // delete before submit
+	ft_printf("starting execution of: (%s)\n", data.cmd); // delete before submit
 	pid.child = fork();	// store these in an array?
 	if (pid.child == 0)	// in the CHILD process
 	{
@@ -119,7 +117,6 @@ void	exec_cmd(t_exec data, char *bin_path, char **env_cpy)
 			ft_perror(EXECVE_ERROR);
 			exit(EXIT_FAILURE);
 		}
-		//ft_strclr((void *)&bin_path);
 		close_fds(data.fds.fd_in, data.fds.fd_out);
 		exit(EXIT_SUCCESS);
 	}
@@ -128,20 +125,9 @@ void	exec_cmd(t_exec data, char *bin_path, char **env_cpy)
 	else	// in the PARENT process
 	{
 		if (data.fds.pipe == PIPE_FIRST)
-		{
 			data.process_pid = pid.child;
-			//wait_for_finish(&pid, data.fds.pipe);
-			//*child = pid.status;
-			//pid.wait = waitpid(data.process_pid, &(*child), 0);
-		}
 		else
-		{
-			pid.wait = waitpid(pid.child, &pid.status, 0);
-			if (pid.wait == -1)
-				ft_perror(WAITPID_FAIL);
-		}
+			wait_for_finish(&pid);
 	}
-	//(void)terminal;
-	//init_in_out_err(terminal);
 	close_fds(data.fds.fd_in, data.fds.fd_out);
 }
