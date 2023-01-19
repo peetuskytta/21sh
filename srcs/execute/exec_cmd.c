@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:40:28 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/19 22:20:57 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/19 22:38:44 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	change_in_and_out(t_exec *data)
 	else
 	{
 		if (data->redir->type == HEREDOC)
-			;//redir_heredoc(data); // WE NEED TO BRING THE TERMCAPS FOR HEREDOC
+			redir_heredoc(data); // WE NEED TO BRING THE TERMCAPS FOR HEREDOC
 		if (data->fds.fd_out > 0 && data->redir->type != HEREDOC)
 			dup2(data->fds.fd_out, STDOUT_FILENO);
 		if (data->fds.fd_in > 0 && data->redir->type != HEREDOC)
