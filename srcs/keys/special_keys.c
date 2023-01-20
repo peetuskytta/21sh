@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 17:00:36 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/17 17:06:03 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/20 09:19:10 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,6 @@ static int	is_escape(t_shell *shell, t_win *win, char *input, int *i)
 
 static int	is_home_end(t_shell *shell, t_win *window, char *input, int *i)
 {
-	int	len;
-
-	len = shell->cmd_idx;
 	if (input[1] == '[' && input[3] == 0 && (input[2] == 'H'
 			|| input[2] == 'F'))
 	{
