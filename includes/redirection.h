@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 14:59:36 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/19 22:39:14 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/20 08:04:25 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ typedef enum e_status
 bool	redirection_loop(t_exec *data);
 int		redir_file_check(t_redir *redir);
 int		redir_folder_check(char *str);
-void	redir_heredoc(t_exec *data);
+void	redir_heredoc(t_tok *token);
 
 #endif
