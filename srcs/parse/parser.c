@@ -40,12 +40,14 @@ static void	check_for_heredoc(t_tok **first, t_shell *shell)
 	temp = *first;
 	while (temp)
 	{
+		(void)shell;
 		if (temp->type == REDIR && ft_strequ(temp->str, "<<"))
 		{
-			tcsetattr(STDIN_FILENO, TCSANOW, &shell->orig_raw);
+			//tcsetattr(STDIN_FILENO, TCSANOW, &shell->orig_raw);
 			temp = temp->next;
 			redir_heredoc(temp);
-			tcsetattr(STDIN_FILENO, TCSANOW, &shell->raw);
+			//tcsetattr(STDIN_FILENO, TCSANOW, &shell->raw);
+			ft_putendl(temp->str);
 		}
 		temp = temp->next;
 	}
@@ -63,6 +65,7 @@ t_tok	*parser(t_shell *shell)
 	check_for_heredoc(&list.token_list, shell);
 	return (list.token_list);
 }
+	// HEREDOC is not working with slash directories
 	// t_tok	*temp = list.token_list;
 	// token_list_print(temp);
 
