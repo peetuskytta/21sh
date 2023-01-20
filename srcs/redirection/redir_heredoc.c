@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 19:36:30 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/20 08:30:11 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/20 08:58:41 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 bool	heredoc_write(int fd, char *delim)
 {
-	char	here_string[MAX_BUFF];
+	char	*here_string;
 
-	ft_printf("delimiter: %s\n", delim);
+	ft_printf("\ndelimiter: %s\n", delim);
 	while (true)
 	{
-		if (read(STDIN_FILENO, &here_string, 4096) >= 0)
+		if (get_next_line(STDIN_FILENO, &here_string) >= 0)
 		{
 			if (ft_strequ(delim, here_string) == 1)
 				break ;
