@@ -33,23 +33,24 @@
 // 		ft_printf("\ntoken[%d] (NULL)\n", i);
 // }
 
-// static void	check_for_heredoc(t_tok **first, t_shell *shell)
-// {
-// 	t_tok	*temp;
+static void	check_for_heredoc(t_tok **first, t_shell *shell)
+{
+	t_tok	*temp;
+	temp = *first;
 
-// 	temp = *first;
-// 	while (temp)
-// 	{
-// 		if (temp->type == REDIR && ft_strequ(temp->str, "<<"))
-// 		{
-// 			tcsetattr(STDIN_FILENO, TCSANOW, &shell->orig_raw);
-// 			temp = temp->next;
-// 			redir_heredoc(temp);
-// 			tcsetattr(STDIN_FILENO, TCSANOW, &shell->raw);
-// 		}
-// 		temp = temp->next;
-// 	}
-// }
+	(void)shell;
+	while (temp)
+	{
+		if (temp->type == REDIR && ft_strequ(temp->str, "<<"))
+		{
+			//tcsetattr(STDIN_FILENO, TCSANOW, &shell->orig_raw);
+			temp = temp->next;
+			redir_heredoc(temp);
+			//tcsetattr(STDIN_FILENO, TCSANOW, &shell->raw);
+		}
+		temp = temp->next;
+	}
+}
 
 t_tok	*parser(t_shell *shell)
 {
@@ -61,6 +62,7 @@ t_tok	*parser(t_shell *shell)
 	if (lenght > 0)
 		token_list_build(shell->q_input, lenght, &list);
 	parse_errors(&list.token_list);
+	check_for_heredoc(&list.token_list, shell);
 	return (list.token_list);
 }
 	// t_tok	*temp = list.token_list;

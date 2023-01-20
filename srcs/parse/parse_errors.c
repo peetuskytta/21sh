@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 13:33:06 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/19 15:04:17 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/20 12:30:54 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,14 @@ static bool	separator_check(t_tok *temp)
 {
 	while (temp)
 	{
-		if (temp->type == ';' || temp->type == CHAR_PIPE)
+		if (temp->type == ';' || temp->type == '|')
 		{
-			if (temp->type == ';' && temp->next->type == ';')
+			if (temp->type == ';' && (temp->next->type == '|' || temp->next->type == ';'))
 			{
 				ft_perror("\n21sh syntax error near unexpected token: ';'\n");
 				return (true);
 			}
-			if (temp->type == CHAR_PIPE && temp->next->type == CHAR_PIPE)
+			if (temp->type == '|' && (temp->next->type == '|' || temp->next->type == ';'))
 			{
 				ft_perror("\n21sh syntax error near unexpected token: '|'\n");
 				return (true);
