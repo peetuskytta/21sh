@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 13:58:06 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/16 13:35:34 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/20 09:09:16 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ typedef enum e_type
 
 typedef enum e_red
 {
-	FILE_IN,
-	FILE_OUT,
-	FILE_AGGR,
-	FILE_APPEND,
-	FILE_TRUNC,
-	FILE_INVALID,
-	FILE_PARSE_ERR,
+	FILE_IN = 2,
+	FILE_OUT = 3,
+	FILE_AGGR = 4,
+	FILE_APPEND = 5,
+	FILE_TRUNC = 6,
+	FILE_INVALID = 7,
+	FILE_PARSE_ERR = 8,
 }	t_red;
 
 typedef enum e_state
@@ -66,5 +66,7 @@ typedef enum e_state
 void	token_list_build(char *input, int size, t_lex *list);
 void	token_list_free(t_tok *list);
 t_tok	*parser(t_shell *shell);
+void	parse_errors(t_tok **first);
+
 
 #endif

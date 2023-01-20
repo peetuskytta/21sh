@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init_term.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 14:35:28 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/15 14:39:18 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/19 14:29:21 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-void init_term(void)
+void	init_term(void)
 {
 	char	*term;
 	char	term_buffer[MAX_BUFF];

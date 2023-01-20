@@ -6,11 +6,11 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 15:11:08 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/16 13:39:41 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/20 09:09:16 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../includes/redirection.h"
+#include "../../includes/redirection.h"
 
 /*
 **	Outputs the error message according to the status.
@@ -28,6 +28,7 @@ static void	file_error(int *status, char *str)
 		ft_perror("21sh:");
 		ft_print_fd(STDERR_FILENO, " %s", str);
 		ft_perror(IS_A_DIR);
+		*status = FOLDER;
 	}
 	if (*status == NO_FILE)
 	{
@@ -35,7 +36,6 @@ static void	file_error(int *status, char *str)
 		ft_print_fd(STDERR_FILENO, " %s", str);
 		ft_perror(NO_FILE_OR_DIR);
 	}
-	*status = FILE_ERR;
 }
 
 static void	open_redirection_in(t_redir *redir, int *status)
@@ -64,7 +64,7 @@ static void	open_redirection_out(t_redir *redir, int *status)
 		redir->fd_out = open(redir->file, O_CREAT | O_WRONLY | O_TRUNC, 0664);
 		if (redir->fd_out < 0 && *status != FILE_PERM)
 			*status = NO_FILE;
-		if (redir->fd_out > 0)
+		if (redir->fd_out > 0 && !ft_is_directory(redir->file))
 			*status = FILE_OUT;
 	}
 	else if (redir->type == FILE_APPEND)
@@ -74,7 +74,7 @@ static void	open_redirection_out(t_redir *redir, int *status)
 		redir->fd_out = open(redir->file, O_CREAT | O_WRONLY | O_APPEND, 0664);
 		if (redir->fd_out < 0 && *status != FILE_PERM)
 			*status = NO_FILE;
-		if (redir->fd_out > 0)
+		if (redir->fd_out > 0 && !ft_is_directory(redir->file))
 			*status = FILE_OUT;
 	}
 }
@@ -92,13 +92,15 @@ int	redir_file_check(t_redir *redir)
 	{
 		if (access(redir->file, F_OK) == 0 && !ft_is_directory(redir->file))
 			open_redirection_out(redir, &status);
-		else if (ft_is_directory(redir->file))
+		if (ft_is_directory(redir->file))
 			status = FOLDER;
 		else
 			open_redirection_out(redir, &status);
 	}
 	else if (redir->type == FILE_IN)
 		open_redirection_in(redir, &status);
+	else if (redir->type == HEREDOC)
+		return (FILE_IN);
 	if (status != FILE_IN && status != FILE_OUT)
 		file_error(&status, redir->file);
 	return (status);

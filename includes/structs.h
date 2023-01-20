@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/19 12:57:50 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/20 09:09:16 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include "shell.h"
 # include <termios.h>
 # define MAX_REDIR 512
+# define MAX_PIPE 700
 
 typedef struct s_win
 {
@@ -45,6 +46,7 @@ typedef struct s_shell
 	int				prmpt_len;
 	int				end;
 	int				quote;
+	pid_t			child;
 	char			*tty;
 	t_win			window;
 	struct termios	orig_raw;
@@ -58,6 +60,7 @@ typedef struct s_fds
 	int				fd_err;
 	int				fd_close;
 	int				pipe;
+	int				heredoc;
 }					t_fds;
 
 typedef struct s_redir
@@ -68,12 +71,22 @@ typedef struct s_redir
 	char			*file;
 }					t_redir;
 
+typedef struct s_pid
+{
+	int				child;
+	int				wait;
+	pid_t			status;
+}					t_pid;
+
 typedef struct s_exec
 {
 	char			*cmd;
 	char			*args[MAX_REDIR];
 	struct s_redir	redir[MAX_REDIR];
 	struct s_fds	fds;
+	struct s_pid	pid;
+	int				process_pid;
+	int				status;
 }					t_exec;
 
 typedef struct s_tok
@@ -102,11 +115,9 @@ typedef struct s_ast
 	struct s_pipe	pipes[MAX_REDIR];
 }					t_ast;
 
-typedef struct s_pid
-{
-	int				child;
-	int				wait;
-	int				status;
-}					t_pid;
-
 #endif
+
+// ls -l | grep file | wc -l
+// ls -lRl | grep Makefile | cat -e ; ps aux | grep
+// ls -R | grep Makefile | cat -e ; ps -j
+// ls -R / | grep Makefile | cat -e ; ps -j
