@@ -36,8 +36,9 @@
 static void	check_for_heredoc(t_tok **first, t_shell *shell)
 {
 	t_tok	*temp;
-
 	temp = *first;
+
+	(void)shell;
 	while (temp)
 	{
 		(void)shell;
@@ -47,7 +48,6 @@ static void	check_for_heredoc(t_tok **first, t_shell *shell)
 			temp = temp->next;
 			redir_heredoc(temp);
 			//tcsetattr(STDIN_FILENO, TCSANOW, &shell->raw);
-			ft_putendl(temp->str);
 		}
 		temp = temp->next;
 	}
@@ -56,11 +56,12 @@ static void	check_for_heredoc(t_tok **first, t_shell *shell)
 t_tok	*parser(t_shell *shell)
 {
 	t_lex	list;
+	int		lenght;
 
 	ft_memset(&list, 0, sizeof(t_lex));
-	shell->cmd_idx *= 2;
-	if (shell->cmd_idx > 0)
-		token_list_build(shell->cmd_line, shell->cmd_idx, &list);
+	lenght = ft_strilen(shell->q_input);
+	if (lenght > 0)
+		token_list_build(shell->q_input, lenght, &list);
 	parse_errors(&list.token_list);
 	check_for_heredoc(&list.token_list, shell);
 	return (list.token_list);

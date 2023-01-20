@@ -74,6 +74,7 @@ _MATH_SRC = math/dig_count_base.c \
 		math/ft_wdcounter.c \
 		math/ft_powerof.c \
 		math/ft_strstr_start.c \
+		math/ft_findword_rev.c \
 		math/ft_strchr_index.c \
 		math/ft_count_chrstr.c \
 		math/ft_long_abs.c \
@@ -152,6 +153,7 @@ _STR_SRC = str/ft_charstr.c \
 		str/ft_strstr_end.c \
 		str/ft_strcdup.c \
 		str/ft_strtrimdup.c \
+		str/ft_strcpyrev.c \
 		str/chrcpy_str_rev.c
 
 _TREE_SRC = trees/ft_add_node.c \

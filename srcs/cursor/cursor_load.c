@@ -5,15 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/29 12:49:26 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/30 15:56:27 by zraunio          ###   ########.fr       */
+/*   Created: 2023/01/12 14:43:42 by zraunio           #+#    #+#             */
+/*   Updated: 2023/01/17 13:55:17 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-void	cursor_load(t_shell *shell, int x, int y)
+void	cursor_load(t_win *window, int flg)
 {
-	if (x >= shell->prmpt_len && x <= shell->cmd_idx + shell->prmpt_len)
-		ft_putstr(tgoto(tgetstr("cm", NULL), x, y));
+	if (flg == -1)
+	{
+		ft_putstr(tgoto(tgetstr("cm", NULL), window->loc, window->current_row
+				- 1));
+	}
+	else
+	{
+		while (window->row_idx[flg] != NULL)
+			flg++;
+		ft_putstr(tgoto(tgetstr("cm", NULL), window->loc, window->current_row
+				+ window->idx - flg));
+	}
 }

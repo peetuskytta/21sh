@@ -3,68 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/12 14:05:22 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/16 21:04:08 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/shell.h"
 
-static void	print_zplogo()
-{
-	ft_putendl_fd(" _____  __      _          _ _", STDIN_FILENO);
-	ft_putendl_fd("/ __  \\/  |    | |        | | |", STDIN_FILENO);
-	ft_putendl_fd("   / /  | | ___| |__   ___| | |", STDIN_FILENO);
-	ft_putendl_fd("  / /   | |/ __|  _ \\ / _ \\ | |", STDIN_FILENO);
-	ft_putendl_fd(" / /____| |\\__ \\ | | |  __/ | |", STDIN_FILENO);
-	ft_putendl_fd("\\_____/\\___/___/_| |_|\\___|_|_|", STDIN_FILENO);
-	ft_putendl_fd("\n		~zraunio & pskytta", STDIN_FILENO);
-	ft_putchar_fd('\n', STDIN_FILENO);
-}
-
-static void	print_pzlogo()
-{
-	ft_putendl_fd(" _____  __      _          _ _", STDIN_FILENO);
-	ft_putendl_fd("/ __  \\/  |    | |        | | |", STDIN_FILENO);
-	ft_putendl_fd("   / /  | | ___| |__   ___| | |", STDIN_FILENO);
-	ft_putendl_fd("  / /   | |/ __|  _ \\ / _ \\ | |", STDIN_FILENO);
-	ft_putendl_fd(" / /____| |\\__ \\ | | |  __/ | |", STDIN_FILENO);
-	ft_putendl_fd("\\_____/\\___/___/_| |_|\\___|_|_|", STDIN_FILENO);
-	ft_putendl_fd("\n		~pskytta & zraunio", STDIN_FILENO);
-	ft_putchar_fd('\n', STDIN_FILENO);
-}
-
-static void	print_logo()
-{
-	int	i;
-
-	srand(time(NULL));
-	i = (rand() % 2) + 1;
-	ft_printf("\e[1;1H\e[2J");
-	if (i == 1)
-		print_zplogo();
-	else
-		print_pzlogo();
-}
-
-static void	cmd_line_reset(t_shell *shell)
+static void	cmd_line_reset(t_shell *shell, t_win *window)
 {
 	if (shell->quote == EOF)
-	{
-		ft_memset(shell->cmd_line, '\0', sizeof(char) * (MAX_BUFF + 1));
-		ft_memset(shell->temp, '\0', sizeof(char) * (MAX_BUFF + 1));
-		init_row_idx(&shell->window);
-	}
-	else
-		input_row_len(shell, &shell->window);
+		ft_memset(shell->q_input, '\0', sizeof(char) * (MAX_BUFF * 2 + 1));
+	if (shell->quote != EOF)
+		window->current_row++;
+	window->idx = 0;
+	ft_memset(window->row_idx, '\0', sizeof(char *) * (MAX_BUFF));
+	window->row_idx[window->idx] = &shell->cmd_line[0];
+	ft_memset(shell->cmd_line, '\0', sizeof(char) * (MAX_BUFF + 1));
+	ft_memset(shell->temp, '\0', sizeof(char) * (MAX_BUFF + 1));
+	ft_memset(shell->input, '\0', sizeof(char) * (MAX_BUFF + 1));
 	shell->cmd_idx = 0;
 	shell->end = 0;
 	NL;
 	cmd_line_prompt(shell->quote);
 	init_prompt(shell);
-	shell->window.loc = shell->prmpt_len;
+	window->loc = shell->prmpt_len;
 }
 
 /*
@@ -89,8 +54,8 @@ static void	run_shell(t_shell *shell)
 					exec_tree(tree, shell);
 			}
 			cursor_find(shell, &shell->window);
-			cmd_line_reset(shell);
-			cursor_load(shell, shell->window.loc, shell->window.current_row);
+			cursor_load(&shell->window, -1);
+			cmd_line_reset(shell, &shell->window);
 		}
 	}
 }
@@ -110,8 +75,6 @@ int	main(int argc, char **argv, char **envp)
 		run_shell(&shell);
 	}
 	else
-	{
-		kill_mode("exit", &shell);
-	}
+		kill_mode("exit\n", &shell);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 09:15:27 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/05 17:37:10 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/18 15:00:54 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,31 @@ static void	fetch_ttyname(t_shell *shell)
 		ft_perror("ttyname() failed to retrieve terminal name.");
 }
 
-void	init_shell(t_shell *shell, char **environ)
+static void	init_allocations(t_shell *shell)
 {
 	shell->cmd_line = (char *)ft_memalloc(sizeof(char) * (MAX_BUFF + 1));
 	shell->rev_cmd = (char *)ft_memalloc(sizeof(char) * (MAX_BUFF + 1));
 	shell->temp = (char *)ft_memalloc(sizeof(char) * (MAX_BUFF + 1));
+	shell->input = (char *)ft_memalloc(sizeof(char) * (MAX_BUFF + 1));
+	shell->clipbrd = (char *)ft_memalloc(sizeof(char) * (MAX_BUFF + 1));
+	shell->q_input = (char *)ft_memalloc(sizeof(char) * (MAX_BUFF * 2 + 1));
 	allocation_check((void *)&shell->cmd_line);
 	allocation_check((void *)&shell->rev_cmd);
 	allocation_check((void *)&shell->temp);
+	allocation_check((void *)&shell->input);
+	allocation_check((void *)&shell->clipbrd);
+	allocation_check((void *)&shell->q_input);
+}
+
+void	init_shell(t_shell *shell, char **environ)
+{
+	init_allocations(shell);
 	shell->cmd_idx = 0;
 	shell->prmpt_len = 3;
 	shell->quote = EOF;
 	init_term();
 	cursor_find(shell, &shell->window);
-	init_window(&shell->window);
+	init_window(shell, &shell->window);
 	fetch_envp(shell, environ, env_variable_counter(environ));
 	fetch_ttyname(shell);
 	history_fetch(shell);

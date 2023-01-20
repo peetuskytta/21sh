@@ -38,17 +38,18 @@ _AST := ast_constructor.c \
 
 _SRCS :=  main.c \
 		allocation_check.c \
-		env_variable_counter.c
+		env_variable_counter.c \
+		logo.c
 
 _CURSOR := cursor_reset_line.c \
-		cursor_change_row.c \
-		cursor_row_idx.c \
-		cursor_load.c \
+		cursor_move.c \
 		cursor_find.c \
-		goto_newline.c \
-		goto_sides.c \
-		goto_word.c \
-		goto_end.c
+		cursor_load.c \
+		cursor_goto_end.c \
+		cursor_goto_sides.c \
+		cursor_row_find.c \
+		goto_newline.c
+# cursor_goto_word.c \
 
 _EXECUTE := exec_tree.c \
 		exec_branch.c \
@@ -62,15 +63,14 @@ _INIT := init_shell.c \
 		init_window.c \
 		init_prompt.c \
 		init_term.c \
-		init_row_idx.c \
 		init_in_out_err.c
 
 _INPUT := read_quote.c \
 		cmd_line.c \
+		cmd_line_check.c \
 		cmd_line_reprint.c \
 		input_read.c \
-		input_rev_cmd.c \
-		input_row_len.c
+		input_rev_cmd.c
 
 _HISTORY := history_create.c \
 		history_traverse.c \
@@ -81,13 +81,15 @@ _HISTORY := history_create.c \
 _KEYS := key_listen.c \
 		read_key.c \
 		special_keys.c \
-		key_is_ctrl_alpha.c
+		key_is_ctrl_alpha.c \
+		key_is_arrow.c
 
 _OUTPUT := stdin_char.c \
 		cmd_line_prompt.c
 
 _PANIC := ft_strerror.c \
 		ft_perror.c \
+		ft_error_nl.c \
 		ft_abort.c
 
 _PARSE:= token_list_build.c \

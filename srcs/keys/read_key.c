@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 16:57:43 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/05 15:28:31 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/16 13:54:58 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	read_key(t_shell *shell, char *input)
 	i = 0;
 	while (i != 1)
 	{
-		ft_memset(input, 0, sizeof(char) * (MAX_BUFF + 1));
+		ft_memset(input, '\0', sizeof(char) * (MAX_BUFF + 1));
 		i = read(STDIN_FILENO, input, MAX_BUFF);
 		if (i == -1)
 			return ;

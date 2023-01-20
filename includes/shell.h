@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/16 09:55:17 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/20 09:14:16 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,6 @@
 # include <termcap.h>
 # include <sys/ioctl.h>
 # include <sys/wait.h>
-
-#if __WINDOWS__
-  # define R_OK 4
-  # define W_OK 2
-  # define F_OK 0
-#endif
-
 # define NL ft_putchar('\n')
 # define DB ft_putstr("\nYOU ARE HERE\n")
 # define NULL_BYTE '\0'
@@ -59,5 +52,6 @@
 */
 int		env_variable_counter(char **environ);
 void	allocation_check(void **check);
+void	print_logo(void);
 
 #endif

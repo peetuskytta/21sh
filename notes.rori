@@ -1,18 +1,18 @@
 TO BE DONE:
 // SIGNAL - together 0%
-// ERRORS - together 70%
-// PIPES & REDIRECT - peetu 25%
-// AGREGATE - peetu 25%
 
 REASONABLY DONE:
-- BUILTINS - together 75%
+- AGREGATE - peetu 30%
+- PIPES & REDIRECT - peetu 95%
+- ERRORS - together 90%
+- BUILTINS - together 75% >> "\nexit\n" for exit builtin sent to kill_mode
 	- does setenv need to be sensitive to "na=me"=surname type of argument?
-- CURSOR - rori 85%
-- SPECIAL KEYS - rori 98%
-- HISTORY - together 98%
+- QUOTES - together but peetu is a hero 98%
+- CURSOR - rori 95%
 
 DONE DONE:
-- QUOTES - together but peetu is a hero
+- HISTORY - together 
+- SPECIAL KEYS - rori
 - COMMAND TREE - peetu
 - COMMAND LINE PARSE - peetu
 - READ_INPUT - together
@@ -28,19 +28,8 @@ DONE DONE:
 |			|	$> jsdsjdjd  2>&1 | cat -e 				|
 |			|	21sh: jsdsjdjd: command not found$		|
 |-------------------------------------------------------|
-|			|	2. CONTROL THE CURSOR					|
-|			|	line_len[index] for when in open quotes	|
+|			|	2. CURSOR!								|
+|			|	cpy-paste broken						|
 |-------------------------------------------------------|
-|			|	3. COPY-CUT-PASTE						|
-|			|	edit in middle of line in correct loc	|
-|-------------------------------------------------------|
-|			|	4. HISTORY MULTILINE					|
-|			|	save and recall history with multiline	|
-|			|	at least needs to be fixed in the file	|
-|			|	add '\n' if ENTER, if an open quote		|
-|-------------------------------------------------------|
-|			|	5. HISTORY TRAVERSE DOWN				|
-|			|	when at last item we lose the temp		|
-|			|											|
-|			|											|
+|			|	3. ERROS & IS_BUILTIN					|
 |-------------------------------------------------------|

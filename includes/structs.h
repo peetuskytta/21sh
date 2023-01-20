@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/19 14:33:49 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/20 09:09:16 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define STRUCTS_H
 # include "shell.h"
 # include <termios.h>
-
 # define MAX_REDIR 512
 # define MAX_PIPE 700
 
@@ -24,8 +23,8 @@ typedef struct s_win
 	int				cols;
 	int				rows;
 	int				current_row;
-	int				row_idx[4096];
-	int				rows_q;
+	char			*row_idx[4096];
+	int				idx;
 	int				loc;
 }					t_win;
 
@@ -37,9 +36,12 @@ typedef struct s_shell
 	int				env_iflg;
 	char			*history[1001];
 	int				hist_idx;
-	char			*temp;
+	char			*q_input;
+	char			*input;
 	char			*cmd_line;
 	char			*rev_cmd;
+	char			*temp;
+	char			*clipbrd;
 	int				cmd_idx;
 	int				prmpt_len;
 	int				end;

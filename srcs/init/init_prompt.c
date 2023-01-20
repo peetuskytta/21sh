@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_prompt.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:40:37 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/19 14:28:07 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/20 09:07:35 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	init_prompt(t_shell *shell)
 {
 	if (shell->quote == D_QUOTE)
-		shell->prmpt_len = 9;
-	else if (shell->quote == S_QUOTE)
 		shell->prmpt_len = 8;
+	else if (shell->quote == S_QUOTE)
+		shell->prmpt_len = 7;
 	else
 		shell->prmpt_len = 3;
 }

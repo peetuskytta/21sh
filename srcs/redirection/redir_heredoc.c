@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 19:36:30 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/20 15:58:43 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/20 16:11:01 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 bool	heredoc_write(int fd, char *delim)
 {
-	char	here_string[MAX_BUFF];
+	char	*here_string = ft_memalloc(sizeof(char *));
+	char	temp[4096];
+	int		bytes;
 
+<<<<<<< HEAD
 	ft_memset(here_string, '\0', 4096);
 	ft_printf("delimiter: %s\n", delim);
 	while (true)
@@ -29,8 +32,24 @@ bool	heredoc_write(int fd, char *delim)
 			ft_putchar_fd('\n', fd);
 			ft_putendl("");
 			ft_memset(here_string, '\0', 4096);
+=======
+	ft_printf("\ndelimiter: %s\n", delim);
+	bytes = read(STDIN_FILENO, &temp, 4096);
+	if (bytes >= 0)
+	{
+		while (true)
+		{
+			get_next_line(fd, &here_string);
+			{
+				if (ft_strequ(delim, here_string) == 1)
+					break ;
+			}
+			ft_putstr_fd(here_string, fd);
+			ft_memdel((void *)&here_string);
+>>>>>>> f823886746ed2c7918294116d0da46a819df9a34
 		}
 	}
+	ft_memdel((void *)&here_string);
 	return (true);
 }
 

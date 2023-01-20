@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cursor_row_idx.c                                   :+:      :+:    :+:   */
+/*   cursor_row_find.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/03 16:36:40 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/03 16:54:57 by zraunio          ###   ########.fr       */
+/*   Created: 2023/01/17 16:57:11 by zraunio           #+#    #+#             */
+/*   Updated: 2023/01/17 16:59:21 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-void	cursor_row_idx(t_win *window, int len)
+void	cursor_row_find(t_shell *shell, t_win *win)
 {
-	int	x;
+	int	i;
 
-	x = 0;
-	while (window->row_idx[x] != -1)
-		x++;
-	if (x == MAX_BUFF)
-		ft_perror(QUOTE_TOO_LONG);
+	i = 0;
+	while (win->row_idx[i] != NULL)
+		i++;
+	if (win->idx == 0)
+	{
+		if (win->idx != i)
+			cursor_reset_line(win, shell->prmpt_len, i);
+		else
+			cursor_reset_line(win, shell->prmpt_len, -1);
+	}
 	else
-		window->row_idx[x] = len;
+		cursor_reset_line(win, shell->prmpt_len, i);
 }

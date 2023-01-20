@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 13:35:45 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/05 16:52:42 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/19 20:45:07 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,22 @@ void	key_listen(t_shell *shell, char *input)
 	i = 0;
 	while (input[i] != '\0')
 	{
-		if (input[i] == CTRL_D)
-			kill_mode("exit\n", shell);
+		if (input[i] == CTRL_D && shell->cmd_idx == 0)
+			kill_mode("exit", shell);
+		else if (input[i] == CTRL_D && shell->cmd_idx > 0)
+			break ;
 		key = special_keys(shell, input, &i);
 		if (key == ENTER)
 			shell->end = 1;
-		else if (key == 0 && shell->cmd_idx <= MAX_BUFF)
+		else if (key == 0 && shell->cmd_idx + 1 <= MAX_BUFF)
 		{
-			if (shell->window.loc < shell->cmd_idx + shell->prmpt_len)
-				cmd_line_reprint(shell, &shell->window, input[i]);
+			if (input[i] == '\t')
+				input[i] = ' ';
+			cmd_line(shell, &shell->window, input[i]);
+			if (ft_strilen(shell->rev_cmd) > 0)
+				cmd_line_reprint(shell, &shell->window);
 			else
 				stdin_char(input[i]);
-			cmd_line(shell, input[i]);
 		}
 		i++;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:24:46 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/19 11:04:03 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/20 09:09:16 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define ABORTED_ERROR "Process aborted."
 # define ERROR_EXIT "Exit error."
 # define NO_STRING ""
-# define STDOUT_FAIL "Failed to fetch the stdout. Terminate shell and try again."
+# define STDOUT_FAIL "Fail to fetch the stdout. Terminate shell and try again."
 
 /*Error message defines for CD*/
 # define CD_NO_HOME " HOME not set"

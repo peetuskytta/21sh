@@ -1,23 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_row_idx.c                                     :+:      :+:    :+:   */
+/*   ft_findword_rev.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/03 16:03:01 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/03 17:16:08 by zraunio          ###   ########.fr       */
+/*   Created: 2023/01/13 17:07:51 by zraunio           #+#    #+#             */
+/*   Updated: 2023/01/20 09:09:16 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
+#include "../incl/libft.h"
 
-void	init_row_idx(t_win *window)
+int	ft_finword_rev(char *str)
 {
-	int	x;
+	int	i;
 
-	x = 0;
-	while (x <= MAX_BUFF + 1)
-		window->row_idx[x++] = -1;
-	window->rows_q = 0;
+	i = ft_strilen(str) - 1;
+	if (i <= 1)
+	{
+		if (i == -1 || i == 0)
+			return (0);
+		else
+			return (1);
+	}
+	while (ft_isspace(str[i]) && i > 0)
+		i--;
+	while (!ft_isspace(str[i]) && i > 0)
+		i--;
+	if (i == 0 || i == 1)
+		return (i);
+	return (i + 1);
 }

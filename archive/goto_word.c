@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 13:36:36 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/30 14:59:33 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/13 17:00:44 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ void	goto_word(t_shell *shell, t_win *window, int ws, int key)
 			tputs(tgoto(tgetstr("cm", NULL), x - 1, y), 1, stdin_char);
 			tputs(tgoto(tgetstr("cd", NULL), x - 1, y), 1, stdin_char);
 			input_rev_cmd(shell);
-			cursor_load(shell, x - 1, y);
+			// cursor_load(shell, x - 1, y);
 		}
 		else if (x == shell->prmpt_len)
-			cursor_load(shell, shell->prmpt_len, y);
+			// cursor_load(shell, shell->prmpt_len, y);
 	}
 	else
 	{
