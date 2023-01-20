@@ -70,7 +70,6 @@ _INPUT := read_quote.c \
 		cmd_line_check.c \
 		cmd_line_reprint.c \
 		input_read.c \
-		input_midline.c \
 		input_rev_cmd.c
 
 _HISTORY := history_create.c \

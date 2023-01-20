@@ -6,11 +6,19 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 12:49:26 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/17 14:29:17 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/19 21:15:05 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
+
+static void	move_right_row(t_win *win, int max, int len)
+{
+	win->loc = len - win->cols;
+	win->idx += 1;
+	if (win->row_idx[win->idx] == NULL && win->loc > max)
+		win->loc = ft_strilen(win->row_idx[win->idx]);
+}
 
 static int	move_cursor_right(t_shell *shell, t_win *win, int len)
 {
@@ -31,10 +39,7 @@ static int	move_cursor_right(t_shell *shell, t_win *win, int len)
 	if (win->loc == max && win->row_idx[win->idx + 1] == NULL)
 		return (0);
 	if (len > max && win->row_idx[win->idx + 1] != NULL)
-	{
-		win->loc = len - win->cols;
-		win->idx += 1;
-	}
+		move_right_row(win, max, len);
 	else
 		win->loc = len;
 	return (1);
