@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:58 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/16 12:26:52 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/21 10:59:35 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,10 @@
 ** KEYS
 */
 void	key_listen(t_shell *shell, char *input);
-void	read_key(t_shell *shell, char *input);
+void	read_key(t_shell *shell, char *input, int flg);
 int		special_keys(t_shell *shell, char *input, int *i);
 int		key_is_ctrl_alpha(t_shell *shell, t_win *window, char *input, int *i);
 int		key_is_arrow(t_shell *shell, t_win *window, char *input, int *i);
+void	heredoc_listen(t_shell *shell, char *input);
 
 #endif

@@ -38,14 +38,19 @@ static char	**copy_environment(char **environ)
 **	binary file's execution rights before executing the command.
 **	Clears data after each command, succesful or not.
 */
-static void	command_execution(t_exec data, char **env_cpy)
+static void	command_execution(t_shell *shell, t_exec data, char **env_cpy)
 {
 	char	*bin_path;
 
-	bin_path = exec_find_binary(exec_fetch_path_var(env_cpy), data.cmd);
-	if (redirection_loop(&data) && exec_binary_check(bin_path, data))
-		exec_cmd(data, bin_path, env_cpy);
-	ft_strdel((void *)&bin_path);
+	if (is_builtin == TRUE)
+		builtin_execute(shell, data);
+	else
+	{
+		bin_path = exec_find_binary(exec_fetch_path_var(env_cpy), data.cmd);
+		if (redirection_loop(&data) && exec_binary_check(bin_path, data))
+			exec_cmd(data, bin_path, env_cpy);
+		ft_strdel((void *)&bin_path);
+	}
 	//exec_clear_data(&data, bin_path);
 }
 

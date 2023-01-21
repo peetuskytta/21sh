@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/20 17:16:43 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/21 11:38:36 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@
 /*
 ** SHELL
 */
+
 int		env_variable_counter(char **environ);
 void	allocation_check(void **check);
 void	print_logo(void);
