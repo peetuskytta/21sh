@@ -6,13 +6,15 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:30:59 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/21 10:01:23 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/21 11:48:40 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-void	builtin_execute(t_shell *shell, t_exec data)
+bool	is_b
+
+int	builtin_execute(t_shell *shell, t_exec data)
 {
 	if (ft_strequ("echo", data.cmd))
 		return (builtin_echo(shell, data));

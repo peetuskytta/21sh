@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_listen.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 10:50:05 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/21 11:32:29 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/21 11:39:04 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static int	keys_heredoc(t_shell *shell, char *input, int *i)
 	else
 		return (0);
 }
-
 
 void	heredoc_listen(t_shell *shell, char *input)
 {
