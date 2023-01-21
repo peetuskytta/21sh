@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:40:28 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/21 12:15:21 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/21 15:38:26 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static void	change_redir_io(t_redir	*redir)
 **	Closes the STDIN_FILENO or STDOUT_FILENO and sets the in and out
 **	of the command to be executed for pipes and redirections.
 */
+/*
 static void	change_in_and_out(t_exec *data)
 {
 	if (data->fds.pipe != -1)
