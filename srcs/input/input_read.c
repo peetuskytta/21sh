@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_read.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 18:42:14 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/30 16:24:08 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/21 10:57:38 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@ void	input_read(t_shell *shell)
 	if (enable_rawmode(shell) == 0)
 		ft_putendl_fd("Error with tcgetattr", STDERR_FILENO);
 	tcsetattr(STDIN_FILENO, TCSANOW, &shell->raw);
-	read_key(shell, input);
+	read_key(shell, input, 0);
 	tcsetattr(STDIN_FILENO, TCSANOW, &shell->orig_raw);
 }

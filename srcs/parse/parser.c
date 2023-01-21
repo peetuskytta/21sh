@@ -38,16 +38,17 @@ static void	check_for_heredoc(t_tok **first, t_shell *shell)
 	t_tok	*temp;
 	temp = *first;
 
-	(void)shell;
 	while (temp)
 	{
 		(void)shell;
 		if (temp->type == REDIR && ft_strequ(temp->str, "<<"))
 		{
-			//tcsetattr(STDIN_FILENO, TCSANOW, &shell->orig_raw);
+			if (enable_rawmode(shell) == 0)
+				ft_putendl_fd("Error with tcgetattr", STDERR_FILENO);
+			tcsetattr(STDIN_FILENO, TCSANOW, &shell->raw);
 			temp = temp->next;
-			redir_heredoc(temp);
-			//tcsetattr(STDIN_FILENO, TCSANOW, &shell->raw);
+			redir_heredoc(shell, temp);
+			tcsetattr(STDIN_FILENO, TCSANOW, &shell->orig_raw);
 		}
 		temp = temp->next;
 	}
