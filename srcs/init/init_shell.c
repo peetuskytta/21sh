@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 09:15:27 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/20 15:55:21 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/21 16:24:03 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,11 @@ static void	fetch_envp(t_shell *shell, char **environ, int count)
 static void	fetch_ttyname(t_shell *shell)
 {
 	if (!isatty(1))
-		shell->stdout_fd = open(ttyname(ttyslot()), O_RDWR);
-	if (shell->stdout_fd == -1)
-		ft_perror(STDOUT_FAIL);
+		kill_mode(STDOUT_FAIL, shell);
+	else if (!isatty(0))
+		kill_mode(STDIN_FAIL, shell);
+	else if (!isatty(2))
+		kill_mode(STDERR_FAIL, shell);
 	shell->tty = ttyname(STDIN_FILENO);
 	if (!shell->tty)
 		ft_perror("ttyname() failed to retrieve terminal name.");

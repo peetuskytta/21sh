@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/21 16:19:29 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/21 16:28:43 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ typedef struct s_win
 typedef struct s_shell
 {
 	char			**environ;
-	int				stdout_fd;
 	int				env_nbr;
 	int				flg;
 	char			*history[1001];
