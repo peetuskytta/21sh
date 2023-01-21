@@ -42,8 +42,15 @@ static void	command_execution(t_shell *shell, t_exec data, char **env_cpy)
 {
 	char	*bin_path;
 
-	if (is_builtin == TRUE)
-		builtin_execute(shell, data);
+	bin_path = NULL;
+	if (is_builtin(data.cmd) == true)
+	{
+		if (redirection_loop(&data))
+		{
+			change_in_and_out(&data);
+			builtin_execute(shell, data);
+		}
+	}
 	else
 	{
 		bin_path = exec_find_binary(exec_fetch_path_var(env_cpy), data.cmd);
@@ -51,7 +58,6 @@ static void	command_execution(t_shell *shell, t_exec data, char **env_cpy)
 			exec_cmd(data, bin_path, env_cpy);
 		ft_strdel((void *)&bin_path);
 	}
-	//exec_clear_data(&data, bin_path);
 }
 
 /*
@@ -71,7 +77,7 @@ void	exec_branch(t_ast *branch, t_shell *shell)
 		pid.wait = waitpid(branch->data.process_pid, &pid.status, 0);
 	env_cpy = copy_environment(shell->environ);
 	if ((branch->type == REDIR || branch->type == COMMAND))
-		command_execution(branch->data, env_cpy);
+		command_execution(shell, branch->data, env_cpy);
 	exec_branch(branch->left, shell);
 	if (branch->type == PIPE)
 		exec_branch(branch->right, shell);
