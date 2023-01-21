@@ -1,17 +1,20 @@
 TO BE DONE:
-// SIGNAL - together 0%
+// SIGNAL - together but rori starts 0%
 
 REASONABLY DONE:
-- AGREGATE - peetu 30%
-- PIPES & REDIRECT - peetu 95%
-- ERRORS - together 90%
-- BUILTINS - together 75% >> "\nexit\n" for exit builtin sent to kill_mode
-	- does setenv need to be sensitive to "na=me"=surname type of argument?
+- AGREGATE - peetu 60%
+- ERRORS - together 98%
+- BUILTINS - together 92% >> "\nexit\n" for exit builtin sent to kill_mode
+	- cd: peetu
+	- setenv, env, unsetenv: rori
+	- echo: donedone
+- EXPANSIONS - peetu
 - QUOTES - together but peetu is a hero 98%
-- CURSOR - rori 95%
 
 DONE DONE:
-- HISTORY - together 
+- PIPES & REDIRECT - peetu
+- CURSOR - rori _fuck_multiline_
+- HISTORY - together
 - SPECIAL KEYS - rori
 - COMMAND TREE - peetu
 - COMMAND LINE PARSE - peetu

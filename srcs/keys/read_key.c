@@ -3,21 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   read_key.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 16:57:43 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/21 10:53:36 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/21 14:21:44 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
+static void	read_heredoc(t_shell *shell, char *input)
+{
+	int	fd;
+
+	fd = open(HERE_DOC, O_RDWR | O_CREAT | O_APPEND, 0664);
+	if (fd > 0)
+	{
+		if (heredoc_listen(shell, input, fd) == -1)
+		{
+			if (close(fd) < 0)
+				ft_perror(FILE_CLOSE_ERR);
+		}
+	}
+}
+
 void	read_key(t_shell *shell, char *input, int flg)
 {
-	int		i;
+	int	i;
 
 	i = 0;
-	(void)flg;
 	while (i != 1)
 	{
 		ft_memset(input, '\0', sizeof(char) * (MAX_BUFF + 1));
@@ -27,6 +41,6 @@ void	read_key(t_shell *shell, char *input, int flg)
 		if (flg == 0)
 			key_listen(shell, input);
 		else
-			heredoc_listen(shell, input);
+			read_heredoc(shell, input);
 	}
 }

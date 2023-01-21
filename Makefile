@@ -15,6 +15,7 @@ NAME := 21sh
 #Direcory locations
 SRCS_DIR = srcs/
 AST_DIR = srcs/ast/
+BUILTIN_DIR = srcs/builtins/
 CURSOR_DIR = srcs/cursor/
 EXECUTE_DIR = srcs/execute/
 HISTORY_DIR = srcs/history/
@@ -34,7 +35,14 @@ _AST := ast_constructor.c \
 		ast_consume_tokens.c \
 		ast_set_redir.c \
 		ast_print.c \
-		ast_release.c \
+		ast_release.c
+
+_BUILTIN := builtin_execute.c \
+			is_builtin.c \
+			builtin_echo.c \
+			builtin_unsetenv.c \
+			ft_is_strenv.c \
+			builtin_env.c
 
 _SRCS :=  main.c \
 		allocation_check.c \
@@ -57,7 +65,8 @@ _EXECUTE := exec_tree.c \
 		exec_binary_check.c \
 		exec_find_binary.c \
 		exec_fetch_path_var.c \
-		exec_clear_data.c
+		exec_clear_data.c \
+		change_in_and_out.c
 
 _INIT := init_shell.c \
 		init_window.c \
@@ -76,6 +85,7 @@ _HISTORY := history_create.c \
 		history_traverse.c \
 		history_fetch.c \
 		history_runtime.c \
+		history_reset.c \
 		history.c
 
 _KEYS := key_listen.c \
@@ -109,6 +119,7 @@ _REDIRECTION := redirection_loop.c \
 #All to object files
 ALL_SRCS :=	$(addprefix $(SRCS_AST), $(_AST)) \
 			$(addprefix $(SRCS_DIR), $(_SRCS)) \
+			$(addprefix $(BUILTIN_DIR), $(_BUILTIN)) \
 			$(addprefix $(CURSOR_DIR), $(_CURSOR)) \
 			$(addprefix $(HISTORY_DIR), $(_HISTORY)) \
 			$(addprefix $(EXECUTE_DIR), $(_EXECUTE)) \
@@ -121,8 +132,9 @@ ALL_SRCS :=	$(addprefix $(SRCS_AST), $(_AST)) \
 			$(addprefix $(RAWMODE_DIR), $(_RAWMODE)) \
 			$(addprefix $(REDIRECTION_DIR), $(_REDIRECTION))
 
-SRCS = $(_SRCS) $(_CURSOR) $(_INIT) $(_INPUT) $(_KEYS) \
-$(_OUTPUT) $(_PANIC) $(_PARSE) $(_RAWMODE) $(_HISTORY) $(_AST) $(_EXECUTE) $(_REDIRECTION)
+SRCS = $(_SRCS) $(_CURSOR) $(_INIT) $(_INPUT) $(_BUILTIN) $(_KEYS) \
+$(_OUTPUT) $(_PANIC) $(_PARSE) $(_RAWMODE) $(_HISTORY) $(_AST) $(_EXECUTE) \
+$(_REDIRECTION)
 OBJ_FILES = $(SRCS:.c=.o)
 OBJS = $(patsubst %, $(OBJS_DIR)%, $(SRCS:.c=.o))
 #libft
@@ -143,6 +155,9 @@ $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(AST_DIR)%.c
+	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
+
+$(OBJS_DIR)%.o: $(BUILTIN_DIR)%.c
 	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(CURSOR_DIR)%.c

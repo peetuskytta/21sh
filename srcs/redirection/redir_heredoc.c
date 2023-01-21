@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 19:36:30 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/21 10:57:13 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/21 14:18:10 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,10 @@
 
 void	redir_heredoc(t_shell *shell, t_tok *token)
 {
-	int		fd;
 	char	input[MAX_BUFF + 1];
 
- 	fd = open(HERE_DOC, O_RDWR | O_CREAT | O_TRUNC, 0664);
-	if (fd > 0)
-	{
-		read_key(shell, input, 1);
-		//heredoc_write(fd, token->str);
-	}
-	if (close(fd) < 0)
-		ft_perror(FILE_CLOSE_ERR);
+	ft_putstr_fd("\n> ", STDOUT_FILENO);
+	read_key(shell, input, 1);
 	ft_strdel(&token->str);
 	token->str = ft_strdup(HERE_DOC);
 }

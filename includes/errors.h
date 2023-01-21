@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:24:46 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/20 09:09:16 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/21 15:07:13 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # define CD_NOT_DIR ": Not a directory"
 # define CD_SH "shell: cd: "
 # define IS_A_DIR ": Is a directory"
+# define CD_ARG_NO "cd: too many arguments"
 
 /*Error message defines for setenv and unsetenv*/
 # define EMPTY_STR "setenv name: cannot be an empty string"

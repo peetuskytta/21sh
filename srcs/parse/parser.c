@@ -40,7 +40,6 @@ static void	check_for_heredoc(t_tok **first, t_shell *shell)
 
 	while (temp)
 	{
-		(void)shell;
 		if (temp->type == REDIR && ft_strequ(temp->str, "<<"))
 		{
 			if (enable_rawmode(shell) == 0)

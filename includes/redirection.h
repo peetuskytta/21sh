@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 14:59:36 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/21 10:56:49 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/21 14:15:29 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "shell.h"
 # include "structs.h"
 
-# define HERE_DOC "/tmp/heredoc"
+# define HERE_DOC "heredoc"
 
 typedef enum e_status
 {
