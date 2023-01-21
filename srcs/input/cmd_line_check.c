@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 15:57:40 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/21 15:44:38 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/21 16:18:45 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ static void	reset_input(t_shell *shell)
 	i = ft_strilen(shell->rev_cmd) - 1;
 	if (i + ft_strilen(shell->cmd_line) + 1 <= MAX_BUFF && i > 0)
 		ft_strcpyrev(shell->rev_cmd, &shell->input[i], MAX_BUFF, i);
+	else if (i + ft_strilen(shell->cmd_line) + 1 > MAX_BUFF)
+	{
+		goto_newline(shell, &shell->window);
+		ft_error_nl(shell, CMD_TOO_LONG);
+	}
 }
 
 void	cmd_line_check_row(t_shell *shell, t_win *window)

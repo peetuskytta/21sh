@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/20 17:12:51 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/21 16:10:15 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	cmd_line_reset(t_shell *shell, t_win *window)
 	ft_memset(shell->input, '\0', sizeof(char) * (MAX_BUFF + 1));
 	shell->cmd_idx = 0;
 	shell->end = 0;
-	ft_putstr_fd("\n", STDIN_FILENO);
+	ft_putstr_fd("\n", STDOUT_FILENO);
 	cmd_line_prompt(shell->quote);
 	init_prompt(shell);
 	window->loc = shell->prmpt_len;
