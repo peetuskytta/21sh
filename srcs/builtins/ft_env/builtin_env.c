@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 10:20:57 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/04 16:49:46 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/21 10:01:49 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ static void	env_temp(t_shell *shell, char *args)
 	
 }
 
-void	builtin_env(t_shell *shell, char **args)
+void	builtin_env(t_shell *shell, t_exec data)
 {
 	int i;
 
-	if (shell->env_iflg == 1)
-		env_temp(shell, args);
-	else if (args)
+	if (shell->flg == 1)
+		env_temp(shell, data.args);
+	else if (data.args)
 	{
 		//env $VALID_ENV_NAME
 		//env temporary env

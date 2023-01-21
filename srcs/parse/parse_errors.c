@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 13:33:06 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/20 12:30:54 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/21 11:35:22 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static bool	redir_validation(char *str, t_tok *next, int i)
 		}
 		if (!ft_isdigit(str[i]))
 		{
-			ft_print_fd(2, "\n21sh parse error near `%c%c'\n", str[i], str[i + 1]);
+			ft_print_fd(2, "\n21sh parse error near `%c%c'\n", str[i],
+				str[i + 1]);
 			return (true);
 		}
 		i++;

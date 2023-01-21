@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/20 09:09:16 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/20 16:48:09 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_shell
 	char			**environ;
 	int				stdout_fd;
 	int				env_nbr;
-	int				env_iflg;
+	int				flg;
 	char			*history[1001];
 	int				hist_idx;
 	char			*q_input;
