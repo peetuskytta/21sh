@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:50:18 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/13 09:18:46 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/20 15:38:06 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	cursor_find(t_shell *shell, t_win *window)
 	ft_memset(buf, 0, sizeof(char) * (MAX_BUFF + 1));
 	if (read(STDIN_FILENO, &buf, MAX_BUFF) > 0)
 		grep_coordinates(window, buf);
+	window->loc = shell->prmpt_len;
 	tcsetattr(STDIN_FILENO, TCSANOW, &shell->orig_raw);
 	ft_memset(buf, 0, sizeof(char) * (MAX_BUFF + 1));
 }

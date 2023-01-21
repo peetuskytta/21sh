@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 17:48:04 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/20 09:10:59 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/20 17:13:51 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ void	goto_newline(t_shell *shell, t_win *window)
 	if (i > 0)
 		chrcpy_str_rev(shell->rev_cmd, shell->cmd_line, MAX_BUFF, i);
 	i = ft_strilen(shell->q_input);
+	if (i + shell->cmd_idx + 1 > MAX_BUFF * 2)
+	{
+		ft_error_nl(shell, CMD_TOO_LONG);
+		return ;
+	}
 	if (i > 0)
 	{
 		shell->q_input[i] = '\n';

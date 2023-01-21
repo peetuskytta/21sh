@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_setenv.c                                        :+:      :+:    :+:   */
+/*   builtin_setenv.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 11:53:38 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/04 16:49:16 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/21 10:01:31 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@ static void	setenv_split(char *args, char **name, char **value)
 	}
 }
 
-void	builtin_setenv(t_shell *shell, char *args)
+void	builtin_setenv(t_shell *shell, t_exec data)
 {
 	char	*name;
 	char	*value;
 	int		valid;
 	int		index;
 
-	setenv_split(args, &name, &value);
+	setenv_split(data.args, &name, &value);
 	valid = setenv_verify_value(name);
 	if (valid != 1)
 	{

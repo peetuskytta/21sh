@@ -29,7 +29,8 @@ DONE DONE:
 |			|	21sh: jsdsjdjd: command not found$		|
 |-------------------------------------------------------|
 |			|	2. CURSOR!								|
-|			|	cpy-paste broken						|
+|			|	history is the one breaking loc			|
+|			|	again. reset different if line is empty	|
 |-------------------------------------------------------|
 |			|	3. ERROS & IS_BUILTIN					|
 |-------------------------------------------------------|

@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/16 21:04:08 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/20 17:12:51 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ static void	cmd_line_reset(t_shell *shell, t_win *window)
 		window->current_row++;
 	window->idx = 0;
 	ft_memset(window->row_idx, '\0', sizeof(char *) * (MAX_BUFF));
-	window->row_idx[window->idx] = &shell->cmd_line[0];
 	ft_memset(shell->cmd_line, '\0', sizeof(char) * (MAX_BUFF + 1));
+	window->row_idx[window->idx] = &shell->cmd_line[0];
 	ft_memset(shell->temp, '\0', sizeof(char) * (MAX_BUFF + 1));
 	ft_memset(shell->input, '\0', sizeof(char) * (MAX_BUFF + 1));
 	shell->cmd_idx = 0;
 	shell->end = 0;
-	NL;
+	ft_putstr_fd("\n", STDIN_FILENO);
 	cmd_line_prompt(shell->quote);
 	init_prompt(shell);
 	window->loc = shell->prmpt_len;
@@ -53,9 +53,9 @@ static void	run_shell(t_shell *shell)
 				if (tree)
 					exec_tree(tree, shell);
 			}
+			cmd_line_reset(shell, &shell->window);
 			cursor_find(shell, &shell->window);
 			cursor_load(&shell->window, -1);
-			cmd_line_reset(shell, &shell->window);
 		}
 	}
 }
@@ -71,7 +71,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		print_logo();
 		init_shell(&shell, envp);
-		ft_print_fd(STDOUT_FILENO, "$> ");
+		cmd_line_prompt(EOF);
 		run_shell(&shell);
 	}
 	else

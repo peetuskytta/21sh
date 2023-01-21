@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_errors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 13:33:06 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/19 15:04:17 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/20 16:57:19 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static bool	redir_validation(char *str, t_tok *next, int i)
 		}
 		if (!ft_isdigit(str[i]))
 		{
-			ft_print_fd(2, "\n21sh parse error near `%c%c'\n", str[i], str[i + 1]);
+			ft_print_fd(2, "\n21sh parse error near `%c%c'\n", str[i],
+				str[i + 1]);
 			return (true);
 		}
 		i++;

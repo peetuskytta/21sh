@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 14:29:03 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/20 09:19:34 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/21 10:26:23 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,12 @@ static void	history_cursor(t_shell *shell, t_win *win)
 	cmd_line_check_row(shell, win);
 	if (ft_strilen(shell->cmd_line) > 0)
 		ft_putstr_fd(shell->cmd_line, STDIN_FILENO);
+	cursor_find(shell, win);
 	if (win->row_idx[1] == NULL)
-	{
-		cursor_find(shell, win);
 		win->loc = shell->prmpt_len + shell->cmd_idx;
-		cursor_load(win, 0);
-	}
 	else
-	{
-		cursor_find(shell, win);
 		win->loc = ft_strilen(win->row_idx[win->idx]);
-		cursor_load(win, 0);
-	}
+	cursor_load(win, 0);
 }
 
 static void	reset_history(t_shell *shell, t_win *window)
