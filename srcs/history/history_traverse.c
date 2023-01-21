@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 14:29:03 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/21 10:26:23 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/21 16:02:21 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,57 +35,60 @@ static void	history_cursor(t_shell *shell, t_win *win)
 	cursor_load(win, 0);
 }
 
-static void	reset_history(t_shell *shell, t_win *window)
-{
-	int	i;
-
-	ft_memset(shell->rev_cmd, '\0', sizeof(char) * MAX_BUFF);
-	i = 0;
-	while (window->row_idx[i] != NULL)
-		i++;
-	cursor_row_find(shell, window);
-	if (window->idx == 0 && window->idx != i)
-		window->current_row = window->current_row - i - 1;
-	else if (i != window->idx)
-		window->current_row = window->current_row - i + 1;
-}
-
 static void	history_up(t_shell *shell, t_win *win, int *idx)
 {
 	int	i;
+	int	len;
 
-	reset_history(shell, win);
+	history_reset(shell, win);
 	i = *idx;
 	if (shell->history[i + 1] == NULL)
 		shell->temp = ft_strcpy(shell->temp, shell->cmd_line);
 	ft_memset(shell->cmd_line, '\0', sizeof(char) * MAX_BUFF);
-	shell->cmd_line = ft_strcpy(shell->cmd_line, shell->history[i]);
+	len = ft_strilen(shell->history[i]);
+	if (len + 1 >= MAX_BUFF)
+		len = MAX_BUFF - 1;
+	ft_memcpy(shell->cmd_line, shell->history[i], len);
 	shell->cmd_idx = ft_strilen(shell->cmd_line);
 	*idx -= 1;
 	history_cursor(shell, win);
 }
 
+static void	history_temp_restore(t_shell *shell)
+{
+	int	len;
+
+	ft_memset(shell->cmd_line, '\0', sizeof(char) * MAX_BUFF);
+	len = ft_strilen(shell->temp);
+	if (len + 1 >= MAX_BUFF)
+		len = MAX_BUFF - 1;
+	ft_memcpy(shell->cmd_line, shell->temp, len);
+	shell->cmd_idx = ft_strilen(shell->cmd_line);
+	ft_memset(shell->temp, '\0', sizeof(char) * MAX_BUFF);
+}
+
 static void	history_down(t_shell *shell, t_win *win, int *idx)
 {
 	int	i;
+	int	len;
 
 	*idx += 1;
 	i = *idx;
 	if (shell->history[i + 1] != NULL)
 	{
-		reset_history(shell, win);
+		history_reset(shell, win);
 		ft_memset(shell->cmd_line, '\0', sizeof(char) * MAX_BUFF);
-		shell->cmd_line = ft_strcpy(shell->cmd_line, shell->history[i + 1]);
+		len = ft_strilen(shell->history[i + 1]);
+		if (len + 1 >= MAX_BUFF)
+			len = MAX_BUFF - 1;
+		ft_memcpy(shell->cmd_line, shell->history[i + 1], len);
 		shell->cmd_idx = ft_strilen(shell->cmd_line);
 		history_cursor(shell, win);
 	}
 	else if (shell->temp != NULL)
 	{
-		reset_history(shell, win);
-		ft_memset(shell->cmd_line, '\0', sizeof(char) * MAX_BUFF);
-		shell->cmd_line = ft_strcpy(shell->cmd_line, shell->temp);
-		shell->cmd_idx = ft_strilen(shell->cmd_line);
-		ft_memset(shell->temp, '\0', sizeof(char) * MAX_BUFF);
+		history_reset(shell, win);
+		history_temp_restore(shell);
 		history_cursor(shell, win);
 	}
 }

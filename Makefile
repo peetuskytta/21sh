@@ -85,6 +85,7 @@ _HISTORY := history_create.c \
 		history_traverse.c \
 		history_fetch.c \
 		history_runtime.c \
+		history_reset.c \
 		history.c
 
 _KEYS := key_listen.c \
