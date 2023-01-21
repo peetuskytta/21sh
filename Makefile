@@ -38,7 +38,11 @@ _AST := ast_constructor.c \
 		ast_release.c
 
 _BUILTIN := builtin_execute.c \
-			is_builtin.c
+			is_builtin.c \
+			builtin_echo.c \
+			builtin_unsetenv.c \
+			ft_is_strenv.c \
+			builtin_env.c
 
 _SRCS :=  main.c \
 		allocation_check.c \

@@ -6,11 +6,11 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 12:16:38 by zraunio           #+#    #+#             */
-/*   Updated: 2022/11/17 12:17:04 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/21 14:41:13 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/shell.h"
+#include "../../includes/shell.h"
 
 int	ft_is_strenv(char *name, char **environ)
 {

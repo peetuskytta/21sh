@@ -6,11 +6,11 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 11:34:37 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/21 10:02:51 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/21 14:59:32 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/shell.h"
+#include "../../includes/shell.h"
 
 static int verify_value(char *name)
 {
@@ -44,20 +44,11 @@ static int	unset_errors(char *name, int index)
 
 void	builtin_unsetenv(t_shell *shell, t_exec data)
 {
-	int		index;
-	char	*name;
+	int	index;
 
-	index = 0;
-	while (ft_isspace(data.args[index]) == 0 && data.args[index] != 0)
-		index++;
-	if (data.args[index] != '\0')
-		name = ft_strsub(data.args, 0, index - 1);
-	else
-		name = ft_strdup(data.args);
-	index = ft_is_strenv(name, shell->environ);
-	if (unset_errors(name, index) == -1)
+	index = ft_is_strenv(data.args[1], shell->environ);
+	if (unset_errors(data.args[1], index) == -1)
 		return ;
 	ft_arrtrim(shell->environ, index);
 	shell->env_nbr--;
-	ft_memdel((void *)&name);
 }

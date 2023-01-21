@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 11:53:38 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/21 10:01:31 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/21 14:59:42 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	builtin_setenv(t_shell *shell, t_exec data)
 	int		valid;
 	int		index;
 
+	//if first character is not alpha error check
 	setenv_split(data.args, &name, &value);
 	valid = setenv_verify_value(name);
 	if (valid != 1)
