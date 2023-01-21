@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:40:28 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/21 12:15:21 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/21 13:31:47 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ static void	change_redir_io(t_redir	*redir)
 	}
 }
 
-/*
+
 **	Closes the STDIN_FILENO or STDOUT_FILENO and sets the in and out
 **	of the command to be executed for pipes and redirections.
-*/
+
 static void	change_in_and_out(t_exec *data)
 {
 	if (data->fds.pipe != -1)
@@ -66,7 +66,7 @@ static void	change_in_and_out(t_exec *data)
 			dup2(data->fds.fd_in, STDIN_FILENO);
 	}
 	change_redir_io(data->redir);
-} */
+}*/
 
 /*
 **	Closes all the filedescriptors. Moved to a separate function
