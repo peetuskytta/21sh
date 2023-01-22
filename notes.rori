@@ -1,8 +1,8 @@
 TO BE DONE:
 
 REASONABLY DONE:
-- SIGNAL - together but rori starts 50%
-- AGREGATE - peetu 60%
+- SIGNAL - together but rori starts 65%
+- AGREGATE - peetu 70%
 - ERRORS - together 99%
 - BUILTINS - together 92% >> "\nexit\n" for exit builtin sent to kill_mode
 	- cd: peetu
@@ -36,7 +36,7 @@ DONE DONE:
 |			|	again. reset different if line is empty	|
 |-------------------------------------------------------|
 |			|	3. SIGNAL								|
-|			|	signal needs to handle window as well	|
-|			|	perhaps simply calling resize or 		|
-|			|	rechaeck of window						|
+|			|	signal needs to handle curr_row as well	|
+|			|	perhaps simply calling recheck widnow	|
+|			|	currently doesn't go to keyis_ctrlc.c	|
 |-------------------------------------------------------|

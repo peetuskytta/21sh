@@ -36,9 +36,8 @@
 static void	check_for_heredoc(t_tok **first, t_shell *shell)
 {
 	t_tok	*temp;
-	temp = *first;
 
-	signal_ignore();
+	temp = *first;
 	while (temp)
 	{
 		if (temp->type == REDIR && ft_strequ(temp->str, "<<"))

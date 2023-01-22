@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 17:00:36 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/22 15:42:29 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/22 16:47:59 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,10 @@ int	special_keys(t_shell *shell, char *input, int *i)
 	}
 	else if (input[0] == ENTER || input[0] == CTRL_C)
 	{
+		if (input[0] == CTRL_C)
+			key_is_ctrlc(shell, &shell->window, i);
 		goto_newline(shell, &shell->window);
 		return (ENTER);
 	}
-		return (0);
+	return (0);
 }

@@ -95,6 +95,7 @@ _KEYS := key_listen.c \
 		read_key.c \
 		special_keys.c \
 		key_is_ctrl_alpha.c \
+		key_is_ctrlc.c \
 		key_is_arrow.c \
 		heredoc_listen.c
 

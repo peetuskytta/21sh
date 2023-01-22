@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input_read.c                                       :+:      :+:    :+:   */
+/*   key_is_ctrlc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/12 18:42:14 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/22 16:27:55 by zraunio          ###   ########.fr       */
+/*   Created: 2023/01/22 16:36:30 by zraunio           #+#    #+#             */
+/*   Updated: 2023/01/22 16:45:47 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-void	input_read(t_shell *shell)
+int	key_is_ctrlc(t_shell *shell, t_win *win, int *i)
 {
-	char	input[MAX_BUFF + 1];
-
-	if (enable_rawmode(shell) == 0)
-		ft_putendl_fd("Error with tcgetattr", STDERR_FILENO);
-	tcsetattr(STDIN_FILENO, TCSANOW, &shell->raw);
-	read_key(shell, input, 0);
-	tcsetattr(STDIN_FILENO, TCSANOW, &shell->orig_raw);
+	ft_memset(shell->cmd_line, '\0', sizeof(char) * MAX_BUFF + 1);
+	ft_memset(shell->input, '\0', sizeof(char) * MAX_BUFF + 1);
+	ft_memset(shell->rev_cmd, '\0', sizeof(char) * MAX_BUFF + 1);
+	ft_memset(shell->q_input, '\0', sizeof(char) * MAX_BUFF + 1);
+	ft_memset(win->row_idx, '\0', sizeof(char *) * MAX_BUFF + 1);
+	shell->cmd_idx = 0;
+	*i += 1;
+	return (ENTER);
 }

@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/21 16:10:15 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/22 16:31:53 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static void	run_shell(t_shell *shell)
 	ft_memset(&tree, 0, sizeof(t_ast *));
 	while (TRUE)
 	{
+		signal_listen();
 		input_read(shell);
 		if (shell->end == 1)
 		{
