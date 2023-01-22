@@ -12,21 +12,24 @@
 
 #include "../../includes/shell.h"
 
+static void	dir_change(const char *dir_path)
+{
+	if (access(dir_path, F_OK) == 0)
+	{
+		if (access(dir_path, X_OK) != 0)
+			ft_perror(CD_NO_ACCESS);
+	}
+	else
+		ft_perror(NO_FILE_OR_DIR);
+}
+
 void	builtin_cd_change_dir(t_shell *shell, const char *dir_path)
 {
 	char *temp;
 
 	temp = NULL;
 	if (chdir(dir_path) != 0)
-	{
-		if (access(dir_path, F_OK) == 0)
-		{
-			if (access(dir_path, X_OK) != 0)
-				ft_perror(CD_NO_ACCESS);
-		}
-		else
-			ft_perror(NO_FILE_OR_DIR);
-	}
+		dir_change(dir_path);
 	if (shell->pipe == true)
 	{
 		shell->pipe = false;
@@ -34,7 +37,7 @@ void	builtin_cd_change_dir(t_shell *shell, const char *dir_path)
 	}
 	temp = ft_strdup("OLDPWD");
 	int i = ft_is_strenv(temp, shell->environ);
-	setenv_update_env(shell, temp, getenv("OLDPWD"), i);
+	setenv_update_env(shell, temp, ft_strdup(getenv("OLDPWD")), i);
 	//ft_memdel((void *)&temp);
 	temp = ft_strdup("PWD");
 	i = ft_is_strenv(temp, shell->environ);
