@@ -106,7 +106,7 @@ void	exec_tree(t_ast **tree, t_shell *shell)
 	idx = 0;
 	while (tree[idx])
 	{
-		// NL;
+		NL;
 		piping(tree[idx]);
 		exec_branch(tree[idx], shell);
 		ft_memdel((void *)&tree[idx]);

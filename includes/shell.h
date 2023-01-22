@@ -6,15 +6,15 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/21 16:05:34 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/21 16:42:48 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SHELL_H
 # define SHELL_H
 # include "../libft/incl/libft.h"
-# include "structs.h"
 # include <stdbool.h>
+# include "structs.h"
 # include <term.h>
 # include <fcntl.h>
 # include <time.h>
