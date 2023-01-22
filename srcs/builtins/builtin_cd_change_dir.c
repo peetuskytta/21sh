@@ -16,8 +16,6 @@ void	builtin_cd_change_dir(t_shell *shell, const char *dir_path)
 {
 	if (chdir(dir_path) != 0)
 	{
-
-		DB;
 		if (access(dir_path, F_OK) == 0)
 		{
 			if (access(dir_path, X_OK) != 0)
