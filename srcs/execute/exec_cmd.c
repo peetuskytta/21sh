@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:40:28 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/22 15:11:52 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/22 17:11:25 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ static void	wait_for_finish(t_pid *pid)
 */
 void	exec_cmd(t_exec data, char *bin_path, char **env_cpy)
 {
-	signal_runtime();
 	data.pid.child = fork();	// store these in an array?
 	if (data.pid.child == 0)	// in the CHILD process
 	{
