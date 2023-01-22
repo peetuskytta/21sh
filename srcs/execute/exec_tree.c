@@ -73,13 +73,14 @@ static void	init_pipes(t_ast *temp, t_pipe *pipes)
 **	If branch->right (pointer to the next branch) equals NULL there
 **	are no pipes and the function returns.
 */
-static void	piping(t_ast *branch)
+static void	piping(t_ast *branch, bool *pipe)
 {
 	t_ast	*temp;
 
 	temp = branch->right;
 	if (temp == NULL)
 		return ;
+	*pipe = true;
 	init_pipes(temp, branch->pipes);
 	temp = branch;
 	setup_pipes(temp, branch->pipes, 0);
@@ -107,10 +108,11 @@ void	exec_tree(t_ast **tree, t_shell *shell)
 	while (tree[idx])
 	{
 		NL;
-		piping(tree[idx]);
+		piping(tree[idx], &shell->pipe);
 		exec_branch(tree[idx], shell);
 		ft_memdel((void *)&tree[idx]);
 		init_in_out_err(shell->tty);
+		shell->pipe = false;
 		idx++;
 	}
 	ft_memdel((void *)&tree);

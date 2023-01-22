@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   buildin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:25:24 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/21 13:30:44 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/22 11:39:27 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,18 @@
 # define BUILDIN_H
 # include "shell.h"
 # include "structs.h"
+
+
+typedef enum e_cd
+{
+	CD_DIR = 3,
+	CD_HOME = 4,
+	CD_NORMAL = 5,
+	CD_PREVIOUS = 6,
+	CD_NO_FILE = 7,
+	CD_PERM = 8,
+	CD_ERR = -1,
+}			t_cd;
 
 /*
 ** HELPERS
@@ -29,5 +41,7 @@ void	builtin_env(t_shell *shell, t_exec data);
 void	builtin_unsetenv(t_shell *shell, t_exec data);
 void	builtin_echo(t_shell *shell, t_exec data);
 void	builtin_execute(t_shell *shell, t_exec data);
+void	builtin_cd(t_shell *shell, t_exec data);
+void	builtin_cd_change_dir(t_shell *shell, const char *dir_path);
 
 #endif

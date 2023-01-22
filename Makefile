@@ -42,7 +42,9 @@ _BUILTIN := builtin_execute.c \
 			builtin_echo.c \
 			builtin_unsetenv.c \
 			ft_is_strenv.c \
-			builtin_env.c
+			builtin_env.c \
+			builtin_cd.c \
+			builtin_cd_change_dir.c
 
 _SRCS :=  main.c \
 		allocation_check.c \

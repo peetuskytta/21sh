@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_key.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 16:57:43 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/21 14:21:44 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/22 10:01:18 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static void	read_heredoc(t_shell *shell, char *input)
 				ft_perror(FILE_CLOSE_ERR);
 		}
 	}
+	if (close(fd) < 0)
+		ft_perror(FILE_CLOSE_ERR);
 }
 
 void	read_key(t_shell *shell, char *input, int flg)
@@ -40,7 +42,7 @@ void	read_key(t_shell *shell, char *input, int flg)
 			return ;
 		if (flg == 0)
 			key_listen(shell, input);
-		else
+		else if (flg == 1)
 			read_heredoc(shell, input);
 	}
 }
