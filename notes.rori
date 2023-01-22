@@ -1,7 +1,7 @@
 TO BE DONE:
-// SIGNAL - together but rori starts 0%
 
 REASONABLY DONE:
+- SIGNAL - together but rori starts 50%
 - AGREGATE - peetu 60%
 - ERRORS - together 99%
 - BUILTINS - together 92% >> "\nexit\n" for exit builtin sent to kill_mode
@@ -35,5 +35,8 @@ DONE DONE:
 |			|	history is the one breaking loc			|
 |			|	again. reset different if line is empty	|
 |-------------------------------------------------------|
-|			|	3. ERROS & IS_BUILTIN					|
+|			|	3. SIGNAL								|
+|			|	signal needs to handle window as well	|
+|			|	perhaps simply calling resize or 		|
+|			|	rechaeck of window						|
 |-------------------------------------------------------|

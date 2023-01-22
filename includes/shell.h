@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/21 16:03:09 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/22 14:52:42 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include "../libft/incl/libft.h"
 # include "structs.h"
 # include <stdbool.h>
+# include <signal.h>
 # include <term.h>
 # include <fcntl.h>
 # include <time.h>
@@ -46,6 +47,7 @@
 # include "parse.h"
 # include "rawmode.h"
 # include "redirection.h"
+# include "signals.h"
 
 /*
 ** SHELL

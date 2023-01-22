@@ -6,13 +6,26 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:38:49 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/19 21:06:18 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/22 15:24:33 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-static void	ctrl_paste(t_shell *shell, t_win *window)
+// static int	ctrl_prompt(t_shell *shell, t_win *win)
+// {
+// 	ft_memset(shell->cmd_line, 0, sizeof(char) * MAX_BUFF + 1);
+// 	ft_memset(shell->input, 0, sizeof(char) * MAX_BUFF + 1);
+// 	ft_memset(shell->rev_cmd, 0, sizeof(char) * MAX_BUFF + 1);
+// 	ft_memset(shell->q_input, 0, sizeof(char) * MAX_BUFF + 1);
+// 	ft_memset(win->row_idx, 0, sizeof(char *) * MAX_BUFF + 1);
+// 	shell->end = 1;
+// 	shell->quote = EOF;
+// 	goto_newline(shell, win);
+// 	return (ENTER);
+// }
+
+static int	ctrl_paste(t_shell *shell, t_win *window)
 {
 	int	len;
 
@@ -29,6 +42,7 @@ static void	ctrl_paste(t_shell *shell, t_win *window)
 		cursor_move(shell, window, len, 'r');
 		cmd_line_reprint(shell, window);
 	}
+	return (1);
 }
 
 static void	ctrl_cut(t_shell *shell, t_win *window)
@@ -68,9 +82,11 @@ int	key_is_ctrl_alpha(t_shell *shell, t_win *window, char *input, int *i)
 	else if (input[0] == CTRL_P)
 	{
 		*i += 1;
-		ctrl_paste(shell, window);
-		return (1);
+		return (ctrl_paste(shell, window));
 	}
-	else
-		return (0);
+	// else if (input[0] == CTRL_C)
+	// {
+	// 	return (ctrl_prompt(shell, window));
+	// }
+	return (0);
 }

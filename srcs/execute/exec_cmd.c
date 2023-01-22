@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:40:28 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/22 14:21:50 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/22 15:11:52 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,27 @@ static void	wait_for_finish(t_pid *pid)
 		ft_perror(WAITPID_FAIL);
 }
 
+// static void	signal_stop(int signo)
+// {
+// 	(void)signo;
+// }
+
+// static void	signal_kill(t_pid pid)
+// {
+// 	kill(pid.child, SIGKILL);
+// }
+
+// static void	signal_abort(t_pid pid)
+// {
+// 	kill(pid.child, SIGABRT);
+// }
+
 /*
 **	Performs input/output change before fork and execution of a command.
 */
 void	exec_cmd(t_exec data, char *bin_path, char **env_cpy)
 {
+	signal_runtime();
 	data.pid.child = fork();	// store these in an array?
 	if (data.pid.child == 0)	// in the CHILD process
 	{
@@ -101,8 +117,6 @@ void	exec_cmd(t_exec data, char *bin_path, char **env_cpy)
 			ft_perror(EXECVE_ERROR);
 			exit(EXIT_FAILURE);
 		}
-		if (signal(SIGABRT, ) != SIG_ERR)
-			
 		close_fds(data.fds.fd_in, data.fds.fd_out);
 		exit(EXIT_SUCCESS);
 	}

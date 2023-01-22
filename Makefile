@@ -119,7 +119,9 @@ _REDIRECTION := redirection_loop.c \
 		redir_folder_check.c \
 		redir_heredoc.c
 
-# _SIGNAL := 
+_SIGNAL := signal_listen.c \
+			signal_ignore.c \
+			signal_runtime.c
 
 #All to object files
 ALL_SRCS :=	$(addprefix $(SRCS_AST), $(_AST)) \
@@ -135,9 +137,10 @@ ALL_SRCS :=	$(addprefix $(SRCS_AST), $(_AST)) \
 			$(addprefix $(PANIC_DIR), $(_PANIC)) \
 			$(addprefix $(PARSE_DIR), $(_PARSE)) \
 			$(addprefix $(RAWMODE_DIR), $(_RAWMODE)) \
-			$(addprefix $(REDIRECTION_DIR), $(_REDIRECTION))
+			$(addprefix $(REDIRECTION_DIR), $(_REDIRECTION)) \
+			$(addprefix $(SIGNAL_DIR), $(_SIGNAL))
 
-SRCS = $(_SRCS) $(_CURSOR) $(_INIT) $(_INPUT) $(_BUILTIN) $(_KEYS) \
+SRCS = $(_SRCS) $(_CURSOR) $(_INIT) $(_INPUT) $(_BUILTIN) $(_KEYS) $(_SIGNAL) \
 $(_OUTPUT) $(_PANIC) $(_PARSE) $(_RAWMODE) $(_HISTORY) $(_AST) $(_EXECUTE) \
 $(_REDIRECTION)
 OBJ_FILES = $(SRCS:.c=.o)
@@ -196,6 +199,9 @@ $(OBJS_DIR)%.o: $(EXECUTE_DIR)%.c
 	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(REDIRECTION_DIR)%.c
+	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
+
+$(OBJS_DIR)%.o: $(SIGNAL_DIR)%.c
 	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(LIBFT_A):

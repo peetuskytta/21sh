@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input_read.c                                       :+:      :+:    :+:   */
+/*   signals.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/12 18:42:14 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/22 15:44:26 by zraunio          ###   ########.fr       */
+/*   Created: 2023/01/22 14:50:33 by zraunio           #+#    #+#             */
+/*   Updated: 2023/01/22 15:11:08 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
+#ifndef SIGNALS_H
+# define SIGNALS_H
+# include "shell.h"
 
-void	input_read(t_shell *shell)
-{
-	char	input[MAX_BUFF + 1];
+void	signal_listen(void);
+void	signal_ignore(void);
+void	signal_runtime(void);
 
-	// signal_ignore();
-	if (enable_rawmode(shell) == 0)
-		ft_putendl_fd("Error with tcgetattr", STDERR_FILENO);
-	tcsetattr(STDIN_FILENO, TCSANOW, &shell->raw);
-	read_key(shell, input, 0);
-	tcsetattr(STDIN_FILENO, TCSANOW, &shell->orig_raw);
-}
+#endif
