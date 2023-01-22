@@ -6,11 +6,13 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/22 16:31:53 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/22 16:55:55 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/shell.h"
+
+t_shell	*g_shell;
 
 static void	cmd_line_reset(t_shell *shell, t_win *window)
 {
@@ -67,6 +69,7 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
+	g_shell = &shell;
 	ft_memset(&shell, 0, sizeof(shell));
 	if (envp)
 	{

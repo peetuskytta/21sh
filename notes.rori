@@ -1,7 +1,6 @@
-TO BE DONE:
 
 REASONABLY DONE:
-- SIGNAL - together but rori starts 65%
+- SIGNAL - together but rori starts 75%
 - AGREGATE - peetu 70%
 - ERRORS - together 99%
 - BUILTINS - together 92% >> "\nexit\n" for exit builtin sent to kill_mode
@@ -38,5 +37,4 @@ DONE DONE:
 |			|	3. SIGNAL								|
 |			|	signal needs to handle curr_row as well	|
 |			|	perhaps simply calling recheck widnow	|
-|			|	currently doesn't go to keyis_ctrlc.c	|
 |-------------------------------------------------------|

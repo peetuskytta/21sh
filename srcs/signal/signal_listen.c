@@ -6,15 +6,18 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 14:15:51 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/22 15:46:35 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/22 16:58:17 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
+extern t_shell	*g_shell;
+
 static void	signal_abort(int signo)
 {
 	kill(signo, SIGABRT);
+	key_is_ctrlc(g_shell, &g_shell->window);
 	ft_putchar_fd('\n', STDOUT_FILENO);
 	cmd_line_prompt(EOF);
 }
