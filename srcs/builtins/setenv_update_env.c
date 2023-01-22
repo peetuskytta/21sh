@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   setenv_update_env.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 13:31:58 by zraunio           #+#    #+#             */
-/*   Updated: 2022/11/24 11:29:55 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/22 13:03:32 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/shell.h"
+#include "../../includes/shell.h"
 
 void	setenv_update_env(t_shell *shell, char *name, char *value, int i)
 {

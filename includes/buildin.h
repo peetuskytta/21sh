@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:25:24 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/22 11:39:27 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/22 13:03:05 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define BUILDIN_H
 # include "shell.h"
 # include "structs.h"
-
 
 typedef enum e_cd
 {

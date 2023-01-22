@@ -16,6 +16,7 @@ void	builtin_cd_change_dir(t_shell *shell, const char *dir_path)
 {
 	if (chdir(dir_path) != 0)
 	{
+
 		DB;
 		if (access(dir_path, F_OK) == 0)
 		{
@@ -28,8 +29,14 @@ void	builtin_cd_change_dir(t_shell *shell, const char *dir_path)
 	if (shell->pipe == true)
 	{
 		shell->pipe = false;
-		//builtin_cd_change_dir(shell, )
+		builtin_cd_change_dir(shell, getenv("PWD"));
 	}
+	char *temp = ft_strdup("OLDPWD");
+	int i = ft_is_strenv(temp, shell->environ);
+	setenv_update_env(shell, temp, getenv("PWD"), i);
+	temp = ft_strdup("PWD");
+	i = ft_is_strenv(temp, shell->environ);
+	setenv_update_env(shell, temp, (char *)dir_path, i);
 	// change the OLDPWD to be the current PWD
 	// change the PWD to match the dir_path
 }

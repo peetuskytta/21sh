@@ -41,6 +41,7 @@ _BUILTIN := builtin_execute.c \
 			is_builtin.c \
 			builtin_echo.c \
 			builtin_unsetenv.c \
+			setenv_update_env.c \
 			ft_is_strenv.c \
 			builtin_env.c \
 			builtin_cd.c \
