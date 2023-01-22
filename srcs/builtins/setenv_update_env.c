@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 13:31:58 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/22 13:03:32 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/22 15:59:11 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	setenv_update_env(t_shell *shell, char *name, char *value, int i)
 		shell->environ = ft_arrdup(arr_temp);
 		shell->env_nbr++;
 	}
-	i = 0;
-	while (shell->environ[i])
-		ft_printf("%s\n", shell->environ[i++]);
+//	i = 0;
+//	while (shell->environ[i])
+//		ft_printf("%s\n", shell->environ[i++]);
 }

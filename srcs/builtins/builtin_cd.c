@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 15:03:07 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/22 12:46:15 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/22 16:04:02 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,4 @@ void	builtin_cd(t_shell *shell, t_exec data)
 	}
 	else
 		ft_perror(CD_ARG_NO);
-	DB;
 }
