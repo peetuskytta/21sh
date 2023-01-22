@@ -80,6 +80,7 @@ static void	piping(t_ast *branch, bool *pipe)
 	temp = branch->right;
 	if (temp == NULL)
 		return ;
+	//(void)pipe;
 	*pipe = true;
 	init_pipes(temp, branch->pipes);
 	temp = branch;

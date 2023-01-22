@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 15:03:07 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/22 12:16:29 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/22 12:46:15 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,7 @@ void	builtin_cd(t_shell *shell, t_exec data)
 	{
 		checks = initial_checks(&data);
 		if (checks == CD_NORMAL)
-		{
 			builtin_cd_change_dir(shell, (const char *)data.args[1]);
-			ft_perror("cd to the given place");//change_to_token(data, data.args[1]);
-		}
 		else if (checks == CD_HOME)
 			ft_perror("cd to home please");//handle_home(data);
 		else if (checks == CD_PREVIOUS)
