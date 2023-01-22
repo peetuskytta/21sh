@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:40:28 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/21 13:31:47 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/22 14:21:50 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ void	exec_cmd(t_exec data, char *bin_path, char **env_cpy)
 			ft_perror(EXECVE_ERROR);
 			exit(EXIT_FAILURE);
 		}
+		if (signal(SIGABRT, ) != SIG_ERR)
+			
 		close_fds(data.fds.fd_in, data.fds.fd_out);
 		exit(EXIT_SUCCESS);
 	}

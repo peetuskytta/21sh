@@ -6,13 +6,13 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 11:34:37 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/21 14:59:32 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/22 11:00:47 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-static int verify_value(char *name)
+static int	verify_value(char *name)
 {
 	if (name == NULL || ft_strlen(name) == 0)
 		return (0);
@@ -46,7 +46,7 @@ void	builtin_unsetenv(t_shell *shell, t_exec data)
 {
 	int	index;
 
-	index = ft_is_strenv(data.args[1], shell->environ);
+	index = is_strenv(data.args[1], shell->environ);
 	if (unset_errors(data.args[1], index) == -1)
 		return ;
 	ft_arrtrim(shell->environ, index);

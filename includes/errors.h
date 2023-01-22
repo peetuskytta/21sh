@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:24:46 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/21 16:22:38 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/22 10:52:39 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@
 /*Error message defines for setenv and unsetenv*/
 # define EMPTY_STR "setenv name: cannot be an empty string"
 # define NAME_ERROR "setenv name: cannot be a NULL pointer or 0 length string"
-# define INVALID_CHAR "setenv name: cannot contain a '=' character"
+# define INVALID_CHAR "setenv name: must begin with Alpha cahracter"
 # define SET_TOO_MANY_ARG "setenv: too many arguments"
-# define SETENV_USAGE "usage: 'setenv [name] [value]'"
+# define SETENV_USAGE "usage: 'setenv [name]=[value]'"
 # define NOT_IDENTIFIER ": not a valid identifier"
 # define UNSETENV_USAGE "usage: unsetenv [name]"
 # define UNSETENV_ARGS "unsetenv: too many arguments"

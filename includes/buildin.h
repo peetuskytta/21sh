@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:25:24 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/21 13:30:44 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/22 10:59:32 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 /*
 ** HELPERS
 */
-int		ft_is_strenv(char *name, char **environ);
+int		is_strenv(char *name, char **environ);
 bool	is_builtin(char *cmd);
 void	setenv_update_env(t_shell *shell, char *name, char *value, int i);
 /*

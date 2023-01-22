@@ -27,6 +27,7 @@ PANIC_DIR = srcs/panic/
 PARSE_DIR = srcs/parse/
 RAWMODE_DIR = srcs/rawmode/
 REDIRECTION_DIR = srcs/redirection/
+SIGNAL_DIR = srcs/signal/
 OBJS_DIR = obj/
 INCL = -I includes/
 
@@ -38,10 +39,12 @@ _AST := ast_constructor.c \
 		ast_release.c
 
 _BUILTIN := builtin_execute.c \
-			is_builtin.c \
 			builtin_echo.c \
 			builtin_unsetenv.c \
-			ft_is_strenv.c \
+			builtin_setenv.c \
+			is_strenv.c \
+			is_builtin.c \
+			setenv_update_env.c \
 			builtin_env.c
 
 _SRCS :=  main.c \
@@ -115,6 +118,8 @@ _REDIRECTION := redirection_loop.c \
 		redir_file_check.c \
 		redir_folder_check.c \
 		redir_heredoc.c
+
+# _SIGNAL := 
 
 #All to object files
 ALL_SRCS :=	$(addprefix $(SRCS_AST), $(_AST)) \
@@ -199,8 +204,10 @@ $(LIBFT_A):
 clean:
 	-@make -C libft clean >> makelog.txt
 	-@rm -f $(OBJS) >> makelog.txt
-	@find . -type f -name '*.o' -print -delete -o -name '#*#' -print -delete >> makelog.txt
-	@find . -type f -name '*~' -print -delete -o -name '#*#' -print -delete >> makelog.txt
+	@find . -type f -name '*.o' -print -delete -o -name '#*#' -print -delete \
+	>> makelog.txt
+	@find . -type f -name '*~' -print -delete -o -name '#*#' -print -delete  \
+	>> makelog.txt
 	@find . -type f -name '.DS_Store' -print -delete >> makelog.txt
 	@echo "$(BOLD)$(RED)----------Objects deleted----------$(RESET)"
 

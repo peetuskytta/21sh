@@ -3,12 +3,12 @@ TO BE DONE:
 
 REASONABLY DONE:
 - AGREGATE - peetu 60%
-- ERRORS - together 98%
+- ERRORS - together 99%
 - BUILTINS - together 92% >> "\nexit\n" for exit builtin sent to kill_mode
 	- cd: peetu
-	- setenv, env, unsetenv: rori
-	- echo: donedone
-- EXPANSIONS - peetu
+	- env: rori
+	- echo, setenv, unsetenv: donedone
+- EXPANSIONS - peetu 2%
 - QUOTES - together but peetu is a hero 98%
 
 DONE DONE:
