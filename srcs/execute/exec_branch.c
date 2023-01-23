@@ -30,6 +30,7 @@ static char	**copy_environment(char **environ)
 		copy[i] = ft_strdup(environ[i]);
 		i++;
 	}
+	copy[i] = NULL;
 	return (copy);
 }
 
@@ -48,7 +49,7 @@ static void	command_execution(t_shell *shell, t_exec data, char **env_cpy)
 		if (redirection_loop(&data))
 		{
 			change_in_and_out(&data);
-			builtin_execute(shell, data);
+			builtin_execute(shell, data, env_cpy);
 		}
 	}
 	else
