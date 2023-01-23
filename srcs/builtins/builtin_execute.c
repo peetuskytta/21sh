@@ -6,13 +6,13 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:30:59 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/23 14:58:17 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/23 17:20:42 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-void	builtin_execute(t_shell *shell, t_exec data, char **env_cpy)
+void	builtin_execute(t_shell *shell, t_exec data)
 {
 	if (ft_strequ("echo", data.cmd))
 		return (builtin_echo(shell, data));

@@ -54,7 +54,7 @@ static void	command_execution(t_shell *shell, t_exec data, char **env_cpy)
 		else if (redirection_loop(&data))
 		{
 			change_in_and_out(&data);
-			builtin_execute(shell, data, env_cpy);
+			builtin_execute(shell, data);
 		}
 	}
 	else
@@ -84,9 +84,6 @@ void	exec_branch(t_ast *branch, t_shell *shell)
 	env_cpy = copy_environment(shell->environ);
 	if ((branch->type == REDIR || branch->type == COMMAND))
 	{
-		/* They can add the function that starts stripping quotes and expands $ and ~
-		here (all expandables are in data.args).
-		*/
 		command_execution(shell, branch->data, env_cpy);
 	}
 	exec_branch(branch->left, shell);

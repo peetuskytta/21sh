@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 10:20:57 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/23 15:24:06 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/24 00:43:56 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,35 @@ static bool	env_output(char **env_cpy)
 	ft_putchar_fd('\n', STDOUT_FILENO);
 	while (env_cpy[i])
 		ft_print_fd(STDOUT_FILENO, "%s\n", env_cpy[i++]);
-	return (false)
+	return (false);
+}
+
+void	swap_char_ptr(char **first, char **second) //maybe a function to add to libft
+{
+	char	*temp;
+
+	temp = *first;
+	*first = *second;
+	*second = temp;
+}
+
+static bool is_command(t_exec *data, int count, int i)
+{
+	while (data->args[i])
+	{
+		if (!ft_strchr(data->args[i], '='))
+		{
+			if (ft_strequ("env", data->args[0]))
+				{}; //swap_char_ptr(&data->args[0], &data->args[i]);
+		}
+		i++;
+	}
+	if (i > count)
+	{
+		ft_perror("shell: too many variables\n");
+		return (false);
+	}
+	return (true);
 }
 
 /* static void	env_temp_addvar(char **args, char **env_cpy)
@@ -28,27 +56,67 @@ static bool	env_output(char **env_cpy)
 
 } */
 
-static bool env_temp_empty
+static char	**env_args_renew(char **old_arg, char **old_env, int i)
+{
+	char	*new_arg[MAX_REDIR];
+	int		count;
+	int		start;
+
+	count = 0;
+	start = 0;
+	while (old_env[count])
+		ft_strdel(&old_env[count++]);
+	count = 0;
+	ft_memset(&new_arg, 0, sizeof(char *) * MAX_REDIR);
+	while (old_arg[i])
+	{
+		if (!ft_strchr(old_arg[i], '='))
+			new_arg[start++] = ft_strdup(old_arg[i]);
+		if (ft_strchr(old_arg[i], '='))
+		{
+			old_env[count] = ft_strdup(old_arg[i]);
+			count++;
+		}
+		//ft_strdel(&old_arg[i]);
+		i++;
+	}
+/* 	i = 0;
+	while (new_arg[i])
+		ft_putendl(new_arg[i++]); */
+	return ((char *)new_arg);
+}
 
 static bool	env_temp_empty(t_shell *shell, t_exec *data, char **env_cpy)
 {
-	int	i;
-
-	if (data.args[2] != NULL)
+	(void)shell;
+	if (data->args[2] == NULL)
 		return (false);
-	i = env_variable_counter(env_cpy);
-	ft_memset(env_cpy, '\0', sizeof(char *) * (i + 1));
-	i = is_strenv("PWD", shell->environ);
-	if (i != -1)
-		env_cpy[0] = ft_strdup(shell->environ[i]);
-	i = is_strenv("SHLVL", shell->environ);
-	if (i != -1)
-		env_cpy[1] = ft_strdup(shell->environ[i]);
-	i = is_strenv("_", shell->environ);
-	if (i != -1)
-		env_cpy[2] = ft_strdup(shell->environ[i]);
-
-	// replace the data.cmd with the nth data.arg which doesn't have '='
+	if (is_command(data, env_variable_counter(env_cpy), 2))
+	{
+		data->args = env_args_renew(data->args, env_cpy, 2);
+		DB;
+		int i = 0;
+		while (data->args[i])
+			ft_putendl(data->args[i++]);
+		DB;
+		i = 0;
+		while (env_cpy[i])
+			ft_putendl(env_cpy[i++]);
+/* 		i = env_variable_counter(env_cpy);
+		i = is_strenv("PWD", shell->environ);
+		if (i != -1)
+			env_cpy[0] = ft_strdup(shell->environ[i]);
+		i = is_strenv("SHLVL", shell->environ);
+		if (i != -1)
+			env_cpy[1] = ft_strdup(shell->environ[i]);
+		i = is_strenv("_", shell->environ);
+		if (i != -1)
+			env_cpy[2] = ft_strdup(shell->environ[i]); */
+		return (false);
+		//return (true);
+	}
+	else
+		return (false);
 	return (true);
 }
 
@@ -61,12 +129,11 @@ static bool	env_flag(char **args)
 
 bool	builtin_env(t_shell *shell, t_exec data, char **env_cpy)
 {
-	int i;
 	int	flg;
 
 	flg = env_flag(data.args);
 	if (flg == true)
-		return (env_temp_empty(shell, data, env_cpy))
+		return (env_temp_empty(shell, &data, env_cpy));
 	else if (data.args[1] != NULL && flg == false)
 	{
 		//env_temp_addvar(data.args, env_cpy);
@@ -74,8 +141,9 @@ bool	builtin_env(t_shell *shell, t_exec data, char **env_cpy)
 		//env temporary env
 		//env misformatted_anything
 		//env command
-		;
+		return (false);
 	}
 	else
 		return (env_output(env_cpy));
+	return (false);
 }
