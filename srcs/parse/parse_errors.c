@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 13:33:06 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/21 12:19:12 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/23 12:33:29 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static bool	redir_validation(char *str, t_tok *next, int i)
 {
 	while (str[i])
 	{
-		if (str[i] == '<' || str[i] == '>' || str[i] == '&')
+		if (str[i] == '<' || str[i] == '>')
 		{
 			if (next == NULL)
 			{
@@ -35,6 +35,8 @@ static bool	redir_validation(char *str, t_tok *next, int i)
 	}
 	return (false);
 }
+
+// >& = redirect 1 and 2 to a file or
 
 static bool	redir_error_checks(char *str, t_tok *next)
 {
@@ -59,8 +61,13 @@ static bool	redir_check(t_tok *temp)
 	{
 		if (temp->type == REDIR)
 		{
-			if (redir_error_checks(temp->str, temp->next))
-				return (true);
+			if (ft_strchr(temp->str, '&') || ft_strchr(temp->str, '-'))
+				ft_perror("AGGR check here");
+			else
+			{
+				if (redir_error_checks(temp->str, temp->next))
+					return (true);
+			}
 			temp = temp->next;
 		}
 		temp = temp->next;

@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 13:31:58 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/23 08:08:07 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/23 09:54:02 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	setenv_update_env(t_shell *shell, char *name, char *value, int i)
 		ft_memset(shell->environ[i], 0, ft_strlen(shell->environ[i]));
 		temp = ft_strjoin_free(name, "=", 1);
 		allocation_check((void *)&temp);
+		ft_memdel((void *)&shell->environ[i]); // this was missing and causing the leak.
 		shell->environ[i] = ft_strjoin_free(temp, value, 3);
 		allocation_check((void *)&shell->environ[i]);
 	}

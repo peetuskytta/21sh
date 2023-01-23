@@ -26,23 +26,25 @@ static void	dir_change(const char *dir_path)
 void	builtin_cd_change_dir(t_shell *shell, const char *dir_path)
 {
 	char *temp;
+	int i = 0;
 
 	temp = NULL;
 	if (chdir(dir_path) != 0)
+	{
 		dir_change(dir_path);
-	if (shell->pipe == true)
+		return ;
+	}
+	if (shell->pipe == true) // in pipe we want to change the dir but revert the change back
 	{
 		shell->pipe = false;
-		builtin_cd_change_dir(shell, ft_strdup(getenv("PWD")));
+		temp =  ft_strdup(getenv("PWD"));
+		builtin_cd_change_dir(shell, temp);
+		ft_memdel((void *)&temp);
 	}
 	temp = ft_strdup("OLDPWD");
-	free(temp);
-	int i = ft_is_strenv(temp, shell->environ);
-	//setenv_update_env(shell, temp, ft_strdup(getenv("OLDPWD")), i);
+	i = ft_is_strenv(temp, shell->environ);
+	setenv_update_env(shell, temp, ft_strdup(getenv("OLDPWD")), i);
 	temp = ft_strdup("PWD");
 	i = ft_is_strenv(temp, shell->environ);
 	setenv_update_env(shell, temp, ft_strdup(dir_path), i);
-
-	// change the OLDPWD to be the current PWD
-	// change the PWD to match the dir_path
 }
