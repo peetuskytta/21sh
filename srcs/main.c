@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/21 16:10:15 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/23 08:02:49 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ static void	run_shell(t_shell *shell)
 				history_runtime(shell);
 				tree = ast_constructor(shell, parser(shell));
 				if (tree)
+				{
+					NL;
 					exec_tree(tree, shell);
+				}
 			}
 			cmd_line_reset(shell, &shell->window);
 			cursor_find(shell, &shell->window);

@@ -104,8 +104,10 @@ static void	piping(t_ast *branch, bool *pipe)
 void	exec_tree(t_ast **tree, t_shell *shell)
 {
 	int	idx;
+	char	buf[MAX_BUFF];
 
 	idx = 0;
+	ft_memset(buf, 0, MAX_BUFF);
 	while (tree[idx])
 	{
 		//NL;
