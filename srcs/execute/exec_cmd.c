@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:40:28 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/22 17:14:15 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/23 13:37:34 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ static void	change_redir_io(t_redir	*redir)
 
 **	Closes the STDIN_FILENO or STDOUT_FILENO and sets the in and out
 **	of the command to be executed for pipes and redirections.
-
+*/
+/*
 static void	change_in_and_out(t_exec *data)
 {
 	if (data->fds.pipe != -1)
@@ -111,6 +112,9 @@ void	exec_cmd(t_exec data, char *bin_path, char **env_cpy)
 	if (data.pid.child == 0)	// in the CHILD process
 	{
 		change_in_and_out(&data);
+		// copy stderr and stdout to different files.. then compare their
+		// modification times to determine to where something was written
+		// to and save it in shell->last_io as a boolean value;
 		if (execve(bin_path, data.args, env_cpy) == -1)
 		{
 			ft_perror(EXECVE_ERROR);

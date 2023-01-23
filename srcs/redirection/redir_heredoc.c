@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 19:36:30 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/21 14:18:10 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/22 09:30:39 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ void	redir_heredoc(t_shell *shell, t_tok *token)
 {
 	char	input[MAX_BUFF + 1];
 
+	shell->delim = ft_strdup(token->str); //store the delimiter
 	ft_putstr_fd("\n> ", STDOUT_FILENO);
 	read_key(shell, input, 1);
 	ft_strdel(&token->str);
+	ft_strdel(&shell->delim);
 	token->str = ft_strdup(HERE_DOC);
 }
