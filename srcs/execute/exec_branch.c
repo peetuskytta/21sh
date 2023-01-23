@@ -46,7 +46,12 @@ static void	command_execution(t_shell *shell, t_exec data, char **env_cpy)
 	bin_path = NULL;
 	if (is_builtin(data.cmd) == true)
 	{
-		if (redirection_loop(&data))
+		if (ft_strequ(data.cmd, "env"))
+		{
+			if (builtin_env(shell, data, env_cpy)) // work it so that things are changed for the env to
+				command_execution(shell, data, env_cpy);
+		}
+		else if (redirection_loop(&data))
 		{
 			change_in_and_out(&data);
 			builtin_execute(shell, data, env_cpy);
@@ -78,7 +83,12 @@ void	exec_branch(t_ast *branch, t_shell *shell)
 		pid.wait = waitpid(branch->data.process_pid, &pid.status, 0);
 	env_cpy = copy_environment(shell->environ);
 	if ((branch->type == REDIR || branch->type == COMMAND))
+	{
+		/* They can add the function that starts stripping quotes and expands $ and ~
+		here (all expandables are in data.args).
+		*/
 		command_execution(shell, branch->data, env_cpy);
+	}
 	exec_branch(branch->left, shell);
 	if (branch->type == PIPE)
 		exec_branch(branch->right, shell);

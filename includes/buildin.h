@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   buildin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:25:24 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/23 14:09:49 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/23 15:17:47 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	setenv_update_env(t_shell *shell, char *name, char *value, int i);
 /*
 ** BUILDINS
 */
+bool	builtin_env(t_shell *shell, t_exec data, char **env_cpy);
 void	builtin_setenv(t_shell *shell, t_exec data);
-void	builtin_env(t_shell *shell, t_exec data, char **env_cpy);
 void	builtin_unsetenv(t_shell *shell, t_exec data);
 void	builtin_echo(t_shell *shell, t_exec data);
 void	builtin_execute(t_shell *shell, t_exec data, char **env_cpy);
