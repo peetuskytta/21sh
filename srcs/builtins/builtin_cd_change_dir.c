@@ -36,8 +36,9 @@ void	builtin_cd_change_dir(t_shell *shell, const char *dir_path)
 		builtin_cd_change_dir(shell, ft_strdup(getenv("PWD")));
 	}
 	temp = ft_strdup("OLDPWD");
+	free(temp);
 	int i = ft_is_strenv(temp, shell->environ);
-	setenv_update_env(shell, temp, ft_strdup(getenv("OLDPWD")), i);
+	//setenv_update_env(shell, temp, ft_strdup(getenv("OLDPWD")), i);
 	temp = ft_strdup("PWD");
 	i = ft_is_strenv(temp, shell->environ);
 	setenv_update_env(shell, temp, ft_strdup(dir_path), i);
