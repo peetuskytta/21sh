@@ -84,9 +84,7 @@ void	exec_branch(t_ast *branch, t_shell *shell)
 	env_cpy = copy_environment(shell->environ);
 	if ((branch->type == REDIR || branch->type == COMMAND))
 	{
-		/* They can add the function that starts stripping quotes and expands $ and ~
-		here (all expandables are in data.args).
-		*/
+		input_expand(shell, &branch->data);
 		command_execution(shell, branch->data, env_cpy);
 	}
 	exec_branch(branch->left, shell);
