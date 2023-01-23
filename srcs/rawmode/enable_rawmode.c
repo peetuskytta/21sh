@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 12:59:48 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/22 16:41:59 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/23 19:24:26 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,3 +29,5 @@ int	enable_rawmode(t_shell *shell)
 	shell->raw = orig_raw;
 	return (1);
 }
+/* 
+*/
