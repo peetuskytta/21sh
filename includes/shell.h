@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/23 13:35:50 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/24 08:02:30 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <termcap.h>
 # include <sys/ioctl.h>
 # include <sys/wait.h>
+
 # define NL ft_putchar('\n')
 # define DB ft_putstr("\nYOU ARE HERE\n")
 # define NULL_BYTE '\0'

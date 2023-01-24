@@ -12,6 +12,12 @@
 
 #include "../../includes/execute.h"
 
+static void	*ft_memdel_return(void **delete) // add to libft?
+{
+	ft_memdel((void *)&delete);
+	return (NULL);
+}
+
 static char	*exec_binary_path(char **path, char *cmd)
 {
 	struct stat		buf;
@@ -31,12 +37,14 @@ static char	*exec_binary_path(char **path, char *cmd)
 		cpy++;
 	}
 	ft_arr_free((void *)&path);
+	if (ft_is_directory(temp))
+		return (ft_memdel_return((void *)&temp));
 	return (temp);
 }
 
 char	*exec_find_binary(char **path, char *cmd)
 {
-	if (cmd == NULL)
+	if (cmd == NULL || path == NULL)
 		return (NULL);
 	if (ft_is_directory(cmd))
 	{

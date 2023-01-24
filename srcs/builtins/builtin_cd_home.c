@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ast_release.c                                      :+:      :+:    :+:   */
+/*   builtin_cd_home.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/03 08:00:13 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/24 10:45:37 by pskytta          ###   ########.fr       */
+/*   Created: 2023/01/24 13:39:29 by pskytta           #+#    #+#             */
+/*   Updated: 2023/01/24 13:56:06 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/ast.h"
+#include "../../includes/buildin.h"
 
-/*
-** Recursive cleaning function for tree branches.
-*/
-void	ast_release(t_ast *branch, char **env_cpy)
+void	builtin_cd_home(t_shell *shell, int idx)
 {
-	if (branch == NULL)
-		return ;
-	if (env_cpy != NULL)
-		ft_arr_free((void *)&env_cpy);
-	exec_clear_data(&branch->data);
-	ast_release(branch->left, env_cpy);
-	ast_release(branch->right, env_cpy);
-	if (branch)
+	(void)shell;
+	if (idx == -1)
+		ft_perror(CD_NO_HOME);
+	else
 	{
-		ft_memdel((void *)&branch->left);
-		ft_memdel((void *)&branch->right);
+		//ft_putnbr_endl(idx);
+		
 	}
+
 }

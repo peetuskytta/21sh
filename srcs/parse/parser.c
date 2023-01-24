@@ -62,14 +62,22 @@ t_tok	*parser(t_shell *shell)
 	lenght = ft_strilen(shell->q_input);
 	if (lenght > 0)
 		token_list_build(shell->q_input, lenght, &list);
+	/* They can add the function that starts stripping quotes and expands $ and ~
+		here (all expandables are in the list.token_list).
+		It needs to be done here, otherwise the redirections that have quotes would
+		be parse errors in the function below.
+		first expand
+		then quote strip
+	*/
 	parse_errors(&list.token_list);
 	check_for_heredoc(&list.token_list, shell);
 	return (list.token_list);
 }
 	// HEREDOC is not working with slash directories
 
-	// t_tok	*temp = list.token_list;
-	// token_list_print(temp);
+	// read from our own input array to a file (save a ptr to the
+	// beginning and end, then strsub ot copy to the file)
+
 // 2>&1 ---> redirect STDERR to STDOUT, redirects it to the same location
 // 1>&2 ---> redirect STDOUT to STDERR, redirects it to the same location
 

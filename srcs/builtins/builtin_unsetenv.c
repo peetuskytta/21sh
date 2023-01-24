@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 11:34:37 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/22 11:00:47 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/24 14:30:57 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,4 @@ void	builtin_unsetenv(t_shell *shell, t_exec data)
 	if (unset_errors(data.args[1], index) == -1)
 		return ;
 	ft_arrtrim(shell->environ, index);
-	shell->env_nbr--;
 }
