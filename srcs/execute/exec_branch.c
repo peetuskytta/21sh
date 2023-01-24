@@ -59,7 +59,7 @@ static void	command_execution(t_shell *shell, t_exec data, char **env_cpy)
 		{
 			if (builtin_env(shell, data, env_cpy)) // work it so that things are changed for the env to
 			{
-				if (!ft_streque(data.cmd, "env"))
+				if (!ft_strequ(data.cmd, "env"))
 					real_exec(data, env_cpy);
 			}
 		}

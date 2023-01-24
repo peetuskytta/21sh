@@ -75,6 +75,9 @@ t_tok	*parser(t_shell *shell)
 }
 	// HEREDOC is not working with slash directories
 
+	// read from our own input array to a file (save a ptr to the
+	// beginning and end, then strsub ot copy to the file)
+
 // 2>&1 ---> redirect STDERR to STDOUT, redirects it to the same location
 // 1>&2 ---> redirect STDOUT to STDERR, redirects it to the same location
 

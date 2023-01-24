@@ -43,6 +43,8 @@ _BUILTIN := builtin_execute.c \
 			builtin_unsetenv.c \
 			builtin_setenv.c \
 			builtin_cd.c \
+			builtin_cd_home.c \
+			builtin_cd_access.c \
 			builtin_cd_change_dir.c \
 			is_strenv.c \
 			is_builtin.c \

@@ -23,7 +23,7 @@ static void	dir_change(const char *dir_path)
 		ft_perror(NO_FILE_OR_DIR);
 }
 
-void	builtin_cd_change_dir(t_shell *shell, const char *dir_path)
+void	directory_work(t_shell *shell, const char *dir_path)
 {
 	char *temp;
 	int i = 0;
@@ -48,3 +48,10 @@ void	builtin_cd_change_dir(t_shell *shell, const char *dir_path)
 	i = is_strenv(temp, shell->environ);
 	setenv_update_env(shell, temp, ft_strdup(dir_path), i);
 }
+
+int	builtin_cd_change_dir(t_shell *shell, t_exec *data)
+{
+	if (builtin_cd_access(data) == CD_NORMAL)
+		directory_work(shell, data->args[1]);
+}
+
