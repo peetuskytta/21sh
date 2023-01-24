@@ -23,22 +23,22 @@ static void	dir_change(const char *dir_path)
 		ft_perror(NO_FILE_OR_DIR);
 }
 
-void	directory_work(t_shell *shell, const char *dir_path)
+static void	directory_work(t_shell *shell, t_exec *data)
 {
 	char *temp;
 	int i = 0;
 
 	temp = NULL;
-	if (chdir(dir_path) != 0)
+	if (chdir(data->args[1]) != 0)
 	{
-		dir_change(dir_path);
+		dir_change(data->args[1]);
 		return ;
 	}
 	if (shell->pipe == true) // in pipe we want to change the dir but revert the change back
 	{
 		shell->pipe = false;
 		temp =  ft_strdup(getenv("PWD"));
-		builtin_cd_change_dir(shell, temp);
+		directory_work(shell, data);
 		ft_memdel((void *)&temp);
 	}
 	temp = ft_strdup("OLDPWD");
@@ -46,12 +46,12 @@ void	directory_work(t_shell *shell, const char *dir_path)
 	setenv_update_env(shell, temp, ft_strdup(getenv("OLDPWD")), i);
 	temp = ft_strdup("PWD");
 	i = is_strenv(temp, shell->environ);
-	setenv_update_env(shell, temp, ft_strdup(dir_path), i);
+	setenv_update_env(shell, temp, ft_strdup(data->args[1]), i);
 }
 
 int	builtin_cd_change_dir(t_shell *shell, t_exec *data)
 {
 	if (builtin_cd_access(data) == CD_NORMAL)
-		directory_work(shell, data->args[1]);
+		directory_work(shell, data);
+	return (CD_ERR);
 }
-
