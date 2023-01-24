@@ -34,6 +34,17 @@ static char	**copy_environment(char **environ)
 	return (copy);
 }
 
+static void	real_exec(t_exec data, char **env_cpy)
+{
+	char	*bin_path;
+
+	bin_path = NULL;
+	bin_path = exec_find_binary(exec_fetch_path_var(env_cpy), data.cmd);
+	if (redirection_loop(&data) && exec_binary_check(bin_path, data))
+		exec_cmd(data, bin_path, env_cpy);
+	ft_strdel((void *)&bin_path);
+}
+
 /*
 **	Begins the process of finding the binary, opening redirections, checking
 **	binary file's execution rights before executing the command.
@@ -41,15 +52,15 @@ static char	**copy_environment(char **environ)
 */
 static void	command_execution(t_shell *shell, t_exec data, char **env_cpy)
 {
-	char	*bin_path;
-
-	bin_path = NULL;
+	(void)shell;
 	if (is_builtin(data.cmd) == true)
 	{
 		if (ft_strequ(data.cmd, "env"))
 		{
 			if (builtin_env(shell, data, env_cpy)) // work it so that things are changed for the env to
+			{
 				command_execution(shell, data, env_cpy);
+			}
 		}
 		else if (redirection_loop(&data))
 		{
@@ -59,10 +70,11 @@ static void	command_execution(t_shell *shell, t_exec data, char **env_cpy)
 	}
 	else
 	{
-		bin_path = exec_find_binary(exec_fetch_path_var(env_cpy), data.cmd);
+		real_exec(data, env_cpy);
+/* 		bin_path = exec_find_binary(exec_fetch_path_var(env_cpy), data.cmd);
 		if (redirection_loop(&data) && exec_binary_check(bin_path, data))
 			exec_cmd(data, bin_path, env_cpy);
-		ft_strdel((void *)&bin_path);
+		ft_strdel((void *)&bin_path); */
 	}
 }
 
@@ -83,9 +95,7 @@ void	exec_branch(t_ast *branch, t_shell *shell)
 		pid.wait = waitpid(branch->data.process_pid, &pid.status, 0);
 	env_cpy = copy_environment(shell->environ);
 	if ((branch->type == REDIR || branch->type == COMMAND))
-	{
 		command_execution(shell, branch->data, env_cpy);
-	}
 	exec_branch(branch->left, shell);
 	if (branch->type == PIPE)
 		exec_branch(branch->right, shell);

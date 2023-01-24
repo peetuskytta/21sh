@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 10:20:57 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/24 00:54:53 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/24 12:07:52 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ static bool is_command(t_exec *data, int count, int i)
 		if (!ft_strchr(data->args[i], '='))
 		{
 			if (ft_strequ("env", data->args[0]))
-				{}; //swap_char_ptr(&data->args[0], &data->args[i]);
+				swap_char_ptr(&data->args[0], &data->args[i]);
 		}
 		i++;
 	}
-	if (i > count)
+	if (i > count + 10)
 	{
 		ft_perror("shell: too many variables\n");
 		return (false);
@@ -56,55 +56,24 @@ static bool is_command(t_exec *data, int count, int i)
 
 } */
 
-static char	**copy_environment(char **environ)
-{
-	char	**copy;
-	int		i;
 
-	i = env_variable_counter(environ);
-	copy = (char **)ft_memalloc(sizeof(char *) * (i + 2));
-	ft_memset(copy, 0, (i + 2));
-	i = 0;
-	while (environ[i])
-	{
-		copy[i] = ft_strdup(environ[i]);
-		i++;
-	}
-	copy[i] = NULL;
-	return (copy);
-}
-
-static void	env_args_renew(char **old_arg, char **old_env, int i)
+static void	env_args_renew(t_exec *data, char **old_env, int i)
 {
-	char	*new_arg[MAX_REDIR];
 	int		count;
-	int		start;
 
 	count = 0;
-	start = 0;
 	while (old_env[count])
-		ft_strdel(&old_env[count++]);
+		ft_memdel((void *)&old_env[count++]);
 	count = 0;
-	ft_memset(&new_arg, 0, sizeof(char *) * MAX_REDIR);
-	while (old_arg[i])
+	while (data->args[i] != NULL)
 	{
-		if (!ft_strchr(old_arg[i], '='))
-			new_arg[start++] = ft_strdup(old_arg[i]);
-		if (ft_strchr(old_arg[i], '='))
+		if (ft_strchr(data->args[i], '='))
 		{
-			old_env[count] = ft_strdup(old_arg[i]);
+			old_env[count] = ft_strdup(data->args[i]);
 			count++;
 		}
-		//ft_strdel(&old_arg[i]);
 		i++;
 	}
-/*  	i = 0;
-	while (new_arg[i])
-		ft_putendl(new_arg[i++]); */
-	i = 0;
-	//while(old_arg[i])
-	//	ft_strdel(&old_arg[i++]);
-	old_arg = ft_arrdup(copy_environment(new_arg));
 }
 
 static bool	env_temp_empty(t_shell *shell, t_exec *data, char **env_cpy)
@@ -114,15 +83,18 @@ static bool	env_temp_empty(t_shell *shell, t_exec *data, char **env_cpy)
 		return (false);
 	if (is_command(data, env_variable_counter(env_cpy), 2))
 	{
-		env_args_renew(data->args, env_cpy, 2);
-		DB;
+		env_args_renew(data, env_cpy, 2);
+		ft_strclr(data->cmd);
+		data->cmd = ft_memcpy((void *)data->cmd, (void *)data->args[0], sizeof(char *));
+		ft_putendl(data->cmd);
+/* 		DB;
 		int i = 0;
 		while (data->args[i])
 			ft_putendl(data->args[i++]);
 		DB;
 		i = 0;
 		while (env_cpy[i])
-			ft_putendl(env_cpy[i++]);
+			ft_putendl(env_cpy[i++]); */
 /* 		i = env_variable_counter(env_cpy);
 		i = is_strenv("PWD", shell->environ);
 		if (i != -1)
@@ -133,8 +105,8 @@ static bool	env_temp_empty(t_shell *shell, t_exec *data, char **env_cpy)
 		i = is_strenv("_", shell->environ);
 		if (i != -1)
 			env_cpy[2] = ft_strdup(shell->environ[i]); */
-		return (false);
-		//return (true);
+		//return (false);
+		return (true);
 	}
 	else
 		return (false);

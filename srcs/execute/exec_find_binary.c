@@ -44,7 +44,7 @@ static char	*exec_binary_path(char **path, char *cmd)
 
 char	*exec_find_binary(char **path, char *cmd)
 {
-	if (cmd == NULL)
+	if (cmd == NULL || path == NULL)
 		return (NULL);
 	if (ft_is_directory(cmd))
 	{
