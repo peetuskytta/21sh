@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 19:36:30 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/24 09:02:44 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/24 15:21:16 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,24 @@ void	redir_heredoc(t_shell *shell, t_tok *token)
 
 	shell->fd = open(HERE_DOC, O_RDWR | O_CREAT | O_APPEND, 0664);
 	shell->cmd_idx = 0;
+	shell->end = 0;
 	ft_memset(shell->input, '\0', sizeof(char) * (MAX_BUFF + 1));
-	shell->delim = ft_strdup(token->str);
+	shell->delim = ft_strdup(token->next->str);
 	ft_putstr_fd("\n> ", STDOUT_FILENO);
-	// signal_listen();
-	// signal_runtime();
-	while (1)
+	while (TRUE)
+	{
 		read_key(shell, input, 1);
-	ft_strdel(&token->str);
-	ft_strdel(&shell->delim);
-	token->str = ft_strdup(HERE_DOC);
+		if (shell->end == 1)
+		{
+			//trim the delimiter
+			ft_strdel(&token->str);
+			token->str = ft_strdup("<");
+			ft_strdel(&token->next->str);
+			ft_strdel(&shell->delim);
+			token->next->str = ft_strdup(HERE_DOC);
+			break ;
+		}
+	}
+	if (close(shell->fd) < 0)
+		ft_perror(FILE_CLOSE_ERR);
 }

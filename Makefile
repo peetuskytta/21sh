@@ -45,12 +45,12 @@ _BUILTIN := builtin_execute.c \
 			builtin_cd.c \
 			builtin_cd_home.c \
 			builtin_cd_access.c \
+			builtin_cd_change_dir.c \
 			is_strenv.c \
 			is_builtin.c \
 			setenv_update_env.c \
 			builtin_env.c
 
-	# builtin_cd_change_dir.c
 _SRCS :=  main.c \
 		allocation_check.c \
 		env_variable_counter.c \

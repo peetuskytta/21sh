@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:45:33 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/23 19:10:22 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/24 15:39:50 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,3 +86,11 @@ void	input_expand(t_shell *shell, t_exec *data)
 		i++;
 	}
 }
+/*
+** this will be list function instead. it needs the temp to point to head!!!!
+** otherwise take the *str in the list and do the same thing
+** while (next != NULL)
+** ft_perror(parse error)
+** clean list with first item of list
+** head = null (if clean doesn't handle it)
+*/

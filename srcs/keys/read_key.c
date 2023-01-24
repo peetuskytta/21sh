@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 16:57:43 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/24 09:03:20 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/24 15:08:50 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ static void	read_heredoc(t_shell *shell, char *input)
 		{
 			if (ft_strilen(shell->input) > 0)
 				ft_putstr_fd(shell->input, shell->fd);
-			if (close(shell->fd) < 0)
-				ft_perror(FILE_CLOSE_ERR);
+			shell->end = 1;
 		}
 	}
 }
