@@ -63,11 +63,11 @@ t_tok	*parser(t_shell *shell)
 		token_list_build(shell->q_input, lenght, &list);
 	/* They can add the function that starts stripping quotes and expands $ and ~
 		here (all expandables are in the list.token_list).
-		It needs to be done here, otherwise the redirections that have quotes would
-		be parse errors in the function below.
+		It needs to be done here, otherwise the redirections that have quotes would be parse errors in the function below.
 		first expand
 		then quote strip
 	*/
+	input_expand(shell, &list.token_list);
 	parse_errors(&list.token_list);
 	check_for_heredoc(&list.token_list, shell);
 	return (list.token_list);
