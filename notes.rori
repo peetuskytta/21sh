@@ -38,7 +38,7 @@ _________DONE DONE_________
 |			|	3. SIGNAL								|
 |			|	signal needs to handle curr_row as well	|
 |			|	perhaps simply calling recheck widnow	|
-|-------------------------------------------------------|
+|-------------------------------------------------------|s
 |			|	4. ADDITIONAL:							|
 |			|	history file not found on first run err	|
 |			|	all FD addresses to correct places		|
