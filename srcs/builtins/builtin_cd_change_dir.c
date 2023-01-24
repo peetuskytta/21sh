@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd_change_dir.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 14:39:37 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/24 14:39:58 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/24 16:30:23 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-static void	dir_change(const char *dir_path)
+static void	directory_change(const char *dir_path)
 {
 	if (access(dir_path, F_OK) == 0)
 	{
@@ -31,13 +31,13 @@ static void	directory_work(t_shell *shell, t_exec *data)
 	temp = NULL;
 	if (chdir(data->args[1]) != 0)
 	{
-		dir_change(data->args[1]);
+		directory_change(data->args[1]);
 		return ;
 	}
 	if (shell->pipe == true) // in pipe we want to change the dir but revert the change back
 	{
 		shell->pipe = false;
-		temp =  ft_strdup(getenv("PWD"));
+		temp = ft_strdup(shell->environ[is_strenv("PWD", shell->environ)]);
 		directory_work(shell, data);
 		ft_memdel((void *)&temp);
 	}
@@ -51,7 +51,7 @@ static void	directory_work(t_shell *shell, t_exec *data)
 
 int	builtin_cd_change_dir(t_shell *shell, t_exec *data)
 {
-	if (builtin_cd_access(data) == CD_NORMAL)
+	if (builtin_cd_access(data, CD_NORMAL) == CD_NORMAL)
 		directory_work(shell, data);
 	return (CD_ERR);
 }
