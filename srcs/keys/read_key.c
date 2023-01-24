@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 16:57:43 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/23 19:16:26 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/24 09:03:20 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 
 static void	read_heredoc(t_shell *shell, char *input)
 {
-	int	fd;
-
-	fd = open(HERE_DOC, O_RDWR | O_CREAT | O_APPEND, 0664);
-	if (fd > 0)
+	if (shell->fd > 0)
 	{
-		if (heredoc_listen(shell, input, fd) == -1)
+		if (heredoc_listen(shell, input) == -1)
 		{
-			if (close(fd) < 0)
+			if (ft_strilen(shell->input) > 0)
+				ft_putstr_fd(shell->input, shell->fd);
+			if (close(shell->fd) < 0)
 				ft_perror(FILE_CLOSE_ERR);
 		}
 	}

@@ -1,16 +1,15 @@
-
 REASONABLY DONE:
-- SIGNAL - together but rori starts 78%
+- SIGNAL - together but rori starts 95%
 - AGREGATE - peetu 70%
 - ERRORS - together 99%
-- BUILTINS - together 92% >> "\nexit\n" for exit builtin sent to kill_mode
+- BUILTINS - together 97% >> "\n" for exit builtin sent to kill_mode
 	- cd: peetu
 	- env: rori
 	- echo, setenv, unsetenv: donedone
-- EXPANSIONS - peetu 2%
 - QUOTES - together but peetu is a hero 98%
 
 DONE DONE:
+- EXPANSIONS - rori
 - PIPES & REDIRECT - peetu
 - CURSOR - rori _fuck_multiline_
 - HISTORY - together

@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 19:36:30 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/23 19:31:01 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/24 09:02:44 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,21 @@
 void	redir_heredoc(t_shell *shell, t_tok *token)
 {
 	char	input[MAX_BUFF + 1];
-/*store the delimiter, heredoc listen needs to parse for it
-so perhaps need to save to a string?*/
 
+/*store the delimiter, heredoc listen needs to parse for it
+**so perhaps need to save to a string?
+** REDIR might be closing things before heredoc is finished
+*/
+
+	shell->fd = open(HERE_DOC, O_RDWR | O_CREAT | O_APPEND, 0664);
 	shell->cmd_idx = 0;
+	ft_memset(shell->input, '\0', sizeof(char) * (MAX_BUFF + 1));
 	shell->delim = ft_strdup(token->str);
 	ft_putstr_fd("\n> ", STDOUT_FILENO);
-	read_key(shell, input, 1);
+	// signal_listen();
+	// signal_runtime();
+	while (1)
+		read_key(shell, input, 1);
 	ft_strdel(&token->str);
 	ft_strdel(&shell->delim);
 	token->str = ft_strdup(HERE_DOC);
