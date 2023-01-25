@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 13:33:06 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/25 23:16:08 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/25 23:34:28 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ static bool	redir_error_checks(char *str, t_tok *next)
 		|| ft_strequ("<<", str) || ft_strequ("1>", str)
 		|| ft_strequ("1>>", str) || ft_strequ("2>", str)
 		|| ft_strequ("2>>", str) || ft_strequ("2>>1", str)
-		|| ft_strequ("1>>2", str))
+		|| ft_strequ("1>>2", str) || ft_strequ("1>2", str)
+		|| ft_strequ("2>1", str))
 		;
 	else
 	{
@@ -50,8 +51,10 @@ static bool	redir_error_checks(char *str, t_tok *next)
 	return (false);
 }
 
-static bool aggr_checks(char *str)
+static bool aggr_checks(char *str, t_tok *next)
 {
+	if (next == NULL)
+		return (true);
 	if (ft_strequ(">&", str) || ft_strequ(">&-", str)
 	|| ft_strequ("1>&-", str) || ft_strequ("2>&-", str)
 	|| ft_strequ("1>&2", str) || ft_strequ("2>&1", str))
@@ -72,7 +75,7 @@ static bool	redir_check(t_tok *temp)
 		{
 			if (ft_strchr(temp->str, '&') || ft_strchr(temp->str, '-'))
 			{
-				if (aggr_checks(temp->str))
+				if (aggr_checks(temp->str, temp->next))
 					return (true);
 			}
 			else
