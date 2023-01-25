@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history_create.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 15:09:56 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/19 14:28:45 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/25 14:56:59 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	history_create(char **history)
 		exit(EXIT_FAILURE);
 	}
 	i = 0;
-	while (history[i] != NULL)
+	while (history[i] != NULL && i < 1000)
 		ft_putendl_fd(history[i++], fd);
 	if (close(fd) < 0)
 		ft_perror(FILE_CLOSE_ERR);
