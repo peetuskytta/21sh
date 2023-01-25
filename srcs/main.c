@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/25 13:55:28 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/25 14:59:57 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	run_shell(t_shell *shell)
 		{
 			if (shell->quote == EOF)
 			{
-				NL;
+				ft_putchar_fd('\n', STDOUT_FILENO);
 				history_runtime(shell);
 				tree = ast_constructor(shell, parser(shell));
 				if (tree)

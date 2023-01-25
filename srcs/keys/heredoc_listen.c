@@ -6,17 +6,56 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 10:50:05 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/24 15:21:57 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/25 14:43:55 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
+
+// static void	stupid_thingie(char *inputti)
+// {
+// 	int	len;
+
+// 	len = ft_strilen(inputti);
+// 	while (len >)
+// }
+
+static int	ft_strstr_rev(const char *haystack, const char *needle)
+{
+	int	j;
+	int	k;
+
+	j = ft_strilen(haystack) - 1;
+	if (j == 0)
+		return (-1);
+	while (j >= 0)
+	{
+		k = ft_strilen(needle) - 1;
+		while (k >= 0)
+		{
+			if (haystack[j] == needle[k])
+				return (j);
+			else
+				k--;
+		}
+		j--;
+	}
+	return (-1);
+}
+
 static int	is_delim(t_shell *shell)
 {
-	if (ft_strstr_start(shell->input, shell->delim) != 0)
+	int		i;
+	char	*temp;
+
+	i = ft_strstr_rev(shell->input, shell->delim);
+	if (i != -1 && shell->input[ft_strilen(shell->delim) - 1] == '\n')
 	{
-		// trim the delimiter from input before writing it to fd
+		temp = ft_strsub(shell->input, 0, ft_strlen(shell->input) - i + 1);
+		ft_memset(shell->input, '\0', sizeof(char) * (MAX_BUFF + 1));
+		shell->input = ft_strcpy(shell->input, temp);
+		ft_memdel((void *)&temp);
 		return (1);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 13:01:21 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/16 13:28:11 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/25 13:40:09 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ size_t				ft_wdcounter(char const *str, char c);
 int					dig_count_base(long long int nb,
 						long int base);
 int					ft_count_digit(long int nb);
-size_t				ft_strstr_start(const char *haystack, const char *needle);
+ssize_t				ft_strstr_start(const char *haystack, const char *needle);
 int					ft_strchr_index(char *str, char c, char start);
 void				ft_swap(int *a, int *b);
 int					ft_count_chrstr(char *str, char c);
