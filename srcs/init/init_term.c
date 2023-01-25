@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_term.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 14:35:28 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/19 14:29:21 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/25 13:38:07 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	init_term(void)
 	int		status;
 
 	term = getenv("TERM");
-	if (term  == NULL)
+	if (term == NULL)
 	{
 		ft_print_fd(STDERR_FILENO, "could not get the TERM env\n");
 		exit(EXIT_FAILURE);

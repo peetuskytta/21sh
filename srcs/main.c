@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/24 14:41:12 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/25 13:54:54 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,11 @@ static void	run_shell(t_shell *shell)
 		{
 			if (shell->quote == EOF)
 			{
+				NL;
 				history_runtime(shell);
 				tree = ast_constructor(shell, parser(shell));
 				if (tree)
-				{
-					NL;
 					exec_tree(tree, shell);
-				}
 			}
 			cmd_line_reset(shell, &shell->window);
 			cursor_find(shell, &shell->window);
