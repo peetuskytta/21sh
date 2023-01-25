@@ -43,9 +43,7 @@ static void	setup_pipes(t_ast *temp, t_pipe *pipes, int idx)
 	}
 	setup_pipes(temp->left, pipes, idx++);
 	if (temp->type == PIPE)
-	{
 		setup_pipes(temp->right, pipes, idx++);
-	}
 }
 
 /*
@@ -80,20 +78,19 @@ static void	piping(t_ast *branch, bool *pipe)
 	temp = branch->right;
 	if (temp == NULL)
 		return ;
-	//(void)pipe;
 	*pipe = true;
 	init_pipes(temp, branch->pipes);
 	temp = branch;
 	setup_pipes(temp, branch->pipes, 0);
-	int idx = 0;
+}
+/* 	int idx = 0;
 	while (branch->pipes[idx].fd[0] != -1 || branch->pipes[idx].fd[1] != -1)
 	{
 		ft_printf("pipes[%d]\n", idx);
-		ft_printf("  READ:[%d],", branch->pipes[idx].fd[0]);
-		ft_printf(" WRITE:[%d]\n", branch->pipes[idx].fd[1]);
+		ft_printf("  READ:[%d],", branch->pipes[idx].fd[PIPE_READ]);
+		ft_printf(" WRITE:[%d]\n", branch->pipes[idx].fd[PIPE_WRITE]);
 		idx++;
-	}
-}
+	} */
 
 /*
 **	Begin execution of a tree or multiple trees. Tree consists of one
@@ -110,7 +107,6 @@ void	exec_tree(t_ast **tree, t_shell *shell)
 	ft_memset(buf, 0, MAX_BUFF);
 	while (tree[idx])
 	{
-		//NL;
 		piping(tree[idx], &shell->pipe);
 		exec_branch(tree[idx], shell);
 		ft_memdel((void *)&tree[idx]);

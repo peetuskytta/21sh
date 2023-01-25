@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 13:33:06 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/23 12:33:29 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/25 23:16:08 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,31 @@
 
 static bool	redir_validation(char *str, t_tok *next, int i)
 {
-	while (str[i])
+	(void)i;
+	(void)str;
+	if (next == NULL)
 	{
-		if (str[i] == '<' || str[i] == '>')
+		ft_perror("syntax error near unexpected token `newline'\n");
+		return (true);
+	}
+	else
+	{
+		if (ft_atoi(next->str))
 		{
-			if (next == NULL)
-			{
-				ft_perror("\nsyntax error near unexpected token `newline'\n");
-				return (true);
-			}
-			return (false);
-		}
-		if (!ft_isdigit(str[i]))
-		{
-			ft_print_fd(2, "\n21sh parse error near `%c%c'\n", str[i],
-				str[i + 1]);
+			ft_perror("not a valid file descriptor\n");
 			return (true);
 		}
-		i++;
 	}
 	return (false);
 }
 
-// >& = redirect 1 and 2 to a file or
-
 static bool	redir_error_checks(char *str, t_tok *next)
 {
 	if (ft_strequ(">", str) || ft_strequ(">>", str) || ft_strequ("<", str) \
-		|| ft_strequ("<<", str))
-		;
-	else if (ft_isalnum(str[0]))
+		|| ft_strequ("<<", str) || ft_strequ("1>", str)
+		|| ft_strequ("1>>", str) || ft_strequ("2>", str)
+		|| ft_strequ("2>>", str) || ft_strequ("2>>1", str)
+		|| ft_strequ("1>>2", str))
 		;
 	else
 	{
@@ -55,6 +50,20 @@ static bool	redir_error_checks(char *str, t_tok *next)
 	return (false);
 }
 
+static bool aggr_checks(char *str)
+{
+	if (ft_strequ(">&", str) || ft_strequ(">&-", str)
+	|| ft_strequ("1>&-", str) || ft_strequ("2>&-", str)
+	|| ft_strequ("1>&2", str) || ft_strequ("2>&1", str))
+		;
+	else
+	{
+		ft_print_fd(2, "\n21sh parse error near `%s'\n", str);
+		return (true);
+	}
+	return (false);
+}
+
 static bool	redir_check(t_tok *temp)
 {
 	while (temp)
@@ -62,7 +71,10 @@ static bool	redir_check(t_tok *temp)
 		if (temp->type == REDIR)
 		{
 			if (ft_strchr(temp->str, '&') || ft_strchr(temp->str, '-'))
-				ft_perror("AGGR check here");
+			{
+				if (aggr_checks(temp->str))
+					return (true);
+			}
 			else
 			{
 				if (redir_error_checks(temp->str, temp->next))

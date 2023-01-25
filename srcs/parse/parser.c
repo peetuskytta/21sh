@@ -67,6 +67,7 @@ t_tok	*parser(t_shell *shell)
 		first expand
 		then quote strip
 	*/
+	token_list_print(list.token_list);
 	input_expand(shell, &list.token_list);
 	parse_errors(&list.token_list);
 	check_for_heredoc(&list.token_list, shell);
