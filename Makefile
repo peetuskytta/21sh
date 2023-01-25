@@ -107,8 +107,7 @@ _KEYS := key_listen.c \
 _OUTPUT := stdin_char.c \
 		cmd_line_prompt.c
 
-_PANIC := ft_strerror.c \
-		ft_perror.c \
+_PANIC := ft_perror.c \
 		ft_error_nl.c \
 		ft_abort.c
 

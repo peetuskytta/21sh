@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:24:46 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/22 10:52:39 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/25 17:03:25 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@
 # define PIPE_ERR "shell: pipe error"
 # define BAD_FD "shell: Bad file descriptor:"
 # define SYNTAX_ERR "shell: syntax error near unexpected token"
+# define PARSE_ERR "shell: parse error near "
 
 /*Error messages for file descriptors*/
 # define FILE_CLOSE_ERR "shell: error when closing a file"

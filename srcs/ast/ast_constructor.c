@@ -34,12 +34,12 @@ static int	ast_sniff_for_type(t_tok *token)
 
 	tmp = token;
 	if (!tmp)
-		return(COMMAND);
+		return (COMMAND);
 	while (tmp->type != CHAR_SEMICOLON || tmp->type != PIPE)
 	{
 		tmp = tmp->next;
 		if (!tmp)
-			return(COMMAND);
+			return (COMMAND);
 		else if (tmp->type == REDIR)
 			return (REDIR);
 	}
@@ -103,7 +103,7 @@ static t_ast	*ast_create_tree(t_tok **token)
 	return (branch);
 }
 
-//DELETE BEFORE SUBMIT
+/*DELETE BEFORE SUBMIT
 void	print_tree(t_ast **tree)
 {
 	t_ast **tmp;
@@ -119,7 +119,7 @@ void	print_tree(t_ast **tree)
 		if (!tmp[i])
 			ft_putendl("Root of the tree reached");
 	}
-}
+}*/
 
 t_ast	**ast_constructor(t_shell *shell, t_tok *token)
 {
@@ -140,7 +140,6 @@ t_ast	**ast_constructor(t_shell *shell, t_tok *token)
 		if (token && token->type == CHAR_SEMICOLON)
 			token = token->next;
 	}
-	//print_tree(tree);
 	token_list_free(temp);
 	return (tree);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_execute.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:30:59 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/25 09:13:20 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/25 16:45:36 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ void	builtin_execute(t_shell *shell, t_exec data, char **env_cpy)
 	}
 	else if (ft_strequ("cd", data.cmd))
 		return (builtin_cd(shell, data));
-	// else if (ft_strequ("exit", data.cmd))
-	// 	return ();
 	else
 		return ((void) -1);
 }

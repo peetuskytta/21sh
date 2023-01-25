@@ -80,7 +80,6 @@ static void	piping(t_ast *branch, bool *pipe)
 	temp = branch->right;
 	if (temp == NULL)
 		return ;
-	//(void)pipe;
 	*pipe = true;
 	init_pipes(temp, branch->pipes);
 	temp = branch;
@@ -103,14 +102,13 @@ static void	piping(t_ast *branch, bool *pipe)
 */
 void	exec_tree(t_ast **tree, t_shell *shell)
 {
-	int	idx;
+	int		idx;
 	char	buf[MAX_BUFF];
 
 	idx = 0;
 	ft_memset(buf, 0, MAX_BUFF);
 	while (tree[idx])
 	{
-		//NL;
 		piping(tree[idx], &shell->pipe);
 		exec_branch(tree[idx], shell);
 		ft_memdel((void *)&tree[idx]);

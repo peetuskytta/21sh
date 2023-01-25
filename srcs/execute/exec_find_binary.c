@@ -12,7 +12,7 @@
 
 #include "../../includes/execute.h"
 
-static void	*ft_memdel_return(void **delete) // add to libft?
+static void	*ft_memdel_return(void **delete)
 {
 	ft_memdel((void *)&delete);
 	return (NULL);

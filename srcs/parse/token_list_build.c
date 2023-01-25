@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_list_build.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 23:15:32 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/19 14:37:08 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/25 17:03:48 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,8 @@ void	token_list_build(char *input, int size, t_lex *list)
 				change_state(token, &state, &k, c);
 			else if (ch_type == CHAR_WHITESPACE)
 			{
-				if (k > 0 && input[i + 1] != CHAR_WHITESPACE && input[i + 1] != CHAR_TAB)
+				if (k > 0 && input[i + 1] != CHAR_WHITESPACE
+					&& input[i + 1] != CHAR_TAB)
 				{
 					token->str[k] = NULL_BYTE;
 					if (input[i + 1] == NULL_BYTE)
@@ -109,9 +110,13 @@ void	token_list_build(char *input, int size, t_lex *list)
 			}
 			else if (ch_type == CHAR_SEMICOLON || ch_type == CHAR_PIPE)
 			{
-				if (((input[i] == CHAR_SEMICOLON && input[i + 1] == CHAR_SEMICOLON) || (input[i] == CHAR_PIPE && input[i + 1] == CHAR_PIPE)) || i == 0)
+				if (((input[i] == CHAR_SEMICOLON
+							&& input[i + 1] == CHAR_SEMICOLON)
+						|| (input[i] == CHAR_PIPE && input[i + 1] == CHAR_PIPE))
+					|| i == 0)
 				{
-					ft_print_fd(2, "\n21sh parse error near `%c%c'\n",input[i], input[i + 1]);
+					ft_perror(PARSE_ERR);
+					ft_print_fd(STDERR_FILENO, "'%c%c'\n", input[i], input[i + 1]);
 					token_list_free(list->token_list);
 					list->token_list = NULL;
 					return ;

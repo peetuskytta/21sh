@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_errors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 13:33:06 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/23 12:33:29 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/25 17:02:21 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static bool	redir_validation(char *str, t_tok *next, int i)
 		}
 		if (!ft_isdigit(str[i]))
 		{
-			ft_print_fd(2, "\n21sh parse error near `%c%c'\n", str[i],
-				str[i + 1]);
+			ft_perror(PARSE_ERR);
+			ft_print_fd(STDERR_FILENO, "`%c%c'\n", str[i], str[i + 1]);
 			return (true);
 		}
 		i++;
@@ -47,7 +47,8 @@ static bool	redir_error_checks(char *str, t_tok *next)
 		;
 	else
 	{
-		ft_print_fd(2, "\n21sh parse error near `%s'\n", str);
+		ft_perror(PARSE_ERR);
+		ft_print_fd(STDERR_FILENO, "%s'\n", str);
 		return (true);
 	}
 	if (redir_validation(str, next, 0))
@@ -81,12 +82,14 @@ static bool	separator_check(t_tok *temp)
 	{
 		if (temp->type == ';' || temp->type == '|')
 		{
-			if (temp->type == ';' && (temp->next->type == '|' || temp->next->type == ';'))
+			if (temp->type == ';' && (temp->next->type == '|'
+					|| temp->next->type == ';'))
 			{
 				ft_perror("\n21sh syntax error near unexpected token: ';'\n");
 				return (true);
 			}
-			if (temp->type == '|' && (temp->next->type == '|' || temp->next->type == ';'))
+			if (temp->type == '|' && (temp->next->type == '|'
+					|| temp->next->type == ';'))
 			{
 				ft_perror("\n21sh syntax error near unexpected token: '|'\n");
 				return (true);

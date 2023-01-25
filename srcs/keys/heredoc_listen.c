@@ -6,20 +6,11 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 10:50:05 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/25 14:43:55 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/25 16:50:01 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
-
-
-// static void	stupid_thingie(char *inputti)
-// {
-// 	int	len;
-
-// 	len = ft_strilen(inputti);
-// 	while (len >)
-// }
 
 static int	ft_strstr_rev(const char *haystack, const char *needle)
 {

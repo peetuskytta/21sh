@@ -59,11 +59,11 @@ static void	command_execution(t_shell *shell, t_exec data, char **env_cpy)
 			change_in_and_out(&data);
 			if (ft_strequ(data.cmd, "env"))
 			{
-				if (builtin_env(shell, data, env_cpy)) // work it so that things are changed for the env to
+				if (builtin_env(shell, data, env_cpy)) //  work it so that things are changed for the env to
 				{
 					return ;
-			//		if (!ft_strequ(data.cmd, "env"))
-			//			real_exec(data, env_cpy);
+			// ** 		if (!ft_strequ(data.cmd, "env"))
+			// ** 			real_exec(data, env_cpy);
 				}
 			}
 			else
@@ -97,7 +97,8 @@ void	exec_branch(t_ast *branch, t_shell *shell)
 		exec_branch(branch->right, shell);
 	ast_release(branch, env_cpy);
 }
-
-//ls -l | grep file | awk '{print $1, $9}'
-//ls -l | grep file | grep Makefile | wc -l
-//ls -l | grep file | grep Makefile | wc -l
+/*
+** ls -l | grep file | awk '{print $1, $9}'
+** ls -l | grep file | grep Makefile | wc -l
+** ls -l | grep file | grep Makefile | wc -l
+*/

@@ -1,13 +1,15 @@
 _________REASONABLY DONE_________
 - AGREGATE - peetu 70%
-- ERRORS - together 99%
 - BUILTINS - together 97% >> "\n" for exit builtin sent to kill_mode
 	- cd: peetu
+		- HOME and -
 	- env: rori
+		- env ls, e.g env comamnd or executable
 	- echo, setenv, unsetenv: donedone
-- STRIP QUOTES - rori
 
 _________DONE DONE_________
+- ERRORS - together 
+- STRIP QUOTES - rori
 - SIGNAL - rori 
 - QUOTES - together but peetu is a hero
 - HEREDOC - peetu and rori save the day
@@ -32,11 +34,12 @@ _________DONE DONE_________
 |			|	21sh: jsdsjdjd: command not found$		|
 |-------------------------------------------------------|
 |			|	2. CURSOR!								|
-|			|	history is the one breaking loc			|
-|			|	again. reset different if line is empty	|
+|			|	cursor getting F-ed if 1st line is ERR	|
 |-------------------------------------------------------|
 |			|	3. ADDITIONAL:							|
 |			|	history file not found on first run err	|
 |			|	all FD addresses to correct places		|
 |			|	all comments and norm err				|
+|			|	when builtin first in pipe > stuck		|
+|			|	Error with tcgetattr is in middle		|
 |-------------------------------------------------------|

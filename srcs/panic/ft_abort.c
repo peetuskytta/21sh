@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 11:59:10 by zraunio           #+#    #+#             */
-/*   Updated: 2022/12/30 16:26:56 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/25 16:50:50 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@
 
 void	ft_abort(void)
 {
-	ft_perror(ft_strerror(ABORT_ERRNO));
+	ft_perror(ABORTED_ERROR);
 	exit(EXIT_FAILURE);
 }

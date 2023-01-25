@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_consume_tokens.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:05:15 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/13 13:51:34 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/25 16:43:27 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,10 @@ static void	ast_add_redir(t_tok ***token, t_redir *redir, int *idx)
 	else
 		ft_perror("too many redirections...");
 	(**token) = (**token)->next;
+}
 
 	// Needs a way to detect the type of redirection and
 	// separate the filename from the redirection
-}
-
 /*
 ** Consumes the tokens to arguments and redirections
 */

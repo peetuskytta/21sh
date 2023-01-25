@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:40:28 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/23 13:37:34 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/25 16:47:48 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void	exec_cmd(t_exec data, char *bin_path, char **env_cpy)
 		exit(EXIT_SUCCESS);
 	}
 	else if (data.pid.child < 0)
-		ft_perror(FORK_FAIL);
+		ft_perror (FORK_FAIL);
 	else	// in the PARENT process
 	{
 		if (data.fds.pipe != PIPE_FIRST)
