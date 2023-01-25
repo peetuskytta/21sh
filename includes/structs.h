@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/24 08:39:00 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/25 16:41:18 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_shell
 	char			*rev_cmd;
 	char			*temp;
 	char			*clipbrd;
+	char			*cwd;
 	int				cmd_idx;
 	int				prmpt_len;
 	int				end;

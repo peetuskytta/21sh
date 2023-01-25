@@ -60,11 +60,7 @@ static void	command_execution(t_shell *shell, t_exec data, char **env_cpy)
 			if (ft_strequ(data.cmd, "env"))
 			{
 				if (builtin_env(shell, data, env_cpy)) // work it so that things are changed for the env to
-				{
-					return ;
-			//		if (!ft_strequ(data.cmd, "env"))
-			//			real_exec(data, env_cpy);
-				}
+					{} ;
 			}
 			else
 				builtin_execute(shell, data, env_cpy);
@@ -88,7 +84,10 @@ void	exec_branch(t_ast *branch, t_shell *shell)
 	if (branch == NULL)
 		return ;
 	if (branch->data.fds.pipe == PIPE_LAST)
-		pid.wait = waitpid(branch->data.process_pid, &pid.status, 0);
+	{
+		if (is_builtin(branch->data.cmd) == false)
+			pid.wait = waitpid(branch->data.process_pid, &pid.status, 0);
+	}
 	env_cpy = copy_environment(shell->environ);
 	if ((branch->type == REDIR || branch->type == COMMAND))
 		command_execution(shell, branch->data, env_cpy);

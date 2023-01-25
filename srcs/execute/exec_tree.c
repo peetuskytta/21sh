@@ -85,15 +85,15 @@ static void	piping(t_ast *branch, bool *pipe)
 	init_pipes(temp, branch->pipes);
 	temp = branch;
 	setup_pipes(temp, branch->pipes, 0);
-}
-/*	int idx = 0;
+	int idx = 0;
 	while (branch->pipes[idx].fd[0] != -1 || branch->pipes[idx].fd[1] != -1)
 	{
 		ft_printf("pipes[%d]\n", idx);
 		ft_printf("  READ:[%d],", branch->pipes[idx].fd[0]);
 		ft_printf(" WRITE:[%d]\n", branch->pipes[idx].fd[1]);
 		idx++;
-	}*/
+	}
+}
 
 /*
 **	Begin execution of a tree or multiple trees. Tree consists of one

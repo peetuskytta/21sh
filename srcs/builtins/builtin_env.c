@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 10:20:57 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/25 11:21:17 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/25 17:53:02 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ bool	builtin_env(t_shell *shell, t_exec data, char **env_cpy)
 {
 	int	flg;
 
+	ft_putnbr_endl(data.fds.fd_out);
 	flg = env_flag(data.args);
 	(void)shell;
 	if (flg == true)
@@ -168,6 +169,8 @@ bool	builtin_env(t_shell *shell, t_exec data, char **env_cpy)
 		return (false);
 	}
 	else
+	{
 		return (env_output(env_cpy));
+	}
 	return (false);
 }

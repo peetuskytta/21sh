@@ -12,7 +12,7 @@
 
 #include "../../includes/parse.h"
 
-/*DELETE BEFORE SUBMIT
+/*DELETE BEFORE SUBMIT*/
 void	token_list_print(t_tok *token)
 {
 	t_tok	*temp;
@@ -31,7 +31,7 @@ void	token_list_print(t_tok *token)
 	}
 	if (temp == NULL)
 		ft_printf("\ntoken[%d] (NULL)\n", i);
-}*/
+}
 
 static void	check_for_heredoc(t_tok **first, t_shell *shell)
 {
