@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 13:39:29 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/24 13:56:06 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/24 15:59:15 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	builtin_cd_home(t_shell *shell, int idx)
 	else
 	{
 		//ft_putnbr_endl(idx);
-		
+
 	}
 
 }

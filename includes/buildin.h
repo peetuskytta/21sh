@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   buildin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:25:24 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/24 14:30:39 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/25 10:01:29 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef enum e_cd
 	CD_PREVIOUS = 6,
 	CD_NO_FILE = 7,
 	CD_PERM = 8,
+	CD_UNDEFINED = 9,
 	CD_ERR = -1,
 }	t_cd;
 
@@ -32,7 +33,7 @@ typedef enum e_cd
 int		is_strenv(char *name, char **environ);
 bool	is_builtin(char *cmd);
 void	setenv_update_env(t_shell *shell, char *name, char *value, int i);
-int		builtin_cd_access(t_exec *data);
+int		builtin_cd_access(t_exec *data, int ret);
 void	builtin_execute(t_shell *shell, t_exec data, char **env_cpy);
 int		builtin_cd_change_dir(t_shell *shell, t_exec *data);
 void	builtin_cd_home(t_shell *shell, int idx);

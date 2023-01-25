@@ -6,11 +6,21 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 15:03:07 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/24 14:11:51 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/24 16:10:21 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
+
+static int	identify_case(t_exec *data)
+{
+	if (ft_strequ(data->args[1], "-") == 1)
+		return (CD_PREVIOUS);
+	if (data->args[1] == NULL || ft_strequ(data->args[1], "--") == 1
+		|| data->args[1][0] == '\0')
+		return (CD_HOME);
+	return (CD_NORMAL);
+}
 
 void	builtin_cd(t_shell *shell, t_exec data)
 {
@@ -18,7 +28,7 @@ void	builtin_cd(t_shell *shell, t_exec data)
 
 	if (data.args[2] == NULL)
 	{
-		checks = builtin_cd_access(&data);
+		checks = identify_case(&data);
 		if (checks == CD_NORMAL)
 			checks = builtin_cd_change_dir(shell, &data);
 		else if (checks == CD_HOME)
