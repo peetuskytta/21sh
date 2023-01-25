@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 14:01:14 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/25 14:10:24 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/25 14:58:00 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,20 @@ static int	access_check(char *temp)
 	return (-1);
 }
 
-static int	path_permission_loop(char **split, int i)
+static int	path_permission_loop(char **split, char *cwd, int i)
 {
 	char		temp[MAX_BUFF];
 	int			ret;
 
 	ft_memset(temp, '\0', MAX_BUFF);
+	ft_strcat(temp, cwd);
 	while (split[i])
 	{
 		if (split[i] == NULL)
 			break ;
 		if (temp[ft_strlen(temp)] != '/')
 			ft_strcat(temp, "/");
-		if (ft_strstr(split[i], ".."))
-			ft_strcat(temp, split[i]);
+		ft_strcat(temp, split[i]);
 		ft_putendl(temp);
 		ret = access_check(temp);
 		if (ret != 1)
@@ -68,10 +68,7 @@ int	builtin_cd_access(t_exec *data, int ret)
 	if (ft_strchr(data->args[1], '/'))
 	{
 		split = ft_strsplit(data->args[1], '/');
-		int ii = 0;
-		while (split[ii])
-			ft_putendl(split[ii++]);
-		ret = path_permission_loop(split, 0);
+		ret = path_permission_loop(split, getenv("PWD"), 0);
 		ft_arr_free((void *)&split);
 		if (ret == CD_PERM || ret == CD_NO_FILE)
 		{
