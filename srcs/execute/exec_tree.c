@@ -49,8 +49,8 @@ static void	setup_pipes(t_ast *temp, t_pipe *pipes, int idx)
 }
 
 /*
-*	Init_pipes function will open the correct number of pipes according to the
-*	type of the branch. Command "ls -l | grep file" will have one pipe opened.
+**	Init_pipes function will open the correct number of pipes according to the
+**	type of the branch. Command "ls -l | grep file" will have one pipe opened.
 */
 static void	init_pipes(t_ast *temp, t_pipe *pipes)
 {

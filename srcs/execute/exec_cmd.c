@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:40:28 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/25 16:47:48 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/25 18:15:17 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,33 +88,15 @@ static void	wait_for_finish(t_pid *pid)
 		ft_perror(WAITPID_FAIL);
 }
 
-// static void	signal_stop(int signo)
-// {
-// 	(void)signo;
-// }
-
-// static void	signal_kill(t_pid pid)
-// {
-// 	kill(pid.child, SIGKILL);
-// }
-
-// static void	signal_abort(t_pid pid)
-// {
-// 	kill(pid.child, SIGABRT);
-// }
-
 /*
 **	Performs input/output change before fork and execution of a command.
 */
 void	exec_cmd(t_exec data, char *bin_path, char **env_cpy)
 {
-	data.pid.child = fork();	// store these in an array?
-	if (data.pid.child == 0)	// in the CHILD process
+	data.pid.child = fork();
+	if (data.pid.child == 0)
 	{
 		change_in_and_out(&data);
-		// copy stderr and stdout to different files.. then compare their
-		// modification times to determine to where something was written
-		// to and save it in shell->last_io as a boolean value;
 		if (execve(bin_path, data.args, env_cpy) == -1)
 		{
 			ft_perror(EXECVE_ERROR);
@@ -125,7 +107,7 @@ void	exec_cmd(t_exec data, char *bin_path, char **env_cpy)
 	}
 	else if (data.pid.child < 0)
 		ft_perror (FORK_FAIL);
-	else	// in the PARENT process
+	else
 	{
 		if (data.fds.pipe != PIPE_FIRST)
 			wait_for_finish(&data.pid);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 10:20:57 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/25 11:21:17 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/25 18:25:13 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static bool	env_output(char **env_cpy)
 	ft_putchar_fd('\n', STDOUT_FILENO);
 	while (env_cpy[i])
 		ft_print_fd(STDOUT_FILENO, "%s\n", env_cpy[i++]);
-	return (false);
+	return (true);
 }
 
 void	swap_char_ptr(char **first, char **second) //maybe a function to add to libft
@@ -165,7 +165,7 @@ bool	builtin_env(t_shell *shell, t_exec data, char **env_cpy)
 		//env temporary env
 		//env misformatted_anything
 		//env command
-		return (false);
+		return (true);
 	}
 	else
 		return (env_output(env_cpy));

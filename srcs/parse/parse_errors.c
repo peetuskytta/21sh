@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 13:33:06 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/25 17:02:21 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/25 18:16:27 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ static bool	redir_validation(char *str, t_tok *next, int i)
 	}
 	return (false);
 }
-
-// >& = redirect 1 and 2 to a file or
 
 static bool	redir_error_checks(char *str, t_tok *next)
 {

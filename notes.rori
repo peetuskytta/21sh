@@ -2,9 +2,9 @@ _________REASONABLY DONE_________
 - AGREGATE - peetu 70%
 - BUILTINS - together 97% >> "\n" for exit builtin sent to kill_mode
 	- cd: peetu
-		- HOME and -
+		- HOME and - : rori
 	- env: rori
-		- env ls, e.g env comamnd or executable
+		- env ls, e.g env comamnd or executable : rori
 	- echo, setenv, unsetenv: donedone
 
 _________DONE DONE_________
@@ -36,10 +36,12 @@ _________DONE DONE_________
 |			|	2. CURSOR!								|
 |			|	cursor getting F-ed if 1st line is ERR	|
 |-------------------------------------------------------|
-|			|	3. ADDITIONAL:							|
+|			|	3. BUILTIN PIPE:						|
+|			|	when builtin first in pipe > stuck		|
+|			|	Error with tcgetattr is in middle		|
+|-------------------------------------------------------|
+|			|	4. ADDITIONAL:							|
 |			|	history file not found on first run err	|
 |			|	all FD addresses to correct places		|
 |			|	all comments and norm err				|
-|			|	when builtin first in pipe > stuck		|
-|			|	Error with tcgetattr is in middle		|
 |-------------------------------------------------------|

@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 19:36:30 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/25 14:04:49 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/25 18:17:26 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,3 @@ void	redir_heredoc(t_shell *shell, t_tok *token)
 	if (close(shell->fd) < 0)
 		ft_perror(FILE_CLOSE_ERR);
 }
-/*store the delimiter, heredoc listen needs to parse for it
-**so perhaps need to save to a string?
-** REDIR might be closing things before heredoc is finished
-*/

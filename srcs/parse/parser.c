@@ -67,11 +67,3 @@ t_tok	*parser(t_shell *shell)
 	check_for_heredoc(&list.token_list, shell);
 	return (list.token_list);
 }
-/*
-** HEREDOC is not working with slash directories
-** 2>&1 ---> redirect STDERR to STDOUT, redirects it to the same location
-** 1>&2 ---> redirect STDOUT to STDERR, redirects it to the same location
-** 0>&- = closes the STDIN
-** 1>&- = closes the STDOUT
-** 2>&- = closes the STDERR
-*/
