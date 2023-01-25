@@ -35,11 +35,7 @@ _________DONE DONE_________
 |			|	history is the one breaking loc			|
 |			|	again. reset different if line is empty	|
 |-------------------------------------------------------|
-|			|	3. SIGNAL								|
-|			|	signal needs to handle curr_row as well	|
-|			|	perhaps simply calling recheck widnow	|
-|-------------------------------------------------------|s
-|			|	4. ADDITIONAL:							|
+|			|	3. ADDITIONAL:							|
 |			|	history file not found on first run err	|
 |			|	all FD addresses to correct places		|
 |			|	all comments and norm err				|

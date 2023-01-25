@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/25 13:54:54 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/25 16:28:30 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ static void	cmd_line_reset(t_shell *shell, t_win *window)
 	if (shell->quote == EOF)
 		ft_memset(shell->q_input, '\0', sizeof(char) * (MAX_BUFF * 2 + 1));
 	if (shell->quote != EOF)
+	{
+		ft_putchar_fd('\n', STDOUT_FILENO);
 		window->current_row++;
+	}
 	window->idx = 0;
 	ft_memset(window->row_idx, '\0', sizeof(char *) * (MAX_BUFF));
 	ft_memset(shell->cmd_line, '\0', sizeof(char) * (MAX_BUFF + 1));
@@ -50,7 +53,7 @@ static void	run_shell(t_shell *shell)
 		{
 			if (shell->quote == EOF)
 			{
-				NL;
+				ft_putchar_fd('\n', STDOUT_FILENO);
 				history_runtime(shell);
 				tree = ast_constructor(shell, parser(shell));
 				if (tree)

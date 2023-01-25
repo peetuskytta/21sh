@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:34:24 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/24 16:22:31 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/25 16:15:46 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ void	cmd_line(t_shell *shell, t_win *window, char c);
 void	input_read(t_shell *shell);
 void	input_expand(t_shell *shell, t_tok **first);
 void	input_rev_cmd(t_shell *shell);
-void	input_midline(t_shell *shell, t_win *window);
+void	input_strip_quotes(t_tok **first);
 
 #endif

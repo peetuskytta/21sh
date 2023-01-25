@@ -64,7 +64,6 @@ _CURSOR := cursor_reset_line.c \
 		cursor_goto_sides.c \
 		cursor_row_find.c \
 		goto_newline.c
-# cursor_goto_word.c \
 
 _EXECUTE := exec_tree.c \
 		exec_branch.c \
@@ -87,7 +86,8 @@ _INPUT := read_quote.c \
 		cmd_line_reprint.c \
 		input_read.c \
 		input_expand.c \
-		input_rev_cmd.c
+		input_rev_cmd.c \
+		input_strip_quotes.c
 
 _HISTORY := history_create.c \
 		history_traverse.c \
