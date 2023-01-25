@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 14:07:07 by zraunio           #+#    #+#             */
-/*   Updated: 2022/09/25 10:26:38 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/25 13:48:49 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,8 @@ char	**ft_strsplit(char const *s, char c)
 	words = split_string(s, c, count);
 	if (!words)
 		ft_arr_free((void *)&words);
+	int i = 0;
+	while (words[i])
+		ft_putendl(words[i++]);
 	return (words);
 }

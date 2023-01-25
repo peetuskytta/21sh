@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 14:01:14 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/24 16:46:19 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/25 13:49:22 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,15 @@ int	builtin_cd_access(t_exec *data, int ret)
 	int		i;
 
 	i = 0;
-
+	split = NULL;
 	if (ft_strchr(data->args[1], '/'))
 	{
-		split = ft_strsplit(data->args[1] + i, '/');
+		split = ft_strsplit(data->args[1], '/');
+		int ii = 0;
+		while (split[ii])
+			ft_putendl(split[ii++]);
 		ret = path_permission_loop(split, 0);
+		ft_putnbr_endl(ret);
 		ft_arr_free((void *)&split);
 		if (ret == CD_PERM || ret == CD_NO_FILE)
 		{
