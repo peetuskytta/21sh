@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 12:14:41 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/25 18:31:13 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/25 20:04:58 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,15 @@ static void	pipe_ends(int pipe, int *fd_in, int *fd_out)
 {
 	if (pipe == PIPE_FIRST)
 	{
+		ft_putnbr_endl(*fd_in);
+		ft_putnbr_endl(*fd_out);
 		close(*fd_in);
 		*fd_in = -1;
-		dup2(*fd_out, STDOUT_FILENO);
-		perror("error:"); // bad filedescriptor
-		ft_putnbr_endl(*fd_out);
+		if (dup2(*fd_out, STDOUT_FILENO) == -1)
+		{
+			perror("error:"); // bad filedescriptor
+		}
+	//	ft_putnbr_endl(*fd_out);
 	}
 	else if (pipe == PIPE_LAST)
 	{
@@ -28,7 +32,6 @@ static void	pipe_ends(int pipe, int *fd_in, int *fd_out)
 		*fd_out = -1;
 		dup2(*fd_in, STDIN_FILENO);
 	}
-	DB;
 }
 
 static void	change_redir_io(t_redir	*redir)
