@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 13:33:06 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/25 23:34:28 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/25 23:42:05 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ static bool	redir_error_checks(char *str, t_tok *next)
 
 static bool aggr_checks(char *str, t_tok *next)
 {
-	if (next == NULL)
-		return (true);
 	if (ft_strequ(">&", str) || ft_strequ(">&-", str)
 	|| ft_strequ("1>&-", str) || ft_strequ("2>&-", str)
 	|| ft_strequ("1>&2", str) || ft_strequ("2>&1", str))
@@ -64,6 +62,8 @@ static bool aggr_checks(char *str, t_tok *next)
 		ft_print_fd(2, "\n21sh parse error near `%s'\n", str);
 		return (true);
 	}
+	if (next == NULL)
+		return (true);
 	return (false);
 }
 
