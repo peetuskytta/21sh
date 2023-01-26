@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd_access.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 14:01:14 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/25 17:41:53 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/26 15:14:56 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	access_check(char *temp, char *arg)
 	return (-1);
 }
 
-static int	path_permission_loop(char **split, t_exec *data, int i)
+static int	path_permission_loop(char **split, char *arg, int i)
 {
 	char		temp[MAX_BUFF];
 	int			ret;
@@ -45,7 +45,7 @@ static int	path_permission_loop(char **split, t_exec *data, int i)
 			ft_strcat(temp, "/");
 		if (ft_strstr(split[i], ".."))
 			ft_strcat(temp, split[i]);
-		ret = access_check(temp, data->args[1]);
+		ret = access_check(temp, arg);
 		if (ret != 1)
 			return (ret);
 		if (temp[ft_strlen(temp)] != '/')
@@ -55,15 +55,15 @@ static int	path_permission_loop(char **split, t_exec *data, int i)
 	return (CD_NORMAL);
 }
 
-int	builtin_cd_access(t_exec *data, int ret)
+int	builtin_cd_access(char *arg, int ret)
 {
 	char	**split;
 
 	split = NULL;
-	if (ft_strchr(data->args[1], '/'))
+	if (ft_strchr(arg, '/'))
 	{
-		split = ft_strsplit(data->args[1], '/');
-		ret = path_permission_loop(split, data, 0);
+		split = ft_strsplit(arg, '/');
+		ret = path_permission_loop(split, arg, 0);
 		ft_arr_free((void *)&split);
 		if (ret == CD_PERM || ret == CD_NO_FILE)
 		{

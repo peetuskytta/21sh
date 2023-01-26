@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 15:11:08 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/26 13:02:31 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/26 16:41:17 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,11 @@ static void	set_aggregation(t_redir *redir)
 		redir->fd_err = ERR_ON;
 	else if (redir->type == AGGR_COPY_ONE)
 		redir->fd_out = 2;
+	else if (redir->type == AGGR_CLOSE_BOTH)
+	{
+		redir->fd_err = -1;
+		redir->fd_out = -1;
+	}
 }
 
 /*
@@ -113,12 +118,8 @@ int	redir_file_check(t_redir *redir)
 	else if (redir->type == HEREDOC)
 		return (FILE_IN);
 	else if (redir->type > 9)
-	{
-		ft_putnbr_fd(redir->type, STDOUT_FILENO);
 		set_aggregation(redir);
-	}
 	if (status != FILE_IN && status != FILE_OUT)
 		file_error(&status, redir->file);
-	ft_putnbr_fd(status, STDOUT_FILENO);
 	return (status);
 }

@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 10:20:57 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/26 10:35:46 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/26 15:03:17 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,6 @@ static bool	env_output(char **env_cpy)
 	return (true);
 }
 
-void	swap_char_ptr(char **first, char **second) //maybe a function to add to libft
-{
-	char	*temp;
-
-	temp = *first;
-	*first = *second;
-	*second = temp;
-}
-
 static bool is_command(t_exec *data, int i)
 {
 	while (data->args[i])
@@ -42,61 +33,9 @@ static bool is_command(t_exec *data, int i)
 	}
 	if (i >= MAX_REDIR / 2)
 	{
-		ft_perror("shell: too many variables\n");
+		ft_perror(SET_TOO_MANY_ARG);
 		return (false);
 	}
-	return (false);
-}
-
-/* static void	env_temp_addvar(char **args, char **env_cpy)
-{
-
-}*/
-
-static void	execute_env(t_shell *shell, t_exec new, char **env_cpy)
-{
-	char	*bin_path;
-
-	(void)shell;
-	bin_path = NULL;
-	bin_path = exec_find_binary(exec_fetch_path_var(env_cpy), new.cmd);
-	if (redirection_loop(&new) && exec_binary_check(bin_path, new))
-		execve(bin_path, new.args, env_cpy);
-	ft_strdel((void *)&bin_path);
-}
-
-static bool	env_cdm(t_shell *shell, t_exec new, t_exec data, int i)
-{
-	int		idx;
-	int		env_idx;
-	char	**env_cpy;
-
-	env_idx = 0;
-	idx = 0;
-	env_cpy = (char **)ft_memalloc(sizeof(char *) * (MAX_REDIR - 1));
-	while (data.args[i])
-	{
-		if (!ft_strchr(data.args[i], '='))
-		{
-			new.args[idx] = ft_strdup(data.args[i]);
-			idx++;
-		}
-		if (ft_strchr(data.args[i], '='))
-		{
-			env_cpy[env_idx] = ft_strdup(data.args[i]);
-			env_idx++;
-		}
-		ft_strdel(&data.args[i]);
-		i++;
-	}
-	new.cmd = ft_strdup(new.args[0]);
-	execute_env(shell, new, env_cpy);
-	ft_arr_free((void *)&env_cpy);
-	i = 0;
-	ft_strdel(&data.args[1]);
-	while (new.args[i])
-		ft_strdel(&new.args[i++]);
-	ft_strdel(&new.cmd);
 	return (false);
 }
 
@@ -140,24 +79,15 @@ bool	builtin_env(t_shell *shell, t_exec data, char **env_cpy)
 {
 	int	flg;
 
-	ft_putnbr_endl(data.fds.fd_out);
 	flg = env_flag(data.args);
-	(void)shell;
 	if (flg == true)
 		return (env_temp_i(shell, data));
-	if (data.args[1] != NULL && flg == false)
+	else if (data.args[1] && flg == false)
 	{
-		//env_temp_addvar(data.args, env_cpy);
-		//env $VALID_ENV_NAME
-		//env temporary env
-		//env misformatted_anything
-		//env command
+		ft_perror(ENV_USE);
 		return (true);
 	}
 	else
-	{
-		DB;
 		return (env_output(env_cpy));
-	}
 	return (true);
 }

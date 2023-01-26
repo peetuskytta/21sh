@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_llmax.c                                         :+:      :+:    :+:   */
+/*   swap_char_ptr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/12 15:07:28 by zraunio           #+#    #+#             */
-/*   Updated: 2021/05/18 14:57:42 by zraunio          ###   ########.fr       */
+/*   Created: 2023/01/26 13:05:07 by zraunio           #+#    #+#             */
+/*   Updated: 2023/01/26 13:05:40 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/libft.h"
 
-long long int	ft_llmax(long long x, long long y)
+void	swap_char_ptr(char **first, char **second)
 {
-	if (x > y)
-		return (x);
-	else if (y > x)
-		return (y);
-	else
-		return (x);
+	char	*temp;
+
+	temp = *first;
+	*first = *second;
+	*second = temp;
 }

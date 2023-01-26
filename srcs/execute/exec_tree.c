@@ -20,6 +20,7 @@ static void	save_pipe_fd(t_fds *fds, t_pipe *pipes, int idx)
 		fds->fd_in = pipes[idx - 1].fd[PIPE_READ];
 	if (fds->pipe == -1)
 	{
+		fds->pipe = PIPE_IN;
 		fds->fd_in = pipes[idx - 1].fd[PIPE_READ];
 		fds->fd_out = pipes[idx].fd[PIPE_WRITE];
 	}

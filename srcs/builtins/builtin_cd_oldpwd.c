@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_cd_home.c                                  :+:      :+:    :+:   */
+/*   builtin_cd_oldpwd.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/24 13:39:29 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/26 15:42:35 by zraunio          ###   ########.fr       */
+/*   Created: 2023/01/26 15:37:21 by zraunio           #+#    #+#             */
+/*   Updated: 2023/01/26 15:44:01 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/buildin.h"
+#include "../../includes/shell.h"
 
-static void	cd_home_value(t_shell *shell, t_exec *data, int idx)
+static void	cd_oldpwd_value(t_shell *shell, t_exec *data, int idx)
 {
-	data->args[1] = ft_strdup(shell->environ[idx] + 5);
+	data->args[1] = ft_strdup(shell->environ[idx] + 7);
 	allocation_check((void *)&data->args[1]);
 }
 
-void	builtin_cd_home(t_shell *shell, t_exec *data, int idx)
+void	builtin_cd_oldpwd(t_shell *shell, t_exec *data, int idx)
 {
 	if (idx == -1)
 	{
-		ft_perror(CD_NO_HOME);
+		ft_perror(CD_NO_OLDPWD);
 		return ;
 	}
 	else
 	{
-		cd_home_value(shell, data, idx);
+		cd_oldpwd_value(shell, data, idx);
 		builtin_cd_change_dir(shell, data);
+		ft_putendl_fd(data->args[1], STDOUT_FILENO);
 	}
 }

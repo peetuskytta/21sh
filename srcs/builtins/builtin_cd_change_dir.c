@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd_change_dir.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 14:39:37 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/25 22:03:24 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/26 15:19:37 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	modify_env(t_shell *shell, char *name, char *value, int i)
 
 static void	directory_work(t_shell *shell, t_exec *data)
 {
-	char *temp;
+	char	*temp;
 
 	temp = NULL;
 	if (is_strenv("OLDPWD", shell->environ) < 0)
@@ -58,7 +58,7 @@ static void	directory_work(t_shell *shell, t_exec *data)
 		directory_change(data->args[1]);
 		return ;
 	}
-	if (shell->pipe == true) // in pipe we want to change the dir but revert the change back
+	if (shell->pipe == true)
 	{
 		shell->pipe = false;
 		temp = ft_strdup(shell->environ[is_strenv("PWD", shell->environ)]);
@@ -75,7 +75,7 @@ static void	directory_work(t_shell *shell, t_exec *data)
 int	builtin_cd_change_dir(t_shell *shell, t_exec *data)
 {
 	builtin_cd_fetch_cwd(shell);
-	if (builtin_cd_access(data, CD_NORMAL) == CD_NORMAL)
+	if (builtin_cd_access(data->args[1], CD_NORMAL) == CD_NORMAL)
 		directory_work(shell, data);
 	return (CD_ERR);
 }

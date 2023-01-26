@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:24:46 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/26 10:35:59 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/26 18:44:35 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,27 @@
 # define STDERR_FAIL "Fail to fetch the stderr. Terminating."
 
 /*Error message defines for CD*/
-# define CD_NO_HOME " HOME not set"
-# define CD_NO_ACCESS " permission denied"
-# define CD_NOT_DIR ": Not a directory"
+# define CD_NO_HOME "cd: HOME not set\n"
+# define CD_NO_OLDPWD "cd: OLDPWD not set\n"
+# define CD_NO_ACCESS " permission denied\n"
+# define CD_NOT_DIR ": Not a directory\n"
 # define CD_SH "shell: cd: "
-# define IS_A_DIR ": Is a directory"
-# define CD_ARG_NO "cd: too many arguments"
+# define IS_A_DIR ": Is a directory\n"
+# define CD_ARG_NO "cd: too many arguments\n"
 
 /*Error message defines for setenv and unsetenv*/
 # define EMPTY_STR "setenv name: cannot be an empty string"
 # define NAME_ERROR "setenv name: cannot be a NULL pointer or 0 length string"
 # define INVALID_CHAR "setenv name: must begin with Alpha cahracter"
-# define SET_TOO_MANY_ARG "setenv: too many arguments"
+# define SET_TOO_MANY_ARG "env/setenv: too many arguments\n"
 # define SETENV_USAGE "usage: 'setenv [name]=[value]'"
 # define NOT_IDENTIFIER ": not a valid identifier"
 # define UNSETENV_USAGE "usage: unsetenv [name]"
 # define UNSETENV_ARGS "unsetenv: too many arguments"
 # define UNSETENV_TOO_LONG "unsetenv: argument too long"
+
+/*Error message defines for env*/
+# define ENV_USE "env: usage: env OR env -i {NAME=value} {executable}\n "
 
 /*Error messages for fork, waitpid, and execve*/
 # define CMD_NOT_FOUND ": command not found"
@@ -60,8 +64,9 @@
 # define REDIR_ERR "shell: redirection error"
 # define PIPE_ERR "shell: pipe error"
 # define BAD_FD "shell: Bad file descriptor:"
-# define SYNTAX_ERR "shell: syntax error near unexpected token"
+# define SYNTAX_ERR "shell: syntax error near unexpected token\n"
 # define PARSE_ERR "shell: parse error near "
+# define AGGR_ERR "shell: redir and closing file descriptor not allowed"
 
 /*Error messages for file descriptors*/
 # define FILE_CLOSE_ERR "shell: error when closing a file"

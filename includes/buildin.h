@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   buildin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:25:24 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/25 17:01:58 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/26 18:20:45 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,13 @@ typedef enum e_cd
 int		is_strenv(char *name, char **environ);
 bool	is_builtin(char *cmd);
 void	setenv_update_env(t_shell *shell, char *name, char *value, int i);
-int		builtin_cd_access(t_exec *data, int ret);
+int		builtin_cd_access(char *arg, int ret);
 void	builtin_execute(t_shell *shell, t_exec data, char **env_cpy);
 int		builtin_cd_change_dir(t_shell *shell, t_exec *data);
-void	builtin_cd_home(t_shell *shell, int idx);
+void	builtin_cd_home(t_shell *shell, t_exec *data, int idx);
+void	builtin_cd_oldpwd(t_shell *shell, t_exec *data, int idx);
 void	builtin_cd_fetch_cwd(t_shell *shell);
+bool	env_cdm(t_shell *shell, t_exec new, t_exec data, int i);
 /*
 ** BUILDINS
 */

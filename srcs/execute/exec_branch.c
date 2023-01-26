@@ -62,27 +62,36 @@ static void	command_execution(t_shell *shell, t_exec *data, char **env_cpy)
 {
 	if (is_builtin(data->cmd) == true)
 	{
-		data->pid.child = fork();
-		if (data->pid.child == 0)
+		if (ft_strequ(data->cmd, "cd") && data->fds.pipe == PIPE_IN)
+			builtin_cd(shell, *data);
+		else
 		{
-			if (redirection_loop(data))
+			data->pid.child = fork();
+			if (data->pid.child == 0)
 			{
-				change_in_and_out(data);
-				if (ft_strequ(data->cmd, "env"))
+				if (redirection_loop(data))
 				{
-					if (builtin_env(shell, *data, env_cpy)) // work it so that things are changed for the env to
-						{} ;
+					change_in_and_out(data);
+					if (ft_strequ(data->cmd, "env"))
+					{
+						if (builtin_env(shell, *data, env_cpy))
+							;
+					}
+					else
+						builtin_execute(shell, *data, env_cpy);
+					close_fds(data->fds.fd_in, data->fds.fd_out);
+					exit(EXIT_SUCCESS);
 				}
-				else
-					builtin_execute(shell, *data, env_cpy);
-				close_fds(data->fds.fd_in, data->fds.fd_out);
-				exit(EXIT_SUCCESS);
+			}
+			else if (data->pid.child < 0)
+				ft_perror(FORK_FAIL);
+			else
+			{
+				if (data->fds.pipe == PIPE_IN)
+					wait(0);
+				close(data->fds.fd_out);
 			}
 		}
-		else if (data->pid.child < 0)
-			ft_perror(FORK_FAIL);
-		else
-			close(data->fds.fd_out);
 	}
 	else
 		real_exec(data, env_cpy);
@@ -96,13 +105,14 @@ static void	command_execution(t_shell *shell, t_exec *data, char **env_cpy)
 */
 void	exec_branch(t_ast *branch, t_shell *shell)
 {
-	char	**env_cpy;
-	t_pid	pid;
+	char			**env_cpy;
+	t_pid			pid;
 
+	ft_memset(&pid, '\0', sizeof(t_pid));
 	if (branch == NULL)
 		return ;
-	if (branch->data.fds.pipe == PIPE_LAST)
-			pid.wait = waitpid(branch->data.process_pid, &pid.status, 0);
+	if (branch->data.fds.pipe == PIPE_LAST && branch->data.process_pid == -1)
+		pid.wait = waitpid(branch->data.process_pid, &pid.status, WNOHANG);
 	env_cpy = copy_environment(shell->environ);
 	if ((branch->type == REDIR || branch->type == COMMAND))
 		command_execution(shell, &branch->data, env_cpy);

@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 12:14:41 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/26 13:03:07 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/26 16:00:50 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,11 @@ static void	aggr_in_out(t_exec *data)
 			close(STDOUT_FILENO);
 		else if (data->redir->type == AGGR_CLOSE_TWO)
 			close(STDERR_FILENO);
+		else if (data->redir->type == AGGR_CLOSE_BOTH)
+		{
+			close(STDOUT_FILENO);
+			close(STDERR_FILENO);
+		}
 	}
 }
 
@@ -71,7 +76,7 @@ static void	aggr_in_out(t_exec *data)
 */
 void	change_in_and_out(t_exec *data)
 {
-	if (data->fds.pipe != -1)
+	if (data->fds.pipe != PIPE_IN)
 		pipe_ends(data->fds.pipe, &data->fds.fd_in, &data->fds.fd_out);
 	else
 	{

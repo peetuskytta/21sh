@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 13:01:21 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/25 13:40:09 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/26 13:06:15 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ void				*ft_memccpy(void *dest, const void *src, int c,
 void				*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 void				ft_bzero(void *s, size_t n);
 int					ft_memdel_range(const int nbr, ...);
+void				swap_char_ptr(char **first, char **second);
 /*
 ** print
 */

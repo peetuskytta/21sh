@@ -90,7 +90,8 @@ _MEM_SRC =  mem/ft_bzero.c \
 		mem/ft_memmove.c \
 		mem/ft_memset.c \
 		mem/ft_realloc.c \
-		mem/ft_memdel_range.c
+		mem/ft_memdel_range.c \
+		mem/swap_char_ptr.c
 
 _PERMISSIONS_SRC = permissions/ft_is_directory.c
 
@@ -133,6 +134,7 @@ _STR_SRC = str/ft_charstr.c \
 		str/ft_strilen.c \
 		str/ft_strmap.c \
 		str/ft_strmapi.c \
+		str/ft_strncpy.c \
 		str/ft_strncat.c \
 		str/ft_strmapi.c \
 		str/ft_strncat.c \

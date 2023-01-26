@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 08:19:09 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/21 12:15:02 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/26 15:55:08 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef enum e_pipe_fd
 	PIPE_READ,
 	PIPE_WRITE,
 	PIPE_FIRST,
+	PIPE_IN,
 	PIPE_LAST,
 }			t_pipe_fd;
 
