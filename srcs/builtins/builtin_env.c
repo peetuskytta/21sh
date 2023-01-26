@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 10:20:57 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/25 18:25:13 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/26 10:35:46 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,12 @@ static void	execute_env(t_shell *shell, t_exec new, char **env_cpy)
 {
 	char	*bin_path;
 
+	(void)shell;
 	bin_path = NULL;
-	if (is_builtin(new.cmd))
-	{
-		builtin_execute(shell, new, env_cpy);
-	}
-	else
-	{
-		bin_path = exec_find_binary(exec_fetch_path_var(env_cpy), new.cmd);
-		if (redirection_loop(&new) && exec_binary_check(bin_path, new))
-			exec_cmd(new, bin_path, env_cpy);
-		ft_strdel((void *)&bin_path);
-	}
+	bin_path = exec_find_binary(exec_fetch_path_var(env_cpy), new.cmd);
+	if (redirection_loop(&new) && exec_binary_check(bin_path, new))
+		execve(bin_path, new.args, env_cpy);
+	ft_strdel((void *)&bin_path);
 }
 
 static bool	env_cdm(t_shell *shell, t_exec new, t_exec data, int i)
@@ -95,14 +89,6 @@ static bool	env_cdm(t_shell *shell, t_exec new, t_exec data, int i)
 		ft_strdel(&data.args[i]);
 		i++;
 	}
-/* 	i = 0;
-	NL;
-	while (new.args[i])
-		ft_putendl(new.args[i++]);
- 	i = 0;
-	NL;
-	while (env_cpy[i])
-		ft_putendl(env_cpy[i++]); */
 	new.cmd = ft_strdup(new.args[0]);
 	execute_env(shell, new, env_cpy);
 	ft_arr_free((void *)&env_cpy);
@@ -111,7 +97,7 @@ static bool	env_cdm(t_shell *shell, t_exec new, t_exec data, int i)
 	while (new.args[i])
 		ft_strdel(&new.args[i++]);
 	ft_strdel(&new.cmd);
-	return (true);
+	return (false);
 }
 
 static bool	env_i_no_cmd(t_exec data, int i)
@@ -140,7 +126,7 @@ static bool	env_temp_i(t_shell *shell, t_exec data)
 	{
 		return (env_i_no_cmd(data, 1));
 	}
-	return (false);
+	return (true);
 }
 
 static bool	env_flag(char **args)
@@ -154,6 +140,7 @@ bool	builtin_env(t_shell *shell, t_exec data, char **env_cpy)
 {
 	int	flg;
 
+	ft_putnbr_endl(data.fds.fd_out);
 	flg = env_flag(data.args);
 	(void)shell;
 	if (flg == true)
@@ -168,6 +155,9 @@ bool	builtin_env(t_shell *shell, t_exec data, char **env_cpy)
 		return (true);
 	}
 	else
+	{
+		DB;
 		return (env_output(env_cpy));
-	return (false);
+	}
+	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 15:07:37 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/19 11:48:07 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/25 15:25:48 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ void	history_fetch(t_shell *shell)
 		shell->hist_idx = i - 1;
 	}
 	else if (fd < 0)
+	{
+		ft_perror("shell: ");
 		ft_perror(HIST_ERR_FILE);
-	if (close(fd) < 0)
-		ft_perror(FILE_CLOSE_ERR);
+	}
+	close(fd);
 }

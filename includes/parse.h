@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 13:58:06 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/20 09:09:16 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/26 08:25:27 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,21 @@ typedef enum e_red
 {
 	FILE_IN = 2,
 	FILE_OUT = 3,
-	FILE_AGGR = 4,
 	FILE_APPEND = 5,
 	FILE_TRUNC = 6,
 	FILE_INVALID = 7,
 	FILE_PARSE_ERR = 8,
+	ERR_ON = 9,
 }	t_red;
+
+typedef enum e_aggr
+{
+	AGGR_CLOSE_BOTH = 10,
+	AGGR_CLOSE_ONE = 11,
+	AGGR_CLOSE_TWO = 12,
+	AGGR_COPY_ONE = 13,
+	AGGR_COPY_TWO = 14,
+}	t_aggr;
 
 typedef enum e_state
 {

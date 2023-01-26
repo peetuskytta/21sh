@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:24:46 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/25 17:03:25 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/26 10:35:59 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # define ARG_REQUIRED ": filename argument required"
 # define ARG_USAGE_1 ": usage: "
 # define ARG_USAGE_2 " filename [arguments]"
-# define NO_FILE_OR_DIR ": No such file or directory"
-# define HIST_ERR_FILE "Could not open history file."
+# define NO_FILE_OR_DIR ": No such file or directory\n"
+# define HIST_ERR_FILE "Could not open history file.\n"
 # define ABORTED_ERROR "Process aborted."
 # define ERROR_EXIT "Exit error."
 # define NO_STRING ""

@@ -6,62 +6,75 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 13:33:06 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/25 18:16:27 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/26 12:56:39 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parse.h"
 
-static bool	redir_validation(char *str, t_tok *next, int i)
+static bool	redir_validation(t_tok *next)
 {
-	while (str[i])
+	if (next == NULL)
 	{
-		if (str[i] == '<' || str[i] == '>')
-		{
-			if (next == NULL)
-			{
-				ft_perror("\nsyntax error near unexpected token `newline'\n");
-				return (true);
-			}
-			return (false);
-		}
-		if (!ft_isdigit(str[i]))
-		{
-			ft_perror(PARSE_ERR);
-			ft_print_fd(STDERR_FILENO, "`%c%c'\n", str[i], str[i + 1]);
-			return (true);
-		}
-		i++;
+		ft_perror("syntax error near unexpected token `newline'\n");
+		return (true);
 	}
 	return (false);
 }
 
 static bool	redir_error_checks(char *str, t_tok *next)
 {
-	if (ft_strequ(">", str) || ft_strequ(">>", str) || ft_strequ("<", str) \
-		|| ft_strequ("<<", str))
+	if (ft_strequ(">", str) || ft_strequ(">>", str)
+		||ft_strequ("<", str) || ft_strequ("<<", str)
+		|| ft_strequ("1>", str) || ft_strequ("1>>", str)
+		|| ft_strequ("2>", str) || ft_strequ("2>>", str)
+		|| ft_strequ("2>>1", str) || ft_strequ("1>>2", str)
+		|| ft_strequ("1>2", str) || ft_strequ("2>1", str))
 		;
-	else if (ft_isalnum(str[0]))
+	else
+	{
+		ft_print_fd(2, "\n21sh parse error near `%s'\n", str);
+		return (true);
+	}
+	if (redir_validation(next))
+		return (true);
+	return (false);
+}
+
+static bool aggr_checks(char *str, t_tok *next)
+{
+	if (ft_strequ(">&", str) || ft_strequ(">&-", str)
+		|| ft_strequ("1>&-", str) || ft_strequ("2>&-", str)
+		|| ft_strequ("1>&2", str) || ft_strequ("2>&1", str))
 		;
+	else if (ft_strequ("0<&-", str))
+	{
+		ft_perror(BAD_FD);
+		ft_perror("0<&-\n");
+		return (true);
+	}
 	else
 	{
 		ft_perror(PARSE_ERR);
 		ft_print_fd(STDERR_FILENO, "%s'\n", str);
 		return (true);
 	}
-	if (redir_validation(str, next, 0))
+	if (ft_strequ(">&", str) && next == NULL)
 		return (true);
 	return (false);
 }
 
 static bool	redir_check(t_tok *temp)
 {
-	while (temp)
+	while (temp->next)
 	{
-		if (temp->type == REDIR)
+		if (temp->type == REDIR && temp->next->type != REDIR)
 		{
 			if (ft_strchr(temp->str, '&') || ft_strchr(temp->str, '-'))
-				ft_perror("AGGR check here");
+			{
+				if (aggr_checks(temp->str, temp->next))
+					return (true);
+			}
 			else
 			{
 				if (redir_error_checks(temp->str, temp->next))
@@ -69,7 +82,8 @@ static bool	redir_check(t_tok *temp)
 			}
 			temp = temp->next;
 		}
-		temp = temp->next;
+		else
+			temp = temp->next;
 	}
 	return (false);
 }
@@ -103,7 +117,9 @@ void	parse_errors(t_tok **first)
 	t_tok	*temp;
 
 	temp = *first;
-	if (redir_check(temp) || separator_check(temp))
+	if (*first == NULL)
+		return ;
+	else if (redir_check(temp) || separator_check(temp))
 	{
 		token_list_free(*first);
 		*first = NULL;

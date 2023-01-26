@@ -17,16 +17,27 @@ or error messages from the command.
 
 It's worth noting that in C shell, the ">" operator only redirects stdout, and "2>" operator redirects stderr.
 
+0: stdin
+1: stdout
+2: stderr
 
 
->&		1 and 2 to a file (if no file: parse error)
->&-		close 2 and 1
+ 1>&- >&- 2>&-   ;  >&- 2>&-  everything closes
+
+
+
+>&		1 and 2 to a file (if no file >>> ERROR)
+1>&-	close 1 NULL OK
+2>&-	close 2 NULL OK
+1>&2	make 1 a copy of 2 NULL OK
+2>&1	make 2 a copy of 1 NULL OK
+>&-		close 2 and 1 NULL OK
+
+
+
+done:
+1>		same as > (DO NOTHING)
+1>>		same as >> (DO NOTHING)
 <&-		close 0 (DONT ACCEPT)
-1>&-	close 1
-2>&-	close 2
-1>&2	make 1 a copy of 2
-2>&1	make 2 a copy of 1
-1>2
-1>>2
-2>1
-2>>1
+2>
+2>>

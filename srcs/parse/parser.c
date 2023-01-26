@@ -12,7 +12,7 @@
 
 #include "../../includes/parse.h"
 
-/*DELETE BEFORE SUBMIT
+/*DELETE BEFORE SUBMIT*/
 void	token_list_print(t_tok *token)
 {
 	t_tok	*temp;
@@ -31,7 +31,7 @@ void	token_list_print(t_tok *token)
 	}
 	if (temp == NULL)
 		ft_printf("\ntoken[%d] (NULL)\n", i);
-}*/
+}
 
 static void	check_for_heredoc(t_tok **first, t_shell *shell)
 {
@@ -61,6 +61,13 @@ t_tok	*parser(t_shell *shell)
 	lenght = ft_strilen(shell->q_input);
 	if (lenght > 0)
 		token_list_build(shell->q_input, lenght, &list);
+	/* They can add the function that starts stripping quotes and expands $ and ~
+		here (all expandables are in the list.token_list).
+		It needs to be done here, otherwise the redirections that have quotes would be parse errors in the function below.
+		first expand
+		then quote strip
+	*/
+	token_list_print(list.token_list);
 	input_expand(shell, &list.token_list);
 	input_strip_quotes(&list.token_list);
 	parse_errors(&list.token_list);

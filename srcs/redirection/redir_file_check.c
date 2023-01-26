@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 15:11:08 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/20 09:09:16 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/26 13:02:31 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,16 @@ static void	open_redirection_out(t_redir *redir, int *status)
 		if (redir->fd_out > 0 && !ft_is_directory(redir->file))
 			*status = FILE_OUT;
 	}
+	if (redir->fd_err == ERR_ON)
+		ft_perror("\nERR is ON\n");
+}
+
+static void	set_aggregation(t_redir *redir)
+{
+	if (redir->type == AGGR_COPY_TWO)
+		redir->fd_err = ERR_ON;
+	else if (redir->type == AGGR_COPY_ONE)
+		redir->fd_out = 2;
 }
 
 /*
@@ -88,11 +98,12 @@ int	redir_file_check(t_redir *redir)
 	int			status;
 
 	status = -1;
-	if (redir->type == FILE_APPEND || redir->type == FILE_TRUNC)
+	if (redir->type == FILE_APPEND || redir->type == FILE_TRUNC \
+		|| redir->type > 12)
 	{
 		if (access(redir->file, F_OK) == 0 && !ft_is_directory(redir->file))
 			open_redirection_out(redir, &status);
-		if (ft_is_directory(redir->file))
+		else if (ft_is_directory(redir->file))
 			status = FOLDER;
 		else
 			open_redirection_out(redir, &status);
@@ -101,7 +112,13 @@ int	redir_file_check(t_redir *redir)
 		open_redirection_in(redir, &status);
 	else if (redir->type == HEREDOC)
 		return (FILE_IN);
+	else if (redir->type > 9)
+	{
+		ft_putnbr_fd(redir->type, STDOUT_FILENO);
+		set_aggregation(redir);
+	}
 	if (status != FILE_IN && status != FILE_OUT)
 		file_error(&status, redir->file);
+	ft_putnbr_fd(status, STDOUT_FILENO);
 	return (status);
 }

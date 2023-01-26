@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:40:28 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/25 18:15:17 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/26 11:42:17 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,8 @@ static void	change_in_and_out(t_exec *data)
 			dup2(data->fds.fd_in, STDIN_FILENO);
 	}
 	change_redir_io(data->redir);
-}*/
 
-/*
+}
 **	Closes all the filedescriptors. Moved to a separate function
 **	to fit the NORM.
 */
@@ -95,14 +94,13 @@ void	exec_cmd(t_exec data, char *bin_path, char **env_cpy)
 {
 	data.pid.child = fork();
 	if (data.pid.child == 0)
-	{
+	{	
 		change_in_and_out(&data);
 		if (execve(bin_path, data.args, env_cpy) == -1)
 		{
 			ft_perror(EXECVE_ERROR);
 			exit(EXIT_FAILURE);
 		}
-		close_fds(data.fds.fd_in, data.fds.fd_out);
 		exit(EXIT_SUCCESS);
 	}
 	else if (data.pid.child < 0)
@@ -111,6 +109,7 @@ void	exec_cmd(t_exec data, char *bin_path, char **env_cpy)
 	{
 		if (data.fds.pipe != PIPE_FIRST)
 			wait_for_finish(&data.pid);
+		close_fds(data.fds.fd_in, data.fds.fd_out);
 	}
 	close_fds(data.fds.fd_in, data.fds.fd_out);
 }

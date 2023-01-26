@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 23:15:32 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/25 17:03:48 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/26 10:37:50 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ void	token_list_build(char *input, int size, t_lex *list)
 		}
 		else if (state == STATE_REDIR)
 		{
-			if (!ft_strchr("&><-", c))
+			if (!ft_strchr("&><-12", c))
 			{
 				token->type = REDIR;
 				token->next = (t_tok *)ft_memalloc(sizeof(t_tok));

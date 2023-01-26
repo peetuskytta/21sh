@@ -6,26 +6,32 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 14:01:14 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/24 16:46:19 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/25 17:41:53 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/buildin.h"
 
-static int	access_check(char *temp)
+static int	access_check(char *temp, char *arg)
 {
 	if (access(temp, F_OK) == 0)
 	{
 		if (ft_is_directory(temp) == 0)
+		{
+			ft_perror(arg);
 			return (CD_NO_FILE);
+		}
 		if (access(temp, X_OK) == -1)
+		{
+			ft_perror(arg);
 			return (CD_PERM);
+		}
 		return (1);
 	}
 	return (-1);
 }
 
-static int	path_permission_loop(char **split, int i)
+static int	path_permission_loop(char **split, t_exec *data, int i)
 {
 	char		temp[MAX_BUFF];
 	int			ret;
@@ -39,11 +45,9 @@ static int	path_permission_loop(char **split, int i)
 			ft_strcat(temp, "/");
 		if (ft_strstr(split[i], ".."))
 			ft_strcat(temp, split[i]);
-		ret = access_check(temp);
+		ret = access_check(temp, data->args[1]);
 		if (ret != 1)
 			return (ret);
-		else
-			return (CD_NO_FILE);
 		if (temp[ft_strlen(temp)] != '/')
 			ft_strcat(temp, "/");
 		i++;
@@ -54,14 +58,12 @@ static int	path_permission_loop(char **split, int i)
 int	builtin_cd_access(t_exec *data, int ret)
 {
 	char	**split;
-	int		i;
 
-	i = 0;
-
+	split = NULL;
 	if (ft_strchr(data->args[1], '/'))
 	{
-		split = ft_strsplit(data->args[1] + i, '/');
-		ret = path_permission_loop(split, 0);
+		split = ft_strsplit(data->args[1], '/');
+		ret = path_permission_loop(split, data, 0);
 		ft_arr_free((void *)&split);
 		if (ret == CD_PERM || ret == CD_NO_FILE)
 		{
