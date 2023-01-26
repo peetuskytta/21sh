@@ -19,7 +19,7 @@ It's worth noting that in C shell, the ">" operator only redirects stdout, and "
 
 
 
->&		1 and 2 to a file (if no file: parse error)
+>&		1 and 2 to a file
 >&-		close 2 and 1
 <&-		close 0 (DONT ACCEPT)
 1>&-	close 1

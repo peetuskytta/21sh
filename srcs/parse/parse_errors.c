@@ -6,16 +6,14 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 13:33:06 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/25 23:42:05 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/26 07:31:24 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parse.h"
 
-static bool	redir_validation(char *str, t_tok *next, int i)
+static bool	redir_validation(t_tok *next)
 {
-	(void)i;
-	(void)str;
 	if (next == NULL)
 	{
 		ft_perror("syntax error near unexpected token `newline'\n");
@@ -25,7 +23,8 @@ static bool	redir_validation(char *str, t_tok *next, int i)
 	{
 		if (ft_atoi(next->str))
 		{
-			ft_perror("not a valid file descriptor\n");
+			ft_perror("not a valid file descriptor");
+			ft_perror("try 1 or 2\n");
 			return (true);
 		}
 	}
@@ -34,19 +33,19 @@ static bool	redir_validation(char *str, t_tok *next, int i)
 
 static bool	redir_error_checks(char *str, t_tok *next)
 {
-	if (ft_strequ(">", str) || ft_strequ(">>", str) || ft_strequ("<", str) \
-		|| ft_strequ("<<", str) || ft_strequ("1>", str)
-		|| ft_strequ("1>>", str) || ft_strequ("2>", str)
-		|| ft_strequ("2>>", str) || ft_strequ("2>>1", str)
-		|| ft_strequ("1>>2", str) || ft_strequ("1>2", str)
-		|| ft_strequ("2>1", str))
+	if (ft_strequ(">", str) || ft_strequ(">>", str)
+		||ft_strequ("<", str) || ft_strequ("<<", str)
+		|| ft_strequ("1>", str) || ft_strequ("1>>", str)
+		|| ft_strequ("2>", str) || ft_strequ("2>>", str)
+		|| ft_strequ("2>>1", str) || ft_strequ("1>>2", str)
+		|| ft_strequ("1>2", str) || ft_strequ("2>1", str))
 		;
 	else
 	{
 		ft_print_fd(2, "\n21sh parse error near `%s'\n", str);
 		return (true);
 	}
-	if (redir_validation(str, next, 0))
+	if (redir_validation(next))
 		return (true);
 	return (false);
 }
