@@ -26,7 +26,7 @@ It's worth noting that in C shell, the ">" operator only redirects stdout, and "
 2>&-	close 2
 1>&2	make 1 a copy of 2
 2>&1	make 2 a copy of 1
-1>
-1>>
+1>		same as > (DO NOTHING)
+1>>		same as >> (DO NOTHING)
 2>
 2>>
