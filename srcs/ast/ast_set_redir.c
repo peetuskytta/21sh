@@ -72,7 +72,7 @@ void	ast_set_redir(t_redir *redir, char *str)
 	redir->type = check_for_type(redir, str);
 /* 	if (ft_strequ("<<", str))
 		redir->type = HEREDOC; */
-	if (redir->type > 9)
+/* 	if (redir->type > 9)
 		ft_putendl("\nFILE AGGR");
 	if (redir->type == FILE_IN)
 		ft_putendl("\nFILE_IN");
@@ -83,5 +83,5 @@ void	ast_set_redir(t_redir *redir, char *str)
 	if (redir->type == HEREDOC)
 		ft_putendl("\nHEREDOC");
 	if (redir->type == FILE_PARSE_ERR)
-		ft_putendl("\nFILE_PARSE_ERR");
+		ft_putendl("\nFILE_PARSE_ERR"); */
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_file_check.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 15:11:08 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/26 16:41:17 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/26 23:17:16 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,6 @@ static void	open_redirection_out(t_redir *redir, int *status)
 		if (redir->fd_out > 0 && !ft_is_directory(redir->file))
 			*status = FILE_OUT;
 	}
-	if (redir->fd_err == ERR_ON)
-		ft_perror("\nERR is ON\n");
 }
 
 static void	set_aggregation(t_redir *redir)

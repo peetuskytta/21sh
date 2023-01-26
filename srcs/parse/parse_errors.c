@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_errors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 13:33:06 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/26 18:52:28 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/26 23:19:55 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static bool aggr_checks(char *str, t_tok *next)
 		ft_print_fd(STDERR_FILENO, "%s'\n", str);
 		return (true);
 	}
-	ft_print_fd(STDERR_FILENO, "%s\n", next->str);
+	//ft_print_fd(STDERR_FILENO, "%s\n", next->str);
 	if (ft_strequ(">&", str) && (next->str == NULL || next->str[0] == '\0'
 			|| ft_strequ(next->str, " ")))
 	{

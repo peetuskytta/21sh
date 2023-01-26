@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:40:28 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/26 22:32:25 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/27 00:13:04 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,10 @@ static void	change_in_and_out(t_exec *data)
 */
 static void	close_fds(int fd_in, int fd_out)
 {
-	//if (fd_in >= 0)
-	close(fd_in);
-	//if (fd_out >= 0)
-	close(fd_out);
+	if (fd_in >= 0)
+		close(STDIN_FILENO);
+	if (fd_out >= 0)
+		close(STDOUT_FILENO);
 }
 
 static void	wait_for_finish(t_pid *pid)
