@@ -62,7 +62,7 @@ static void	command_execution(t_shell *shell, t_exec *data, char **env_cpy)
 {
 	if (is_builtin(data->cmd) == true)
 	{
-		if (ft_strequ(data->cmd, "cd") && data->fds.pipe == PIPE_IN)
+		if (ft_strequ(data->cmd, "cd") && data->fds.pipe == -1)
 			builtin_cd(shell, *data);
 		else
 		{
