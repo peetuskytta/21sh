@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/01/26 19:22:14 by zraunio           #+#    #+#              #
+#    Updated: 2023/01/26 19:22:17 by zraunio          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 #Compiler and compiler flags
 CC := gcc
 FLAGS_DB := -Wall -Wextra -Werror -g -fsanitize=address
@@ -36,6 +48,7 @@ _AST := ast_constructor.c \
 		ast_consume_tokens.c \
 		ast_set_redir.c \
 		ast_print.c \
+		ast_create_tree.c \
 		ast_release.c
 
 _BUILTIN := builtin_execute.c \
@@ -48,6 +61,7 @@ _BUILTIN := builtin_execute.c \
 			builtin_cd_home.c \
 			builtin_cd_access.c \
 			builtin_cd_change_dir.c \
+			env_temp_i.c \
 			is_strenv.c \
 			is_builtin.c \
 			setenv_update_env.c \
@@ -57,6 +71,7 @@ _BUILTIN := builtin_execute.c \
 _SRCS :=  main.c \
 		allocation_check.c \
 		env_variable_counter.c \
+		copy_environment.c \
 		logo.c
 
 _CURSOR := cursor_reset_line.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/26 08:21:52 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/26 19:39:13 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,16 @@ typedef struct s_ast
 	struct s_ast	*right;
 	struct s_pipe	pipes[MAX_REDIR];
 }					t_ast;
+
+typedef struct s_herfd
+{
+	int		fd;
+	int		idx;
+	int		end;
+	int		cols;
+	char	*input;
+	char	*delim;
+}				t_herfd;
 
 #endif
 

@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:25:24 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/26 18:20:45 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/26 19:09:48 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	builtin_cd_home(t_shell *shell, t_exec *data, int idx);
 void	builtin_cd_oldpwd(t_shell *shell, t_exec *data, int idx);
 void	builtin_cd_fetch_cwd(t_shell *shell);
 bool	env_cdm(t_shell *shell, t_exec new, t_exec data, int i);
+bool	env_temp_i(t_shell *shell, t_exec data);
 /*
 ** BUILDINS
 */

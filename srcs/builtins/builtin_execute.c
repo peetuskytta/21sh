@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:30:59 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/25 16:45:36 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/26 19:10:14 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	builtin_execute(t_shell *shell, t_exec data, char **env_cpy)
 		return ((void)builtin_env(shell, data, env_cpy));
 	else if (ft_strequ("exit", data.cmd))
 	{
-		//free tree
 		kill_mode("\n", shell);
 	}
 	else if (ft_strequ("cd", data.cmd))

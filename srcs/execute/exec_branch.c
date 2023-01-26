@@ -16,23 +16,6 @@
 **	copies the environment for the execution. Used to change environment
 **	before execution so we don't mess up the parent's environment.
 */
-static char	**copy_environment(char **environ)
-{
-	char	**copy;
-	int		i;
-
-	i = env_variable_counter(environ);
-	copy = (char **)ft_memalloc(sizeof(char *) * (i + 2));
-	ft_memset(copy, 0, (i + 2));
-	i = 0;
-	while (environ[i])
-	{
-		copy[i] = ft_strdup(environ[i]);
-		i++;
-	}
-	copy[i] = NULL;
-	return (copy);
-}
 
 static void	real_exec(t_exec *data, char **env_cpy)
 {
@@ -53,6 +36,20 @@ static void	close_fds(int fd_in, int fd_out)
 		close(fd_out);
 }
 
+static void	builtin_redir(t_shell *shell, t_exec *data, char **env_cpy)
+{
+	change_in_and_out(data);
+	if (ft_strequ(data->cmd, "env"))
+	{
+		if (builtin_env(shell, *data, env_cpy))
+			;
+	}
+	else
+		builtin_execute(shell, *data, env_cpy);
+	close_fds(data->fds.fd_in, data->fds.fd_out);
+	exit(EXIT_SUCCESS);
+}
+
 /*
 **	Begins the process of finding the binary, opening redirections, checking
 **	binary file's execution rights before executing the command.
@@ -70,18 +67,7 @@ static void	command_execution(t_shell *shell, t_exec *data, char **env_cpy)
 			if (data->pid.child == 0)
 			{
 				if (redirection_loop(data))
-				{
-					change_in_and_out(data);
-					if (ft_strequ(data->cmd, "env"))
-					{
-						if (builtin_env(shell, *data, env_cpy))
-							;
-					}
-					else
-						builtin_execute(shell, *data, env_cpy);
-					close_fds(data->fds.fd_in, data->fds.fd_out);
-					exit(EXIT_SUCCESS);
-				}
+					builtin_redir(shell, data, env_cpy);
 			}
 			else if (data->pid.child < 0)
 				ft_perror(FORK_FAIL);
@@ -105,14 +91,13 @@ static void	command_execution(t_shell *shell, t_exec *data, char **env_cpy)
 */
 void	exec_branch(t_ast *branch, t_shell *shell)
 {
-	char			**env_cpy;
-	t_pid			pid;
+	char	**env_cpy;
+	t_pid	pid;
 
-	ft_memset(&pid, '\0', sizeof(t_pid));
 	if (branch == NULL)
 		return ;
-	if (branch->data.fds.pipe == PIPE_LAST && branch->data.process_pid == -1)
-		pid.wait = waitpid(branch->data.process_pid, &pid.status, WNOHANG);
+	if (branch->data.fds.pipe == PIPE_LAST && pid.status == -1)
+		pid.wait = waitpid(branch->data.process_pid, &pid.status, 0);
 	env_cpy = copy_environment(shell->environ);
 	if ((branch->type == REDIR || branch->type == COMMAND))
 		command_execution(shell, &branch->data, env_cpy);

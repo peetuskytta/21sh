@@ -21,6 +21,16 @@ It's worth noting that in C shell, the ">" operator only redirects stdout, and "
 1: stdout
 2: stderr
 
+/*
+ls -la >>file
+tok >
+tok >
+tok file
+tok  ls -la 2&>1 jee
+	 ls -la > jee 2>&1
+	 ls -la > jee .ls
+*/
+
 
  1>&- >&- 2>&-   ;  >&- 2>&-  everything closes
 
