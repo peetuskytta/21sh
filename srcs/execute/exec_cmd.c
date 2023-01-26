@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:40:28 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/26 18:22:15 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/26 22:32:25 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,10 @@ static void	change_in_and_out(t_exec *data)
 */
 static void	close_fds(int fd_in, int fd_out)
 {
-	if (fd_in >= 0)
-		close(fd_in);
-	if (fd_out >= 0)
-		close(fd_out);
+	//if (fd_in >= 0)
+	close(fd_in);
+	//if (fd_out >= 0)
+	close(fd_out);
 }
 
 static void	wait_for_finish(t_pid *pid)
@@ -94,7 +94,7 @@ void	exec_cmd(t_exec data, char *bin_path, char **env_cpy)
 {
 	data.pid.child = fork();
 	if (data.pid.child == 0)
-	{	
+	{
 		change_in_and_out(&data);
 		if (execve(bin_path, data.args, env_cpy) == -1)
 		{
@@ -107,9 +107,8 @@ void	exec_cmd(t_exec data, char *bin_path, char **env_cpy)
 		ft_perror (FORK_FAIL);
 	else
 	{
-		if (data.fds.pipe != PIPE_LAST)
+		if (data.fds.pipe != PIPE_FIRST)
 			wait_for_finish(&data.pid);
 		close_fds(data.fds.fd_in, data.fds.fd_out);
 	}
-	close_fds(data.fds.fd_in, data.fds.fd_out);
 }

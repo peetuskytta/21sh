@@ -11,6 +11,11 @@
 /* ************************************************************************** */
 
 #include "../../includes/execute.h"
+#include <sys/types.h>
+#include <sys/time.h>
+#include <sys/resource.h>
+#include <sys/wait.h>
+
 
 /*
 **	copies the environment for the execution. Used to change environment
@@ -75,7 +80,7 @@ static void	command_execution(t_shell *shell, t_exec *data, char **env_cpy)
 					if (ft_strequ(data->cmd, "env"))
 					{
 						if (builtin_env(shell, *data, env_cpy))
-							;
+							{};
 					}
 					else
 						builtin_execute(shell, *data, env_cpy);
@@ -111,8 +116,8 @@ void	exec_branch(t_ast *branch, t_shell *shell)
 	ft_memset(&pid, '\0', sizeof(t_pid));
 	if (branch == NULL)
 		return ;
-	if (branch->data.fds.pipe == PIPE_LAST && branch->data.process_pid == -1)
-		pid.wait = waitpid(branch->data.process_pid, &pid.status, WNOHANG);
+	if (branch->data.fds.pipe > 2)
+		pid.wait = waitpid(branch->data.process_pid, &pid.status, 0);
 	env_cpy = copy_environment(shell->environ);
 	if ((branch->type == REDIR || branch->type == COMMAND))
 		command_execution(shell, &branch->data, env_cpy);
