@@ -96,7 +96,11 @@ static void	command_execution(t_shell *shell, t_exec *data, char **env_cpy)
 		if (data->fds.pipe < 0)
 		{
 			if (redirection_loop(data))
+			{
+				change_in_and_out(data);
 				builtin_execute(shell, *data, env_cpy);
+			}
+			close_fds(data->fds.fd_in, data->fds.fd_out);
 		}
 		else if (data->fds.pipe > -1)
 		{
