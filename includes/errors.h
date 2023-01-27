@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:24:46 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/26 18:44:35 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/26 20:26:24 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define ERRORS_H
 
 /*Error message defines*/
-# define CMD_TOO_LONG "command line argument is too long"
+# define CMD_TOO_LONG "command line argument is too long\n"
 # define QUOTE_TOO_LONG "too many lines. Quote level cannot exceed 4096 lines"
 # define MALLOC_FAIL "malloc failed: serious memory issues"
 # define ARG_REQUIRED ": filename argument required"
@@ -53,7 +53,7 @@
 # define ENV_USE "env: usage: env OR env -i {NAME=value} {executable}\n "
 
 /*Error messages for fork, waitpid, and execve*/
-# define CMD_NOT_FOUND ": command not found"
+# define CMD_NOT_FOUND ": command not found\n"
 # define EXEC_NO_ACCESS ": permission denied"
 # define EXECVE_ERROR "shell: error with execve"
 # define FORK_FAIL "shell: fork fail"
@@ -71,6 +71,7 @@
 /*Error messages for file descriptors*/
 # define FILE_CLOSE_ERR "shell: error when closing a file"
 # define FILE_OPEN_ERR "shell: error when opening a file"
+# define HEREDOC_EXIST "heredoc: already exists. Delete file and try again.\n"
 
 # define MALLOC_ERRNO		2
 # define FORK_ERRNO			3

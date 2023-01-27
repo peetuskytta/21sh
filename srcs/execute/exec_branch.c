@@ -16,23 +16,6 @@
 **	copies the environment for the execution. Used to change environment
 **	before execution so we don't mess up the parent's environment.
 */
-static char	**copy_environment(char **environ)
-{
-	char	**copy;
-	int		i;
-
-	i = env_variable_counter(environ);
-	copy = (char **)ft_memalloc(sizeof(char *) * (i + 2));
-	ft_memset(copy, 0, (i + 2));
-	i = 0;
-	while (environ[i])
-	{
-		copy[i] = ft_strdup(environ[i]);
-		i++;
-	}
-	copy[i] = NULL;
-	return (copy);
-}
 
 static void	real_exec(t_exec *data, char **env_cpy)
 {
@@ -68,7 +51,6 @@ static void	close_fds(int fd_in, int fd_out)
 	if (fd_out >= 0)
 		close(fd_out);
 }
-
 
 static void	builtin_redir(t_shell *shell, t_exec *data, char **env_cpy)
 {

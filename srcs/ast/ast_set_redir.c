@@ -12,21 +12,6 @@
 
 #include "ast.h"
 
-/* static bool	type_error_case(char *str)
-{
-	if (ft_strstr(str, "<&>") || ft_strstr(str, ">&>"))
-		return (true);
-	if (ft_strstr(str, "<&<") || ft_strstr(str, ">&>"))
-		return (true);
-	if (ft_strstr(str, "<<>>") || ft_strstr(str, ">>>"))
-		return (true);
-	if (ft_strstr(str, "<<>>") || ft_strstr(str, "<<<"))
-		return (true);
-	if (ft_strstr(str, "><") || ft_strstr(str, "><>"))
-		return (true);
-	return (false);
-} */
-
 static int	set_aggr_type(t_redir *redir, char *str)
 {
 	(void)redir;
@@ -72,16 +57,16 @@ void	ast_set_redir(t_redir *redir, char *str)
 	redir->type = check_for_type(redir, str);
 /* 	if (ft_strequ("<<", str))
 		redir->type = HEREDOC; */
-/* 	if (redir->type > 9)
-		ft_putendl("\nFILE AGGR");
-	if (redir->type == FILE_IN)
-		ft_putendl("\nFILE_IN");
-	if (redir->type == FILE_APPEND)
-		ft_putendl("\nFILE_APPEND");
-	if (redir->type == FILE_TRUNC)
-		ft_putendl("\nFILE_TRUNC");
-	if (redir->type == HEREDOC)
-		ft_putendl("\nHEREDOC");
-	if (redir->type == FILE_PARSE_ERR)
-		ft_putendl("\nFILE_PARSE_ERR"); */
+	// if (redir->type > 9)
+	// 	ft_putendl("\nFILE AGGR");
+	// if (redir->type == FILE_IN)
+	// 	ft_putendl("\nFILE_IN");
+	// if (redir->type == FILE_APPEND)
+	// 	ft_putendl("\nFILE_APPEND");
+	// if (redir->type == FILE_TRUNC)
+	// 	ft_putendl("\nFILE_TRUNC");
+	// if (redir->type == HEREDOC)
+	// 	ft_putendl("\nHEREDOC");
+	// if (redir->type == FILE_PARSE_ERR)
+	// 	ft_putendl("\nFILE_PARSE_ERR");
 }

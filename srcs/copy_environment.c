@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_key.c                                         :+:      :+:    :+:   */
+/*   copy_environment.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/03 16:57:43 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/26 19:36:34 by zraunio          ###   ########.fr       */
+/*   Created: 2023/01/26 19:17:50 by zraunio           #+#    #+#             */
+/*   Updated: 2023/01/26 19:21:19 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
+#include "../includes/shell.h"
 
-void	read_key(t_shell *shell, char *input)
+char	**copy_environment(char **environ)
 {
-	int	i;
+	char	**copy;
+	int		i;
 
+	i = env_variable_counter(environ);
+	copy = (char **)ft_memalloc(sizeof(char *) * (i + 2));
+	ft_memset(copy, 0, (i + 2));
 	i = 0;
-	while (i != 1)
+	while (environ[i])
 	{
-		ft_memset(input, 0, sizeof(char) * (MAX_BUFF + 1));
-		i = read(STDIN_FILENO, input, MAX_BUFF);
-		if (i == -1)
-			return ;
-		key_listen(shell, input);
+		copy[i] = ft_strdup(environ[i]);
+		i++;
 	}
+	copy[i] = NULL;
+	return (copy);
 }

@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 13:33:06 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/26 23:19:55 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/27 13:01:32 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static bool	redir_error_checks(char *str, t_tok *next)
 	return (false);
 }
 
-static bool aggr_checks(char *str, t_tok *next)
+static bool	aggr_checks(char *str, t_tok *next)
 {
 	if (ft_strequ(">&", str) || ft_strequ(">&-", str)
 		|| ft_strequ("1>&-", str) || ft_strequ("2>&-", str)

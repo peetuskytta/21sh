@@ -1,6 +1,8 @@
-moro vaanLIM
-en tiia
-mita sanoa
-LIM
+lol
+cat file
+EOF
+clear
+EOF
 
-LIM
+cat file
+cat heredoc
