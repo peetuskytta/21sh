@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 12:14:41 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/27 09:09:34 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/27 15:16:56 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,9 @@ void	change_in_and_out(t_exec *data)
 		pipe_ends(data->fds.pipe, &data->fds.fd_in, &data->fds.fd_out);
 	else if (data->fds.pipe == PIPE_IN)
 	{
-		if (data->fds.fd_out >= 0 && data->redir->type != HEREDOC)
+		if (data->fds.fd_out >= 0)
 			dup2(data->fds.fd_out, STDOUT_FILENO);
-		if (data->fds.fd_in >= 0 && data->redir->type != HEREDOC)
+		if (data->fds.fd_in >= 0)
 			dup2(data->fds.fd_in, STDIN_FILENO);
 	}
 	change_redir_io(data->redir);

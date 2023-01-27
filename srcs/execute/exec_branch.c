@@ -40,7 +40,9 @@ static void	real_exec(t_exec *data, char **env_cpy)
 	if (!bin_path)
 		bin_path = exec_find_binary(exec_fetch_path_var(env_cpy), data->cmd);
 	if (redirection_loop(data) && exec_binary_check(bin_path, *data))
+	{
 		exec_cmd(data, bin_path, env_cpy);
+	}
 	ft_strdel((void *)&bin_path);
 }
 
@@ -119,9 +121,9 @@ void	exec_branch(t_ast *branch, t_shell *shell)
 	if (branch == NULL)
 		return ;
 	pid.child = branch->data.pid.child;
+	env_cpy = copy_environment(shell->environ);
 	if (branch->data.fds.pipe == PIPE_LAST)
 		pid.wait = waitpid(-1, &pid.status, 0);
-	env_cpy = copy_environment(shell->environ);
 	if ((branch->type == REDIR || branch->type == COMMAND))
 		command_execution(shell, &branch->data, env_cpy);
 	exec_branch(branch->left, shell);

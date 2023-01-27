@@ -7,9 +7,9 @@ foo									OK
 
 SECTION 2
 
-exit								OK
-echo "it works"						---- adds space in end
-echo it works						---- adds space in end
+exit								OK >>>>>>> in pipe gives an error
+echo "it works"						OK
+echo it works						OK
 cd relative/path/of/your/choice		OK
 /bin/pwd							OK
 cd									OK
@@ -18,12 +18,12 @@ setenv FOO=bar						OK
 /usr/bin/env						OK
 unsetenv FOO						OK
 /usr/bin/env						OK
-unsetenv FOO					!!!!SEGV!!!! line 38 builtin_unsetenv
+unsetenv FOO						OK
 
 SECTION 3
 
 unsetenv PATH						OK
-setenv PATH "/bin:/usr/bin"			OK
+setenv "PATH=/bin:/usr/bin"			OK
 ls									OK
 vim									OK
 unsetenv PATH						OK
@@ -34,38 +34,39 @@ vim									OK
 SECTION 4
 
 empty line run						OK
-just space							ERR should return prompt (so trimming?)
+just space							OK
 /bin/ls -l -A(tabs/spaces)			OK
 
 SECTION 5
 
 ctrl-c								OK
 random cmd							OK
-cat									FAIL
+cat									OK
 
 SECTION 6
 
 ls | cat -e							OK
 ls | sort | cat -e					OK
 ls | cat -e							OK
-base64 /dev/urandom | head -c 1000 | grep 42 | wc -l | sed -e 's/1/Yes/g' -e 's/1/No/g'
+base64 < /dev/urandom | head -c 1000 | grep 42 | wc -l | sed -e 's/1/Yes/g' -e 's/0/No/g'
+base64 /dev/urandom | head -c 1000 | grep 42 | wc -l | sed -e 's/1/Yes/g' -e 's/0/No/g'
 
 SECTION 7
 
 echo "Testing redirections," > file				OK
 echo "with multiple lines" >> /tmp/test.txt		OK
-wc -c < test.txt				OK
-cat -e  "<<" LIM					ERR
-cat -e "<<" LIM >> /tmp/test.txt	ERR
+wc -c < test.txt								OK
+cat -e  "<<" LIM								ERR
+cat -e "<<" LIM >> /tmp/test.txt				ERR
 
 SECTION 8
 
-ls -1; touch newfile ; ls -1	OK
+ls -1; touch newfile ; ls -1					OK
 
 SECTION 9
 
-mkdir test ; cd test ; ls -a ; ls | cat | wc -c > fifi ; cat fifi			FAILS DUE TO CAT FAILING
-cd /tmp; sort << EOF | cat -e > sorted_poem ; sed -e 's/Roses/Turnips/' 	FAILS
+mkdir test ; cd test ; ls -a ; ls | cat | wc -c > fifi ; cat fifi			FAIL >>>>> order of doing.
+cd /tmp; sort << EOF | cat -e > sorted_poem ; sed -e 's/Roses/Turnips/'		FAIL
 
 SECTION 10
 
@@ -79,11 +80,17 @@ move cursor left and right		OK
 edit							OK
 home and end					OK
 move words						OK
-History							FAIL
+History							OK
 
 SECTION 12
 
-copy						?
+copy						OK
 paste						OK
-cat and ctrl-c				FAIL
+cat and ctrl-c				OK
 echo "open quotes			OK
+
+
+
+
+
+NOTES
