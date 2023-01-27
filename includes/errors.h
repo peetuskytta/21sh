@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:24:46 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/26 18:44:35 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/27 16:40:15 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 /*Error message defines for CD*/
 # define CD_NO_HOME "cd: HOME not set\n"
 # define CD_NO_OLDPWD "cd: OLDPWD not set\n"
-# define CD_NO_ACCESS " permission denied\n"
+# define CD_NO_ACCESS ": permission denied\n"
 # define CD_NOT_DIR ": Not a directory\n"
 # define CD_SH "shell: cd: "
 # define IS_A_DIR ": Is a directory\n"

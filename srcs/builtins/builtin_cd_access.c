@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd_access.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 14:01:14 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/26 15:14:56 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/27 16:37:49 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	access_check(char *temp, char *arg)
 		}
 		if (access(temp, X_OK) == -1)
 		{
-			ft_perror(arg);
+			ft_perror(temp);
 			return (CD_PERM);
 		}
 		return (1);

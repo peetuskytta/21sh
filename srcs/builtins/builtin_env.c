@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 10:20:57 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/26 15:03:17 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/27 15:57:37 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,28 +25,18 @@ static bool	env_output(char **env_cpy)
 
 static bool is_command(t_exec *data, int i)
 {
-	while (data->args[i])
-	{
-		if (!ft_strchr(data->args[i], '='))
-			return (true);
-		i++;
-	}
-	if (i >= MAX_REDIR / 2)
-	{
-		ft_perror(SET_TOO_MANY_ARG);
+	if (ft_strchr(data->args[i], '='))
 		return (false);
-	}
-	return (false);
+	return (true);
 }
 
 static bool	env_i_no_cmd(t_exec data, int i)
 {
-	ft_putchar_fd('\n', STDOUT_FILENO);
+	//ft_putchar_fd('\n', STDOUT_FILENO);
 	while (data.args[i])
 	{
 		if (ft_strchr(data.args[i], '='))
 			ft_print_fd(STDOUT_FILENO, "%s\n", data.args[i]);
-		ft_strdel(&data.args[i]);
 		i++;
 	}
 	return (false);
@@ -62,9 +52,7 @@ static bool	env_temp_i(t_shell *shell, t_exec data)
 	if (is_command(&data, 2))
 		return (env_cdm(shell, new, data, 2));
 	else
-	{
 		return (env_i_no_cmd(data, 1));
-	}
 	return (true);
 }
 
