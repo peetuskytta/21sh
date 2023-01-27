@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 12:14:41 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/27 08:10:36 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/27 09:09:34 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,11 @@ static void	pipe_ends(int pipe, int *fd_in, int *fd_out)
 	{
 		*fd_in = -1;
 		dup2(*fd_out, STDOUT_FILENO);
-		close(*fd_out);
 	}
 	else if (pipe == PIPE_LAST)
 	{
 		*fd_out = -1;
 		dup2(*fd_in, STDIN_FILENO);
-		close(*fd_in);
 	}
 }
 
@@ -69,9 +67,9 @@ static void	aggr_in_out(t_exec *data)
 			close(STDOUT_FILENO);
 		}
 		else if (data->redir->type == AGGR_CLOSE_ONE)
-			close(STDOUT_FILENO);
+			close(data->redir->fd_out);
 		else if (data->redir->type == AGGR_CLOSE_TWO)
-			close(STDERR_FILENO);
+			close(data->redir->fd_err);
 	}
 	else if (data->redir->type > 12)
 		dup_fds(data->redir->type);
@@ -85,11 +83,11 @@ void	change_in_and_out(t_exec *data)
 {
 	if (data->fds.pipe == PIPE_FIRST || data->fds.pipe == PIPE_LAST)
 		pipe_ends(data->fds.pipe, &data->fds.fd_in, &data->fds.fd_out);
-	else
+	else if (data->fds.pipe == PIPE_IN)
 	{
-		if (data->fds.fd_out > 0 && data->redir->type != HEREDOC)
+		if (data->fds.fd_out >= 0 && data->redir->type != HEREDOC)
 			dup2(data->fds.fd_out, STDOUT_FILENO);
-		if (data->fds.fd_in > 0 && data->redir->type != HEREDOC)
+		if (data->fds.fd_in >= 0 && data->redir->type != HEREDOC)
 			dup2(data->fds.fd_in, STDIN_FILENO);
 	}
 	change_redir_io(data->redir);

@@ -1,0 +1,21 @@
+SECTION 1
+
+foo									OK
+/bin/ls								OK
+/bin/ls	-laF						OK
+/bin/ls	-l -a -F					OK
+
+SECTION 2
+
+exit								OK
+echo "it works"						---- adds space in end
+echo it works						---- adds space in end
+cd relative/path/of/your/choice		OK
+/bin/pwd							OK
+cd									OK
+/bin/pwd							OK
+setenv FOO=bar						OK
+/usr/bin/env						OK
+unsetenv FOO						OK
+/usr/bin/env						OK
+unsetenv FOO					!!!!SEGV!!!!

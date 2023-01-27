@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 08:19:09 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/26 22:33:38 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/27 09:55:43 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*exec_find_binary(char **path, char *cmd);
 char	**exec_fetch_path_var(char **env);
 void	exec_tree(t_ast **tree, t_shell *shell);
 void	exec_branch(t_ast *branch, t_shell *shell);
-void	exec_cmd(t_exec data, char *bin_path, char **env_cpy);
+void	exec_cmd(t_exec *data, char *bin_path, char **env_cpy);
 void	exec_clear_data(t_exec *data);
 void	change_in_and_out(t_exec *data);
 
