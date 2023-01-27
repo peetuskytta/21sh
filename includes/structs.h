@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/26 23:35:01 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/27 08:09:50 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ typedef struct s_pid
 {
 	int				child;
 	int				wait;
-	pid_t			status;
+	int				status;
 }					t_pid;
 
 typedef struct s_exec

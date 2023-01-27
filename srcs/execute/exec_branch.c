@@ -58,7 +58,7 @@ static void	close_fds(int fd_in, int fd_out)
 **	binary file's execution rights before executing the command.
 **	Clears data after each command, succesful or not.
 */
-static void	command_execution(t_shell *shell, t_exec *data, char **env_cpy)
+/* static void	command_execution(t_shell *shell, t_exec *data, char **env_cpy)
 {
 	if (is_builtin(data->cmd) == true)
 	{
@@ -95,6 +95,53 @@ static void	command_execution(t_shell *shell, t_exec *data, char **env_cpy)
 	}
 	else
 		real_exec(data, env_cpy);
+} */
+
+static void	builtin_redir(t_shell *shell, t_exec *data, char **env_cpy)
+{
+	change_in_and_out(data);
+	if (ft_strequ(data->cmd, "env"))
+	{
+		if (builtin_env(shell, *data, env_cpy))
+			{};
+	}
+	else
+		builtin_execute(shell, *data, env_cpy);
+	close_fds(data->fds.fd_in, data->fds.fd_out);
+	exit(EXIT_SUCCESS);
+}
+
+/*
+**	Begins the process of finding the binary, opening redirections, checking
+**	binary file's execution rights before executing the command.
+**	Clears data after each command, succesful or not.
+*/
+static void	command_execution(t_shell *shell, t_exec *data, char **env_cpy)
+{
+	if (is_builtin(data->cmd) == true)
+	{
+		if (ft_strequ(data->cmd, "cd") && data->fds.pipe < 0)
+			builtin_cd(shell, *data);
+		else
+		{
+			data->pid.child = fork();
+			if (data->pid.child == 0)
+			{
+				if (redirection_loop(data))
+					builtin_redir(shell, data, env_cpy);
+			}
+			else if (data->pid.child < 0)
+				ft_perror(FORK_FAIL);
+			else
+			{
+				if (data->fds.pipe == PIPE_IN)
+					wait(0);
+				close(data->fds.fd_out);
+			}
+		}
+	}
+	else
+		real_exec(data, env_cpy);
 }
 
 /*
@@ -106,16 +153,14 @@ static void	command_execution(t_shell *shell, t_exec *data, char **env_cpy)
 void	exec_branch(t_ast *branch, t_shell *shell)
 {
 	char			**env_cpy;
-	t_pid			pid;
 
-	ft_memset(&pid, '\0', sizeof(t_pid));
 	if (branch == NULL)
 		return ;
+	if (branch->data.fds.pipe == PIPE_LAST)
+		branch->data.pid.wait = waitpid(branch->data.pid.child, &branch->data.pid.status, 0);
 	env_cpy = copy_environment(shell->environ);
 	if ((branch->type == REDIR || branch->type == COMMAND))
 		command_execution(shell, &branch->data, env_cpy);
-	if (branch->data.fds.pipe == PIPE_LAST)
-		pid.wait = waitpid(branch->data.process_pid, &pid.status, 0);
 	exec_branch(branch->left, shell);
 	if (branch->type == PIPE)
 		exec_branch(branch->right, shell);

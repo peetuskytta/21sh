@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 12:14:41 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/27 00:20:40 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/27 08:10:36 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ static void	pipe_ends(int pipe, int *fd_in, int *fd_out)
 	{
 		*fd_in = -1;
 		dup2(*fd_out, STDOUT_FILENO);
-		//close(*fd_out);
+		close(*fd_out);
 	}
 	else if (pipe == PIPE_LAST)
 	{
 		*fd_out = -1;
 		dup2(*fd_in, STDIN_FILENO);
-		//close(*fd_in);
+		close(*fd_in);
 	}
 }
 
@@ -36,17 +36,17 @@ static void	change_redir_io(t_redir	*redir)
 		if (redir->fd_out > 0 && redir->fd_err != ERR_ON)
 		{
 			dup2(redir->fd_out, STDOUT_FILENO);
-			//close(redir->fd_out);
+			close(redir->fd_out);
 		}
 		if (redir->fd_in > 0)
 		{
 			dup2(redir->fd_in, STDIN_FILENO);
-			//close(redir->fd_in);
+			close(redir->fd_in);
 		}
 		if (redir->fd_err == ERR_ON)
 		{
 			dup2(redir->fd_out, STDERR_FILENO);
-			//close(redir->fd_out);
+			close(redir->fd_out);
 		}
 	}
 }
@@ -73,7 +73,7 @@ static void	aggr_in_out(t_exec *data)
 		else if (data->redir->type == AGGR_CLOSE_TWO)
 			close(STDERR_FILENO);
 	}
-	else
+	else if (data->redir->type > 12)
 		dup_fds(data->redir->type);
 }
 

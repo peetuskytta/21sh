@@ -6,69 +6,13 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:40:28 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/27 00:13:04 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/27 08:21:55 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/execute.h"
 
 /*
-**	Closes the STDIN_FILENO or STDOUT_FILENO for the start and end of the pipe
-**	We don't want to read in the pipe beginning and write to the pipe end.
-*/
-/* static void	pipe_ends(int pipe, int *fd_in, int *fd_out)
-{
-	if (pipe == PIPE_FIRST)
-	{
-		close(*fd_in);
-		*fd_in = -1;
-		dup2(*fd_out, STDOUT_FILENO);
-	}
-	else if (pipe == PIPE_LAST)
-	{
-		close(*fd_out);
-		*fd_out = -1;
-		dup2(*fd_in, STDIN_FILENO);
-	}
-}
-
-static void	change_redir_io(t_redir	*redir)
-{
-	if (redir->type == FILE_IN || redir->type == FILE_TRUNC \
-		|| redir->type == FILE_APPEND)
-	{
-		if (redir->fd_out > 0)
-		{
-			dup2(redir->fd_out, STDOUT_FILENO);
-			close(redir->fd_out);
-		}
-		if (redir->fd_in > 0)
-		{
-			dup2(redir->fd_in, STDIN_FILENO);
-			close(redir->fd_in);
-		}
-	}
-}
-
-
-**	Closes the STDIN_FILENO or STDOUT_FILENO and sets the in and out
-**	of the command to be executed for pipes and redirections.
-*/
-/*
-static void	change_in_and_out(t_exec *data)
-{
-	if (data->fds.pipe != -1)
-		pipe_ends(data->fds.pipe, &data->fds.fd_in, &data->fds.fd_out);
-	else
-	{
-		if (data->fds.fd_out > 0 && data->redir->type != HEREDOC)
-			dup2(data->fds.fd_out, STDOUT_FILENO);
-		if (data->fds.fd_in > 0 && data->redir->type != HEREDOC)
-			dup2(data->fds.fd_in, STDIN_FILENO);
-	}
-	change_redir_io(data->redir);
-
-}
 **	Closes all the filedescriptors. Moved to a separate function
 **	to fit the NORM.
 */
@@ -80,7 +24,7 @@ static void	close_fds(int fd_in, int fd_out)
 		close(STDOUT_FILENO);
 }
 
-static void	wait_for_finish(t_pid *pid)
+void	wait_for_finish(t_pid *pid)
 {
 	pid->wait = waitpid(pid->child, &pid->status, 0);
 	if (pid->wait == -1)
