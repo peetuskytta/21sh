@@ -43,7 +43,7 @@ static void	check_for_heredoc(t_tok **first, t_shell *shell)
 		if (temp->type == REDIR && ft_strequ(temp->str, "<<"))
 		{
 			if (enable_rawmode(shell) == 0)
-				ft_putendl_fd("Error with tcgetattr", STDERR_FILENO);
+				ft_perror(TCGET_ERR);
 			tcsetattr(STDIN_FILENO, TCSANOW, &shell->raw);
 			redir_heredoc(temp);
 			tcsetattr(STDIN_FILENO, TCSANOW, &shell->orig_raw);
@@ -61,12 +61,6 @@ t_tok	*parser(t_shell *shell)
 	lenght = ft_strilen(shell->q_input);
 	if (lenght > 0)
 		token_list_build(shell->q_input, lenght, &list);
-	/* They can add the function that starts stripping quotes and expands $ and ~
-		here (all expandables are in the list.token_list).
-		It needs to be done here, otherwise the redirections that have quotes would be parse errors in the function below.
-		first expand
-		then quote strip
-	*/
 	// token_list_print(list.token_list);
 	input_expand(shell, &list.token_list);
 	input_strip_quotes(&list.token_list);

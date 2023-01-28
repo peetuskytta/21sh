@@ -6,12 +6,16 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 19:17:50 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/26 19:21:19 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/28 14:09:36 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/shell.h"
 
+/*
+**	copies the environment for the execution. Used to change environment
+**	before execution so we don't mess up the parent's environment.
+*/
 char	**copy_environment(char **environ)
 {
 	char	**copy;

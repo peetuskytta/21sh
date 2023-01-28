@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:40:28 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/27 17:25:43 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/28 14:30:10 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,15 @@ void	wait_for_finish(t_pid *pid)
 */
 void	exec_cmd(t_exec *data, char *bin_path, char **env_cpy)
 {
-	// DB;
 	data->pid.child = fork();
 	if (data->pid.child == 0)
 	{
 		change_in_and_out(data);
-		// ft_putnbr_endl(data->fds.fd_in);
-		// ft_putnbr_endl(data->fds.fd_out);
 		if (execve(bin_path, data->args, env_cpy) == -1)
 		{
 			ft_perror(EXECVE_ERROR);
 			exit(EXIT_FAILURE);
 		}
-		//exit(EXIT_SUCCESS);
 	}
 	else if (data->pid.child < 0)
 		ft_perror(FORK_FAIL);

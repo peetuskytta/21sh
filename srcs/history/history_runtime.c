@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 15:10:51 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/20 09:26:02 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/28 14:02:35 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	history_runtime(t_shell *shell)
 		{
 			shell->history[i] = ft_strdup(shell->cmd_line);
 			allocation_check((void *)&shell->history[i]);
-			shell->hist_idx = i;
 		}
+		shell->hist_idx = i;
 	}
 }

@@ -6,7 +6,7 @@
 #    By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/26 19:22:14 by zraunio           #+#    #+#              #
-#    Updated: 2023/01/28 13:33:15 by zraunio          ###   ########.fr        #
+#    Updated: 2023/01/28 14:11:58 by zraunio          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -111,8 +111,7 @@ _HISTORY := history_create.c \
 		history_traverse.c \
 		history_fetch.c \
 		history_runtime.c \
-		history_reset.c \
-		history.c
+		history_reset.c
 
 _KEYS := key_listen.c \
 		read_key.c \

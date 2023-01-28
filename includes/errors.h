@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:24:46 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/28 13:48:41 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/28 14:23:16 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@
 # define FORK_FAIL "shell: fork fail"
 # define WAITPID_FAIL "shell: waitpid fail"
 # define EXECVE_ERR "shell: execve error"
+# define TCGET_ERR "Error with tcgetattr"
+# define TTY_TERM_ERR "ttyname() failed to retrieve terminal name."
 
 /*Error messages for pipe, redirections & tokens*/
 # define REDIR_ERR "shell: redirection error"

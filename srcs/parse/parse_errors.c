@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 13:33:06 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/28 13:32:57 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/28 14:15:51 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static bool	aggr_checks(char *str, t_tok *next)
 		ft_print_fd(STDERR_FILENO, "%s'\n", str);
 		return (true);
 	}
-	//ft_print_fd(STDERR_FILENO, "%s\n", next->str);
 	if (ft_strequ(">&", str) && (next->str == NULL || next->str[0] == '\0'
 			|| ft_strequ(next->str, " ")))
 	{

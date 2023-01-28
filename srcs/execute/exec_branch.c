@@ -12,11 +12,6 @@
 
 #include "../../includes/execute.h"
 
-/*
-**	copies the environment for the execution. Used to change environment
-**	before execution so we don't mess up the parent's environment.
-*/
-
 static void	real_exec(t_exec *data, char **env_cpy)
 {
 	char	*bin_path;
@@ -27,12 +22,12 @@ static void	real_exec(t_exec *data, char **env_cpy)
 		if (access(data->cmd, F_OK) == -1)
 		{
 			ft_perror(NO_FILE_OR_DIR);
-			return;
+			return ;
 		}
 		else if (access(data->cmd, X_OK) == -1)
 		{
 			ft_perror(EXEC_NO_ACCESS);
-			return;
+			return ;
 		}
 		else
 			bin_path = ft_strdup(data->cmd);
@@ -60,7 +55,7 @@ static void	builtin_redir(t_shell *shell, t_exec *data, char **env_cpy)
 	if (ft_strequ(data->cmd, "env"))
 	{
 		if (builtin_env(shell, *data, env_cpy))
-			{};
+			;
 	}
 	else
 		builtin_execute(shell, *data, env_cpy);
