@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/28 13:29:05 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/28 14:45:52 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ typedef struct s_win
 typedef struct s_shell
 {
 	char			**environ;
-	int				fd;
 	int				flg;
 	char			*history[1001];
 	int				hist_idx;
@@ -49,7 +48,6 @@ typedef struct s_shell
 	bool			pipe;
 	char			*tty;
 	bool			last_io;
-	char			*delim;
 	pid_t			child;
 	t_win			window;
 	struct termios	orig_raw;
@@ -138,8 +136,3 @@ typedef struct s_herfd
 }				t_herfd;
 
 #endif
-
-// ls -l | grep file | wc -l
-// ls -lRl | grep Makefile | cat -e ; ps aux | grep
-// ls -R | grep Makefile | cat -e ; ps -j
-// ls -R / | grep Makefile | cat -e ; ps -j
