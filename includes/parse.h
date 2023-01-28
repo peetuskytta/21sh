@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 13:58:06 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/26 19:21:45 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/28 13:32:20 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,6 @@ void	token_list_build(char *input, int size, t_lex *list);
 void	token_list_free(t_tok *list);
 t_tok	*parser(t_shell *shell);
 void	parse_errors(t_tok **first);
+bool	parse_redir_errors(char *str, t_tok *next);
 
 #endif

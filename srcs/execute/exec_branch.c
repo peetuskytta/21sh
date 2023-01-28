@@ -22,9 +22,27 @@ static void	real_exec(t_exec *data, char **env_cpy)
 	char	*bin_path;
 
 	bin_path = NULL;
-	bin_path = exec_find_binary(exec_fetch_path_var(env_cpy), data->cmd);
+	if (data->cmd[0] == '/')
+	{
+		if (access(data->cmd, F_OK) == -1)
+		{
+			ft_perror(NO_FILE_OR_DIR);
+			return;
+		}
+		else if (access(data->cmd, X_OK) == -1)
+		{
+			ft_perror(EXEC_NO_ACCESS);
+			return;
+		}
+		else
+			bin_path = ft_strdup(data->cmd);
+	}
+	if (!bin_path)
+		bin_path = exec_find_binary(exec_fetch_path_var(env_cpy), data->cmd);
 	if (redirection_loop(data) && exec_binary_check(bin_path, *data))
-		exec_cmd(*data, bin_path, env_cpy);
+	{
+		exec_cmd(data, bin_path, env_cpy);
+	}
 	ft_strdel((void *)&bin_path);
 }
 
@@ -42,7 +60,7 @@ static void	builtin_redir(t_shell *shell, t_exec *data, char **env_cpy)
 	if (ft_strequ(data->cmd, "env"))
 	{
 		if (builtin_env(shell, *data, env_cpy))
-			;
+			{};
 	}
 	else
 		builtin_execute(shell, *data, env_cpy);
@@ -59,9 +77,16 @@ static void	command_execution(t_shell *shell, t_exec *data, char **env_cpy)
 {
 	if (is_builtin(data->cmd) == true)
 	{
-		if (ft_strequ(data->cmd, "cd") && data->fds.pipe == PIPE_IN)
-			builtin_cd(shell, *data);
-		else
+		if (data->fds.pipe < 0)
+		{
+			if (redirection_loop(data))
+			{
+				change_in_and_out(data);
+				builtin_execute(shell, *data, env_cpy);
+			}
+			close_fds(data->fds.fd_in, data->fds.fd_out);
+		}
+		else if (data->fds.pipe > -1)
 		{
 			data->pid.child = fork();
 			if (data->pid.child == 0)
@@ -73,9 +98,8 @@ static void	command_execution(t_shell *shell, t_exec *data, char **env_cpy)
 				ft_perror(FORK_FAIL);
 			else
 			{
-				if (data->fds.pipe == PIPE_IN)
-					wait(0);
-				close(data->fds.fd_out);
+				wait(0);
+				close_fds(data->fds.fd_in, data->fds.fd_out);
 			}
 		}
 	}
@@ -96,9 +120,10 @@ void	exec_branch(t_ast *branch, t_shell *shell)
 
 	if (branch == NULL)
 		return ;
-	if (branch->data.fds.pipe == PIPE_LAST && pid.status == -1)
-		pid.wait = waitpid(branch->data.process_pid, &pid.status, 0);
+	pid.child = branch->data.pid.child;
 	env_cpy = copy_environment(shell->environ);
+	if (branch->data.fds.pipe == PIPE_LAST)
+		pid.wait = waitpid(-1, &pid.status, 0);
 	if ((branch->type == REDIR || branch->type == COMMAND))
 		command_execution(shell, &branch->data, env_cpy);
 	exec_branch(branch->left, shell);

@@ -3,72 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:40:28 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/26 18:22:15 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/27 17:25:43 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/execute.h"
 
 /*
-**	Closes the STDIN_FILENO or STDOUT_FILENO for the start and end of the pipe
-**	We don't want to read in the pipe beginning and write to the pipe end.
-*/
-/* static void	pipe_ends(int pipe, int *fd_in, int *fd_out)
-{
-	if (pipe == PIPE_FIRST)
-	{
-		close(*fd_in);
-		*fd_in = -1;
-		dup2(*fd_out, STDOUT_FILENO);
-	}
-	else if (pipe == PIPE_LAST)
-	{
-		close(*fd_out);
-		*fd_out = -1;
-		dup2(*fd_in, STDIN_FILENO);
-	}
-}
-
-static void	change_redir_io(t_redir	*redir)
-{
-	if (redir->type == FILE_IN || redir->type == FILE_TRUNC \
-		|| redir->type == FILE_APPEND)
-	{
-		if (redir->fd_out > 0)
-		{
-			dup2(redir->fd_out, STDOUT_FILENO);
-			close(redir->fd_out);
-		}
-		if (redir->fd_in > 0)
-		{
-			dup2(redir->fd_in, STDIN_FILENO);
-			close(redir->fd_in);
-		}
-	}
-}
-
-
-**	Closes the STDIN_FILENO or STDOUT_FILENO and sets the in and out
-**	of the command to be executed for pipes and redirections.
-*/
-/*
-static void	change_in_and_out(t_exec *data)
-{
-	if (data->fds.pipe != -1)
-		pipe_ends(data->fds.pipe, &data->fds.fd_in, &data->fds.fd_out);
-	else
-	{
-		if (data->fds.fd_out > 0 && data->redir->type != HEREDOC)
-			dup2(data->fds.fd_out, STDOUT_FILENO);
-		if (data->fds.fd_in > 0 && data->redir->type != HEREDOC)
-			dup2(data->fds.fd_in, STDIN_FILENO);
-	}
-	change_redir_io(data->redir);
-
-}
 **	Closes all the filedescriptors. Moved to a separate function
 **	to fit the NORM.
 */
@@ -80,7 +24,7 @@ static void	close_fds(int fd_in, int fd_out)
 		close(fd_out);
 }
 
-static void	wait_for_finish(t_pid *pid)
+void	wait_for_finish(t_pid *pid)
 {
 	pid->wait = waitpid(pid->child, &pid->status, 0);
 	if (pid->wait == -1)
@@ -90,26 +34,28 @@ static void	wait_for_finish(t_pid *pid)
 /*
 **	Performs input/output change before fork and execution of a command.
 */
-void	exec_cmd(t_exec data, char *bin_path, char **env_cpy)
+void	exec_cmd(t_exec *data, char *bin_path, char **env_cpy)
 {
-	data.pid.child = fork();
-	if (data.pid.child == 0)
-	{	
-		change_in_and_out(&data);
-		if (execve(bin_path, data.args, env_cpy) == -1)
+	// DB;
+	data->pid.child = fork();
+	if (data->pid.child == 0)
+	{
+		change_in_and_out(data);
+		// ft_putnbr_endl(data->fds.fd_in);
+		// ft_putnbr_endl(data->fds.fd_out);
+		if (execve(bin_path, data->args, env_cpy) == -1)
 		{
 			ft_perror(EXECVE_ERROR);
 			exit(EXIT_FAILURE);
 		}
-		exit(EXIT_SUCCESS);
+		//exit(EXIT_SUCCESS);
 	}
-	else if (data.pid.child < 0)
-		ft_perror (FORK_FAIL);
+	else if (data->pid.child < 0)
+		ft_perror(FORK_FAIL);
 	else
 	{
-		if (data.fds.pipe != PIPE_LAST)
-			wait_for_finish(&data.pid);
-		close_fds(data.fds.fd_in, data.fds.fd_out);
+		if (data->fds.pipe != PIPE_FIRST)
+			wait_for_finish(&data->pid);
+		close_fds(data->fds.fd_in, data->fds.fd_out);
 	}
-	close_fds(data.fds.fd_in, data.fds.fd_out);
 }

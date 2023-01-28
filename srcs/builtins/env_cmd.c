@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:17:03 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/26 19:10:52 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/28 13:34:28 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,13 @@ static void	cmd_change_value(t_shell *sh, t_exec n, t_exec d, char **env)
 	int	i;
 
 	i = 0;
+	(void)d;
 	n.cmd = ft_strdup(n.args[0]);
 	execute_env(sh, n, env);
 	ft_arr_free((void *)&env);
 	i = 0;
-	ft_strdel(&d.args[1]);
+	//if (sh->pipe == false)
+	//	ft_strdel(&d.args[1]);
 	while (n.args[i])
 		ft_strdel(&n.args[i++]);
 	ft_strdel(&n.cmd);

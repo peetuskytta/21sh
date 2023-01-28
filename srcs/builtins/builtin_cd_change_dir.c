@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 14:39:37 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/26 19:08:25 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/28 13:33:45 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@ static void	directory_change(const char *dir_path)
 	if (access(dir_path, F_OK) == 0)
 	{
 		if (access(dir_path, X_OK) != 0)
+		{
+			ft_perror(CD_SH);
+			ft_perror(dir_path);
 			ft_perror(CD_NO_ACCESS);
+		}
 	}
 	else
 		ft_perror(NO_FILE_OR_DIR);

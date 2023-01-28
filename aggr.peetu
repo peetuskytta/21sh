@@ -42,6 +42,7 @@ tok  ls -la 2&>1 jee
 1>&2	make 1 a copy of 2 NULL OK
 2>&1	make 2 a copy of 1 NULL OK
 
+echo hello > file (leaks?)
 
 
 done:
@@ -55,7 +56,7 @@ done:
 ECHO adds space ?
 if no HOME --- return
 if HOME empty --- return
-if HOME valid -- check permissions, 
+if HOME valid -- check permissions,
 	if permissions, change oldpwd and PWD
 
 

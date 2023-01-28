@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:24:46 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/26 20:26:24 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/28 13:48:41 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 /*Error message defines for CD*/
 # define CD_NO_HOME "cd: HOME not set\n"
 # define CD_NO_OLDPWD "cd: OLDPWD not set\n"
-# define CD_NO_ACCESS " permission denied\n"
+# define CD_NO_ACCESS ": permission denied\n"
 # define CD_NOT_DIR ": Not a directory\n"
 # define CD_SH "shell: cd: "
 # define IS_A_DIR ": Is a directory\n"
@@ -50,10 +50,10 @@
 # define UNSETENV_TOO_LONG "unsetenv: argument too long"
 
 /*Error message defines for env*/
-# define ENV_USE "env: usage: env OR env -i {NAME=value} {executable}\n "
+# define ENV_USE "env: usage: env OR env -i NAME=value {executable}\n"
 
 /*Error messages for fork, waitpid, and execve*/
-# define CMD_NOT_FOUND ": command not found\n"
+# define CMD_NOT_FOUND ": command not found"
 # define EXEC_NO_ACCESS ": permission denied"
 # define EXECVE_ERROR "shell: error with execve"
 # define FORK_FAIL "shell: fork fail"

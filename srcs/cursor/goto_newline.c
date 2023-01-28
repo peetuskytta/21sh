@@ -6,17 +6,28 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 17:48:04 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/20 17:13:51 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/28 13:30:01 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
+static int	whitespace_check(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (ft_isspace(str[i]))
+		i++;
+	if (str[i] == '\0')
+		return (0);
+	return (1);
+}
+
 void	goto_newline(t_shell *shell, t_win *window)
 {
 	int	i;
 
-	(void)window;
 	i = ft_strilen(shell->rev_cmd);
 	if (i > 0)
 		chrcpy_str_rev(shell->rev_cmd, shell->cmd_line, MAX_BUFF, i);
@@ -32,5 +43,7 @@ void	goto_newline(t_shell *shell, t_win *window)
 		i += 1;
 	}
 	ft_memcpy(&shell->q_input[i], shell->cmd_line, ft_strilen(shell->cmd_line));
+	if (whitespace_check(shell->q_input) == 0)
+		key_is_ctrlc(shell, window);
 	read_quote(shell);
 }

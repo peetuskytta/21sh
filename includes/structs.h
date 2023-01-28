@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/26 19:39:13 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/28 13:29:05 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,15 @@ typedef struct s_pid
 {
 	int				child;
 	int				wait;
-	pid_t			status;
+	int				status;
 }					t_pid;
+
+typedef struct s_agre
+{
+	int				agre_one;
+	int				agre_two;
+	int				close;
+}					t_agre;
 
 typedef struct s_exec
 {
@@ -89,6 +96,7 @@ typedef struct s_exec
 	struct s_redir	redir[MAX_REDIR];
 	struct s_fds	fds;
 	struct s_pid	pid;
+	struct s_agre	agre;
 	int				process_pid;
 	int				status;
 }					t_exec;

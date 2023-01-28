@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   change_in_and_out.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 12:14:41 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/26 16:00:50 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/27 15:16:56 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,14 @@ static void	change_redir_io(t_redir	*redir)
 	}
 }
 
+static void	dup_fds(int aggr_type)
+{
+	if (aggr_type == AGGR_COPY_ONE)
+		dup2(STDERR_FILENO, STDOUT_FILENO);
+	else if (aggr_type == AGGR_COPY_TWO)
+		dup2(STDOUT_FILENO, STDERR_FILENO);
+}
+
 static void	aggr_in_out(t_exec *data)
 {
 	if (data->redir->type > 9 && data->redir->type < 13)
@@ -59,15 +67,12 @@ static void	aggr_in_out(t_exec *data)
 			close(STDOUT_FILENO);
 		}
 		else if (data->redir->type == AGGR_CLOSE_ONE)
-			close(STDOUT_FILENO);
+			close(data->redir->fd_out);
 		else if (data->redir->type == AGGR_CLOSE_TWO)
-			close(STDERR_FILENO);
-		else if (data->redir->type == AGGR_CLOSE_BOTH)
-		{
-			close(STDOUT_FILENO);
-			close(STDERR_FILENO);
-		}
+			close(data->redir->fd_err);
 	}
+	else if (data->redir->type > 12)
+		dup_fds(data->redir->type);
 }
 
 /*
@@ -76,13 +81,13 @@ static void	aggr_in_out(t_exec *data)
 */
 void	change_in_and_out(t_exec *data)
 {
-	if (data->fds.pipe != PIPE_IN)
+	if (data->fds.pipe == PIPE_FIRST || data->fds.pipe == PIPE_LAST)
 		pipe_ends(data->fds.pipe, &data->fds.fd_in, &data->fds.fd_out);
-	else
+	else if (data->fds.pipe == PIPE_IN)
 	{
-		if (data->fds.fd_out > 0 && data->redir->type != HEREDOC)
+		if (data->fds.fd_out >= 0)
 			dup2(data->fds.fd_out, STDOUT_FILENO);
-		if (data->fds.fd_in > 0 && data->redir->type != HEREDOC)
+		if (data->fds.fd_in >= 0)
 			dup2(data->fds.fd_in, STDIN_FILENO);
 	}
 	change_redir_io(data->redir);

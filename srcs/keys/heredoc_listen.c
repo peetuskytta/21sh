@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 10:50:05 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/26 20:22:31 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/28 13:40:39 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,11 @@ static int	is_delim(t_herfd *shell)
 	char	*temp;
 
 	i = ft_strstr_rev(shell->input, shell->delim);
-	ft_putnbr_endl(i);
-	ft_putendl(shell->input);
 	if (i != -1 && shell->input[ft_strilen(shell->delim) - 1] == '\n')
 	{
-		ft_putnbr_endl(ft_strlen(shell->input) - ft_strilen(shell->delim) - 2);
 		temp = ft_strsub(shell->input, 0, ft_strlen(shell->input) - ft_strilen(shell->delim) - 1);
 		ft_memset(shell->input, '\0', sizeof(char) * (MAX_BUFF + 1));
 		shell->input = ft_strcpy(shell->input, temp);
-		ft_putendl(shell->input);
 		ft_memdel((void *)&temp);
 		return (1);
 	}

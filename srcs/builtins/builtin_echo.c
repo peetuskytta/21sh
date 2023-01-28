@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:08:12 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/21 14:39:27 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/27 15:13:52 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void	builtin_echo(t_shell *shell, t_exec data)
 	while (data.args[i] != NULL)
 	{
 		ft_putstr(data.args[i++]);
-		ft_putchar(' ');
+		if (data.args[i])
+			ft_putchar(' ');
 	}
 	if (flg == false)
 		ft_putchar('\n');

@@ -6,7 +6,7 @@
 #    By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/26 19:22:14 by zraunio           #+#    #+#              #
-#    Updated: 2023/01/26 19:22:17 by zraunio          ###   ########.fr        #
+#    Updated: 2023/01/28 13:33:15 by zraunio          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -132,6 +132,7 @@ _PANIC := ft_perror.c \
 _PARSE:= token_list_build.c \
 		token_list_free.c \
 		parse_errors.c \
+		parse_redir_errors.c \
 		parser.c
 
 _RAWMODE := enable_rawmode.c \
