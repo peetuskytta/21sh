@@ -133,8 +133,8 @@ t_ast	**ast_constructor(t_shell *shell, t_tok *token)
 	if (!token)
 		return (NULL);
 	temp = token;
-	tree = (t_ast **)ft_memalloc(sizeof(t_ast *) * (50));
-	ft_memset((void **)tree, 0, sizeof(t_ast *) * (50));
+	tree = (t_ast **)ft_memalloc(sizeof(t_ast *) * (100));
+	ft_memset((void **)tree, 0, sizeof(t_ast *) * (100));
 	while (token)
 	{
 		tree[i++] = ast_create_tree(&token);

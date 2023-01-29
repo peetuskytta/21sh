@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:17:03 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/27 15:58:38 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/29 17:27:00 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	execute_env(t_shell *shell, t_exec new, char **env_cpy)
 	(void)shell;
 	bin_path = NULL;
 	bin_path = exec_find_binary(exec_fetch_path_var(env_cpy), new.cmd);
-	if (redirection_loop(&new) && exec_binary_check(bin_path, new))
+	if (redirection_loop(&new) && exec_binary_check(&bin_path, new))
 		execve(bin_path, new.args, env_cpy);
 	ft_strdel((void *)&bin_path);
 }
@@ -62,7 +62,7 @@ bool	env_cdm(t_shell *shell, t_exec new, t_exec data, int i)
 			env_cpy[env_idx] = ft_strdup(data.args[i]);
 			env_idx++;
 		}
-		ft_strdel(&data.args[i]);
+		//ft_strdel(&data.args[i]);
 		i++;
 	}
 	cmd_change_value(shell, new, data, env_cpy);

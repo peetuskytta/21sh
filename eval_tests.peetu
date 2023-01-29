@@ -94,3 +94,5 @@ echo "open quotes			OK
 
 
 NOTES
+
+ls |     lele     |  grep txt  >>>>> leaves process open?

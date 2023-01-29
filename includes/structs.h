@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/27 16:15:42 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/29 14:27:25 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct s_redir
 	int				fd_in;
 	int				fd_out;
 	int				fd_err;
+	int				agre;
 	char			*file;
 }					t_redir;
 
@@ -82,13 +83,6 @@ typedef struct s_pid
 	int				status;
 }					t_pid;
 
-typedef struct s_agre
-{
-	int				agre_one;
-	int				agre_two;
-	int				close;
-}					t_agre;
-
 typedef struct s_exec
 {
 	char			*cmd;
@@ -96,7 +90,6 @@ typedef struct s_exec
 	struct s_redir	redir[MAX_REDIR];
 	struct s_fds	fds;
 	struct s_pid	pid;
-	struct s_agre	agre;
 	int				process_pid;
 	int				status;
 }					t_exec;
@@ -104,6 +97,7 @@ typedef struct s_exec
 typedef struct s_tok
 {
 	int				type;
+	int				agre;
 	char			*str;
 	struct s_tok	*next;
 }					t_tok;

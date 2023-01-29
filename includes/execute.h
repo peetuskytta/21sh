@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 08:19:09 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/27 09:55:43 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/29 17:27:41 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "shell.h"
 
-bool	exec_binary_check(char *bin_path, t_exec data);
+bool	exec_binary_check(char **bin_path, t_exec data);
 char	*exec_find_binary(char **path, char *cmd);
 char	**exec_fetch_path_var(char **env);
 void	exec_tree(t_ast **tree, t_shell *shell);

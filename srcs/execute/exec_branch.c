@@ -34,6 +34,14 @@ static char	**copy_environment(char **environ)
 	return (copy);
 }
 
+static void	close_fds(int fd_in, int fd_out)
+{
+	if (fd_in >= 0)
+		close(fd_in);
+	if (fd_out >= 0)
+		close(fd_out);
+}
+
 static void	real_exec(t_exec *data, char **env_cpy)
 {
 	char	*bin_path;
@@ -56,21 +64,12 @@ static void	real_exec(t_exec *data, char **env_cpy)
 	}
 	if (!bin_path)
 		bin_path = exec_find_binary(exec_fetch_path_var(env_cpy), data->cmd);
-	if (redirection_loop(data) && exec_binary_check(bin_path, *data))
-	{
+	if (redirection_loop(data) && exec_binary_check(&bin_path, *data))
 		exec_cmd(data, bin_path, env_cpy);
-	}
+	else
+		close_fds(data->fds.fd_in, data->fds.fd_out);
 	ft_strdel((void *)&bin_path);
 }
-
-static void	close_fds(int fd_in, int fd_out)
-{
-	if (fd_in >= 0)
-		close(fd_in);
-	if (fd_out >= 0)
-		close(fd_out);
-}
-
 
 static void	builtin_redir(t_shell *shell, t_exec *data, char **env_cpy)
 {
@@ -121,7 +120,7 @@ static void	command_execution(t_shell *shell, t_exec *data, char **env_cpy)
 			}
 		}
 	}
-	else
+	else if (data->cmd)
 		real_exec(data, env_cpy);
 }
 

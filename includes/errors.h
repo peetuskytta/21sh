@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:24:46 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/27 16:40:15 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/29 16:08:48 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 # define ERRORS_H
 
 /*Error message defines*/
-# define CMD_TOO_LONG "command line argument is too long"
-# define QUOTE_TOO_LONG "too many lines. Quote level cannot exceed 4096 lines"
-# define MALLOC_FAIL "malloc failed: serious memory issues"
-# define ARG_REQUIRED ": filename argument required"
+# define CMD_TOO_LONG "command line argument is too long\n"
+# define QUOTE_TOO_LONG "too many lines. Quote level cannot exceed 4096 lines\n"
+# define MALLOC_FAIL "malloc failed: serious memory issues\n"
+# define ARG_REQUIRED ": filename argument required\n"
 # define ARG_USAGE_1 ": usage: "
-# define ARG_USAGE_2 " filename [arguments]"
+# define ARG_USAGE_2 " filename [arguments]\n"
 # define NO_FILE_OR_DIR ": No such file or directory\n"
 # define HIST_ERR_FILE "Could not open history file.\n"
-# define ABORTED_ERROR "Process aborted."
-# define ERROR_EXIT "Exit error."
+# define ABORTED_ERROR "Process aborted.\n"
+# define ERROR_EXIT "Exit error.\n"
 # define NO_STRING ""
-# define STDOUT_FAIL "Fail to fetch the stdout. Terminating."
-# define STDIN_FAIL "Fail to fetch the stdin. Terminating."
-# define STDERR_FAIL "Fail to fetch the stderr. Terminating."
+# define STDOUT_FAIL "Fail to fetch the stdout. Terminating.\n"
+# define STDIN_FAIL "Fail to fetch the stdin. Terminating.\n"
+# define STDERR_FAIL "Fail to fetch the stderr. Terminating.\n"
 
 /*Error message defines for CD*/
 # define CD_NO_HOME "cd: HOME not set\n"
@@ -39,38 +39,38 @@
 # define CD_ARG_NO "cd: too many arguments\n"
 
 /*Error message defines for setenv and unsetenv*/
-# define EMPTY_STR "setenv name: cannot be an empty string"
-# define NAME_ERROR "setenv name: cannot be a NULL pointer or 0 length string"
-# define INVALID_CHAR "setenv name: must begin with Alpha cahracter"
+# define EMPTY_STR "setenv name: cannot be an empty string\n"
+# define NAME_ERROR "setenv name: cannot be a NULL pointer or 0 length string\n"
+# define INVALID_CHAR "setenv name: must begin with Alpha cahracter\n"
 # define SET_TOO_MANY_ARG "env/setenv: too many arguments\n"
-# define SETENV_USAGE "usage: 'setenv [name]=[value]'"
-# define NOT_IDENTIFIER ": not a valid identifier"
-# define UNSETENV_USAGE "usage: unsetenv [name]"
-# define UNSETENV_ARGS "unsetenv: too many arguments"
-# define UNSETENV_TOO_LONG "unsetenv: argument too long"
+# define SETENV_USAGE "usage: 'setenv [name]=[value]'\n"
+# define NOT_IDENTIFIER ": not a valid identifier\n"
+# define UNSETENV_USAGE "usage: unsetenv [name]\n"
+# define UNSETENV_ARGS "unsetenv: too many arguments\n"
+# define UNSETENV_TOO_LONG "unsetenv: argument too long\n"
 
 /*Error message defines for env*/
 # define ENV_USE "env: usage: env OR env -i {NAME=value} {executable}\n "
 
 /*Error messages for fork, waitpid, and execve*/
-# define CMD_NOT_FOUND ": command not found"
-# define EXEC_NO_ACCESS ": permission denied"
-# define EXECVE_ERROR "shell: error with execve"
-# define FORK_FAIL "shell: fork fail"
-# define WAITPID_FAIL "shell: waitpid fail"
-# define EXECVE_ERR "shell: execve error"
+# define CMD_NOT_FOUND ": command not found\n"
+# define EXEC_NO_ACCESS ": permission denied\n"
+# define EXECVE_ERROR "shell: error with execve\n"
+# define FORK_FAIL "shell: fork fail\n"
+# define WAITPID_FAIL "shell: waitpid fail\n"
+# define EXECVE_ERR "shell: execve error\n"
 
 /*Error messages for pipe, redirections & tokens*/
-# define REDIR_ERR "shell: redirection error"
-# define PIPE_ERR "shell: pipe error"
-# define BAD_FD "shell: Bad file descriptor:"
+# define REDIR_ERR "shell: redirection error\n"
+# define PIPE_ERR "shell: pipe error\n"
+# define BAD_FD "shell: Bad file descriptor:\n"
 # define SYNTAX_ERR "shell: syntax error near unexpected token\n"
 # define PARSE_ERR "shell: parse error near "
-# define AGGR_ERR "shell: redir and closing file descriptor not allowed"
+# define AGGR_ERR "shell: redir and closing file descriptor not allowed\n"
 
 /*Error messages for file descriptors*/
-# define FILE_CLOSE_ERR "shell: error when closing a file"
-# define FILE_OPEN_ERR "shell: error when opening a file"
+# define FILE_CLOSE_ERR "shell: error when closing a file\n"
+# define FILE_OPEN_ERR "shell: error when opening a file\n"
 
 # define MALLOC_ERRNO		2
 # define FORK_ERRNO			3

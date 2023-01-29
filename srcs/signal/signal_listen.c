@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_listen.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 14:15:51 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/25 16:26:19 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/29 16:12:00 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	signal_handler(int signo)
 void	signal_listen(void)
 {
 	signal(SIGINT, signal_handler);
-	signal(SIGWINCH, signal_handler);
+	//signal(SIGWINCH, signal_handler);
 	signal(SIGTSTP, SIG_IGN);
 	signal(SIGSTOP, SIG_IGN);
 }
