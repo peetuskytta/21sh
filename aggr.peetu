@@ -51,3 +51,6 @@ if HOME valid -- check permissions,
 
 
 
+env in a pipe
+cd leaks
+

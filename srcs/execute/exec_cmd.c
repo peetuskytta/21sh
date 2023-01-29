@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:40:28 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/29 17:23:34 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/29 18:31:22 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,6 @@ void	exec_cmd(t_exec *data, char *bin_path, char **env_cpy)
 	if (data->pid.child == 0)
 	{
 		change_in_and_out(data);
-		ft_putendl(data->args[0]);
-		ft_putendl(data->cmd);
-		ft_putendl(bin_path);
 		if (execve(bin_path, data->args, env_cpy) == -1)
 		{
 			perror("ERR>>>> ");

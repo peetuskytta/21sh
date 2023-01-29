@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 12:14:41 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/29 16:30:48 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/29 18:16:41 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,5 @@ void	change_in_and_out(t_exec *data)
 			dup2(data->fds.fd_in, STDIN_FILENO);
 	}
 	change_redir_io(data->redir);
-/* 	ft_putnbr_endl(data->redir->agre);
-	ft_putnbr_endl(data->redir->fd_err); */
 	aggr_in_out(data);
 }
