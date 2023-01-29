@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   enable_rawmode.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 12:59:48 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/23 19:24:26 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/29 18:11:20 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,5 @@ int	enable_rawmode(t_shell *shell)
 	shell->raw = orig_raw;
 	return (1);
 }
-/* 
+/*
 */

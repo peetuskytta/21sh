@@ -3,18 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_errors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 13:33:06 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/29 17:33:00 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/29 18:39:08 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parse.h"
 
-
-
-static bool aggr_checks(t_tok *tok, t_tok *next)
+static bool	aggr_checks(t_tok *tok, t_tok *next)
 {
 	if (ft_strequ(">&", tok->str) || ft_strequ(">&-", tok->str)
 		|| ft_strequ("1>&-", tok->str) || ft_strequ("2>&-", tok->str)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd_home.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 13:39:29 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/26 15:42:35 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/29 18:25:53 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ void	builtin_cd_home(t_shell *shell, t_exec *data, int idx)
 	{
 		cd_home_value(shell, data, idx);
 		builtin_cd_change_dir(shell, data);
+		ft_memdel((void *)&data->args[1]);
 	}
 }

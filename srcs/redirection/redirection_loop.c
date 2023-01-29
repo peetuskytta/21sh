@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 14:22:02 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/26 23:50:02 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/29 18:38:35 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,7 @@ bool	redirection_loop(t_exec *data)
 			}
 		}
 		else
-		{
-			//data->fds.fd_close = data->redir->type;
 			return (false);
-		}
 		idx++;
 	}
 	return (true);

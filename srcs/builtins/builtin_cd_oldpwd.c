@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd_oldpwd.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:37:21 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/28 14:04:42 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/29 18:35:44 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ void	builtin_cd_oldpwd(t_shell *shell, t_exec *data, int idx)
 		cd_oldpwd_value(shell, data, idx);
 		builtin_cd_change_dir(shell, data);
 		ft_putendl_fd(data->args[1], STDOUT_FILENO);
+		ft_memdel((void *)&data->args[1]);
 	}
 }

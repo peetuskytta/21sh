@@ -112,7 +112,10 @@ void	exec_branch(t_ast *branch, t_shell *shell)
 	if (branch->data.fds.pipe == PIPE_LAST)
 		pid.wait = waitpid(-1, &pid.status, 0);
 	if ((branch->type == REDIR || branch->type == COMMAND))
+	{
 		command_execution(shell, &branch->data, env_cpy);
+		init_in_out_err(shell->tty);
+	}
 	exec_branch(branch->left, shell);
 	if (branch->type == PIPE)
 		exec_branch(branch->right, shell);
