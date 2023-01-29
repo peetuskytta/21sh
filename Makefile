@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+         #
+#    By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/26 19:22:14 by zraunio           #+#    #+#              #
-#    Updated: 2023/01/29 17:40:45 by zraunio          ###   ########.fr        #
+#    Updated: 2023/01/29 19:09:33 by pskytta          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,6 @@ INCL = -I includes/
 _AST := ast_constructor.c \
 		ast_consume_tokens.c \
 		ast_set_redir.c \
-		ast_print.c \
 		ast_create_tree.c \
 		ast_release.c
 

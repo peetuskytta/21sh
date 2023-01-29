@@ -12,26 +12,29 @@
 
 #include "../../includes/execute.h"
 
+static void	slash_access_check(t_exec *data, char **bin_path)
+{
+	if (access(data->cmd, F_OK) == -1)
+	{
+		ft_perror(NO_FILE_OR_DIR);
+		return ;
+	}
+	else if (access(data->cmd, X_OK) == -1)
+	{
+		ft_perror(EXEC_NO_ACCESS);
+		return ;
+	}
+	else
+		*bin_path = ft_strdup(data->cmd);
+}
+
 static void	real_exec(t_exec *data, char **env_cpy)
 {
 	char	*bin_path;
 
 	bin_path = NULL;
 	if (data->cmd[0] == '/')
-	{
-		if (access(data->cmd, F_OK) == -1)
-		{
-			ft_perror(NO_FILE_OR_DIR);
-			return ;
-		}
-		else if (access(data->cmd, X_OK) == -1)
-		{
-			ft_perror(EXEC_NO_ACCESS);
-			return ;
-		}
-		else
-			bin_path = ft_strdup(data->cmd);
-	}
+		slash_access_check(data, &bin_path);
 	if (!bin_path)
 		bin_path = exec_find_binary(exec_fetch_path_var(env_cpy), data->cmd);
 	if (redirection_loop(data) && exec_binary_check(&bin_path, *data))

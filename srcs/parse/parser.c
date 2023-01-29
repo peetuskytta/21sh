@@ -39,7 +39,11 @@ t_tok	*parser(t_shell *shell)
 	ft_memset(&list, 0, sizeof(t_lex));
 	lenght = ft_strilen(shell->q_input);
 	if (lenght > 0)
+	{
 		token_list_build(shell->q_input, lenght, &list);
+	}
+	else
+		return (NULL);
 	input_expand(shell, &list.token_list);
 	input_strip_quotes(&list.token_list);
 	parse_errors(&list.token_list);
