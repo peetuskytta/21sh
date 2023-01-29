@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 15:03:07 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/27 16:36:21 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/28 13:33:55 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,8 @@ void	builtin_cd(t_shell *shell, t_exec data)
 		else if (checks == CD_HOME)
 			builtin_cd_home(shell, &data, is_strenv("HOME", shell->environ));
 		else if (checks == CD_PREVIOUS)
-		{
-			builtin_cd_oldpwd(shell, &data, is_strenv("OLDPWD", shell->environ));
-		}
+			builtin_cd_oldpwd(shell, &data,
+				is_strenv("OLDPWD", shell->environ));
 		if (checks == CD_ERR)
 			return ;
 	}

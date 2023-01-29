@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/29 14:27:25 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/29 17:36:09 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ typedef struct s_win
 typedef struct s_shell
 {
 	char			**environ;
-	int				fd;
 	int				flg;
 	char			*history[1001];
 	int				hist_idx;
@@ -49,7 +48,6 @@ typedef struct s_shell
 	bool			pipe;
 	char			*tty;
 	bool			last_io;
-	char			*delim;
 	pid_t			child;
 	t_win			window;
 	struct termios	orig_raw;
@@ -121,9 +119,14 @@ typedef struct s_ast
 	struct s_pipe	pipes[MAX_REDIR];
 }					t_ast;
 
-#endif
+typedef struct s_herfd
+{
+	int		fd;
+	int		idx;
+	int		end;
+	int		cols;
+	char	*input;
+	char	*delim;
+}				t_herfd;
 
-// ls -l | grep file | wc -l
-// ls -lRl | grep Makefile | cat -e ; ps aux | grep
-// ls -R | grep Makefile | cat -e ; ps -j
-// ls -R / | grep Makefile | cat -e ; ps -j
+#endif

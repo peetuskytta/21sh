@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_key.c                                         :+:      :+:    :+:   */
+/*   close_fds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/03 16:57:43 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/26 19:36:34 by zraunio          ###   ########.fr       */
+/*   Created: 2023/01/29 17:39:31 by zraunio           #+#    #+#             */
+/*   Updated: 2023/01/29 17:40:17 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
+#include "../../includes/execute.h"
 
-void	read_key(t_shell *shell, char *input)
+void	close_fds(int fd_in, int fd_out)
 {
-	int	i;
-
-	i = 0;
-	while (i != 1)
-	{
-		ft_memset(input, 0, sizeof(char) * (MAX_BUFF + 1));
-		i = read(STDIN_FILENO, input, MAX_BUFF);
-		if (i == -1)
-			return ;
-		key_listen(shell, input);
-	}
+	if (fd_in > 0)
+		close(fd_in);
+	if (fd_out > 0)
+		close(fd_out);
 }

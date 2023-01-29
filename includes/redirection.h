@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 14:59:36 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/25 22:10:55 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/26 19:26:55 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ typedef enum e_status
 bool	redirection_loop(t_exec *data);
 int		redir_file_check(t_redir *redir);
 int		redir_folder_check(char *str);
-void	redir_heredoc(t_shell *shell, t_tok *token);
+void	redir_heredoc(t_tok *token);
 
 #endif

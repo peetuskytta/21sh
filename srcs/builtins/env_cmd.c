@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:17:03 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/29 17:27:00 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/29 17:30:43 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ static void	cmd_change_value(t_shell *sh, t_exec n, t_exec d, char **env)
 	execute_env(sh, n, env);
 	ft_arr_free((void *)&env);
 	i = 0;
-	//if (sh->pipe == false)
-	//	ft_strdel(&d.args[1]);
 	while (n.args[i])
 		ft_strdel(&n.args[i++]);
 	ft_strdel(&n.cmd);
@@ -62,7 +60,6 @@ bool	env_cdm(t_shell *shell, t_exec new, t_exec data, int i)
 			env_cpy[env_idx] = ft_strdup(data.args[i]);
 			env_idx++;
 		}
-		//ft_strdel(&data.args[i]);
 		i++;
 	}
 	cmd_change_value(shell, new, data, env_cpy);

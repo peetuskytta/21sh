@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 09:15:27 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/26 14:39:11 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/28 14:14:08 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	fetch_ttyname(t_shell *shell)
 		kill_mode(STDERR_FAIL, shell);
 	shell->tty = ttyname(STDIN_FILENO);
 	if (!shell->tty)
-		ft_perror("ttyname() failed to retrieve terminal name.");
+		ft_perror(TTY_TERM_ERR);
 }
 
 static void	init_allocations(t_shell *shell)
@@ -64,9 +64,9 @@ void	init_shell(t_shell *shell, char **environ)
 	shell->prmpt_len = 3;
 	shell->quote = EOF;
 	init_term();
-	cursor_find(shell, &shell->window);
-	init_window(shell, &shell->window);
 	fetch_envp(shell, environ, env_variable_counter(environ));
 	fetch_ttyname(shell);
 	history_fetch(shell);
+	cursor_find(shell, &shell->window);
+	init_window(shell, &shell->window);
 }

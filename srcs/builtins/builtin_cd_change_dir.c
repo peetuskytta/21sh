@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd_change_dir.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 14:39:37 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/27 16:39:58 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/29 18:06:54 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,6 @@ static char	*join_n_and_v(char *name, char *value)
 
 static void	modify_env(t_shell *shell, char *name, char *value, int i)
 {
-/* 	i = is_strenv(name, shell->environ);
-	if (i < 0)
-		add_env_variable(shell, name, value); */
 	i = is_strenv(name, shell->environ);
 	ft_memdel((void *)&shell->environ[i]);
 	shell->environ[i] = join_n_and_v(name, value);

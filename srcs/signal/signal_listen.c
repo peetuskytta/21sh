@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 14:15:51 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/29 18:18:43 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/29 18:36:13 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,22 @@
 
 extern t_shell	*g_shell;
 
+void	signal_win_handler(int signo)
+{
+	if (signo == SIGWINCH)
+	{
+	}
+}
+
 static void	signal_abort(int signo)
 {
-	kill(signo, SIGABRT);
-	ft_putchar_fd('\n', STDOUT_FILENO);
-	cmd_line_prompt(EOF);
-	key_is_ctrlc(g_shell, &g_shell->window);
+	if (signo)
+	{
+		kill(signo, SIGINT);
+		ft_putstr_fd("\n\r", STDOUT_FILENO);
+		cmd_line_prompt(EOF);
+		key_is_ctrlc(g_shell, &g_shell->window);
+	}
 }
 
 static void	signal_handler(int signo)
@@ -33,7 +43,7 @@ static void	signal_handler(int signo)
 void	signal_listen(void)
 {
 	signal(SIGINT, signal_handler);
-	signal(SIGWINCH, signal_handler);
+	signal(SIGWINCH, signal_win_handler);
 	signal(SIGTSTP, SIG_IGN);
 	signal(SIGSTOP, SIG_IGN);
 }

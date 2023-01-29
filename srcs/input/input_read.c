@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 18:42:14 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/29 18:11:43 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/29 18:35:57 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	input_read(t_shell *shell)
 	char	input[MAX_BUFF + 1];
 
 	if (enable_rawmode(shell) == 0)
-		ft_putendl_fd("Error with tcgetattr", STDERR_FILENO);
+		ft_perror(TCGET_ERR);
 	tcsetattr(STDIN_FILENO, TCSANOW, &shell->raw);
-	read_key(shell, input, 0);
+	read_key(shell, input);
 	tcsetattr(STDIN_FILENO, TCSANOW, &shell->orig_raw);
 }

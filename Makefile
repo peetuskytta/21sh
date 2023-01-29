@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/01/26 19:22:14 by zraunio           #+#    #+#              #
+#    Updated: 2023/01/29 17:40:45 by zraunio          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 #Compiler and compiler flags
 CC := gcc
 FLAGS_DB := -Wall -Wextra -Werror -g -fsanitize=address
@@ -36,6 +48,7 @@ _AST := ast_constructor.c \
 		ast_consume_tokens.c \
 		ast_set_redir.c \
 		ast_print.c \
+		ast_create_tree.c \
 		ast_release.c
 
 _BUILTIN := builtin_execute.c \
@@ -48,6 +61,7 @@ _BUILTIN := builtin_execute.c \
 			builtin_cd_home.c \
 			builtin_cd_access.c \
 			builtin_cd_change_dir.c \
+			env_temp_i.c \
 			is_strenv.c \
 			is_builtin.c \
 			setenv_update_env.c \
@@ -57,6 +71,7 @@ _BUILTIN := builtin_execute.c \
 _SRCS :=  main.c \
 		allocation_check.c \
 		env_variable_counter.c \
+		copy_environment.c \
 		logo.c
 
 _CURSOR := cursor_reset_line.c \
@@ -75,6 +90,7 @@ _EXECUTE := exec_tree.c \
 		exec_find_binary.c \
 		exec_fetch_path_var.c \
 		exec_clear_data.c \
+		close_fds.c \
 		change_in_and_out.c
 
 _INIT := init_shell.c \
@@ -96,8 +112,7 @@ _HISTORY := history_create.c \
 		history_traverse.c \
 		history_fetch.c \
 		history_runtime.c \
-		history_reset.c \
-		history.c
+		history_reset.c
 
 _KEYS := key_listen.c \
 		read_key.c \
@@ -117,6 +132,7 @@ _PANIC := ft_perror.c \
 _PARSE:= token_list_build.c \
 		token_list_free.c \
 		parse_errors.c \
+		parse_redir_errors.c \
 		parser.c
 
 _RAWMODE := enable_rawmode.c \

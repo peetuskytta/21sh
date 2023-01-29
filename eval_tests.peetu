@@ -7,7 +7,7 @@ foo									OK
 
 SECTION 2
 
-exit								OK >>>>>>> in pipe gives an error
+exit								OK
 echo "it works"						OK
 echo it works						OK
 cd relative/path/of/your/choice		OK
@@ -88,6 +88,7 @@ copy						OK
 paste						OK
 cat and ctrl-c				OK
 echo "open quotes			OK
+
 
 
 

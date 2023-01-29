@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:24:46 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/29 16:08:48 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/29 17:43:58 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@
 # define UNSETENV_TOO_LONG "unsetenv: argument too long\n"
 
 /*Error message defines for env*/
-# define ENV_USE "env: usage: env OR env -i {NAME=value} {executable}\n "
+# define ENV_USE "env: usage: env OR env -i NAME=value {executable}\n"
 
 /*Error messages for fork, waitpid, and execve*/
 # define CMD_NOT_FOUND ": command not found\n"
@@ -59,6 +59,8 @@
 # define FORK_FAIL "shell: fork fail\n"
 # define WAITPID_FAIL "shell: waitpid fail\n"
 # define EXECVE_ERR "shell: execve error\n"
+# define TCGET_ERR "Error with tcgetattr\n"
+# define TTY_TERM_ERR "ttyname() failed to retrieve terminal name.\n"
 
 /*Error messages for pipe, redirections & tokens*/
 # define REDIR_ERR "shell: redirection error\n"
@@ -69,6 +71,7 @@
 # define AGGR_ERR "shell: redir and closing file descriptor not allowed\n"
 
 /*Error messages for file descriptors*/
+# define HEREDOC_EXIST "heredoc: already exists. Delete file and try again.\n"
 # define FILE_CLOSE_ERR "shell: error when closing a file\n"
 # define FILE_OPEN_ERR "shell: error when opening a file\n"
 

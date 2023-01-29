@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_listen.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 10:50:05 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/25 16:50:01 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/29 18:39:42 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	ft_strstr_rev(const char *haystack, const char *needle)
 	return (-1);
 }
 
-static int	is_delim(t_shell *shell)
+static int	is_delim(t_herfd *shell)
 {
 	int		i;
 	char	*temp;
@@ -43,7 +43,8 @@ static int	is_delim(t_shell *shell)
 	i = ft_strstr_rev(shell->input, shell->delim);
 	if (i != -1 && shell->input[ft_strilen(shell->delim) - 1] == '\n')
 	{
-		temp = ft_strsub(shell->input, 0, ft_strlen(shell->input) - i + 1);
+		temp = ft_strsub(shell->input, 0, ft_strlen(shell->input) - \
+			ft_strilen(shell->delim) - 1);
 		ft_memset(shell->input, '\0', sizeof(char) * (MAX_BUFF + 1));
 		shell->input = ft_strcpy(shell->input, temp);
 		ft_memdel((void *)&temp);
@@ -66,14 +67,14 @@ static int	keys_heredoc(char *input, int *i)
 		return (0);
 }
 
-static void	save_to_heredoc(t_shell *shell, char c)
+static void	save_to_heredoc(t_herfd *shell, char c)
 {
 	ft_putchar_fd(c, STDOUT_FILENO);
-	shell->input[shell->cmd_idx] = c;
-	shell->cmd_idx++;
+	shell->input[shell->idx] = c;
+	shell->idx++;
 }
 
-int	heredoc_listen(t_shell *shell, char *input)
+int	heredoc_listen(t_herfd *shell, char *input)
 {
 	int	i;
 	int	key;
@@ -84,14 +85,14 @@ int	heredoc_listen(t_shell *shell, char *input)
 		if (input[i] == CTRL_D)
 			return (-1);
 		key = keys_heredoc(input, &i);
-		if (key == ENTER)
+		if (key == ENTER || shell->idx + 1 >= shell->cols)
 		{
 			save_to_heredoc(shell, '\n');
-			if (is_delim(shell) == 1)
+			if (is_delim(shell) == 1 || shell->idx + 1 >= shell->cols)
 				return (-1);
 			ft_putstr_fd("> ", STDOUT_FILENO);
 		}
-		else if (shell->cmd_idx + 1 < shell->window.cols && key == 0)
+		else if (shell->idx + 1 < shell->cols && key == 0)
 		{
 			if (input[i] == '\t')
 				input[i] = ' ';

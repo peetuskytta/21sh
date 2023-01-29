@@ -1,11 +1,5 @@
 _________REASONABLY DONE_________
-- AGREGATE - peetu 70%
-- BUILTINS - together 97% >> "\n" for exit builtin sent to kill_mode
-	- cd: peetu
-		- HOME and - : rori
-	- env: rori
-		- env ls, e.g env comamnd or executable : rori
-	- echo, setenv, unsetenv: donedone
+- AGREGATE - peetu 85%
 
 _________DONE DONE_________
 - ERRORS - together 
@@ -23,6 +17,12 @@ _________DONE DONE_________
 - READ_INPUT - together
 - RAWMODE - rori
 - KEYPRESS LISTEN - rori
+- BUILTINS - together 97% >> "\n" for exit builtin sent to kill_mode
+	- cd: peetu
+		- HOME and - : rori
+	- env: rori
+		- env ls, e.g env comamnd or executable : rori
+	- echo, setenv, unsetenv: donedone
 - Makefile
 - .h files org
 

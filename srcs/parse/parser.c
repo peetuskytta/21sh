@@ -12,27 +12,6 @@
 
 #include "../../includes/parse.h"
 
-/*DELETE BEFORE SUBMIT*/
-void	token_list_print(t_tok *token)
-{
-	t_tok	*temp;
-	int		i;
-
-	i = 0;
-	temp = token;
-	NL;
-	while (temp != NULL)
-	{
-		if (temp->str)
-			ft_printf("token[%d] type [%d] = %s", i++, temp->type, temp->str);
-		temp = temp->next;
-		if (temp != NULL)
-			NL;
-	}
-	if (temp == NULL)
-		ft_printf("\ntoken[%d] (NULL)\n", i);
-}
-
 static void	check_for_heredoc(t_tok **first, t_shell *shell)
 {
 	t_tok	*temp;
@@ -43,9 +22,9 @@ static void	check_for_heredoc(t_tok **first, t_shell *shell)
 		if (temp->type == REDIR && ft_strequ(temp->str, "<<"))
 		{
 			if (enable_rawmode(shell) == 0)
-				ft_putendl_fd("Error with tcgetattr", STDERR_FILENO);
+				ft_perror(TCGET_ERR);
 			tcsetattr(STDIN_FILENO, TCSANOW, &shell->raw);
-			// redir_heredoc(shell, temp);
+			redir_heredoc(temp);
 			tcsetattr(STDIN_FILENO, TCSANOW, &shell->orig_raw);
 		}
 		temp = temp->next;

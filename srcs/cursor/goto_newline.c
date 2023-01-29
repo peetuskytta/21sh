@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   goto_newline.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 17:48:04 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/27 16:56:32 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/28 13:30:01 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	whitespace_check(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (ft_isspace(str[i]))

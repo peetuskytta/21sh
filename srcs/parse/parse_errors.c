@@ -6,47 +6,13 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 13:33:06 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/29 16:34:07 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/29 18:39:08 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parse.h"
 
-static bool	redir_validation(t_tok *next)
-{
-	if (next == NULL)
-	{
-		ft_perror("syntax error near unexpected token `newline'\n");
-		return (true);
-	}
-	return (false);
-}
-
-static bool	redir_error_checks(char *str, t_tok *next)
-{
-	if (ft_strequ(">", str) || ft_strequ(">>", str)
-		||ft_strequ("<", str) || ft_strequ("<<", str)
-		|| ft_strequ("1>", str) || ft_strequ("1>>", str)
-		|| ft_strequ("2>", str) || ft_strequ("2>>", str)
-		|| ft_strequ("2>>1", str) || ft_strequ("1>>2", str)
-		|| ft_strequ("1>2", str) || ft_strequ("2>1", str))
-		;
-	else if (next->type == REDIR && ft_strchr(next->str, '&'))
-	{
-		ft_print_fd(2, "\n"AGGR_ERR"\n");
-		return (true);
-	}
-	else
-	{
-		ft_print_fd(2, "\n21sh parse error near `%s'\n", str);
-		return (true);
-	}
-	if (redir_validation(next))
-		return (true);
-	return (false);
-}
-
-static bool aggr_checks(t_tok *tok, t_tok *next)
+static bool	aggr_checks(t_tok *tok, t_tok *next)
 {
 	if (ft_strequ(">&", tok->str) || ft_strequ(">&-", tok->str)
 		|| ft_strequ("1>&-", tok->str) || ft_strequ("2>&-", tok->str)
@@ -90,7 +56,7 @@ static bool	redir_check(t_tok *temp)
 			}
 			else
 			{
-				if (redir_error_checks(temp->str, temp->next))
+				if (parse_redir_errors(temp->str, temp->next))
 					return (true);
 			}
 			if (temp->next->type == REDIR && temp->next->next != NULL)
