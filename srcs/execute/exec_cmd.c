@@ -6,23 +6,11 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:40:28 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/28 15:03:16 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/29 17:42:24 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/execute.h"
-
-/*
-**	Closes all the filedescriptors. Moved to a separate function
-**	to fit the NORM.
-*/
-static void	close_fds(int fd_in, int fd_out)
-{
-	if (fd_in >= 0)
-		close(fd_in);
-	if (fd_out >= 0)
-		close(fd_out);
-}
 
 void	wait_for_finish(t_pid *pid)
 {
@@ -42,6 +30,7 @@ void	exec_cmd(t_exec *data, char *bin_path, char **env_cpy)
 		change_in_and_out(data);
 		if (execve(bin_path, data->args, env_cpy) == -1)
 		{
+			perror("ERR>>>> ");
 			ft_perror(EXECVE_ERROR);
 			exit(EXIT_FAILURE);
 		}

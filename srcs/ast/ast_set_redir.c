@@ -15,6 +15,8 @@
 static int	set_aggr_type(t_redir *redir, char *str)
 {
 	(void)redir;
+	if (ft_strequ(">&", str))
+		return (AGGR_COPY_BOTH);
 	if (ft_strequ(">&-", str))
 		return (AGGR_CLOSE_BOTH);
 	if (ft_strequ("1>&-", str))
@@ -35,10 +37,10 @@ static int	check_for_type(t_redir *redir, char *str)
 
 	type = -1;
 	if (ft_strchr(str, '&'))
-		type = set_aggr_type(redir, str);
-	else if ((str[0] == '<' && ft_strlen(str) == 1) || ft_strequ("<<", str))
+		redir->agre = set_aggr_type(redir, str);
+	if ((str[0] == '<' && ft_strlen(str) == 1) || ft_strequ("<<", str))
 		type = FILE_IN;
-	else if (ft_strchr(str, '>'))
+	if (ft_strchr(str, '>'))
 	{
 		if (ft_strnstr(str, ">>", 3))
 			type = FILE_APPEND;
@@ -55,6 +57,8 @@ static int	check_for_type(t_redir *redir, char *str)
 void	ast_set_redir(t_redir *redir, char *str)
 {
 	redir->type = check_for_type(redir, str);
+/* 	if (redir->agre > 0)
+		ft_putendl("AGGRE found"); */
 /* 	if (ft_strequ("<<", str))
 		redir->type = HEREDOC;
 	if (redir->type > 9)

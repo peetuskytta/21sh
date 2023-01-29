@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 13:58:06 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/28 13:32:20 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/29 17:36:00 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef enum e_aggr
 	AGGR_CLOSE_TWO = 12,
 	AGGR_COPY_ONE = 13,
 	AGGR_COPY_TWO = 14,
+	AGGR_COPY_BOTH = 15,
 }	t_aggr;
 
 typedef enum e_state

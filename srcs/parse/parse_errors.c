@@ -6,19 +6,25 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 13:33:06 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/28 14:15:51 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/29 17:33:00 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parse.h"
 
-static bool	aggr_checks(char *str, t_tok *next)
+
+
+static bool aggr_checks(t_tok *tok, t_tok *next)
 {
-	if (ft_strequ(">&", str) || ft_strequ(">&-", str)
-		|| ft_strequ("1>&-", str) || ft_strequ("2>&-", str)
-		|| ft_strequ("1>&2", str) || ft_strequ("2>&1", str))
-		;
-	else if (ft_strequ("0<&-", str))
+	if (ft_strequ(">&", tok->str) || ft_strequ(">&-", tok->str)
+		|| ft_strequ("1>&-", tok->str) || ft_strequ("2>&-", tok->str)
+		|| ft_strequ("1>&2", tok->str) || ft_strequ("2>&1", tok->str))
+	{
+		if (!ft_strequ(">&", tok->str))
+			next->type = WORD;
+		tok->agre = 1;
+	}
+	else if (ft_strequ("0<&-", tok->str))
 	{
 		ft_perror(BAD_FD);
 		ft_perror("0<&-\n");
@@ -27,10 +33,10 @@ static bool	aggr_checks(char *str, t_tok *next)
 	else
 	{
 		ft_perror(PARSE_ERR);
-		ft_print_fd(STDERR_FILENO, "%s'\n", str);
+		ft_print_fd(STDERR_FILENO, "%s'\n", tok->str);
 		return (true);
 	}
-	if (ft_strequ(">&", str) && (next->str == NULL || next->str[0] == '\0'
+	if (ft_strequ(">&", tok->str) && (next->str == NULL || next->str[0] == '\0'
 			|| ft_strequ(next->str, " ")))
 	{
 		ft_perror(SYNTAX_ERR);
@@ -47,7 +53,7 @@ static bool	redir_check(t_tok *temp)
 		{
 			if (ft_strchr(temp->str, '&') || ft_strchr(temp->str, '-'))
 			{
-				if (aggr_checks(temp->str, temp->next))
+				if (aggr_checks(temp, temp->next))
 					return (true);
 			}
 			else

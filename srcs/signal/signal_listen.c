@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 14:15:51 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/29 17:26:09 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/29 18:18:00 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ void	signal_win_handler(int signo)
 
 static void	signal_abort(int signo)
 {
-	if (signo == SIGINT)
+	if (signo)
 	{
 		kill(signo, SIGINT);
-		ft_putchar_fd('\n', STDOUT_FILENO);
+		ft_putstr_fd("\n\r", STDOUT_FILENO);
 		cmd_line_prompt(EOF);
 		key_is_ctrlc(g_shell, &g_shell->window);
 	}
