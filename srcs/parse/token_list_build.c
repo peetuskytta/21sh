@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 23:15:32 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/30 15:48:28 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/30 18:18:36 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static char	get_char_type(char c)
 		return (CHAR_GENERAL);
 }
 
-static void	change_state(t_tok *tok, t_ints *st, char ch)
+static void	change_state(t_tok *tok, t_ints *st, int ch)
 {
 	if (tok->type != REDIR)
 		tok->type = WORD;
@@ -59,115 +59,121 @@ static void	change_state(t_tok *tok, t_ints *st, char ch)
 	else if (ch == CHAR_GREATER || ch == CHAR_LESSER)
 		st->state = STATE_REDIR;
 	tok->str[st->t_i] = ch;
-	st->t_i++;
+	(st->t_i)++;
+}
+
+static int	state_general(t_ints *st, t_tok **token, int ch_type, char *input)
+{
+	if (ch_type == CHAR_QUOTE)
+		change_state(*token, st, CHAR_QUOTE);
+	else if (ch_type == CHAR_DQUOTE)
+		change_state(*token, st, CHAR_DQUOTE);
+	else if (ch_type == CHAR_GREATER || ch_type == CHAR_LESSER
+		|| ch_type == CHAR_GENERAL)
+		change_state(*token, st, st->c);
+	else if (ch_type == CHAR_ESCAPE)
+		change_state(*token, st, input[++st->i]);
+	else if (ch_type == CHAR_WHITESPACE)
+	{
+		if (st->t_i > 0 && input[st->i + 1] != CHAR_WHITESPACE
+			&& input[st->i + 1] != CHAR_TAB)
+		{
+			(*token)->str[st->t_i] = NULL_BYTE;
+			if (input[st->i + 1] == NULL_BYTE)
+				return (0);
+			(*token)->next = (t_tok *)ft_memalloc(sizeof(t_tok));
+			*token = (*token)->next;
+			init_token(*token, st->size - st->i);
+			st->t_i = 0;
+		}
+	}
+	else if (ch_type == CHAR_SEMICOLON || ch_type == CHAR_PIPE)
+	{
+		if (st->t_i > 0)
+		{
+			(*token)->next = (t_tok *)ft_memalloc(sizeof(t_tok));
+			*token = (*token)->next;
+			init_token(*token, st->size - st->i);
+			st->t_i = 0;
+		}
+		if (st->t_i == 0 && input[st->i + 1] == NULL_BYTE)
+			return (0);
+		(*token)->str[0] = ch_type;
+		(*token)->str[1] = NULL_BYTE;
+		(*token)->type = ch_type;
+		(*token)->next = (t_tok *)ft_memalloc(sizeof(t_tok));
+		*token = (*token)->next;
+		init_token(*token, st->size - st->i);
+	}
+	return (1);
+}
+
+static int	state_redir(t_ints *st, t_tok **token)
+{
+	if (!ft_strchr("&><-12", st->c))
+	{
+		(*token)->type = REDIR;
+		(*token)->next = (t_tok *)ft_memalloc(sizeof(t_tok));
+		*token = (*token)->next;
+		init_token(*token, st->size - st->i);
+		(*token)->type = REDIR;
+		st->state = STATE_GENERAL;
+		st->t_i = 0;
+	}
+	if (st->c != CHAR_WHITESPACE)
+	{
+		(*token)->type = REDIR;
+		(*token)->str[st->t_i++] = st->c;
+	}
+	return (1);
+}
+
+static int	state_quotes(t_ints *st, t_tok **token, int ch_type)
+{
+	if (st->state == STATE_IN_DQUOTE)
+	{
+		(*token)->str[st->t_i++] = st->c;
+		if (st->c == CHAR_GREATER || st->c == CHAR_LESSER)
+			(*token)->type = REDIR;
+		if (ch_type == CHAR_DQUOTE)
+			st->state = STATE_GENERAL;
+	}
+	else if (st->state == STATE_IN_QUOTE)
+	{
+		(*token)->str[st->t_i++] = st->c;
+		if (st->c == CHAR_GREATER || st->c == CHAR_LESSER)
+			(*token)->type = REDIR;
+		if (ch_type == CHAR_QUOTE)
+			st->state = STATE_GENERAL;
+	}
+	return (1);
 }
 
 void	token_list_build(char *input, int size, t_lex *list)
 {
 	t_tok	*token;
 	char	ch_type;
-	char	c;
 	t_ints	st;
 
 	ft_memset(&st, '\0', sizeof(t_ints));
+	st.size = size;
 	token = NULL;
 	list->token_list = (t_tok *)ft_memalloc(sizeof(t_tok));
 	token = list->token_list;
 	init_token(token, size);
-	c = input[st.i];
-	while (c != NULL_BYTE)
+	st.c = input[st.i];
+	while (st.c != NULL_BYTE)
 	{
-		c = input[st.i];
-		ch_type = get_char_type(c);
-		if (st.state == STATE_GENERAL)
-		{
-			if (ch_type == CHAR_QUOTE)
-				change_state(token, &st, CHAR_QUOTE);
-			else if (ch_type == CHAR_DQUOTE)
-				change_state(token, &st, CHAR_DQUOTE);
-			else if (ch_type == CHAR_GREATER || ch_type == CHAR_LESSER
-				|| ch_type == CHAR_GENERAL)
-				change_state(token, &st, c);
-			else if (ch_type == CHAR_ESCAPE)
-				change_state(token, &st, input[++st.i]);
-			else if (ch_type == CHAR_WHITESPACE)
-			{
-				if (st.t_i > 0 && input[st.i + 1] != CHAR_WHITESPACE
-					&& input[st.i + 1] != CHAR_TAB)
-				{
-					token->str[st.t_i] = NULL_BYTE;
-					if (input[st.i + 1] == NULL_BYTE)
-						break ;
-					token->next = (t_tok *)ft_memalloc(sizeof(t_tok));
-					token = token->next;
-					init_token(token, size - st.i);
-					st.t_i = 0;
-				}
-			}
-			else if (ch_type == CHAR_SEMICOLON || ch_type == CHAR_PIPE)
-			{
-				if (((input[st.i] == CHAR_SEMICOLON
-							&& input[st.i + 1] == CHAR_SEMICOLON)
-						|| (input[st.i] == CHAR_PIPE && input[st.i + 1] == CHAR_PIPE))
-					|| st.i == 0)
-				{
-					ft_perror(PARSE_ERR);
-					ft_print_fd(STDERR_FILENO, "'%c%c'\n", input[st.i], input[st.i + 1]);
-					token_list_free(list->token_list);
-					list->token_list = NULL;
-					return ;
-				}
-				if (st.t_i > 0)
-				{
-					token->next = (t_tok *)ft_memalloc(sizeof(t_tok));
-					token = token->next;
-					init_token(token, size - st.i);
-					st.t_i = 0;
-				}
-				if (st.t_i == 0 && input[st.i + 1] == NULL_BYTE)
-					break ;
-				token->str[0] = ch_type;
-				token->str[1] = NULL_BYTE;
-				token->type = ch_type;
-				token->next = (t_tok *)ft_memalloc(sizeof(t_tok));
-				token = token->next;
-				init_token(token, size - st.i);
-			}
-		}
-		else if (st.state == STATE_REDIR)
-		{
-			if (!ft_strchr("&><-12", c))
-			{
-				token->type = REDIR;
-				token->next = (t_tok *)ft_memalloc(sizeof(t_tok));
-				token = token->next;
-				init_token(token, size - st.i);
-				token->type = REDIR;
-				st.state = STATE_GENERAL;
-				st.t_i = 0;
-			}
-			if (c != CHAR_WHITESPACE)
-			{
-				token->type = REDIR;
-				token->str[st.t_i++] = c;
-			}
-		}
-		else if (st.state == STATE_IN_DQUOTE)
-		{
-			token->str[st.t_i++] = c;
-			if (c == CHAR_GREATER || c == CHAR_LESSER)
-				token->type = REDIR;
-			if (ch_type == CHAR_DQUOTE)
-				st.state = STATE_GENERAL;
-		}
-		else if (st.state == STATE_IN_QUOTE)
-		{
-			token->str[st.t_i++] = c;
-			if (c == CHAR_GREATER || c == CHAR_LESSER)
-				token->type = REDIR;
-			if (ch_type == CHAR_QUOTE)
-				st.state = STATE_GENERAL;
-		}
+		st.c = input[st.i];
+		ch_type = get_char_type(st.c);
+		if (st.state == STATE_GENERAL
+			&& state_general(&st, &token, ch_type, input) == 1)
+			;
+		else if (st.state == STATE_REDIR && state_redir(&st, &token) == 1)
+			;
+		else if ((st.state == STATE_IN_DQUOTE || st.state == STATE_IN_QUOTE) && \
+			state_quotes(&st, &token, ch_type) == 1)
+			;
 		else if (ch_type == CHAR_NULL)
 		{
 			if (st.t_i > 0)
