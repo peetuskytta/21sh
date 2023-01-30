@@ -12,50 +12,24 @@
 
 #include "../../includes/execute.h"
 
-static void	slash_access_check(t_exec *data, char **bin_path)
-{
-	if (access(data->cmd, F_OK) == -1)
-	{
-		ft_perror(NO_FILE_OR_DIR);
-		return ;
-	}
-	else if (access(data->cmd, X_OK) == -1)
-	{
-		ft_perror(EXEC_NO_ACCESS);
-		return ;
-	}
-	else
-		*bin_path = ft_strdup(data->cmd);
-}
-
-static void	real_exec(t_exec *data, char **env_cpy)
-{
-	char	*bin_path;
-
-	bin_path = NULL;
-	if (data->cmd[0] == '/')
-		slash_access_check(data, &bin_path);
-	if (!bin_path)
-		bin_path = exec_find_binary(exec_fetch_path_var(env_cpy), data->cmd);
-	if (redirection_loop(data) && exec_binary_check(&bin_path, *data))
-		exec_cmd(data, bin_path, env_cpy);
-	else
-		close_fds(data->fds.fd_in, data->fds.fd_out);
-	ft_strdel((void *)&bin_path);
-}
-
 static void	builtin_redir(t_shell *shell, t_exec *data, char **env_cpy)
 {
 	change_in_and_out(data);
 	if (ft_strequ(data->cmd, "env"))
 	{
 		if (builtin_env(shell, *data, env_cpy))
-			{};
+			;
 	}
 	else
 		builtin_execute(shell, *data, env_cpy);
 	close_fds(data->fds.fd_in, data->fds.fd_out);
 	exit(EXIT_SUCCESS);
+}
+
+static void	wait_closefd(t_exec *data)
+{
+	wait(0);
+	close_fds(data->fds.fd_in, data->fds.fd_out);
 }
 
 /*
@@ -70,10 +44,7 @@ static void	command_execution(t_shell *shell, t_exec *data, char **env_cpy)
 		if (data->fds.pipe < 0)
 		{
 			if (redirection_loop(data))
-			{
-				change_in_and_out(data);
 				builtin_execute(shell, *data, env_cpy);
-			}
 			close_fds(data->fds.fd_in, data->fds.fd_out);
 		}
 		else if (data->fds.pipe > -1)
@@ -87,14 +58,11 @@ static void	command_execution(t_shell *shell, t_exec *data, char **env_cpy)
 			else if (data->pid.child < 0)
 				ft_perror(FORK_FAIL);
 			else
-			{
-				wait(0);
-				close_fds(data->fds.fd_in, data->fds.fd_out);
-			}
+				wait_closefd(data);
 		}
 	}
 	else if (data->cmd)
-		real_exec(data, env_cpy);
+		exec_real(data, env_cpy);
 }
 
 /*
@@ -115,10 +83,7 @@ void	exec_branch(t_ast *branch, t_shell *shell)
 	if (branch->data.fds.pipe == PIPE_LAST)
 		pid.wait = waitpid(-1, &pid.status, 0);
 	if ((branch->type == REDIR || branch->type == COMMAND))
-	{
 		command_execution(shell, &branch->data, env_cpy);
-		//init_in_out_err(shell->tty);
-	}
 	exec_branch(branch->left, shell);
 	if (branch->type == PIPE)
 		exec_branch(branch->right, shell);

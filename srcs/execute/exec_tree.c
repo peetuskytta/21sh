@@ -84,14 +84,6 @@ static void	piping(t_ast *branch, bool *pipe)
 	temp = branch;
 	setup_pipes(temp, branch->pipes, 0);
 }
-/* 	int idx = 0;
-	while (branch->pipes[idx].fd[0] != -1 || branch->pipes[idx].fd[1] != -1)
-	{
-		ft_printf("pipes[%d]\n", idx);
-		ft_printf("  READ:[%d],", branch->pipes[idx].fd[PIPE_READ]);
-		ft_printf(" WRITE:[%d]\n", branch->pipes[idx].fd[PIPE_WRITE]);
-		idx++;
-	} */
 
 /*
 **	Begin execution of a tree or multiple trees. Tree consists of one
@@ -109,7 +101,6 @@ void	exec_tree(t_ast **tree, t_shell *shell)
 		piping(tree[idx], &shell->pipe);
 		exec_branch(tree[idx], shell);
 		ft_memdel((void *)&tree[idx]);
-		//init_in_out_err(shell->tty);
 		shell->pipe = false;
 		idx++;
 	}

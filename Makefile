@@ -6,7 +6,7 @@
 #    By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/26 19:22:14 by zraunio           #+#    #+#              #
-#    Updated: 2023/01/30 15:19:15 by zraunio          ###   ########.fr        #
+#    Updated: 2023/01/30 16:21:38 by zraunio          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,8 +86,10 @@ _EXECUTE := exec_tree.c \
 		exec_branch.c \
 		exec_cmd.c \
 		exec_binary_check.c \
+		exec_real.c \
 		exec_find_binary.c \
 		exec_fetch_path_var.c \
+		exec_slash_access.c \
 		exec_clear_data.c \
 		close_fds.c \
 		change_in_and_out.c

@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   enable_rawmode.c                                   :+:      :+:    :+:   */
+/*   exec_slash_access.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 12:59:48 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/30 16:25:03 by zraunio          ###   ########.fr       */
+/*   Created: 2023/01/30 16:20:49 by zraunio           #+#    #+#             */
+/*   Updated: 2023/01/30 16:23:11 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-int	enable_rawmode(t_shell *shell)
+void	exec_slash_access(t_exec *data, char **bin_path)
 {
-	struct termios	orig_raw;
-
-	if (tcgetattr(STDIN_FILENO, &orig_raw) == -1)
-		return (0);
-	shell->orig_raw = orig_raw;
-	orig_raw.c_iflag &= ~(IGNBRK | PARMRK | ISTRIP | INLCR | IGNCR | ICRNL);
-	orig_raw.c_cflag &= ~(CSIZE | PARENB);
-	orig_raw.c_lflag &= ~(ICANON | ECHO);
-	orig_raw.c_iflag &= ~(IXON | BRKINT);
-	orig_raw.c_cc[VMIN] = 0;
-	orig_raw.c_cc[VTIME] = 1;
-	shell->raw = orig_raw;
-	return (1);
+	if (access(data->cmd, F_OK) == -1)
+	{
+		ft_perror(NO_FILE_OR_DIR);
+		return ;
+	}
+	else if (access(data->cmd, X_OK) == -1)
+	{
+		ft_perror(EXEC_NO_ACCESS);
+		return ;
+	}
+	else
+		*bin_path = ft_strdup(data->cmd);
 }
-/*
-*/
