@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/30 11:21:21 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/30 16:16:22 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,5 +128,15 @@ typedef struct s_herfd
 	char	*input;
 	char	*delim;
 }				t_herfd;
+
+
+typedef struct s_ints
+{
+	int		i;
+	int		t_i;
+	char	c;
+	int		size;
+	int		state;
+}				t_ints;
 
 #endif
