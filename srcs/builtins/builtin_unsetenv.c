@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 11:34:37 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/27 12:11:52 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/29 18:40:43 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,7 @@ static int	unset_errors(char *name, int index)
 		return (-1);
 	}
 	else if (index == -1)
-	{
-		//ft_memdel((void *)&name);
 		return (-1);
-	}
 	else
 		return (1);
 }

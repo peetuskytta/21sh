@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 12:14:41 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/27 15:16:56 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/30 08:38:45 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ static void	change_redir_io(t_redir	*redir)
 	if (redir->type == FILE_IN || redir->type == FILE_TRUNC \
 		|| redir->type == FILE_APPEND)
 	{
-		if (redir->fd_out > 0 && redir->fd_err != ERR_ON)
+		if (redir->fd_out >= 0 && redir->fd_err != ERR_ON)
 		{
 			dup2(redir->fd_out, STDOUT_FILENO);
 			close(redir->fd_out);
 		}
-		if (redir->fd_in > 0)
+		if (redir->fd_in >= 0)
 		{
 			dup2(redir->fd_in, STDIN_FILENO);
 			close(redir->fd_in);
@@ -55,24 +55,26 @@ static void	dup_fds(int aggr_type)
 		dup2(STDERR_FILENO, STDOUT_FILENO);
 	else if (aggr_type == AGGR_COPY_TWO)
 		dup2(STDOUT_FILENO, STDERR_FILENO);
+	else if (aggr_type == AGGR_COPY_BOTH)
+		dup2(STDOUT_FILENO, STDERR_FILENO);
 }
 
 static void	aggr_in_out(t_exec *data)
 {
-	if (data->redir->type > 9 && data->redir->type < 13)
+	if (data->redir->agre > 9 && data->redir->agre < 13)
 	{
-		if (data->redir->type == AGGR_CLOSE_BOTH)
+		if (data->redir->agre == AGGR_CLOSE_BOTH)
 		{
 			close(STDERR_FILENO);
 			close(STDOUT_FILENO);
 		}
-		else if (data->redir->type == AGGR_CLOSE_ONE)
-			close(data->redir->fd_out);
-		else if (data->redir->type == AGGR_CLOSE_TWO)
-			close(data->redir->fd_err);
+		else if (data->redir->agre == AGGR_CLOSE_ONE)
+			close(STDOUT_FILENO);
+		else if (data->redir->agre == AGGR_CLOSE_TWO)
+			close(STDERR_FILENO);
 	}
-	else if (data->redir->type > 12)
-		dup_fds(data->redir->type);
+	else if (data->redir->agre > 12)
+		dup_fds(data->redir->agre);
 }
 
 /*

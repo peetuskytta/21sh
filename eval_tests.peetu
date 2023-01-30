@@ -7,7 +7,7 @@ foo									OK
 
 SECTION 2
 
-exit								OK >>>>>>> in pipe gives an error
+exit								OK
 echo "it works"						OK
 echo it works						OK
 cd relative/path/of/your/choice		OK
@@ -93,4 +93,7 @@ echo "open quotes			OK
 
 
 
+
 NOTES
+
+ls |     lele     |  grep txt  >>>>> leaves process open?

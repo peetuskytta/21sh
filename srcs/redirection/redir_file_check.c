@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 15:11:08 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/26 23:17:16 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/29 16:34:56 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ static void	set_aggregation(t_redir *redir)
 		redir->fd_err = -1;
 		redir->fd_out = -1;
 	}
+	else if (redir->type == AGGR_COPY_BOTH)
+		redir->fd_err = ERR_ON;
 }
 
 /*
@@ -115,7 +117,7 @@ int	redir_file_check(t_redir *redir)
 		open_redirection_in(redir, &status);
 	else if (redir->type == HEREDOC)
 		return (FILE_IN);
-	else if (redir->type > 9)
+	if (redir->agre > 9)
 		set_aggregation(redir);
 	if (status != FILE_IN && status != FILE_OUT)
 		file_error(&status, redir->file);

@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 12:49:26 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/19 21:15:05 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/29 14:28:05 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static int	move_cursor_right(t_shell *shell, t_win *win, int len)
 	while (len > win->cols && win->row_idx[win->idx + 1] != NULL)
 	{
 		len -= win->cols;
+		if (len == 1 || len == win->cols)
+			len = 0;
 		win->idx++;
 	}
 	if (win->idx == 0 && win->row_idx[win->idx + 1] == NULL)
@@ -35,7 +37,7 @@ static int	move_cursor_right(t_shell *shell, t_win *win, int len)
 	else if (win->idx > 0 && win->row_idx[win->idx + 1] == NULL)
 		max = ft_strilen(win->row_idx[win->idx]);
 	else
-		max = win->cols;
+		max = win->cols - 1;
 	if (win->loc == max && win->row_idx[win->idx + 1] == NULL)
 		return (0);
 	if (len > max && win->row_idx[win->idx + 1] != NULL)

@@ -36,17 +36,17 @@ tok  ls -la 2&>1 jee
 
 
 
->&		1 and 2 to a file (if no file >>> ERROR)
-1>&-	close 1 NULL OK
-2>&-	close 2 NULL OK
-1>&2	make 1 a copy of 2 NULL OK
-2>&1	make 2 a copy of 1 NULL OK
+//>&		1 and 2 to a file (if no file >>> ERROR)
+//1>&-	close 1 NULL OK
+//2>&-	close 2 NULL OK
+//1>&2	make 1 a copy of 2 NULL OK
+//2>&1	make 2 a copy of 1 NULL OK
 
 echo hello > file (leaks?)
 
 
 done:
->&-		close 2 and 1 NULL OK
+//>&-		close 2 and 1 NULL OK
 1>		same as > (DO NOTHING)
 1>>		same as >> (DO NOTHING)
 <&-		close 0 (DONT ACCEPT)
@@ -60,4 +60,7 @@ if HOME valid -- check permissions,
 	if permissions, change oldpwd and PWD
 
 
+
+env in a pipe
+cd leaks
 

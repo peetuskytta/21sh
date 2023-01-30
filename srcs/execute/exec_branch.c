@@ -12,10 +12,21 @@
 
 #include "../../includes/execute.h"
 
-/*
-**	copies the environment for the execution. Used to change environment
-**	before execution so we don't mess up the parent's environment.
-*/
+static void	slash_access_check(t_exec *data, char **bin_path)
+{
+	if (access(data->cmd, F_OK) == -1)
+	{
+		ft_perror(NO_FILE_OR_DIR);
+		return ;
+	}
+	else if (access(data->cmd, X_OK) == -1)
+	{
+		ft_perror(EXEC_NO_ACCESS);
+		return ;
+	}
+	else
+		*bin_path = ft_strdup(data->cmd);
+}
 
 static void	real_exec(t_exec *data, char **env_cpy)
 {
@@ -23,35 +34,14 @@ static void	real_exec(t_exec *data, char **env_cpy)
 
 	bin_path = NULL;
 	if (data->cmd[0] == '/')
-	{
-		if (access(data->cmd, F_OK) == -1)
-		{
-			ft_perror(NO_FILE_OR_DIR);
-			return;
-		}
-		else if (access(data->cmd, X_OK) == -1)
-		{
-			ft_perror(EXEC_NO_ACCESS);
-			return;
-		}
-		else
-			bin_path = ft_strdup(data->cmd);
-	}
+		slash_access_check(data, &bin_path);
 	if (!bin_path)
 		bin_path = exec_find_binary(exec_fetch_path_var(env_cpy), data->cmd);
-	if (redirection_loop(data) && exec_binary_check(bin_path, *data))
-	{
+	if (redirection_loop(data) && exec_binary_check(&bin_path, *data))
 		exec_cmd(data, bin_path, env_cpy);
-	}
+	else
+		close_fds(data->fds.fd_in, data->fds.fd_out);
 	ft_strdel((void *)&bin_path);
-}
-
-static void	close_fds(int fd_in, int fd_out)
-{
-	if (fd_in >= 0)
-		close(fd_in);
-	if (fd_out >= 0)
-		close(fd_out);
 }
 
 static void	builtin_redir(t_shell *shell, t_exec *data, char **env_cpy)
@@ -103,7 +93,7 @@ static void	command_execution(t_shell *shell, t_exec *data, char **env_cpy)
 			}
 		}
 	}
-	else
+	else if (data->cmd)
 		real_exec(data, env_cpy);
 }
 
@@ -125,7 +115,10 @@ void	exec_branch(t_ast *branch, t_shell *shell)
 	if (branch->data.fds.pipe == PIPE_LAST)
 		pid.wait = waitpid(-1, &pid.status, 0);
 	if ((branch->type == REDIR || branch->type == COMMAND))
+	{
 		command_execution(shell, &branch->data, env_cpy);
+		//init_in_out_err(shell->tty);
+	}
 	exec_branch(branch->left, shell);
 	if (branch->type == PIPE)
 		exec_branch(branch->right, shell);
