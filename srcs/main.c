@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/29 18:14:42 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/30 14:47:27 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,18 @@ static void	cmd_line_reset(t_shell *shell, t_win *window)
 		ft_putchar_fd('\n', STDOUT_FILENO);
 		window->current_row++;
 	}
-	ft_memset(window->row_idx, '\0', sizeof(char *) * (MAX_BUFF));
+	ft_memset(window->row_idx, '\0', sizeof(char *) * (MAX_BUFF + 1));
 	ft_memset(shell->cmd_line, '\0', sizeof(char) * (MAX_BUFF + 1));
 	window->row_idx[window->idx] = &shell->cmd_line[0];
 	ft_memset(shell->temp, '\0', sizeof(char) * (MAX_BUFF + 1));
 	ft_memset(shell->input, '\0', sizeof(char) * (MAX_BUFF + 1));
 	shell->cmd_idx = 0;
 	shell->end = 0;
-	cmd_line_prompt(shell->quote);
 	init_prompt(shell);
 	window->loc = shell->prmpt_len;
+	if (shell->flg == 1)
+		cmd_line_prompt(shell->quote);
+	shell->flg = 0;
 }
 
 /*
@@ -61,6 +63,7 @@ static void	run_shell(t_shell *shell)
 			cmd_line_reset(shell, &shell->window);
 			cursor_find(shell, &shell->window);
 			cursor_load(&shell->window, -1);
+			init_in_out_err(shell->tty);
 		}
 	}
 }

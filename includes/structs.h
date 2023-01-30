@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/29 17:36:09 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/30 15:12:38 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,5 +128,13 @@ typedef struct s_herfd
 	char	*input;
 	char	*delim;
 }				t_herfd;
+
+typedef struct s_ints
+{
+	int		i;
+	int		t_i;
+	int		state;
+}				t_ints;
+
 
 #endif

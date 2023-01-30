@@ -21,7 +21,4 @@ void	ast_set_redir(t_redir *redir, char *str);
 void	ast_release(t_ast *branch, char **env_cpy);
 t_ast	*ast_create_tree(t_tok **token);
 
-/*DELETE BEFORE SUBMIT*/
-void	ast_print(t_ast *tree);
-
 #endif

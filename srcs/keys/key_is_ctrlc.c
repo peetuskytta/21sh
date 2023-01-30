@@ -6,13 +6,13 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 16:36:30 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/26 18:20:18 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/30 14:43:14 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-int	key_is_ctrlc(t_shell *shell, t_win *win)
+void	key_is_ctrlc(t_shell *shell, t_win *win)
 {
 	win->idx = 0;
 	ft_memset(win->row_idx, '\0', sizeof(char *) * (MAX_BUFF));
@@ -24,7 +24,7 @@ int	key_is_ctrlc(t_shell *shell, t_win *win)
 	ft_memset(shell->input, '\0', sizeof(char) * (MAX_BUFF + 1));
 	shell->cmd_idx = 0;
 	win->loc = shell->prmpt_len;
+	shell->quote = EOF;
 	cursor_find(shell, win);
 	cursor_load(win, -1);
-	return (ENTER);
 }

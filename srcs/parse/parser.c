@@ -31,6 +31,18 @@ static void	check_for_heredoc(t_tok **first, t_shell *shell)
 	}
 }
 
+static int	whitespace_check(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (ft_isspace(str[i]))
+		i++;
+	if (str[i] == '\0' && i != 0)
+		return (0);
+	return (1);
+}
+
 t_tok	*parser(t_shell *shell)
 {
 	t_lex	list;
@@ -38,8 +50,10 @@ t_tok	*parser(t_shell *shell)
 
 	ft_memset(&list, 0, sizeof(t_lex));
 	lenght = ft_strilen(shell->q_input);
-	if (lenght > 0)
+	if (whitespace_check(shell->q_input) != 0)
 		token_list_build(shell->q_input, lenght, &list);
+	else
+		return (NULL);
 	input_expand(shell, &list.token_list);
 	input_strip_quotes(&list.token_list);
 	parse_errors(&list.token_list);

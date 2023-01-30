@@ -12,26 +12,29 @@
 
 #include "../../includes/execute.h"
 
+static void	slash_access_check(t_exec *data, char **bin_path)
+{
+	if (access(data->cmd, F_OK) == -1)
+	{
+		ft_perror(NO_FILE_OR_DIR);
+		return ;
+	}
+	else if (access(data->cmd, X_OK) == -1)
+	{
+		ft_perror(EXEC_NO_ACCESS);
+		return ;
+	}
+	else
+		*bin_path = ft_strdup(data->cmd);
+}
+
 static void	real_exec(t_exec *data, char **env_cpy)
 {
 	char	*bin_path;
 
 	bin_path = NULL;
 	if (data->cmd[0] == '/')
-	{
-		if (access(data->cmd, F_OK) == -1)
-		{
-			ft_perror(NO_FILE_OR_DIR);
-			return ;
-		}
-		else if (access(data->cmd, X_OK) == -1)
-		{
-			ft_perror(EXEC_NO_ACCESS);
-			return ;
-		}
-		else
-			bin_path = ft_strdup(data->cmd);
-	}
+		slash_access_check(data, &bin_path);
 	if (!bin_path)
 		bin_path = exec_find_binary(exec_fetch_path_var(env_cpy), data->cmd);
 	if (redirection_loop(data) && exec_binary_check(&bin_path, *data))
@@ -47,7 +50,7 @@ static void	builtin_redir(t_shell *shell, t_exec *data, char **env_cpy)
 	if (ft_strequ(data->cmd, "env"))
 	{
 		if (builtin_env(shell, *data, env_cpy))
-			;
+			{};
 	}
 	else
 		builtin_execute(shell, *data, env_cpy);
@@ -114,7 +117,7 @@ void	exec_branch(t_ast *branch, t_shell *shell)
 	if ((branch->type == REDIR || branch->type == COMMAND))
 	{
 		command_execution(shell, &branch->data, env_cpy);
-		init_in_out_err(shell->tty);
+		//init_in_out_err(shell->tty);
 	}
 	exec_branch(branch->left, shell);
 	if (branch->type == PIPE)

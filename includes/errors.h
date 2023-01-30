@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:24:46 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/29 17:43:58 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/30 13:36:50 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@
 # define UNSETENV_TOO_LONG "unsetenv: argument too long\n"
 
 /*Error message defines for env*/
-# define ENV_USE "env: usage: env OR env -i NAME=value {executable}\n"
+# define ENV_USE "env: usage: env OR env -i {argument}\n"
 
 /*Error messages for fork, waitpid, and execve*/
 # define CMD_NOT_FOUND ": command not found\n"

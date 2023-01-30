@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:40:28 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/29 18:35:52 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/30 14:22:19 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	exec_cmd(t_exec *data, char *bin_path, char **env_cpy)
 		change_in_and_out(data);
 		if (execve(bin_path, data->args, env_cpy) == -1)
 		{
-			perror("ERR>>>> ");
 			ft_perror(EXECVE_ERROR);
 			exit(EXIT_FAILURE);
 		}

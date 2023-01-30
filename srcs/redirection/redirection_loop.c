@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 14:22:02 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/29 18:38:35 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/30 08:47:51 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static bool	in_files(t_redir *redir, char *file)
 {
 	if (file)
 	{
+		//DB;
 		close(redir->fd_in);
 		redir->fd_in = -1;
 		return (true);
