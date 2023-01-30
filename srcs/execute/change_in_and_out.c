@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 12:14:41 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/29 19:18:16 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/30 08:38:45 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	change_redir_io(t_redir	*redir)
 			dup2(redir->fd_out, STDOUT_FILENO);
 			close(redir->fd_out);
 		}
-		if (redir->fd_in > 0)
+		if (redir->fd_in >= 0)
 		{
 			dup2(redir->fd_in, STDIN_FILENO);
 			close(redir->fd_in);

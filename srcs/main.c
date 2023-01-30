@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/29 19:41:11 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/30 10:19:11 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	cmd_line_reset(t_shell *shell, t_win *window)
 		ft_putchar_fd('\n', STDOUT_FILENO);
 		window->current_row++;
 	}
-	ft_memset(window->row_idx, '\0', sizeof(char *) * (MAX_BUFF));
+	ft_memset(window->row_idx, '\0', sizeof(char *) * (MAX_BUFF + 1));
 	ft_memset(shell->cmd_line, '\0', sizeof(char) * (MAX_BUFF + 1));
 	window->row_idx[window->idx] = &shell->cmd_line[0];
 	ft_memset(shell->temp, '\0', sizeof(char) * (MAX_BUFF + 1));
@@ -33,6 +33,13 @@ static void	cmd_line_reset(t_shell *shell, t_win *window)
 	cmd_line_prompt(shell->quote);
 	init_prompt(shell);
 	window->loc = shell->prmpt_len;
+/* 	ft_print_fd(open("file", O_RDWR | O_APPEND), "window->loc:		%d\n", window->loc);
+	ft_print_fd(open("file", O_RDWR | O_APPEND), "shell->quote:		%d\n", shell->quote);
+	ft_print_fd(open("file", O_RDWR | O_APPEND), "shell->end:		%d\n", shell->end);
+	ft_print_fd(open("file", O_RDWR | O_APPEND), "shell->cmd_idx:	%d\n", shell->cmd_idx);
+	ft_print_fd(open("file", O_RDWR | O_APPEND), "shell->cmd_line:	%c\n", shell->cmd_line[0]);
+	ft_print_fd(open("file", O_RDWR | O_APPEND), "window->idx:	%d\n", window->idx);
+	ft_print_fd(open("file", O_RDWR | O_APPEND), "window->row_idx[window->idx]:	%s\n\n", &shell->window.row_idx[window->idx]); */
 }
 
 /*
@@ -60,10 +67,12 @@ static void	run_shell(t_shell *shell)
 					exec_tree(tree, shell);
 				}
 			}
+			else
+				ft_putchar_fd('\n', STDOUT_FILENO);
 			cmd_line_reset(shell, &shell->window);
-			ft_printf("input: {%s}, len: (%d)\n", shell->q_input, ft_strilen(shell->q_input));
 			cursor_find(shell, &shell->window);
 			cursor_load(&shell->window, -1);
+			init_in_out_err(shell->tty);
 		}
 	}
 }

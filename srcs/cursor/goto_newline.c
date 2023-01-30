@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   goto_newline.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 17:48:04 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/28 13:30:01 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/30 10:18:56 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
-
-static int	whitespace_check(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (ft_isspace(str[i]))
-		i++;
-	if (str[i] == '\0')
-		return (0);
-	return (1);
-}
 
 void	goto_newline(t_shell *shell, t_win *window)
 {
@@ -43,7 +31,6 @@ void	goto_newline(t_shell *shell, t_win *window)
 		i += 1;
 	}
 	ft_memcpy(&shell->q_input[i], shell->cmd_line, ft_strilen(shell->cmd_line));
-	if (whitespace_check(shell->q_input) == 0)
-		key_is_ctrlc(shell, window);
+	(void)window;
 	read_quote(shell);
 }

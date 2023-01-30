@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:40:28 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/29 19:35:31 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/30 10:19:24 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,29 @@ void	exec_cmd(t_exec *data, char *bin_path, char **env_cpy)
 	if (data->pid.child == 0)
 	{
 		change_in_and_out(data);
+/* 		int fd = fileno(stdin);
+		if (fcntl(fd, F_GETFD) == -1)
+			printf("stdin is not open\n");
+		else
+			printf("stdin is open\n"); */
+/* 		ft_putendl(bin_path);
+		ft_putendl(data->args[0]); */
 		if (execve(bin_path, data->args, env_cpy) == -1)
 		{
-			perror("ERR>>>> ");
 			ft_perror(EXECVE_ERROR);
 			exit(EXIT_FAILURE);
 		}
+		//exit(EXIT_SUCCESS);
 	}
 	else if (data->pid.child < 0)
 		ft_perror(FORK_FAIL);
 	else
 	{
 		if (data->fds.pipe != PIPE_FIRST)
+		{
 			wait_for_finish(&data->pid);
+		}
+		//perror("ERR>>>> ");
 		close_fds(data->fds.fd_in, data->fds.fd_out);
 	}
 }

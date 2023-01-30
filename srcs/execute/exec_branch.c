@@ -50,7 +50,7 @@ static void	builtin_redir(t_shell *shell, t_exec *data, char **env_cpy)
 	if (ft_strequ(data->cmd, "env"))
 	{
 		if (builtin_env(shell, *data, env_cpy))
-			;
+			{};
 	}
 	else
 		builtin_execute(shell, *data, env_cpy);
@@ -117,7 +117,7 @@ void	exec_branch(t_ast *branch, t_shell *shell)
 	if ((branch->type == REDIR || branch->type == COMMAND))
 	{
 		command_execution(shell, &branch->data, env_cpy);
-		init_in_out_err(shell->tty);
+		//init_in_out_err(shell->tty);
 	}
 	exec_branch(branch->left, shell);
 	if (branch->type == PIPE)
