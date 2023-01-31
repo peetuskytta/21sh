@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 14:13:39 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/31 14:23:16 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/31 15:30:49 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@
 bool	aggregation_checks(t_tok *temp)
 {
 	(void)temp;
-/* 	if (aggr_checks(temp));
+/*  	if (aggr_checks(temp));
 		return (true); */
 	return (false);
 }
