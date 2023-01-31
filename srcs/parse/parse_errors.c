@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 13:33:06 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/30 11:23:31 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/31 11:45:00 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,11 @@ static bool	aggr_checks(t_tok *tok, t_tok *next)
 		|| ft_strequ("1>&-", tok->str) || ft_strequ("2>&-", tok->str)
 		|| ft_strequ("1>&2", tok->str) || ft_strequ("2>&1", tok->str))
 	{
-		if (!ft_strequ(">&", tok->str))
-			next->type = WORD;
+		if (next->type != CHAR_SEMICOLON || next->type != CHAR_PIPE)
+		{
+			if (!ft_strequ(">&", tok->str))
+				next->type = WORD;
+		}
 		tok->agre = 1;
 	}
 	else if (ft_strequ("0<&-", tok->str))
@@ -35,7 +38,7 @@ static bool	aggr_checks(t_tok *tok, t_tok *next)
 		return (true);
 	}
 	if (ft_strequ(">&", tok->str) && (next->str == NULL || next->str[0] == '\0'
-			|| ft_strequ(next->str, " ")))
+			|| ft_strequ(next->str, " ") || next->type == CHAR_SEMICOLON || next->type == CHAR_PIPE))
 	{
 		ft_perror(SYNTAX_ERR);
 		return (true);
