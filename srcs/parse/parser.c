@@ -79,6 +79,6 @@ t_tok	*parser(t_shell *shell)
 	input_strip_quotes(&list.token_list);
 	parse_errors(&list.token_list);
 	check_for_heredoc(&list.token_list, shell);
-	token_list_print(list.token_list);
+	//token_list_print(list.token_list);
 	return (list.token_list);
 }
