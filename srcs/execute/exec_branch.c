@@ -12,6 +12,9 @@
 
 #include "../../includes/execute.h"
 
+/*
+**	Checks the permissions for commands like "/bin/ls"
+*/
 static void	slash_access_check(t_exec *data, char **bin_path)
 {
 	if (access(data->cmd, F_OK) == -1)
