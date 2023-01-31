@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 14:13:30 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/31 15:24:28 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/31 15:27:10 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static bool	pipe_check(t_tok **temp)
 {
 	if ((*temp)->type == CHAR_PIPE)
 	{
-		if ((*temp)->next->type == CHAR_PIPE ||
-			(*temp)->next->type == CHAR_SEMICOLON ||
+		if ((*temp)->next->type == CHAR_PIPE || \
+			(*temp)->next->type == CHAR_SEMICOLON || \
 			(*temp)->next == NULL || (*temp)->next->str[0] == '\0')
 		{
 			ft_perror("\n21sh syntax error near unexpected token: '|'\n");
@@ -33,8 +33,8 @@ static bool	semicolon_check(t_tok ***temp)
 	{
 		if ((**temp)->type == CHAR_SEMICOLON)
 		{
-			if ((**temp)->next->type == CHAR_SEMICOLON ||
-				(**temp)->next->type == CHAR_PIPE ||
+			if ((**temp)->next->type == CHAR_SEMICOLON || \
+				(**temp)->next->type == CHAR_PIPE || \
 				(**temp)->next == NULL || (**temp)->next->str[0] == '\0')
 			{
 				ft_perror("\n21sh syntax error near unexpected token: ';'\n");
@@ -47,7 +47,6 @@ static bool	semicolon_check(t_tok ***temp)
 	}
 	return (false);
 }
-
 
 bool	separator_checks(t_tok **tok)
 {

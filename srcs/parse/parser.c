@@ -75,7 +75,6 @@ t_tok	*parser(t_shell *shell)
 		token_list_build(shell->q_input, lenght, &list);
 	else
 		return (NULL);
-	//if (&list.token_list)
 	token_list_print(&list.token_list);
 	input_expand(shell, &list.token_list);
 	input_strip_quotes(&list.token_list);

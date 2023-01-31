@@ -6,7 +6,7 @@
 #    By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/26 19:22:14 by zraunio           #+#    #+#              #
-#    Updated: 2023/01/31 14:24:32 by pskytta          ###   ########.fr        #
+#    Updated: 2023/01/31 15:25:55 by pskytta          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -142,8 +142,7 @@ _PARSE:= token_list_build.c \
 		separator_checks.c \
 		run_parser_checks.c \
 		parser.c
-#		pipe_checks.c \
-		aggregation_checks.c \
+#		aggregation_checks.c \
 
 _RAWMODE := enable_rawmode.c \
 		kill_mode.c
