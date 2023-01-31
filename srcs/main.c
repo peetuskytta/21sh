@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/30 14:47:27 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/31 22:15:29 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ static void	cmd_line_reset(t_shell *shell, t_win *window)
 	shell->cmd_idx = 0;
 	shell->end = 0;
 	init_prompt(shell);
-	window->loc = shell->prmpt_len;
 	if (shell->flg == 1)
 		cmd_line_prompt(shell->quote);
-	shell->flg = 0;
+	window->loc = shell->prmpt_len;
+	shell->flg = 1;
 }
 
 /*

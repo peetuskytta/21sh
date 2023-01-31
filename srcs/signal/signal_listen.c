@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 14:15:51 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/30 14:43:27 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/31 22:13:25 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,9 @@ void	signal_win_handler(int signo)
 
 static void	signal_abort(int signo)
 {
+	g_shell->flg = 0;
 	if (signo == SIGCHLD)
-	{
-		g_shell->flg = 1;
 		kill(signo, SIGINT);
-	}
 	else
 	{
 		ft_putstr_fd("\n", STDOUT_FILENO);
