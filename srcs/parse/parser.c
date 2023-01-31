@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/19 17:15:37 by pskytta           #+#    #+#             */
-/*   Updated: 2022/12/19 17:15:37 by pskytta          ###   ########.fr       */
+/*   Created: 2023/01/31 13:26:02 by pskytta           #+#    #+#             */
+/*   Updated: 2023/01/31 13:26:02 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	whitespace_check(char *str)
 	return (1);
 }
 
-/*DELETE BEFORE SUBMIT*/
+/* //DELETE BEFORE SUBMIT
 void	token_list_print(t_tok *token)
 {
 	t_tok	*temp;
@@ -62,8 +62,7 @@ void	token_list_print(t_tok *token)
 	}
 	if (temp == NULL)
 		ft_printf("\ntoken[%d] (NULL)\n", i);
-}
-
+} */
 
 t_tok	*parser(t_shell *shell)
 {

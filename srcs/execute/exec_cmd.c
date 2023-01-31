@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:40:28 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/31 10:10:42 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/31 13:27:45 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	exec_cmd(t_exec *data, char *bin_path, char **env_cpy)
 		ft_perror(FORK_FAIL);
 	else
 	{
-
 		if (data->fds.pipe != PIPE_FIRST)
 			wait_for_finish(&data->pid);
 		close_fds(data->fds.fd_in, data->fds.fd_out);

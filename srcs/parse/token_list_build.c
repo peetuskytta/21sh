@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 23:15:32 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/31 10:31:25 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/31 13:24:40 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ static void	token_loop(t_ints st, t_tok *token, char *input, int ch)
 			;
 		else if ((st.state == STATE_IN_DQUOTE || st.state == STATE_IN_QUOTE) \
 			&& state_quotes(&st, &token, ch) == 1)
-			{};
+			;
+		st.i++;
+	}
+}
 /* 		else if (ch == CHAR_NULL)
 		{
 			if (st.t_i > 0)
@@ -56,9 +59,6 @@ static void	token_loop(t_ints st, t_tok *token, char *input, int ch)
 				st.t_i = 0;
 			}
 		} */
-		st.i++;
-	}
-}
 
 void	token_list_build(char *input, int size, t_lex *list)
 {
