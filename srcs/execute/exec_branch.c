@@ -27,6 +27,8 @@ static void	slash_access_check(t_exec *data, char **bin_path)
 		ft_perror(EXEC_NO_ACCESS);
 		return ;
 	}
+	if (ft_is_directory(data->cmd))
+		return ;
 	else
 		*bin_path = ft_strdup(data->cmd);
 }

@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 23:15:32 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/31 13:24:40 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/31 14:38:50 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,17 @@ static void	token_loop(t_ints st, t_tok *token, char *input, int ch)
 		else if ((st.state == STATE_IN_DQUOTE || st.state == STATE_IN_QUOTE) \
 			&& state_quotes(&st, &token, ch) == 1)
 			;
-		st.i++;
-	}
-}
-/* 		else if (ch == CHAR_NULL)
+		else if (ch == CHAR_NULL)
 		{
 			if (st.t_i > 0)
 			{
-				token->str[st.t_i] = NULL_BYTE;
+				token->str[st.t_i] = st.c;
 				st.t_i = 0;
 			}
-		} */
+		}
+		st.i++;
+	}
+}
 
 void	token_list_build(char *input, int size, t_lex *list)
 {
@@ -71,6 +71,7 @@ void	token_list_build(char *input, int size, t_lex *list)
 	token = NULL;
 	ch = -1;
 	list->token_list = (t_tok *)ft_memalloc(sizeof(t_tok));
+	allocation_check((void *)&list->token_list);
 	token = list->token_list;
 	init_token(token, size);
 	st.c = input[st.i];

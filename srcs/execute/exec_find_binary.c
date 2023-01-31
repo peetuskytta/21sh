@@ -48,7 +48,7 @@ char	*exec_find_binary(char **path, char *cmd)
 		return (NULL);
 	if (ft_is_directory(cmd))
 	{
-		ft_print_fd(STDERR_FILENO, "21sh: %s: Is a directory", cmd);
+		ft_print_fd(STDERR_FILENO, "21sh: %s: Is a directory\n", cmd);
 		return (NULL);
 	}
 	if (cmd[0] == '\0')

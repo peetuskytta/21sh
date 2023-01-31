@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 13:58:06 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/31 10:03:24 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/31 14:59:42 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,10 @@ void	token_list_build(char *input, int size, t_lex *list);
 void	token_list_free(t_tok *list);
 void	parse_errors(t_tok **first);
 bool	parse_redir_errors(char *str, t_tok *next);
+bool	separator_checks(t_tok **tok);
+bool	redir_checks(t_tok *tok);
+//bool	pipe_checks(t_tok *tok);
+bool	run_parser_checks(t_tok *first);
+bool	aggregation_checks(t_tok *tok);
 
 #endif

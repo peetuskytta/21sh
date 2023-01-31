@@ -43,14 +43,14 @@ static int	whitespace_check(char *str)
 	return (1);
 }
 
-/* //DELETE BEFORE SUBMIT
-void	token_list_print(t_tok *token)
+//DELETE BEFORE SUBMIT
+void	token_list_print(t_tok **token)
 {
 	t_tok	*temp;
 	int		i;
 
 	i = 0;
-	temp = token;
+	temp = *token;
 	NL;
 	while (temp != NULL)
 	{
@@ -62,7 +62,7 @@ void	token_list_print(t_tok *token)
 	}
 	if (temp == NULL)
 		ft_printf("\ntoken[%d] (NULL)\n", i);
-} */
+}
 
 t_tok	*parser(t_shell *shell)
 {
@@ -75,10 +75,11 @@ t_tok	*parser(t_shell *shell)
 		token_list_build(shell->q_input, lenght, &list);
 	else
 		return (NULL);
+	//if (&list.token_list)
+	token_list_print(&list.token_list);
 	input_expand(shell, &list.token_list);
 	input_strip_quotes(&list.token_list);
 	parse_errors(&list.token_list);
 	check_for_heredoc(&list.token_list, shell);
-	//token_list_print(list.token_list);
 	return (list.token_list);
 }

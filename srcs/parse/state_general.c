@@ -33,6 +33,7 @@ static int	handle_ws(t_ints *st, t_tok ***token, int ch_type, char *input)
 
 static int	handle_separators(t_ints *st, t_tok ***token, int ch, char *input)
 {
+	(void)input;
 	if (ch == CHAR_SEMICOLON || ch == CHAR_PIPE)
 	{
 		if (st->t_i > 0)
@@ -42,8 +43,8 @@ static int	handle_separators(t_ints *st, t_tok ***token, int ch, char *input)
 			init_token((**token), st->size - st->i);
 			st->t_i = 0;
 		}
-		if (st->t_i == 0 && input[st->i + 1] == NULL_BYTE)
-			return (0);
+		// if (st->t_i == 0 && input[st->i + 1] == NULL_BYTE)
+		// 	return (0);
 		(**token)->str[0] = ch;
 		(**token)->str[1] = NULL_BYTE;
 		(**token)->type = ch;
@@ -66,7 +67,10 @@ int	state_general(t_ints *st, t_tok **token, int ch_type, char *input)
 	else if (ch_type == CHAR_ESCAPE)
 		change_state(*token, st, input[++st->i]);
 	else if (handle_ws(st, &token, ch_type, input) == 0)
+	{
+		DB;
 		return (0);
+	}
 	else if (handle_separators(st, &token, ch_type, input))
 		;
 	return (1);
