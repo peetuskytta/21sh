@@ -78,20 +78,16 @@ static void	command_execution(t_shell *shell, t_exec *data, char **env_cpy)
 void	exec_branch(t_ast *branch, t_shell *shell)
 {
 	char	**env_cpy;
+	t_pid	pid;
 
 	if (branch == NULL)
 		return ;
+	pid.child = branch->data.pid.child;
 	env_cpy = copy_environment(shell->environ);
-	if ((branch->type == REDIR || branch->type == COMMAND))
-	{
-		command_execution(shell, &branch->data, env_cpy);
-		//shell->pids[i] = branch->data.pid.child;
-	}
 	if (branch->data.fds.pipe == PIPE_LAST)
-	{
-		DB;
-		branch->data.pid.wait = waitpid(-1, &branch->data.pid.status, 0);
-	}
+		pid.wait = waitpid(-1, &pid.status, 0);
+	if ((branch->type == REDIR || branch->type == COMMAND))
+		command_execution(shell, &branch->data, env_cpy);
 	exec_branch(branch->left, shell);
 	if (branch->type == PIPE)
 		exec_branch(branch->right, shell);

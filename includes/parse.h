@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 13:58:06 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/29 17:36:00 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/01/31 10:03:24 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,14 @@ typedef enum e_state
 	STATE_IN_ESCAPE,
 }	t_state;
 
+t_tok	*parser(t_shell *shell);
+int		state_redir(t_ints *st, t_tok **token);
+int		state_general(t_ints *st, t_tok **token, int ch_type, char *input);
+int		state_quotes(t_ints *st, t_tok **token, int ch_type);
+void	change_state(t_tok *tok, t_ints *st, int ch);
+void	init_token(t_tok *token, int size);
 void	token_list_build(char *input, int size, t_lex *list);
 void	token_list_free(t_tok *list);
-t_tok	*parser(t_shell *shell);
 void	parse_errors(t_tok **first);
 bool	parse_redir_errors(char *str, t_tok *next);
 

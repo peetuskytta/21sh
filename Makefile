@@ -6,7 +6,7 @@
 #    By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/26 19:22:14 by zraunio           #+#    #+#              #
-#    Updated: 2023/01/31 07:57:43 by pskytta          ###   ########.fr        #
+#    Updated: 2023/01/31 10:03:52 by pskytta          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -133,6 +133,11 @@ _PARSE:= token_list_build.c \
 		token_list_free.c \
 		parse_errors.c \
 		parse_redir_errors.c \
+		init_token.c \
+		state_redir.c \
+		state_quotes.c \
+		state_change.c \
+		state_general.c \
 		parser.c
 
 _RAWMODE := enable_rawmode.c \
