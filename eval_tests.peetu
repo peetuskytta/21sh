@@ -74,6 +74,8 @@ rm nosuchfile 2>&-							FAIL --- follow Rori's idea
 rm nosuchfile 2>&1 | cat -e					OK
 echo "No dollar character" 1>&2 | cat -e	OK
 
+------------------- Aggregation checks: if anything else then '&>' 
+
 SECTION 11
 
 move cursor left and right		OK

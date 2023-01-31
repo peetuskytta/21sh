@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 14:13:07 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/31 15:38:36 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/31 16:20:53 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,30 @@
 
 static bool	aggr_checks(t_tok *tok, t_tok *next)
 {
-	if (ft_strequ(">&", tok->str) || ft_strequ(">&-", tok->str)
-		|| ft_strequ("1>&-", tok->str) || ft_strequ("2>&-", tok->str)
-		|| ft_strequ("1>&2", tok->str) || ft_strequ("2>&1", tok->str))
+	if (ft_strequ(">&-", tok->str) || ft_strequ("1>&-", tok->str)
+		|| ft_strequ("2>&-", tok->str) || ft_strequ("1>&2", tok->str)
+		|| ft_strequ("2>&1", tok->str))
 	{
-		if (next->type != CHAR_SEMICOLON || next->type != CHAR_PIPE)
-		{
-			if (ft_strequ(">&", tok->str))
-				next->type = WORD;
-		}
+		if (next->type != ';' || next->type != '|')
+			next->type = WORD;
 		tok->agre = 1;
 	}
-	else if (ft_strequ("0<&-", tok->str))
+	if (ft_strequ(">&", tok->str) && (next->type != ';'
+		|| next->type != '|'))
 	{
-		ft_perror(BAD_FD);
-		ft_perror("0<&-\n");
-		return (true);
+		next->type = REDIR;
+		tok->agre = 1;
+		return (false);
 	}
 	else
 	{
-		ft_perror(PARSE_ERR);
-		ft_print_fd(STDERR_FILENO, "%s'\n", tok->str);
+		ft_perror(SYNTAX_ERR_NL);
 		return (true);
 	}
-	if (ft_strequ(">&", tok->str) && (next->str == NULL || next->str[0] == '\0'
-		|| ft_strequ(next->str, " ")))
+	if (ft_strequ("0<&-", tok->str))
 	{
-		ft_perror(SYNTAX_ERR);
+		ft_perror(BAD_FD);
+		ft_perror("0<&-\n");
 		return (true);
 	}
 	return (false);

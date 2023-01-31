@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:24:46 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/30 11:21:13 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/31 16:06:23 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@
 # define PIPE_ERR "shell: pipe error\n"
 # define BAD_FD "shell: Bad file descriptor:\n"
 # define SYNTAX_ERR "shell: syntax error near unexpected token\n"
+# define SYNTAX_ERR_NL "syntax error near unexpected token `newline'\n"
 # define PARSE_ERR "shell: parse error near "
 # define AGGR_ERR "shell: redir and closing file descriptor not allowed\n"
 
