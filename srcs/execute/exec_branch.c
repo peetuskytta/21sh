@@ -44,20 +44,6 @@ static void	real_exec(t_exec *data, char **env_cpy)
 	ft_strdel((void *)&bin_path);
 }
 
-static void	builtin_redir(t_shell *shell, t_exec *data, char **env_cpy)
-{
-	change_in_and_out(data);
-	if (ft_strequ(data->cmd, "env"))
-	{
-		if (builtin_env(shell, *data, env_cpy))
-			{};
-	}
-	else
-		builtin_execute(shell, *data, env_cpy);
-	close_fds(data->fds.fd_in, data->fds.fd_out);
-	exit(EXIT_SUCCESS);
-}
-
 /*
 **	Begins the process of finding the binary, opening redirections, checking
 **	binary file's execution rights before executing the command.
@@ -77,21 +63,7 @@ static void	command_execution(t_shell *shell, t_exec *data, char **env_cpy)
 			close_fds(data->fds.fd_in, data->fds.fd_out);
 		}
 		else if (data->fds.pipe > -1)
-		{
-			data->pid.child = fork();
-			if (data->pid.child == 0)
-			{
-				if (redirection_loop(data))
-					builtin_redir(shell, data, env_cpy);
-			}
-			else if (data->pid.child < 0)
-				ft_perror(FORK_FAIL);
-			else
-			{
-				wait(0);
-				close_fds(data->fds.fd_in, data->fds.fd_out);
-			}
-		}
+			exec_fork_builtin(shell, data, env_cpy);
 	}
 	else if (data->cmd)
 		real_exec(data, env_cpy);
@@ -106,21 +78,21 @@ static void	command_execution(t_shell *shell, t_exec *data, char **env_cpy)
 void	exec_branch(t_ast *branch, t_shell *shell)
 {
 	char	**env_cpy;
-	t_pid	pid;
 
 	if (branch == NULL)
 		return ;
-	pid.child = branch->data.pid.child;
 	env_cpy = copy_environment(shell->environ);
-	if (branch->data.fds.pipe == PIPE_LAST)
-		pid.wait = waitpid(-1, &pid.status, 0);
 	if ((branch->type == REDIR || branch->type == COMMAND))
 	{
 		command_execution(shell, &branch->data, env_cpy);
-		//init_in_out_err(shell->tty);
+		//shell->pids[i] = branch->data.pid.child;
+	}
+	if (branch->data.fds.pipe == PIPE_LAST)
+	{
+		DB;
+		branch->data.pid.wait = waitpid(-1, &branch->data.pid.status, 0);
 	}
 	exec_branch(branch->left, shell);
 	if (branch->type == PIPE)
 		exec_branch(branch->right, shell);
-	ast_release(branch, env_cpy);
 }

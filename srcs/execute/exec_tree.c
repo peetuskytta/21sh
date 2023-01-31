@@ -109,8 +109,8 @@ void	exec_tree(t_ast **tree, t_shell *shell)
 		piping(tree[idx], &shell->pipe);
 		exec_branch(tree[idx], shell);
 		ft_memdel((void *)&tree[idx]);
-		//init_in_out_err(shell->tty);
 		shell->pipe = false;
+		ast_release(tree[idx], NULL);
 		idx++;
 	}
 	ft_memdel((void *)&tree);

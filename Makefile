@@ -6,7 +6,7 @@
 #    By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/26 19:22:14 by zraunio           #+#    #+#              #
-#    Updated: 2023/01/29 19:09:33 by pskytta          ###   ########.fr        #
+#    Updated: 2023/01/31 07:57:43 by pskytta          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,6 +89,7 @@ _EXECUTE := exec_tree.c \
 		exec_find_binary.c \
 		exec_fetch_path_var.c \
 		exec_clear_data.c \
+		exec_fork_builtin.c \
 		close_fds.c \
 		change_in_and_out.c
 

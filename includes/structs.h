@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/30 16:16:22 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/01/31 08:51:03 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ typedef struct s_shell
 	int				prmpt_len;
 	int				end;
 	int				quote;
+	int				pids[MAX_REDIR];
 	bool			pipe;
 	char			*tty;
 	bool			last_io;
-	pid_t			child;
 	t_win			window;
 	struct termios	orig_raw;
 	struct termios	raw;
