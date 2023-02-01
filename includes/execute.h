@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 08:19:09 by pskytta           #+#    #+#             */
-/*   Updated: 2023/02/01 12:46:05 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/01 16:40:22 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ void	exec_branch(t_ast *branch, t_shell *shell);
 void	exec_cmd(t_exec *data, char *bin_path, char **env_cpy);
 void	exec_real(t_exec *data, char **env_cpy);
 void	exec_clear_data(t_exec *data);
-void	exec_slash_access(t_exec *data, char **bin_path);
 void	exec_fork_builtin(t_shell *shell, t_exec *data, char **env_cpy);
 void	change_in_and_out(t_exec *data);
 void	close_fds(int fd_in, int fd_out);
 void	aggregation(t_exec *data);
+bool	exec_slash_access(t_exec *data, char **bin_path);
 
 typedef enum e_pipe_fd
 {
