@@ -53,6 +53,7 @@ void	exec_branch(t_ast *branch, t_shell *shell)
 		pid.wait = waitpid(-1, &pid.status, 0);
 	if ((branch->type == REDIR || branch->type == COMMAND))
 		command_execution(shell, &branch->data, env_cpy);
+	ft_arr_free((void *)&env_cpy);
 	exec_branch(branch->left, shell);
 	if (branch->type == PIPE)
 		exec_branch(branch->right, shell);

@@ -10,11 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ast.h"
+#include "../../includes/ast.h"
 
 static int	set_aggr_type(t_redir *redir, char *str)
 {
-	(void)redir;
 	if (ft_strequ(">&", str))
 		return (AGGR_COPY_BOTH);
 	if (ft_strequ(">&-", str))
@@ -28,7 +27,7 @@ static int	set_aggr_type(t_redir *redir, char *str)
 	if (ft_strequ("2>&1", str))
 		return (AGGR_COPY_TWO);
 	else
-		return (FILE_PARSE_ERR);
+		return (redir->agre);
 }
 
 static int	check_for_type(t_redir *redir, char *str)

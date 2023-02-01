@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 14:13:07 by pskytta           #+#    #+#             */
-/*   Updated: 2023/02/01 14:04:00 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/01 14:51:33 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,6 @@ static bool	in_closed_check(char *str)
 	return (false);
 }
 
-static bool	check_next_type(t_tok *next)
-{
-	if (next == NULL || next->type == ';' || next->type == '|')
-	{
-		ft_perror(SYNTAX_ERR_NL);
-		return (true);
-	}
-	if (next->type != ';' && next->type != '|')
-		next->type = REDIR;
-	return (false);
-}
-
 static bool	aggr_checks(t_tok *tok, t_tok *next)
 {
 	if (ft_strequ(">&-", tok->str) || ft_strequ("1>&-", tok->str)
@@ -45,13 +33,6 @@ static bool	aggr_checks(t_tok *tok, t_tok *next)
 		if (next->type == REDIR)
 			next->type = WORD;
 		tok->agre = 1;
-	}
-	if (ft_strequ(">&", tok->str))
-	{
-		if (check_next_type(next))
-			return (true);
-		tok->agre = 1;
-		return (false);
 	}
 	return (in_closed_check(tok->str));
 }
@@ -72,7 +53,8 @@ bool	redir_checks(t_tok *temp)
 				if (parse_redir_errors(temp->str, temp->next))
 					return (true);
 			}
-			if (temp->next->type == REDIR && temp->next->next != NULL)
+			if (temp->next->type == REDIR && temp->next->next != NULL && \
+				(ft_strchr(temp->str, '&') || ft_strchr(temp->str, '-')))
 				temp = temp->next;
 			temp = temp->next;
 		}

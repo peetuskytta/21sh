@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:40:28 by pskytta           #+#    #+#             */
-/*   Updated: 2023/02/01 12:26:13 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/01 13:02:07 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	exec_cmd(t_exec *data, char *bin_path, char **env_cpy)
 			ft_perror(EXECVE_ERROR);
 			exit(EXIT_FAILURE);
 		}
+		close_fds(data->fds.fd_in, data->fds.fd_out);
 	}
 	else if (data->pid.child < 0)
 		ft_perror(FORK_FAIL);

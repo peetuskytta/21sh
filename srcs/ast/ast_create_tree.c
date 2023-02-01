@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ast_create_tree.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 18:57:50 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/26 19:07:29 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/01 12:54:11 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
+#include "../../includes/ast.h"
 
 static bool	ast_sniff_for_pipe(t_tok *token)
 {
