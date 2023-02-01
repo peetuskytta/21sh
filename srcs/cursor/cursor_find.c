@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cursor_find.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:50:18 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/29 18:11:43 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/01 13:56:55 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	cursor_find(t_shell *shell, t_win *window)
 	char	buf[MAX_BUFF + 1];
 
 	if (enable_rawmode(shell) == 0)
-		ft_perror("Error with tcgetattr\n");
+		ft_perror(TCGET_ERR);
 	tcsetattr(STDIN_FILENO, TCSANOW, &shell->raw);
 	ft_putstr_fd("\x1B[6n", STDOUT_FILENO);
 	ft_memset(buf, 0, sizeof(char) * (MAX_BUFF + 1));

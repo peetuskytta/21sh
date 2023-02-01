@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 14:13:07 by pskytta           #+#    #+#             */
-/*   Updated: 2023/02/01 11:11:03 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/01 14:04:00 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ static bool	aggr_checks(t_tok *tok, t_tok *next)
 			next->type = WORD;
 		tok->agre = 1;
 	}
-	DB;
-	ft_putendl(next->str);
 	if (ft_strequ(">&", tok->str))
 	{
 		if (check_next_type(next))

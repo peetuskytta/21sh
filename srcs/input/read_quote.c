@@ -6,16 +6,12 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:49:29 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/16 14:34:25 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/01 14:00:59 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-/*
-**	Reads new input to *extra and joines the new & extra. Checks if quotes
-**	are closed or not and repeats the above if necessary.
-*/
 /*
 **	Returns the character of the quote that is open.
 */

@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:50:56 by pskytta           #+#    #+#             */
-/*   Updated: 2023/02/01 12:07:24 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/01 13:59:16 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ int	main(int argc, char **argv, char **envp)
 	if (envp)
 	{
 		print_logo();
-		cmd_line_prompt(EOF);
 		init_shell(&shell, envp);
+		cmd_line_prompt(EOF);
 		cursor_load(&shell.window, 0);
 		run_shell(&shell);
 	}

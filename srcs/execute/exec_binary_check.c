@@ -16,11 +16,6 @@ bool	exec_binary_check(char **bin_path, t_exec data)
 {
 	if (!data.cmd && data.redir->file != NULL)
 		return (false);
-	// if (*bin_path == NULL)
-	// {
-	// 	DB;
-	// 	return (false);
-	// }
 	if (ft_strequ(data.args[0], "./21sh"))
 		*bin_path = ft_strdup(data.args[0]);
 	if (access(*bin_path, F_OK) == -1)

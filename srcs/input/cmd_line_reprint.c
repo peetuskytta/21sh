@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 13:36:22 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/19 15:21:53 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/01 14:00:25 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,3 @@ void	cmd_line_reprint(t_shell *shell, t_win *window)
 		input_rev_cmd(shell);
 	cursor_load(window, 0);
 }
-/*
-*/
