@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   kill_mode.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 13:28:31 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/29 18:36:05 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/01 14:15:25 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ void	kill_mode(const char *str, t_shell *shell)
 	write(STDOUT_FILENO, "\x1b[H", 3);
 	if (ft_strequ(str, "exit") || ft_strequ(str, "\nexit\n"))
 		ft_putstr_fd(str, STDOUT_FILENO);
+	else if (ft_strequ(ERROR_EXIT, str))
+	{
+		ft_perror(ERROR_EXIT);
+		exit(EXIT_FAILURE);
+	}
 	else
 		ft_perror(str);
 	ft_memset(shell->clipbrd, '\0', sizeof(char) * (MAX_BUFF + 1));
