@@ -42,6 +42,7 @@ t_ast	**ast_constructor(t_shell *shell, t_tok *token)
 		return (NULL);
 	temp = token;
 	tree = (t_ast **)ft_memalloc(sizeof(t_ast *) * (100));
+	allocation_check((void *)&tree);
 	ft_memset((void **)tree, 0, sizeof(t_ast *) * (100));
 	while (token)
 	{

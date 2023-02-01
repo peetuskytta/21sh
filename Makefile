@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+         #
+#    By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/26 19:22:14 by zraunio           #+#    #+#              #
-#    Updated: 2023/02/01 11:16:52 by zraunio          ###   ########.fr        #
+#    Updated: 2023/02/01 12:45:47 by pskytta          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,6 +93,7 @@ _EXECUTE := exec_tree.c \
 		exec_clear_data.c \
 		exec_fork_builtin.c \
 		close_fds.c \
+		aggregation.c \
 		change_in_and_out.c
 
 _INIT := init_shell.c \

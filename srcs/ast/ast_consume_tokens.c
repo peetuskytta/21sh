@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ast_consume_tokens.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:05:15 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/25 18:13:40 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/01 12:53:49 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
-#include "ast.h"
+#include "../../includes/ast.h"
 
 /*
 ** Adds the token type WORD to the arguments array.

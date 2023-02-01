@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_checks.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 14:13:07 by pskytta           #+#    #+#             */
-/*   Updated: 2023/02/01 11:11:03 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/01 14:17:31 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ static bool	aggr_checks(t_tok *tok, t_tok *next)
 			next->type = WORD;
 		tok->agre = 1;
 	}
-	DB;
-	ft_putendl(next->str);
 	if (ft_strequ(">&", tok->str))
 	{
 		if (check_next_type(next))
@@ -74,7 +72,8 @@ bool	redir_checks(t_tok *temp)
 				if (parse_redir_errors(temp->str, temp->next))
 					return (true);
 			}
-			if (temp->next->type == REDIR && temp->next->next != NULL)
+			if (temp->next->type == REDIR && temp->next->next != NULL && \
+				(ft_strchr(temp->str, '&') || ft_strchr(temp->str, '-')))
 				temp = temp->next;
 			temp = temp->next;
 		}

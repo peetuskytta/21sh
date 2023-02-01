@@ -99,11 +99,13 @@ void	exec_tree(t_ast **tree, t_shell *shell)
 	while (tree[idx])
 	{
 		piping(tree[idx], &shell->pipe);
+		aggregation(&tree[idx]->left->data);
 		exec_branch(tree[idx], shell);
+		ast_release(tree[idx]);
 		ft_memdel((void *)&tree[idx]);
 		shell->pipe = false;
-		ast_release(tree[idx], NULL);
 		idx++;
+		init_in_out_err(shell->tty);
 	}
 	ft_memdel((void *)&tree);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 08:19:09 by pskytta           #+#    #+#             */
-/*   Updated: 2023/02/01 11:13:52 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/01 12:46:05 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	exec_slash_access(t_exec *data, char **bin_path);
 void	exec_fork_builtin(t_shell *shell, t_exec *data, char **env_cpy);
 void	change_in_and_out(t_exec *data);
 void	close_fds(int fd_in, int fd_out);
+void	aggregation(t_exec *data);
 
 typedef enum e_pipe_fd
 {
