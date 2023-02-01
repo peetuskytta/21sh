@@ -1,0 +1,24 @@
+total 3352
+drwxr-xr-x@  23 zraunio  staff      736  1 Feb 15:56 .
+drwxr-xr-x@  32 zraunio  staff     1024  1 Feb 15:56 ..
+-rwxr-xr-x@   1 zraunio  staff    11795 31 Jan 22:15 .21sh_history
+drwxr-xr-x@  33 zraunio  staff     1056  1 Feb 15:11 .git
+-rwxr-xr-x    1 zraunio  staff      126 29 Jan 18:42 .gitignore
+-rwxr-xr-x    1 zraunio  staff   333440  1 Feb 16:01 21sh
+-rw-r--r--@   1 zraunio  staff  1300693 29 Oct 14:25 21sh.en.pdf
+-rw-r--r--    1 zraunio  staff     7055  1 Feb 14:29 Makefile
+-rw-r--r--    1 zraunio  staff     1735 29 Jan 18:42 aggr.peetu
+-rwxr-xr-x    1 zraunio  staff       16 29 Oct 14:25 author
+-rw-r--r--    1 zraunio  staff     1950  1 Feb 11:09 eval_tests.peetu
+-rw-r--r--    1 zraunio  staff      157  1 Feb 15:52 file
+-rw-r--r--    1 zraunio  staff        0  1 Feb 16:01 hello
+drwxr-xr-x@  19 zraunio  staff      608  1 Feb 14:34 includes
+drwxr-xr-x@  26 zraunio  staff      832  1 Feb 15:14 libft
+-rw-r--r--    1 zraunio  staff      373  6 Jan 08:42 links.txt
+-rw-r--r--    1 zraunio  staff    10113  1 Feb 15:11 makelog.txt
+-rwxr-xr-x    1 zraunio  staff     1524  1 Feb 14:28 notes.rori
+drwxr-xr-x@ 101 zraunio  staff     3232  1 Feb 15:56 obj
+drwxr-xr-x@   4 zraunio  staff      128 29 Oct 14:26 other
+-rw-r--r--    1 zraunio  staff    10381 31 Jan 21:54 saved_parse_toklist
+drwxr-xr-x@  21 zraunio  staff      672  1 Feb 15:56 srcs
+-rw-r--r--@   1 zraunio  staff     2635 22 Jan 12:53 txt.txt

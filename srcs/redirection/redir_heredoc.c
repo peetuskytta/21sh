@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 19:36:30 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/28 14:26:02 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/01 15:42:32 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ static void	heredoc_reset(t_herfd *hdoc)
 	ft_memdel((void *)&hdoc->delim);
 	hdoc->idx = 0;
 	hdoc->end = 0;
-	ft_memset(hdoc, '\0', sizeof(t_herfd));
 }
 
 static int	init_heredoc(t_herfd *hdoc, char *delim)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_file_check.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 15:11:08 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/29 16:34:56 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/01 15:42:20 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,6 @@ int	redir_file_check(t_redir *redir)
 	}
 	else if (redir->type == FILE_IN)
 		open_redirection_in(redir, &status);
-	else if (redir->type == HEREDOC)
-		return (FILE_IN);
 	if (redir->agre > 9)
 		set_aggregation(redir);
 	if (status != FILE_IN && status != FILE_OUT)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_redir_errors.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 13:31:36 by zraunio           #+#    #+#             */
-/*   Updated: 2023/02/01 10:11:35 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/01 16:01:22 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,13 @@ bool	parse_redir_errors(char *str, t_tok *next)
 		|| ft_strequ("1>", str) || ft_strequ("1>>", str)
 		|| ft_strequ("2>", str) || ft_strequ("2>>", str))
 		;
-	else if (next->type == REDIR && ft_strchr(next->str, '&'))
-	{
-		ft_print_fd(2, "\n"AGGR_ERR"\n");
-		return (true);
-	}
 	else
 	{
-		ft_print_fd(2, "\n21sh parse error near `%s'\n", str);
-		return (true);
+		if (next->type != '|' && next->type != ';')
+		{
+			ft_print_fd(2, "\n21sh parse error near `%s'\n", str);
+			return (true);
+		}
 	}
 	if (redir_validation(next))
 		return (true);

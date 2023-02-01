@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_listen.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 10:50:05 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/29 18:39:42 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/01 15:38:33 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,13 @@ int	heredoc_listen(t_herfd *shell, char *input)
 	i = 0;
 	while (input[i] != '\0')
 	{
-		if (input[i] == CTRL_D)
-			return (-1);
 		key = keys_heredoc(input, &i);
-		if (key == ENTER || shell->idx + 1 >= shell->cols)
+		if (key == ENTER || shell->idx + 1 >= shell->cols
+			|| (input[i] == CTRL_D && shell->input[shell->idx - 1] == '\n'))
 		{
 			save_to_heredoc(shell, '\n');
-			if (is_delim(shell) == 1 || shell->idx + 1 >= shell->cols)
+			if (is_delim(shell) == 1 || shell->idx + 1 >= shell->cols
+				|| input[i] == CTRL_D)
 				return (-1);
 			ft_putstr_fd("> ", STDOUT_FILENO);
 		}
