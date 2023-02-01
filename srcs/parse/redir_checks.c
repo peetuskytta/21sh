@@ -6,11 +6,35 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 14:13:07 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/31 16:20:53 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/01 11:05:10 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parse.h"
+
+static bool	in_closed_check(char *str)
+{
+	if (ft_strchr(str, '0')) /* && ft_strchr("&", str) && ft_strchr */
+	{
+		ft_perror(BAD_FD);
+		ft_perror(str);
+		ft_putchar('\n');
+		return (true);
+	}
+	return (false);
+}
+
+static bool	check_next_type(t_tok *next)
+{
+	if (next == NULL || next->type == ';' || next->type == '|')
+	{
+		ft_perror(SYNTAX_ERR_NL);
+		return (true);
+	}
+	if (next->type != ';' && next->type != '|')
+		next->type = REDIR;
+	return (false);
+}
 
 static bool	aggr_checks(t_tok *tok, t_tok *next)
 {
@@ -18,29 +42,20 @@ static bool	aggr_checks(t_tok *tok, t_tok *next)
 		|| ft_strequ("2>&-", tok->str) || ft_strequ("1>&2", tok->str)
 		|| ft_strequ("2>&1", tok->str))
 	{
-		if (next->type != ';' || next->type != '|')
+		if (next->type == REDIR)
 			next->type = WORD;
 		tok->agre = 1;
 	}
-	if (ft_strequ(">&", tok->str) && (next->type != ';'
-		|| next->type != '|'))
+	DB;
+	ft_putendl(next->str);
+	if (ft_strequ(">&", tok->str))
 	{
-		next->type = REDIR;
+		if (check_next_type(next))
+			return (true);
 		tok->agre = 1;
 		return (false);
 	}
-	else
-	{
-		ft_perror(SYNTAX_ERR_NL);
-		return (true);
-	}
-	if (ft_strequ("0<&-", tok->str))
-	{
-		ft_perror(BAD_FD);
-		ft_perror("0<&-\n");
-		return (true);
-	}
-	return (false);
+	return (in_closed_check(tok->str));
 }
 
 bool	redir_checks(t_tok *temp)

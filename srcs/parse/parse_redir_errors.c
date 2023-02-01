@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 13:31:36 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/31 15:37:12 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/01 10:11:35 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ bool	parse_redir_errors(char *str, t_tok *next)
 	}
 	else
 	{
-		DB;
 		ft_print_fd(2, "\n21sh parse error near `%s'\n", str);
 		return (true);
 	}

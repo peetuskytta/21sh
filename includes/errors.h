@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:24:46 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/31 16:06:23 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/01 09:11:36 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@
 /*Error messages for pipe, redirections & tokens*/
 # define REDIR_ERR "shell: redirection error\n"
 # define PIPE_ERR "shell: pipe error\n"
-# define BAD_FD "shell: Bad file descriptor:\n"
+# define BAD_FD "shell: Bad file descriptor: "
 # define SYNTAX_ERR "shell: syntax error near unexpected token\n"
 # define SYNTAX_ERR_NL "syntax error near unexpected token `newline'\n"
 # define PARSE_ERR "shell: parse error near "
