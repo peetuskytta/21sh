@@ -6,7 +6,7 @@
 #    By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/26 19:22:14 by zraunio           #+#    #+#              #
-#    Updated: 2023/01/30 16:21:38 by zraunio          ###   ########.fr        #
+#    Updated: 2023/02/01 11:16:52 by zraunio          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,6 +91,7 @@ _EXECUTE := exec_tree.c \
 		exec_fetch_path_var.c \
 		exec_slash_access.c \
 		exec_clear_data.c \
+		exec_fork_builtin.c \
 		close_fds.c \
 		change_in_and_out.c
 
@@ -134,6 +135,14 @@ _PARSE:= token_list_build.c \
 		token_list_free.c \
 		parse_errors.c \
 		parse_redir_errors.c \
+		init_token.c \
+		state_redir.c \
+		state_quotes.c \
+		state_change.c \
+		state_general.c \
+		redir_checks.c \
+		separator_checks.c \
+		run_parser_checks.c \
 		parser.c
 
 _RAWMODE := enable_rawmode.c \

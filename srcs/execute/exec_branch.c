@@ -12,26 +12,6 @@
 
 #include "../../includes/execute.h"
 
-static void	builtin_redir(t_shell *shell, t_exec *data, char **env_cpy)
-{
-	change_in_and_out(data);
-	if (ft_strequ(data->cmd, "env"))
-	{
-		if (builtin_env(shell, *data, env_cpy))
-			;
-	}
-	else
-		builtin_execute(shell, *data, env_cpy);
-	close_fds(data->fds.fd_in, data->fds.fd_out);
-	exit(EXIT_SUCCESS);
-}
-
-static void	wait_closefd(t_exec *data)
-{
-	wait(0);
-	close_fds(data->fds.fd_in, data->fds.fd_out);
-}
-
 /*
 **	Begins the process of finding the binary, opening redirections, checking
 **	binary file's execution rights before executing the command.
@@ -48,18 +28,7 @@ static void	command_execution(t_shell *shell, t_exec *data, char **env_cpy)
 			close_fds(data->fds.fd_in, data->fds.fd_out);
 		}
 		else if (data->fds.pipe > -1)
-		{
-			data->pid.child = fork();
-			if (data->pid.child == 0)
-			{
-				if (redirection_loop(data))
-					builtin_redir(shell, data, env_cpy);
-			}
-			else if (data->pid.child < 0)
-				ft_perror(FORK_FAIL);
-			else
-				wait_closefd(data);
-		}
+			exec_fork_builtin(shell, data, env_cpy);
 	}
 	else if (data->cmd)
 		exec_real(data, env_cpy);
@@ -87,5 +56,4 @@ void	exec_branch(t_ast *branch, t_shell *shell)
 	exec_branch(branch->left, shell);
 	if (branch->type == PIPE)
 		exec_branch(branch->right, shell);
-	ast_release(branch, env_cpy);
 }

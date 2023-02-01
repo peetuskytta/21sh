@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 14:22:02 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/30 16:29:31 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/01 11:10:14 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,36 @@ static bool	in_files(t_redir *redir, char *file)
 		return (false);
 }
 
+static bool	status_out(int status, t_exec *data, int *idx)
+{
+	if (status == FILE_OUT)
+	{
+		if (out_files(&data->redir[*idx], data->redir[*idx + 1].file))
+			;
+		else
+		{
+			data->redir[0].fd_out = data->redir[*idx].fd_out;
+			return (true);
+		}
+	}
+	return (false);
+}
+
+static bool	status_in(int status, t_exec *data, int *idx)
+{
+	if (status == FILE_IN)
+	{
+		if (in_files(&data->redir[*idx], data->redir[*idx + 1].file))
+			;
+		else
+		{
+			data->redir[0].fd_in = data->redir[*idx].fd_in;
+			return (true);
+		}
+	}
+	return (false);
+}
+
 /*
 **	Opens all the redirection files in one command and closes the previous
 **	if there are more to be opened. Last one stays "active" and is used
@@ -51,28 +81,10 @@ bool	redirection_loop(t_exec *data)
 	while (data->redir[idx].file)
 	{
 		status = redir_file_check(&data->redir[idx]);
-		if (status == FILE_OUT)
-		{
-			if (out_files(&data->redir[idx], data->redir[idx + 1].file))
-				;
-			else
-			{
-				data->redir[0].fd_out = data->redir[idx].fd_out;
-				return (true);
-			}
-		}
-		else if (status == FILE_IN)
-		{
-			if (in_files(&data->redir[idx], data->redir[idx + 1].file))
-				;
-			else
-			{
-				data->redir[0].fd_in = data->redir[idx].fd_in;
-				return (true);
-			}
-		}
-		else
-			return (false);
+		if (status_out(status, data, &idx) == true)
+			return (true);
+		else if (status_in(status, data, &idx) == true)
+			return (true);
 		idx++;
 	}
 	return (true);

@@ -50,6 +50,9 @@ static int	check_for_type(t_redir *redir, char *str)
 			type = FILE_PARSE_ERR;
 		if (str[0] == '2')
 			redir->fd_err = ERR_ON;
+/* 		ft_putnbr_endl(redir->agre);
+		ft_putnbr_endl(redir->fd_err);
+		ft_putendl(redir->file); */
 	}
 	return (type);
 }

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_redir_errors.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 13:31:36 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/29 17:33:00 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/01 10:11:35 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
+#include "../../includes/parse.h"
 
 static bool	redir_validation(t_tok *next)
 {
@@ -27,9 +27,7 @@ bool	parse_redir_errors(char *str, t_tok *next)
 	if (ft_strequ(">", str) || ft_strequ(">>", str)
 		||ft_strequ("<", str) || ft_strequ("<<", str)
 		|| ft_strequ("1>", str) || ft_strequ("1>>", str)
-		|| ft_strequ("2>", str) || ft_strequ("2>>", str)
-		|| ft_strequ("2>>1", str) || ft_strequ("1>>2", str)
-		|| ft_strequ("1>2", str) || ft_strequ("2>1", str))
+		|| ft_strequ("2>", str) || ft_strequ("2>>", str))
 		;
 	else if (next->type == REDIR && ft_strchr(next->str, '&'))
 	{

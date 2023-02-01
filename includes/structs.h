@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/30 18:12:00 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/01 11:21:37 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ typedef struct s_shell
 	int				prmpt_len;
 	int				end;
 	int				quote;
+	int				pid;
 	bool			pipe;
 	char			*tty;
 	bool			last_io;
-	pid_t			child;
 	t_win			window;
 	struct termios	orig_raw;
 	struct termios	raw;
@@ -131,9 +131,9 @@ typedef struct s_herfd
 
 typedef struct s_ints
 {
+	char	c;
 	int		i;
 	int		t_i;
-	char	c;
 	int		size;
 	int		state;
 }				t_ints;

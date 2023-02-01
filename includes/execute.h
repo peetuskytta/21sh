@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 08:19:09 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/30 16:21:22 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/01 11:13:52 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	exec_cmd(t_exec *data, char *bin_path, char **env_cpy);
 void	exec_real(t_exec *data, char **env_cpy);
 void	exec_clear_data(t_exec *data);
 void	exec_slash_access(t_exec *data, char **bin_path);
+void	exec_fork_builtin(t_shell *shell, t_exec *data, char **env_cpy);
 void	change_in_and_out(t_exec *data);
 void	close_fds(int fd_in, int fd_out);
 

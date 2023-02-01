@@ -1,36 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirection.h                                      :+:      :+:    :+:   */
+/*   run_parser_checks.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/04 14:59:36 by pskytta           #+#    #+#             */
-/*   Updated: 2023/02/01 11:15:21 by zraunio          ###   ########.fr       */
+/*   Created: 2023/01/31 15:27:18 by pskytta           #+#    #+#             */
+/*   Updated: 2023/02/01 11:11:18 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef REDIRECTION_H
-# define REDIRECTION_H
+#include "../../includes/parse.h"
 
-# include "shell.h"
-# include "structs.h"
-
-# define HERE_DOC "/tmp/heredoc"
-
-typedef enum e_status
+bool	run_parser_checks(t_tok *first)
 {
-	FILE_ERR = 11,
-	FILE_PERM = 12,
-	FOLDER_PERM = 13,
-	NO_FILE = 14,
-	FOLDER = 15,
-	HEREDOC = 16,
-}		t_status;
+	t_tok	*temp;
 
-bool	redirection_loop(t_exec *data);
-int		redir_file_check(t_redir *redir);
-int		redir_folder_check(char *str);
-void	redir_heredoc(t_tok *token);
-
-#endif
+	temp = first;
+	if (redir_checks(temp))
+		return (true);
+	if (separator_checks(&temp))
+		return (true);
+	return (false);
+}
