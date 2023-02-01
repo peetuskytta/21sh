@@ -13,4 +13,5 @@
 libft/ft_printf/.deps/
 file2
 file
+eval_tests.sh
 heredoc
