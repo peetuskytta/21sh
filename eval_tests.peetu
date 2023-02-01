@@ -99,3 +99,6 @@ echo "open quotes			OK
 NOTES
 
 ls |     lele     |  grep txt  >>>>> leaves process open?
+
+
+running with env -i ./21sh from term or our own shell -> either exit everything or make our own env variables on start each time
