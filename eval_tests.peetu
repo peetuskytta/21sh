@@ -56,8 +56,8 @@ SECTION 7
 echo "Testing redirections," > file				OK
 echo "with multiple lines" >> /tmp/test.txt		OK
 wc -c < test.txt								OK
-cat -e  "<<" LIM								ERR
-cat -e "<<" LIM >> /tmp/test.txt				ERR
+cat -e  << LIM								ERR
+cat -e << LIM >> /tmp/test.txt				ERR
 
 SECTION 8
 
@@ -74,7 +74,7 @@ rm nosuchfile 2>&-							OK
 rm nosuchfile 2>&1 | cat -e					OK
 echo "No dollar character" 1>&2 | cat -e	OK
 
-------------------- Aggregation checks: if anything else then '&>' 
+------------------- Aggregation checks: if anything else then '&>'
 
 SECTION 11
 
