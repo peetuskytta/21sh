@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 14:39:37 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/30 11:21:37 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/02 08:09:27 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,11 @@ static void	directory_change(const char *dir_path)
 		}
 	}
 	else
+	{
+		ft_perror(CD_SH);
+		ft_perror(dir_path);
 		ft_perror(NO_FILE_OR_DIR);
+	}
 }
 
 static char	*join_n_and_v(char *name, char *value)

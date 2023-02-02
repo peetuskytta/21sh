@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:24:46 by zraunio           #+#    #+#             */
-/*   Updated: 2023/02/01 11:13:12 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/02 09:01:03 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define CD_NO_OLDPWD "cd: OLDPWD not set\n"
 # define CD_NO_ACCESS ": permission denied\n"
 # define CD_NOT_DIR ": Not a directory\n"
-# define CD_SH "shell: cd: "
+# define CD_SH "21sh: cd: "
 # define IS_A_DIR ": Is a directory\n"
 # define CD_ARG_NO "cd: too many arguments\n"
 
@@ -55,26 +55,26 @@
 /*Error messages for fork, waitpid, and execve*/
 # define CMD_NOT_FOUND ": command not found\n"
 # define EXEC_NO_ACCESS ": permission denied\n"
-# define EXECVE_ERROR "shell: error with execve\n"
-# define FORK_FAIL "shell: fork fail\n"
-# define WAITPID_FAIL "shell: waitpid fail\n"
-# define EXECVE_ERR "shell: execve error\n"
+# define EXECVE_ERROR "21sh: error with execve\n"
+# define FORK_FAIL "21sh: fork fail\n"
+# define WAITPID_FAIL "21sh: waitpid fail\n"
+# define EXECVE_ERR "21sh: execve error\n"
 # define TCGET_ERR "Error with tcgetattr\n"
 # define TTY_TERM_ERR "ttyname() failed to retrieve terminal name.\n"
 
 /*Error messages for pipe, redirections & tokens*/
-# define REDIR_ERR "shell: redirection error\n"
-# define PIPE_ERR "shell: pipe error\n"
-# define BAD_FD "shell: Bad file descriptor: "
-# define SYNTAX_ERR "shell: syntax error near unexpected token\n"
+# define REDIR_ERR "21sh: redirection error\n"
+# define PIPE_ERR "21sh: pipe error\n"
+# define BAD_FD "21sh: Bad file descriptor: "
+# define SYNTAX_ERR "21sh: syntax error near unexpected token\n"
 # define SYNTAX_ERR_NL "syntax error near unexpected token `newline'\n"
-# define PARSE_ERR "shell: parse error near "
-# define AGGR_ERR "shell: redir and closing file descriptor not allowed\n"
+# define PARSE_ERR "21sh: parse error near "
+# define AGGR_ERR "21sh: redir and closing file descriptor not allowed\n"
 
 /*Error messages for file descriptors*/
 # define HEREDOC_EXIST "heredoc: already exists. Delete file and try again.\n"
-# define FILE_CLOSE_ERR "shell: error when closing a file\n"
-# define FILE_OPEN_ERR "shell: error when opening a file\n"
+# define FILE_CLOSE_ERR "21sh: error when closing a file\n"
+# define FILE_OPEN_ERR "21sh: error when opening a file\n"
 
 # define MALLOC_ERRNO		2
 # define FORK_ERRNO			3
