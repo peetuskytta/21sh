@@ -98,10 +98,15 @@ void	exec_tree(t_ast **tree, t_shell *shell)
 	idx = 0;
 	while (tree[idx])
 	{
+		close(open("file", O_WRONLY | O_TRUNC, 0644));
+		ft_print_fd(open("file", O_WRONLY | O_APPEND, 0664), "\n%d\n", idx);
 		piping(tree[idx], &shell->pipe);
 		if (tree[idx]->left->data.redir->agre < 13)
 			aggregation(&tree[idx]->left->data);
 		exec_branch(tree[idx], shell);
+		int i = 0;
+		while (shell->environ[i])
+			ft_print_fd(open("file", O_WRONLY | O_APPEND, 0664), "%s\n", shell->environ[i++]);
 		ast_release(tree[idx]);
 		ft_memdel((void *)&tree[idx]);
 		shell->pipe = false;

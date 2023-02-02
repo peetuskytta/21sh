@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_fd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:17:46 by zraunio           #+#    #+#             */
-/*   Updated: 2022/10/06 16:59:31 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/02 11:09:10 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ int	ft_print_fd(int fd, const char *format, ...)
 	if (ret != -1)
 		ret = write(fd, result, (size_t)ret);
 	free(result);
+	close(fd);
 	return (ret);
 }

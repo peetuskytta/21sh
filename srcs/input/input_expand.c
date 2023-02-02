@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_expand.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:45:33 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/24 16:26:54 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/02 11:34:57 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,18 @@ void	input_expand(t_shell *shell, t_tok **first)
 	t_tok	*temp;
 
 	temp = *first;
+
 	while (temp != NULL)
 	{
-		if (temp->str[0] == '$' && temp->str[1] != '\0')
-			expand_token(shell, temp, 1);
-		else if (temp->str[0] == '~' && temp->str[1] != '$'
-			&& (ft_isspace(temp->str[1]) || temp->str[1] == '\0'
-				|| temp->str[1] == '/'))
-			expand_token(shell, temp, 2);
+		if (is_builtin(temp->str) == false)
+		{
+			if (temp->str[0] == '$' && temp->str[1] != '\0')
+				expand_token(shell, temp, 1);
+			else if (temp->str[0] == '~' && temp->str[1] != '$'
+				&& (ft_isspace(temp->str[1]) || temp->str[1] == '\0'
+					|| temp->str[1] == '/'))
+				expand_token(shell, temp, 2);
+		}
 		temp = temp->next;
 	}
 }

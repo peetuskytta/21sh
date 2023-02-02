@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_execute.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:30:59 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/30 16:14:41 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/02 11:28:55 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	builtin_execute(t_shell *shell, t_exec data, char **env_cpy)
 {
 	change_in_and_out(&data);
+	//
 	if (ft_strequ("echo", data.cmd))
 		return (builtin_echo(shell, data));
 	else if (ft_strequ("setenv", data.cmd))
