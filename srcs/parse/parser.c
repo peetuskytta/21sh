@@ -19,7 +19,8 @@ static void	check_for_heredoc(t_tok **first, t_shell *shell)
 	temp = *first;
 	while (temp)
 	{
-		if (temp->type == REDIR && ft_strequ(temp->str, "<<"))
+		if (temp->type == REDIR && ft_strequ(temp->str, "<<") \
+				&& temp->next != NULL)
 		{
 			if (enable_rawmode(shell) == 0)
 				ft_perror(TCGET_ERR);
