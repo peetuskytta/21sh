@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 16:11:52 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/22 13:28:02 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/02 12:41:27 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ char	**ft_reallocarray(char **old_arr, int rows)
 
 	new_arr = (char **)malloc(sizeof(char *) * (rows + 1));
 	y = 0;
+	// ft_memset(new_arr, '\0', sizeof(char *) * (rows + 1));
 	while (old_arr[y] != NULL && y < rows)
 	{
 		new_arr[y] = ft_strdup(old_arr[y]);

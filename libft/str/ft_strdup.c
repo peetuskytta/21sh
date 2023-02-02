@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 12:37:55 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/22 14:44:18 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/02 12:30:09 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_strdup(const char *src)
 
 	i = 0;
 	str = (char *)malloc(sizeof(*str) * (ft_strlen(src) + 1));
-	if (!str)
+	if (!str || !src)
 		return (NULL);
 	while (src[i])
 	{
