@@ -24,9 +24,11 @@ static void	check_for_heredoc(t_tok **first, t_shell *shell)
 		{
 			if (enable_rawmode(shell) == 0)
 				ft_perror(TCGET_ERR);
-			tcsetattr(STDIN_FILENO, TCSANOW, &shell->raw);
+			if (tcsetattr(STDIN_FILENO, TCSANOW, &shell->raw) == -1)
+				ft_perror(TCGET_ERR);
 			redir_heredoc(temp);
-			tcsetattr(STDIN_FILENO, TCSAFLUSH, &shell->orig_raw);
+			if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &shell->orig_raw) == -1)
+				ft_perror(TCGET_ERR);
 		}
 		temp = temp->next;
 	}
