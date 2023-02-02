@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_read.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 18:42:14 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/30 09:47:46 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/02 21:46:57 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,5 @@ void	input_read(t_shell *shell)
 		ft_perror(TCGET_ERR);
 	tcsetattr(STDIN_FILENO, TCSANOW, &shell->raw);
 	read_key(shell, input);
-	tcsetattr(STDIN_FILENO, TCSANOW, &shell->orig_raw);
+	tcsetattr(STDIN_FILENO, TCSAFLUSH, &shell->orig_raw);
 }
