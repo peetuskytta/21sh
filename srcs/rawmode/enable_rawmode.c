@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 12:59:48 by zraunio           #+#    #+#             */
-/*   Updated: 2023/02/02 22:13:47 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/02 22:18:19 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	enable_rawmode(t_shell *shell)
 		return (0);
 	shell->orig_raw = orig_raw;
 	shell->raw = orig_raw;
-	shell->raw.c_iflag &= ~(IGNBRK | PARMRK | ISTRIP | IGNCR | ICRNL);
+	shell->raw.c_iflag &= ~(IGNBRK | PARMRK | ISTRIP | INLCR | IGNCR | ICRNL);
 	shell->raw.c_cflag &= ~(CSIZE | PARENB);
 	shell->raw.c_lflag &= ~(ICANON | ECHO);
 	shell->raw.c_iflag &= ~(IXON | BRKINT);

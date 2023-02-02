@@ -26,7 +26,7 @@ static void	check_for_heredoc(t_tok **first, t_shell *shell)
 				ft_perror(TCGET_ERR);
 			tcsetattr(STDIN_FILENO, TCSANOW, &shell->raw);
 			redir_heredoc(temp);
-			tcsetattr(STDIN_FILENO, TCSAFLUSH, &shell->orig_raw);
+			tcsetattr(STDIN_FILENO, TCSANOW, &shell->orig_raw);
 		}
 		temp = temp->next;
 	}
