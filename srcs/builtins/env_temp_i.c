@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   env_temp_i.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 19:09:23 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/30 13:34:28 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/02 14:37:03 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
+#include "../../includes/builtin.h"
 
 static bool	is_command(t_exec *data, int i)
 {

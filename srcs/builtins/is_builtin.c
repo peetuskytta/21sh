@@ -6,11 +6,11 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 13:27:51 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/23 14:53:50 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/02 14:37:08 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
+#include "../../includes/builtin.h"
 
 bool	is_builtin(char *cmd)
 {

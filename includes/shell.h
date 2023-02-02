@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/26 19:18:14 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/02 14:36:46 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@
 # include <sys/ioctl.h>
 # include <sys/wait.h>
 
-# define NL ft_putchar('\n')
-# define DB ft_putstr("\nYOU ARE HERE\n")
 # define NULL_BYTE '\0'
 # define TRUE 1
 # define FALSE 0
@@ -35,7 +33,7 @@
 # define MAX_BUFF 4096
 
 # include "ast.h"
-# include "buildin.h"
+# include "builtin.h"
 # include "cursor.h"
 # include "errors.h"
 # include "execute.h"

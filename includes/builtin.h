@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   buildin.h                                          :+:      :+:    :+:   */
+/*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:25:24 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/30 13:33:28 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/02 14:41:43 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILDIN_H
-# define BUILDIN_H
+#ifndef BUILTIN_H
+# define BUILTIN_H
 # include "shell.h"
 # include "structs.h"
 

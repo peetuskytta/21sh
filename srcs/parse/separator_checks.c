@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 14:13:30 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/31 15:27:10 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/02 14:04:45 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static bool	pipe_check(t_tok **temp)
 			(*temp)->next->type == CHAR_SEMICOLON || \
 			(*temp)->next == NULL || (*temp)->next->str[0] == '\0')
 		{
-			ft_perror("\n21sh syntax error near unexpected token: '|'\n");
+			ft_perror("21sh syntax error near unexpected token: '|'\n");
 			return (true);
 		}
 	}
@@ -37,7 +37,7 @@ static bool	semicolon_check(t_tok ***temp)
 				(**temp)->next->type == CHAR_PIPE || \
 				(**temp)->next == NULL || (**temp)->next->str[0] == '\0')
 			{
-				ft_perror("\n21sh syntax error near unexpected token: ';'\n");
+				ft_perror("21sh syntax error near unexpected token: ';'\n");
 				return (true);
 			}
 		}
@@ -50,6 +50,16 @@ static bool	semicolon_check(t_tok ***temp)
 
 bool	separator_checks(t_tok **tok)
 {
+	if ((*tok)->type == ';')
+	{
+		ft_perror("21sh syntax error near unexpected token: ';'\n");
+		return (true);
+	}
+	if ((*tok)->type == '|')
+	{
+		ft_perror("21sh syntax error near unexpected token: '|'\n");
+		return (true);
+	}
 	if (semicolon_check(&tok))
 		return (true);
 	else

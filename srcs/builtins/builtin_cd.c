@@ -6,11 +6,11 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 15:03:07 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/30 11:21:45 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/02 14:35:19 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
+#include "../../includes/builtin.h"
 
 static int	identify_case(t_exec *data)
 {

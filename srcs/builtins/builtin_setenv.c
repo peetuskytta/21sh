@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_setenv.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 11:53:38 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/22 12:24:48 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/02 14:36:24 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
+#include "../../includes/builtin.h"
 
 static void	setenv_error(int err)
 {

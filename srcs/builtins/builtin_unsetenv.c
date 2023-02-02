@@ -6,11 +6,11 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 11:34:37 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/29 18:40:43 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/02 14:36:34 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
+#include "../../includes/builtin.h"
 
 static int	verify_value(char *name)
 {

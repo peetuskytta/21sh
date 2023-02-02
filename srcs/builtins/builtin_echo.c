@@ -6,11 +6,11 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:08:12 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/27 15:13:52 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/02 14:35:23 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
+#include "../../includes/builtin.h"
 
 /*
 **	Builtin function to print the tokens after "echo" command

@@ -6,11 +6,11 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 13:39:29 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/29 18:25:53 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/02 14:35:06 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/buildin.h"
+#include "../../includes/builtin.h"
 
 static void	cd_home_value(t_shell *shell, t_exec *data, int idx)
 {

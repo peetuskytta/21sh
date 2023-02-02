@@ -6,11 +6,11 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:17:03 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/30 11:22:02 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/02 14:36:52 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
+#include "../../includes/builtin.h"
 
 static void	execute_env(t_shell *shell, t_exec new, char **env_cpy)
 {

@@ -6,11 +6,11 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:37:21 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/30 11:21:41 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/02 14:35:11 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
+#include "../../includes/builtin.h"
 
 static void	cd_oldpwd_value(t_shell *shell, t_exec *data, int idx)
 {

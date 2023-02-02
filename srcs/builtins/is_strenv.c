@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   is_strenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 12:16:38 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/22 10:59:25 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/02 14:37:15 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
+#include "../../includes/builtin.h"
 
 int	is_strenv(char *name, char **environ)
 {

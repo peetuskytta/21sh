@@ -6,11 +6,11 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 14:01:14 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/27 16:37:49 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/02 14:33:41 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/buildin.h"
+#include "../../includes/builtin.h"
 
 static int	access_check(char *temp, char *arg)
 {
@@ -67,6 +67,8 @@ int	builtin_cd_access(char *arg, int ret)
 		ft_arr_free((void *)&split);
 		if (ret == CD_PERM || ret == CD_NO_FILE)
 		{
+			ft_perror(CD_SH);
+			ft_perror(arg);
 			if (ret == CD_PERM)
 				ft_perror(CD_NO_ACCESS);
 			else

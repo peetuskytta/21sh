@@ -6,11 +6,11 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 16:44:24 by pskytta           #+#    #+#             */
-/*   Updated: 2023/01/25 16:51:12 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/02 14:41:30 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/buildin.h"
+#include "../../includes/builtin.h"
 
 void	builtin_cd_fetch_cwd(t_shell *shell)
 {
