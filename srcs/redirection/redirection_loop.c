@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_loop.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 14:22:02 by pskytta           #+#    #+#             */
-/*   Updated: 2023/02/01 11:10:14 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/02 19:41:03 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,17 @@ bool	redirection_loop(t_exec *data)
 
 	idx = 0;
 	status = -1;
-	while (data->redir[idx].file)
-	{
-		status = redir_file_check(&data->redir[idx]);
-		if (status_out(status, data, &idx) == true)
-			return (true);
-		else if (status_in(status, data, &idx) == true)
-			return (true);
-		idx++;
-	}
+	// if (data->fds.pipe == -1)
+	// {
+		while (data->redir[idx].file)
+		{
+			status = redir_file_check(&data->redir[idx]);
+			if (status_out(status, data, &idx) == true)
+				return (true);
+			else if (status_in(status, data, &idx) == true)
+				return (true);
+			idx++;
+		}
+	// }
 	return (true);
 }

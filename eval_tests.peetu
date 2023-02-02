@@ -66,7 +66,7 @@ ls -1; touch newfile ; ls -1					OK
 SECTION 9
 
 mkdir test ; cd test ; ls -a ; ls | cat | wc -c > fifi ; cat fifi			FAIL >>>>> order of doing.
-cd /tmp; sort << EOF | cat -e > sorted_poem ; sed -e 's/Roses/Turnips/'		FAIL
+cd /tmp; sort << EOF | cat -e > sorted_poem ; sed -e 's/Roses/Turnips/' < sorted_poem > better_poem; cd -; echo "I prefer turnips anyway" >> /tmp/better_poem; cat /tmp/better_poem 	FAIL
 
 SECTION 10
 

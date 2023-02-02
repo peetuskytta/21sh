@@ -85,6 +85,18 @@ static void	piping(t_ast *branch, bool *pipe)
 	setup_pipes(temp, branch->pipes, 0);
 }
 
+static void	redir_recursive(t_ast *branch)
+{
+	t_ast	*temp;
+
+	temp = branch;
+	if (temp == NULL)
+		return ;
+	redirection_loop(&temp->data);
+	redir_recursive(temp->left);
+	redir_recursive(temp->right);
+}
+
 /*
 **	Begin execution of a tree or multiple trees. Tree consists of one
 **	or multiple branches (if pipes are present). Terminal filedescriptors
@@ -101,6 +113,7 @@ void	exec_tree(t_ast **tree, t_shell *shell)
 		piping(tree[idx], &shell->pipe);
 		if (tree[idx]->left->data.redir->agre < 13)
 			aggregation(&tree[idx]->left->data);
+		redir_recursive(tree[idx]);
 		exec_branch(tree[idx], shell);
 		ast_release(tree[idx]);
 		ft_memdel((void *)&tree[idx]);

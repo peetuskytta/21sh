@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 19:36:30 by pskytta           #+#    #+#             */
-/*   Updated: 2023/02/02 17:19:07 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/02 19:59:42 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,14 @@ static int	init_heredoc(t_herfd *hdoc, char *delim)
 {
 	struct winsize	win;
 
+	close(open(HERE_DOC, O_RDWR | O_CREAT | O_TRUNC, 0664));
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &win);
 	hdoc->cols = win.ws_col;
-	if (access(HERE_DOC, F_OK) == 0)
+/* 	if (access(HERE_DOC, F_OK) == 0)
 	{
 		ft_perror(HEREDOC_EXIST);
 		return (1);
-	}
+	} */
 	hdoc->fd = open(HERE_DOC, O_RDWR | O_CREAT | O_APPEND, 0664);
 	hdoc->idx = 0;
 	hdoc->end = 0;
