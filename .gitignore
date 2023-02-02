@@ -1,6 +1,5 @@
 *.o
 *.pdf
-*.pdf
 *.txt
 *.
 *.out
@@ -15,3 +14,5 @@ file2
 file
 eval_tests.sh
 heredoc
+*.rori
+*.peetu
