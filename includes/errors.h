@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:24:46 by zraunio           #+#    #+#             */
-/*   Updated: 2023/02/01 11:13:12 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/02 10:20:02 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # define STDOUT_FAIL "Fail to fetch the stdout. Terminating.\n"
 # define STDIN_FAIL "Fail to fetch the stdin. Terminating.\n"
 # define STDERR_FAIL "Fail to fetch the stderr. Terminating.\n"
+# define EMPTY_ENV "Running 21sh witth empty environment not allowed. \
+Terminating all processes.\n"
 
 /*Error message defines for CD*/
 # define CD_NO_HOME "cd: HOME not set\n"

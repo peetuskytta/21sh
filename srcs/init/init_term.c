@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 14:35:28 by zraunio           #+#    #+#             */
-/*   Updated: 2023/02/01 18:51:01 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/02 10:19:38 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	init_term(void)
 	term = getenv("TERM");
 	if (term == NULL)
 	{
-		ft_print_fd(STDERR_FILENO, "could not get the TERM env\n");
+		ft_perror("could not get the TERM env\n");
+		ft_perror(EMPTY_ENV);
 		exit(EXIT_FAILURE);
 	}
 	status = tgetent(term_buffer, term);
