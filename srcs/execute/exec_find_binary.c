@@ -53,6 +53,9 @@ char	*exec_find_binary(char **path, char *cmd)
 		return (NULL);
 	}
 	if (cmd[0] == '\0')
+	{
+		ft_arr_free((void *)&path);
 		return (NULL);
+	}
 	return (exec_binary_path(path, cmd));
 }

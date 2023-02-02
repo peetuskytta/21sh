@@ -21,7 +21,7 @@ bool	exec_binary_check(char **bin_path, t_exec data)
 	}
 	if (!data.cmd && data.redir->file != NULL)
 		return (false);
-	if (data.args[0][0] == '.' && !ft_strnstr(data.args[0], "./", 2))
+	if (data.args[0][0] == '.' && (!ft_strnstr(data.args[0], "./", 2)))
 		*bin_path = ft_strdup(data.args[0]);
 	if (access(*bin_path, F_OK) == -1)
 	{

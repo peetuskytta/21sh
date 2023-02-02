@@ -74,7 +74,7 @@ rm nosuchfile 2>&-							OK
 rm nosuchfile 2>&1 | cat -e					OK
 echo "No dollar character" 1>&2 | cat -e	OK
 
-------------------- Aggregation checks: if anything else then '&>' 
+------------------- Aggregation checks: if anything else then '&>'
 
 SECTION 11
 
