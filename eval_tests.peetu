@@ -55,9 +55,9 @@ SECTION 7
 
 echo "Testing redirections," > file				OK
 echo "with multiple lines" >> /tmp/test.txt		OK
-wc -c < test.txt								OK
-cat -e  "<<" LIM								ERR
-cat -e "<<" LIM >> /tmp/test.txt				ERR
+wc -c < /tmp/test.txt							OK
+cat -e  << LIM									OK
+cat -e << LIM >> /tmp/test.txt				ERR
 
 SECTION 8
 
