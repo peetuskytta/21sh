@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 18:42:14 by zraunio           #+#    #+#             */
-/*   Updated: 2023/02/02 22:19:10 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/02 22:20:41 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,5 @@ void	input_read(t_shell *shell)
 		ft_perror(TCGET_ERR);
 	tcsetattr(STDIN_FILENO, TCSANOW, &shell->raw);
 	read_key(shell, input);
-	tcsetattr(STDIN_FILENO, TCSANOW, &shell->orig_raw);
+	tcsetattr(STDIN_FILENO, TCSAFLUSH, &shell->orig_raw);
 }

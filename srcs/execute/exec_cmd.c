@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:40:28 by pskytta           #+#    #+#             */
-/*   Updated: 2023/02/02 22:09:56 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/02 22:21:17 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	exec_cmd(t_exec *data, char *bin_path, char **env_cpy)
 	if (data->pid.child == 0)
 	{
 		change_in_and_out(data);
-		signal_ignore();
 		if (execve(bin_path, data->args, env_cpy) == -1)
 		{
 			ft_perror(EXECVE_ERROR);
@@ -42,7 +41,6 @@ void	exec_cmd(t_exec *data, char *bin_path, char **env_cpy)
 	{
 		if (data->fds.pipe != PIPE_FIRST)
 			wait_for_finish(&data->pid);
-		signal_runtime();
 		close_fds(data->fds.fd_in, data->fds.fd_out);
 	}
 }
