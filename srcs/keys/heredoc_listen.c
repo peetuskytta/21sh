@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 10:50:05 by pskytta           #+#    #+#             */
-/*   Updated: 2023/02/02 13:10:11 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/03 13:35:03 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ static int	is_delim(t_herfd *shell)
 	char	*temp;
 
 	i = ft_strstr_rev(shell->input, shell->delim);
-	if (i != -1 && shell->input[ft_strilen(shell->delim) - 1] == '\n')
+	if (i != -1 && shell->input[ft_strilen(shell->input) - \
+	ft_strilen(shell->delim) - 2] == '\n')
 	{
 		temp = ft_strsub(shell->input, 0, ft_strlen(shell->input) - \
 			ft_strilen(shell->delim) - 1);
@@ -87,7 +88,7 @@ int	heredoc_listen(t_herfd *shell, char *input)
 			|| (input[i] == CTRL_D && shell->input[shell->idx - 1] == '\n'))
 		{
 			save_to_heredoc(shell, '\n');
-			if (is_delim(shell) == 1 || shell->idx + 1 >= shell->cols
+			if (is_delim(shell) == 1 || shell->idx + 1 >= MAX_BUFF
 				|| input[i] == CTRL_D)
 				return (-1);
 			ft_putstr_fd("> ", STDOUT_FILENO);
