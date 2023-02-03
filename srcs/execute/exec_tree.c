@@ -92,6 +92,12 @@ static void	redir_recursive(t_ast *branch)
 	temp = branch;
 	if (temp == NULL)
 		return ;
+/* 	DB;
+ 	ft_putendl(temp->data.cmd);
+	if (temp->data.redir->file_in)
+		ft_putendl(temp->data.redir->file_in);
+	if (temp->data.redir->file)
+		ft_putendl(temp->data.redir->file); */
 	redirection_loop(&temp->data);
 	redir_recursive(temp->left);
 	redir_recursive(temp->right);

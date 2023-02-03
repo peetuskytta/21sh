@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 19:37:47 by pskytta           #+#    #+#             */
-/*   Updated: 2023/02/03 09:33:49 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/03 10:53:14 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static void	command_execution(t_shell *shell, t_exec *data, char **env_cpy)
 	{
 		if (data->fds.pipe < 0)
 		{
-			if (redirection_loop(data))
-				builtin_execute(shell, *data, env_cpy);
+			//if (redirection_loop(data))
+			builtin_execute(shell, *data, env_cpy);
 			close_fds(data->fds.fd_in, data->fds.fd_out);
 		}
 		else if (data->fds.pipe > -1)
