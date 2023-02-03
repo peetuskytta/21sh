@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 16:36:30 by zraunio           #+#    #+#             */
-/*   Updated: 2023/02/03 10:34:27 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/03 12:50:09 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	key_is_ctrlc(t_shell *shell, t_win *win)
 {
-	if (tcsetattr(STDIN_FILENO, TCSANOW, &shell->orig_raw) == -1)
-		ft_perror(TCGET_ERR);
 	win->idx = 0;
 	ft_memset(shell->q_input, '\0', sizeof(char) * (MAX_BUFF * 2 + 1));
 	ft_memset(win->row_idx, '\0', sizeof(char *) * (MAX_BUFF));
@@ -27,11 +25,8 @@ void	key_is_ctrlc(t_shell *shell, t_win *win)
 	shell->cmd_idx = 0;
 	win->loc = shell->prmpt_len;
 	shell->quote = EOF;
-	// if (enable_rawmode(shell) == 0)
-	// 	ft_perror(TCGET_ERR);
-	// if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &shell->raw) == -1)
-	// 	ft_perror(TCGET_ERR);
 	cursor_find(shell, win);
 	cursor_load(win, -1);
 	init_in_out_err(shell->tty);
+	ft_printf("\033[0m");
 }

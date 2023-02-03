@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 14:15:51 by zraunio           #+#    #+#             */
-/*   Updated: 2023/02/03 10:22:35 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/03 11:29:59 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,16 @@ static void	signal_abort(int signo)
 
 static void	signal_handler(int signo)
 {
-	signal_abort(signo);
+	if (signo == SIGWINCH)
+		signal_win_handler(signo);
+	if (signo == SIGINT)
+		signal_abort(signo);
 }
 
 void	signal_listen(void)
 {
 	signal(SIGINT, signal_handler);
-	signal(SIGWINCH, signal_win_handler);
+	signal(SIGWINCH, signal_handler);
 	signal(SIGTSTP, SIG_IGN);
 	signal(SIGSTOP, SIG_IGN);
 }
