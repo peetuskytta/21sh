@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 14:15:51 by zraunio           #+#    #+#             */
-/*   Updated: 2023/02/01 14:20:14 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/03 10:22:35 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	signal_abort(int signo)
 	g_shell->flg = 0;
 	if (signo)
 	{
-		ft_putstr_fd("\n", STDOUT_FILENO);
+		ft_putstr_fd("\n\r", STDOUT_FILENO);
 		cmd_line_prompt(EOF);
 		key_is_ctrlc(g_shell, &g_shell->window);
 	}

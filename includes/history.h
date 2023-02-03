@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:40:58 by zraunio           #+#    #+#             */
-/*   Updated: 2023/02/01 11:14:58 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/03 08:31:58 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define HISTORY_H
 # include "shell.h"
 
-# define HIST_FILE "/tmp/.21sh_history"
+# define HIST_FILE ".21sh_history"
 
 void	history(t_shell *shell);
 void	history_runtime(t_shell *shell);
