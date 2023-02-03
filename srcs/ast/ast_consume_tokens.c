@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:05:15 by pskytta           #+#    #+#             */
-/*   Updated: 2023/02/03 11:36:56 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/03 16:32:33 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,9 @@ static void	ast_redir_inout(t_tok ***token, t_redir *redir)
 {
 	(**token) = (**token)->next;
 	if (redir->type == FILE_IN)
-	{
-		//ft_putnbr_endl(redir->type);
 		redir->file_in = ft_strdup((**token)->str);
-		//ft_putendl(redir->file_in);
-	}
 	else if (redir->type == FILE_APPEND || redir->type == FILE_TRUNC)
-	{
-		//ft_putnbr_endl(redir->type);
 		redir->file = ft_strdup((**token)->str);
-	//	ft_putendl(redir->file);
-	}
 }
 
 /*
@@ -63,19 +55,6 @@ static void	ast_add_redir(t_tok ***token, t_redir *redir, int *idx)
 		}
 		if ((**token)->next->type == REDIR)
 			ast_redir_inout(token, &redir[(*idx)]);
-		// ft_putendl(redir[(*idx)].file_in);
-		// ft_putendl(redir[(*idx)].file);
-
-		// {
-		// 	(**token) = (**token)->next;
-		// 	redir[(*idx)].file = ft_strdup((**token)->str);
-		// }
-/* 		else
-		{
-			ft_perror("here");
-			redir[(*idx)].file_in = NULL;
-			redir[(*idx)].file = NULL;
-		} */
 		(*idx)++;
 	}
 	else

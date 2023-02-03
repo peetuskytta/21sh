@@ -85,24 +85,6 @@ static void	piping(t_ast *branch, bool *pipe)
 	setup_pipes(temp, branch->pipes, 0);
 }
 
-static void	redir_recursive(t_ast *branch)
-{
-	t_ast	*temp;
-
-	temp = branch;
-	if (temp == NULL)
-		return ;
-/* 	DB;
- 	ft_putendl(temp->data.cmd);
-	if (temp->data.redir->file_in)
-		ft_putendl(temp->data.redir->file_in);
-	if (temp->data.redir->file)
-		ft_putendl(temp->data.redir->file); */
-	redirection_loop(&temp->data);
-	redir_recursive(temp->left);
-	redir_recursive(temp->right);
-}
-
 /*
 **	Begin execution of a tree or multiple trees. Tree consists of one
 **	or multiple branches (if pipes are present). Terminal filedescriptors

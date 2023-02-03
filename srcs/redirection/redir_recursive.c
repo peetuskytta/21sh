@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   panic.h                                            :+:      :+:    :+:   */
+/*   redir_recursive.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/08 15:39:18 by zraunio           #+#    #+#             */
-/*   Updated: 2023/02/03 16:46:06 by pskytta          ###   ########.fr       */
+/*   Created: 2023/02/03 16:36:14 by pskytta           #+#    #+#             */
+/*   Updated: 2023/02/03 16:36:40 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PANIC_H
-# define PANIC_H
-# include "shell.h"
-# include "structs.h"
+#include "../../includes/redirection.h"
 
-/*
-** PANIC
-*/
-void	ft_perror(const char *s);
-void	ft_error_nl(t_shell *shell, char *err);
+void	redir_recursive(t_ast *branch)
+{
+	t_ast	*temp;
 
-#endif
+	temp = branch;
+	if (temp == NULL)
+		return ;
+	redirection_loop(&temp->data);
+	redir_recursive(temp->left);
+	redir_recursive(temp->right);
+}

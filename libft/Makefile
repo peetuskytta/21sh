@@ -79,6 +79,7 @@ _MATH_SRC = math/dig_count_base.c \
 		math/ft_count_chrstr.c \
 		math/ft_long_abs.c \
 		math/ft_swap.c \
+		math/ft_strstr_rev.c
 
 _MEM_SRC =  mem/ft_bzero.c \
 		mem/ft_memalloc.c \
@@ -183,37 +184,37 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
 $(OBJ_DIR)%.o: $(_ARRAY_SRC)%.c
-	@$(CC) $(CFLAGS) $(INCL) -c $< -o $@ 
+	@$(CC) $(CFLAGS) $(INCL) -c $< -o $@
 
 $(OBJ_DIR)%.o: $(_ASCII_SRC)%.c
 	@$(CC) $(CFLAGS) $(INCL) -c $< -o $@
 
 $(OBJ_DIR)%.o: $(_BIT_SRC)%.c
-	@$(CC) $(CFLAGS) $(INCL) -c $< -o $@ 
+	@$(CC) $(CFLAGS) $(INCL) -c $< -o $@
 
 $(OBJ_DIR)%.o: $(_CONV_SRC)%.c
-	@$(CC) $(CFLAGS) $(INCL) -c $< -o $@ 
+	@$(CC) $(CFLAGS) $(INCL) -c $< -o $@
 
 $(OBJ_DIR)%.o: $(_LIST_SRC)%.c
-	@$(CC) $(CFLAGS) $(INCL) -c $< -o $@ 
+	@$(CC) $(CFLAGS) $(INCL) -c $< -o $@
 
 $(OBJ_DIR)%.o: $(_MATH_SRC)%.c
-	@$(CC) $(CFLAGS) $(INCL) -c $< -o $@ 
+	@$(CC) $(CFLAGS) $(INCL) -c $< -o $@
 
 $(OBJ_DIR)%.o: $(_MEM_SRC)%.c
-	@$(CC) $(CFLAGS) $(INCL) -c $< -o $@ 
+	@$(CC) $(CFLAGS) $(INCL) -c $< -o $@
 
 $(OBJ_DIR)%.o: $(_PERMISSIONS_SRC)%.c
-	@$(CC) $(CFLAGS) $(INCL) -c $< -o $@ 
+	@$(CC) $(CFLAGS) $(INCL) -c $< -o $@
 
 $(OBJ_DIR)%.o: $(_PRINT_SRC)%.c
-	@$(CC) $(CFLAGS) $(INCL) -c $< -o $@ 
+	@$(CC) $(CFLAGS) $(INCL) -c $< -o $@
 
 $(OBJ_DIR)%.o: $(_STR_SRC)%.c
-	@$(CC) $(CFLAGS) $(INCL) -c $< -o $@ 
+	@$(CC) $(CFLAGS) $(INCL) -c $< -o $@
 
 $(OBJ_DIR)%.o: $(_TREE_SRC)%.c
-	@$(CC) $(CFLAGS) $(INCL) -c $< -o $@ 
+	@$(CC) $(CFLAGS) $(INCL) -c $< -o $@
 
 clean:
 	-@make clean -C ft_printf

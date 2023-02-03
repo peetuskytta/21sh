@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 15:26:16 by pskytta           #+#    #+#             */
-/*   Updated: 2023/02/03 15:23:27 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/03 16:34:57 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,8 @@ void	exec_clear_data(t_exec *data)
 	int	i;
 
 	i = 0;
-	while (i < MAX_REDIR)
-	{
-		if (data->args[i])
-			ft_memdel((void *)&data->args[i]);
-		i++;
-	}
+	while (data->args[i])
+		ft_memdel((void *)&data->args[i++]);
 	if (data->cmd)
 		ft_memdel((void *)&data->cmd);
 	if (data->redir[0].file != NULL || data->redir[0].file_in != NULL)

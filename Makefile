@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+         #
+#    By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/26 19:22:14 by zraunio           #+#    #+#              #
-#    Updated: 2023/02/02 17:21:08 by zraunio          ###   ########.fr        #
+#    Updated: 2023/02/03 16:46:20 by pskytta          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -129,8 +129,7 @@ _OUTPUT := stdin_char.c \
 		cmd_line_prompt.c
 
 _PANIC := ft_perror.c \
-		ft_error_nl.c \
-		ft_abort.c
+		ft_error_nl.c
 
 _PARSE:= token_list_build.c \
 		token_list_free.c \
@@ -152,7 +151,8 @@ _RAWMODE := enable_rawmode.c \
 _REDIRECTION := redirection_loop.c \
 		redir_file_check.c \
 		redir_folder_check.c \
-		redir_heredoc.c
+		redir_heredoc.c \
+		redir_recursive.c
 
 _SIGNAL := signal_listen.c \
 			signal_ignore.c \

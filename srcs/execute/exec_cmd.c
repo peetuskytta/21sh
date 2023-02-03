@@ -6,22 +6,15 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:40:28 by pskytta           #+#    #+#             */
-/*   Updated: 2023/02/03 15:17:26 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/03 16:31:33 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/execute.h"
-#include <sys/wait.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
 
 void	wait_for_finish(t_pid *pid)
 {
-	pid->status = -1;
 	pid->wait = waitpid(pid->child, &pid->status, 0);
-	ft_putnbr(pid->status);
 	if (pid->wait == -1)
 		ft_perror(WAITPID_FAIL);
 }
@@ -45,8 +38,8 @@ void	exec_cmd(t_exec *data, char *bin_path, char **env_cpy)
 		ft_perror(FORK_FAIL);
 	else
 	{
+		close_fds(data->fds.fd_in, data->fds.fd_out);
 		if (data->fds.pipe != PIPE_FIRST)
 			wait_for_finish(&data->pid);
-		close_fds(data->fds.fd_in, data->fds.fd_out);
 	}
 }

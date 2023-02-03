@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 19:36:30 by pskytta           #+#    #+#             */
-/*   Updated: 2023/02/02 19:59:42 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/03 16:42:45 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	read_heredoc(t_herfd *hdoc, char *input)
 {
 	if (hdoc->fd > 0)
 	{
-		if (heredoc_listen(hdoc, input) == -1)
+		if (heredoc_listen(hdoc, input, 0) == -1)
 		{
 			if (ft_strilen(hdoc->input) > 0)
 				ft_putstr_fd(hdoc->input, hdoc->fd);
@@ -55,11 +55,6 @@ static int	init_heredoc(t_herfd *hdoc, char *delim)
 	close(open(HERE_DOC, O_RDWR | O_CREAT | O_TRUNC, 0664));
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &win);
 	hdoc->cols = win.ws_col;
-/* 	if (access(HERE_DOC, F_OK) == 0)
-	{
-		ft_perror(HEREDOC_EXIST);
-		return (1);
-	} */
 	hdoc->fd = open(HERE_DOC, O_RDWR | O_CREAT | O_APPEND, 0664);
 	hdoc->idx = 0;
 	hdoc->end = 0;

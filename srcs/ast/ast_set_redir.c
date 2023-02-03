@@ -56,5 +56,4 @@ static int	check_for_type(t_redir *redir, char *str)
 void	ast_set_redir(t_redir *redir, char *str)
 {
 	redir->type = check_for_type(redir, str);
-	///ft_putnbr_endl(redir->type);
 }

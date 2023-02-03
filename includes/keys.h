@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:58 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/30 14:03:45 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/03 16:43:40 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,7 @@
 # define KEYS_H
 # include "shell.h"
 # include "structs.h"
-/*
-** mac key codes
-** # define ARW_UP {27, 91, 65}
-** # define ARW_DOWN {27, 91, 66}
-** # define ARW_RIGHT {27, 91, 67}
-** # define ARW_LEFT {27, 91, 68}
-** # define END 188
-** # define HOME 190
-** # define DEL 295
-** # define OPTN_UP {27, 91, 49, 59, 51, 65}
-** # define OPTN_DOWN {27, 91, 49, 59, 51, 66}
-** # define OPTN_RIGHT {27, 102}
-** # define OPTN_LEFT {27, 98}
-*/
+
 # define CTRL_C 3
 # define CTRL_D 4
 # define CTRL_P 16
@@ -56,6 +43,6 @@ int		special_keys(t_shell *shell, char *input, int *i);
 int		key_is_ctrl_alpha(t_shell *shell, t_win *window, char *input, int *i);
 void	key_is_ctrlc(t_shell *shell, t_win *win);
 int		key_is_arrow(t_shell *shell, t_win *window, char *input, int *i);
-int		heredoc_listen(t_herfd *shell, char *input);
+int		heredoc_listen(t_herfd *shell, char *input, int i);
 
 #endif

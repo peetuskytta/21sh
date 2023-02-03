@@ -6,10 +6,9 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 19:37:47 by pskytta           #+#    #+#             */
-/*   Updated: 2023/02/03 10:53:14 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/03 16:34:25 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../includes/execute.h"
 
@@ -24,7 +23,6 @@ static void	command_execution(t_shell *shell, t_exec *data, char **env_cpy)
 	{
 		if (data->fds.pipe < 0)
 		{
-			//if (redirection_loop(data))
 			builtin_execute(shell, *data, env_cpy);
 			close_fds(data->fds.fd_in, data->fds.fd_out);
 		}
@@ -61,5 +59,4 @@ void	exec_branch(t_ast *branch, t_shell *shell)
 	exec_branch(branch->left, shell);
 	if (branch->type == PIPE)
 		exec_branch(branch->right, shell);
-	//init_in_out_err(shell->tty);
 }

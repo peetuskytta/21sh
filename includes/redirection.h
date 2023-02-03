@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 14:59:36 by pskytta           #+#    #+#             */
-/*   Updated: 2023/02/01 11:15:21 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/03 16:36:48 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ bool	redirection_loop(t_exec *data);
 int		redir_file_check(t_redir *redir);
 int		redir_folder_check(char *str);
 void	redir_heredoc(t_tok *token);
+void	redir_recursive(t_ast *branch);
 
 #endif

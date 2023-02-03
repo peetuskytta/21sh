@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 14:15:51 by zraunio           #+#    #+#             */
-/*   Updated: 2023/02/03 15:42:52 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/03 16:46:36 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,6 @@ static void	signal_abort(int signo)
 	g_shell->flg = 0;
 	if (signo)
 	{
-		// ft_printf("\033c");
-		// tputs(tgoto(tgetstr("cm", NULL), 0, 0), 1, stdin_char);
-		//tputs(tgetstr("rs", NULL), 0, stdin_char);
-		// system("reset");
 		ft_putstr_fd("\n\r", STDOUT_FILENO);
 		cmd_line_prompt(EOF);
 		key_is_ctrlc(g_shell, &g_shell->window);

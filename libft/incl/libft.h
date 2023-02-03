@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 13:01:21 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/26 13:06:15 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/03 16:40:57 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int					ft_strchr_index(char *str, char c, char start);
 void				ft_swap(int *a, int *b);
 int					ft_count_chrstr(char *str, char c);
 int					ft_finword_rev(char *str);
+int					ft_strstr_rev(const char *haystack, const char *needle);
 /*
 ** convertions
 */

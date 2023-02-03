@@ -6,14 +6,12 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:24:46 by zraunio           #+#    #+#             */
-/*   Updated: 2023/02/03 11:43:08 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/03 16:33:09 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ERRORS_H
 # define ERRORS_H
-
-# define DB ft_putendl("You are HERE")
 
 /*Error message defines*/
 # define CMD_TOO_LONG "command line argument is too long\n"

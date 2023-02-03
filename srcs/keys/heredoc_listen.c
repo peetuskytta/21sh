@@ -6,34 +6,11 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 10:50:05 by pskytta           #+#    #+#             */
-/*   Updated: 2023/02/03 13:41:33 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/03 17:07:37 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
-
-static int	ft_strstr_rev(const char *haystack, const char *needle)
-{
-	int	j;
-	int	k;
-
-	j = ft_strilen(haystack) - 1;
-	if (j == 0)
-		return (-1);
-	while (j >= 0)
-	{
-		k = ft_strilen(needle) - 1;
-		while (k >= 0)
-		{
-			if (haystack[j] == needle[k])
-				return (j);
-			else
-				k--;
-		}
-		j--;
-	}
-	return (-1);
-}
 
 static int	is_delim(t_herfd *shell)
 {
@@ -75,12 +52,10 @@ static void	save_to_heredoc(t_herfd *shell, char c)
 	shell->idx++;
 }
 
-int	heredoc_listen(t_herfd *shell, char *input)
+int	heredoc_listen(t_herfd *shell, char *input, int i)
 {
-	int	i;
 	int	key;
 
-	i = 0;
 	while (input[i] != '\0')
 	{
 		key = keys_heredoc(input, &i);
@@ -94,7 +69,7 @@ int	heredoc_listen(t_herfd *shell, char *input)
 				return (-1);
 			ft_putstr_fd("> ", STDOUT_FILENO);
 		}
-		else if (shell->idx + 1 < shell->cols && key == 0)
+		else if (shell->idx + 1 < MAX_BUFF && key == 0)
 		{
 			if (input[i] == '\t')
 				input[i] = ' ';
