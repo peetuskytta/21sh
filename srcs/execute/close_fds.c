@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 17:39:31 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/30 08:45:42 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/03 09:19:45 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,13 @@
 void	close_fds(int fd_in, int fd_out)
 {
 	if (fd_in >= 0)
+	{
+		ft_putnbr_endl(fd_in);
 		close(fd_in);
+	}
 	if (fd_out >= 0)
+	{
+		ft_putnbr_endl(fd_out);
 		close(fd_out);
+	}
 }

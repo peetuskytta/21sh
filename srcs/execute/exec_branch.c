@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 19:37:47 by pskytta           #+#    #+#             */
-/*   Updated: 2023/02/02 19:37:49 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/03 09:33:49 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ static void	command_execution(t_shell *shell, t_exec *data, char **env_cpy)
 			exec_fork_builtin(shell, data, env_cpy);
 	}
 	else if (data->cmd)
+	{
+		init_in_out_err(shell->tty);
 		exec_real(data, env_cpy);
+	}
 }
 
 /*
@@ -51,11 +54,12 @@ void	exec_branch(t_ast *branch, t_shell *shell)
 	pid.child = branch->data.pid.child;
 	env_cpy = copy_environment(shell->environ);
 	if (branch->data.fds.pipe == PIPE_LAST)
-		pid.wait = waitpid(-1, &pid.status, 0);
+		pid.wait = waitpid(0, &pid.status, 0);
 	if ((branch->type == REDIR || branch->type == COMMAND))
 		command_execution(shell, &branch->data, env_cpy);
 	ft_arr_free((void *)&env_cpy);
 	exec_branch(branch->left, shell);
 	if (branch->type == PIPE)
 		exec_branch(branch->right, shell);
+	//init_in_out_err(shell->tty);
 }

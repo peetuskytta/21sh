@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:05:15 by pskytta           #+#    #+#             */
-/*   Updated: 2023/02/01 12:53:49 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/03 09:04:27 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	ast_consume_tokens(t_tok ***token, t_ast *branch, int i)
 	int	idx;
 
 	idx = 0;
+	ft_memset(&branch->data.args, 0, sizeof(char *) * 512);
 	while ((**token))
 	{
 		if ((**token)->type == WORD)
