@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 14:22:02 by pskytta           #+#    #+#             */
-/*   Updated: 2023/02/02 19:41:03 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/03 12:16:19 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ static bool	out_files(t_redir *redir, char *file)
 		return (false);
 }
 
-static bool	in_files(t_redir *redir, char *file)
+static bool	in_files(t_redir *redir, char *file_in)
 {
-	if (file)
+	if (file_in)
 	{
 		close(redir->fd_in);
 		redir->fd_in = -1;
@@ -55,7 +55,7 @@ static bool	status_in(int status, t_exec *data, int *idx)
 {
 	if (status == FILE_IN)
 	{
-		if (in_files(&data->redir[*idx], data->redir[*idx + 1].file))
+		if (in_files(&data->redir[*idx], data->redir[*idx + 1].file_in))
 			;
 		else
 		{
@@ -78,17 +78,13 @@ bool	redirection_loop(t_exec *data)
 
 	idx = 0;
 	status = -1;
-	// if (data->fds.pipe == -1)
-	// {
-		while (data->redir[idx].file)
-		{
-			status = redir_file_check(&data->redir[idx]);
-			if (status_out(status, data, &idx) == true)
-				return (true);
-			else if (status_in(status, data, &idx) == true)
-				return (true);
-			idx++;
-		}
-	// }
+	while (data->redir[idx].file || data->redir[idx].file_in)
+	{
+		status = redir_file_check(&data->redir[idx]);
+		if (status_out(status, data, &idx) == true \
+			&& status_in(status, data, &idx) == true)
+			return (true);
+		idx++;
+	}
 	return (true);
 }

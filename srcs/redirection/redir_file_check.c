@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_file_check.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 15:11:08 by pskytta           #+#    #+#             */
-/*   Updated: 2023/02/01 15:42:20 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/03 11:41:31 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ static void	file_error(int *status, char *str)
 
 static void	open_redirection_in(t_redir *redir, int *status)
 {
-	if (access(redir->file, F_OK) == -1)
+	if (access(redir->file_in, F_OK) == -1)
 		*status = NO_FILE;
-	else if (access(redir->file, R_OK) == -1)
+	else if (access(redir->file_in, R_OK) == -1)
 		*status = FILE_PERM;
-	redir->fd_in = open(redir->file, O_RDONLY);
+	redir->fd_in = open(redir->file_in, O_RDONLY);
 	if (redir->fd_in < 0 && *status != FILE_PERM)
 		*status = NO_FILE;
 	if (redir->fd_in > 0)
