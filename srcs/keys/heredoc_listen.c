@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_listen.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 10:50:05 by pskytta           #+#    #+#             */
-/*   Updated: 2023/02/03 13:35:03 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/03 13:41:33 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,8 @@ int	heredoc_listen(t_herfd *shell, char *input)
 		if (key == ENTER || shell->idx + 1 > MAX_BUFF
 			|| (input[i] == CTRL_D && shell->input[shell->idx - 1] == '\n'))
 		{
-			save_to_heredoc(shell, '\n');
+			if (input[i] != CTRL_D)
+				save_to_heredoc(shell, '\n');
 			if (is_delim(shell) == 1 || shell->idx + 1 >= MAX_BUFF
 				|| input[i] == CTRL_D)
 				return (-1);

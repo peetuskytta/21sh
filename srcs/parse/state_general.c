@@ -67,6 +67,6 @@ int	state_general(t_ints *st, t_tok **token, int ch_type, char *input)
 	else if (handle_ws(st, &token, ch_type, input) == 0)
 		return (0);
 	else if (handle_separators(st, &token, ch_type, input))
-		{};
+		;
 	return (1);
 }

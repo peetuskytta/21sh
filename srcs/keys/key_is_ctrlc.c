@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_is_ctrlc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 16:36:30 by zraunio           #+#    #+#             */
-/*   Updated: 2023/02/03 12:50:09 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/03 15:44:36 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,4 @@ void	key_is_ctrlc(t_shell *shell, t_win *win)
 	cursor_find(shell, win);
 	cursor_load(win, -1);
 	init_in_out_err(shell->tty);
-	ft_printf("\033[0m");
 }
