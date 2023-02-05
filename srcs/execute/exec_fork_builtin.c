@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_fork_builtin.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 07:54:05 by pskytta           #+#    #+#             */
-/*   Updated: 2023/02/04 12:01:37 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/05 17:01:30 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	builtin_redir(t_shell *shell, t_exec *data, char **env_cpy)
 	if (ft_strequ(data->cmd, "env"))
 	{
 		if (builtin_env(shell, *data, env_cpy))
-		{}	;
+			;
 	}
 	else
 		builtin_execute(shell, *data, env_cpy);
