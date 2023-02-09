@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_list_build.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 23:15:32 by pskytta           #+#    #+#             */
-/*   Updated: 2023/02/01 11:10:39 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/09 12:34:32 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ static void	token_loop(t_ints st, t_tok *token, char *input, int ch)
 			;
 		else if (st.state == STATE_REDIR && state_redir(&st, &token) == 1)
 			;
-		else if ((st.state == STATE_IN_DQUOTE || st.state == STATE_IN_QUOTE) \
+		else if ((st.state == STATE_IN_DQUOTE || st.state == STATE_IN_QUOTE \
+			|| st.state == STATE_IN_BRACKET) \
 			&& state_quotes(&st, &token, ch) == 1)
 			;
 		else if (ch == CHAR_NULL)

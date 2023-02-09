@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 11:34:37 by zraunio           #+#    #+#             */
-/*   Updated: 2023/02/02 14:36:34 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/06 11:54:01 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static int	unset_errors(char *name, int index)
 {
 	if (verify_value(name) != 1)
 	{
-		ft_memdel((void *)&name);
 		if (verify_value(name) == -1)
 			ft_perror(INVALID_CHAR);
 		else
@@ -43,8 +42,13 @@ void	builtin_unsetenv(t_shell *shell, t_exec data)
 {
 	int	index;
 
-	index = is_strenv(data.args[1], shell->environ);
-	if (unset_errors(data.args[1], index) == -1)
-		return ;
-	ft_arrtrim(shell->environ, index);
+	if (data.args[1] != NULL)
+	{
+		index = is_strenv(data.args[1], shell->environ);
+		if (unset_errors(data.args[1], index) == -1)
+			return ;
+		ft_arrtrim(shell->environ, index);
+	}
+	else
+		ft_perror(UNSETENV_USAGE);
 }

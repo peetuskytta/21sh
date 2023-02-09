@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 11:22:49 by pskytta           #+#    #+#             */
-/*   Updated: 2023/02/02 14:35:27 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/06 11:53:52 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static bool	env_output(char **env_cpy)
 	int	i;
 
 	i = 0;
-	ft_putchar_fd('\n', STDOUT_FILENO);
 	while (env_cpy[i])
 		ft_print_fd(STDOUT_FILENO, "%s\n", env_cpy[i++]);
 	return (true);

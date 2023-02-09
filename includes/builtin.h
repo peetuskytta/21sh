@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:25:24 by zraunio           #+#    #+#             */
-/*   Updated: 2023/02/02 14:41:43 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/07 09:38:10 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int		builtin_cd_change_dir(t_shell *shell, t_exec *data);
 void	builtin_cd_home(t_shell *shell, t_exec *data, int idx);
 void	builtin_cd_oldpwd(t_shell *shell, t_exec *data, int idx);
 void	builtin_cd_fetch_cwd(t_shell *shell);
-bool	env_cdm(t_shell *shell, t_exec new, t_exec data, int i);
 bool	env_temp_i(t_shell *shell, t_exec data);
 /*
 ** BUILDINS

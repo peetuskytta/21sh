@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:24:46 by zraunio           #+#    #+#             */
-/*   Updated: 2023/02/03 16:33:09 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/07 09:35:55 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ Terminating all processes.\n"
 # define UNSETENV_TOO_LONG "unsetenv: argument too long\n"
 
 /*Error message defines for env*/
-# define ENV_USE "env: usage: env OR env -i {argument}\n"
+# define ENV_USE "env: usage: env OR env -i {name=value}\n"
 
 /*Error messages for fork, waitpid, and execve*/
 # define CMD_NOT_FOUND ": command not found\n"
@@ -73,6 +73,8 @@ Terminating all processes.\n"
 # define SYNTAX_ERR_NL "syntax error near unexpected token `newline'\n"
 # define PARSE_ERR "21sh: parse error near "
 # define AGGR_ERR "21sh: redir and closing file descriptor not allowed\n"
+# define GEN_ARG "21sh: too many pipes or semicolons\n"
+# define MANY_ARG "21sh: too many arguments or redirections\n"
 
 /*Error messages for file descriptors*/
 # define HEREDOC_EXIST "heredoc: already exists. Delete file and try again.\n"

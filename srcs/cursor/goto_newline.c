@@ -3,16 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   goto_newline.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 17:48:04 by zraunio           #+#    #+#             */
-/*   Updated: 2023/02/03 08:36:39 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/06 16:55:27 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-void	goto_newline(t_shell *shell, t_win *window)
+static int	input_validation(char *q_in)
+{
+	int	se;
+	int	pi;
+	int	i;
+
+	i = 0;
+	se = 0;
+	pi = 0;
+	while (q_in[i] && i < MAX_BUFF)
+	{
+		if (q_in[i] == CHAR_SEMICOLON)
+			se++;
+		if (q_in[i] == CHAR_PIPE)
+			pi++;
+		i++;
+	}
+	if (se > MAX_REDIR || pi > MAX_PIPE)
+	{
+		ft_memset(q_in, '\0', sizeof(char) * (MAX_BUFF * 2 + 1));
+		return (-1);
+	}
+	return (0);
+}
+
+void	goto_newline(t_shell *shell)
 {
 	int	i;
 
@@ -32,6 +57,7 @@ void	goto_newline(t_shell *shell, t_win *window)
 	}
 	ft_memcpy(&shell->q_input[i], shell->cmd_line, ft_strilen(shell->cmd_line));
 	shell->flg = 1;
-	(void)window;
+	if (input_validation(shell->q_input) == -1)
+		ft_error_nl(shell, GEN_ARG);
 	read_quote(shell);
 }

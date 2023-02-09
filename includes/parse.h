@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 13:58:06 by pskytta           #+#    #+#             */
-/*   Updated: 2023/02/01 11:16:42 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/09 12:30:54 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 typedef enum e_tok_type
 {
 	CHAR_PIPE = '|',
+	CHAR_BROPEN = '{',
+	CHAR_BRCLOSE = '}',
 	CHAR_QUOTE = '\'',
 	CHAR_DQUOTE = '\"',
 	CHAR_SEMICOLON = ';',
@@ -71,6 +73,7 @@ typedef enum e_state
 	STATE_IN_DQUOTE,
 	STATE_IN_QUOTE,
 	STATE_IN_ESCAPE,
+	STATE_IN_BRACKET,
 }	t_state;
 
 t_tok	*parser(t_shell *shell);

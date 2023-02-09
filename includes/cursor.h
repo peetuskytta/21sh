@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:22:12 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/17 16:59:34 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/06 16:46:15 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 /*
 ** CURSOR
 */
-void	goto_newline(t_shell *shell, t_win *window);
+void	goto_newline(t_shell *shell);
 void	cursor_reset_line(t_win *window, int len, int flg);
 void	cursor_find(t_shell *shell, t_win *window);
 void	cursor_load(t_win *window, int flg);

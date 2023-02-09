@@ -18,6 +18,7 @@ int	state_redir(t_ints *st, t_tok **token)
 	{
 		(*token)->type = REDIR;
 		(*token)->next = (t_tok *)ft_memalloc(sizeof(t_tok));
+		allocation_check((void *)(*token)->next);
 		*token = (*token)->next;
 		init_token(*token, st->size - st->i);
 		(*token)->type = REDIR;

@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 14:15:51 by zraunio           #+#    #+#             */
-/*   Updated: 2023/02/04 12:21:11 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/06 10:19:19 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	signal_abort(int signo)
 	{
 		ft_putstr_fd("\n\r", STDOUT_FILENO);
 		cmd_line_prompt(EOF);
-		if (g_shell->q_input[0] != '\0')
+		if (g_shell->input[0] != '\0')
 			key_is_ctrlc(g_shell, &g_shell->window);
 	}
 }

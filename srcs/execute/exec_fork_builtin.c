@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_fork_builtin.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 07:54:05 by pskytta           #+#    #+#             */
-/*   Updated: 2023/02/05 17:01:30 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/07 10:46:23 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static void	builtin_redir(t_shell *shell, t_exec *data, char **env_cpy)
 	else
 		builtin_execute(shell, *data, env_cpy);
 	close_fds(data->fds.fd_in, data->fds.fd_out);
-	exit(EXIT_SUCCESS);
 }
 
 void	exec_fork_builtin(t_shell *shell, t_exec *data, char **env_cpy)
@@ -33,12 +32,13 @@ void	exec_fork_builtin(t_shell *shell, t_exec *data, char **env_cpy)
 	{
 		if (redirection_loop(data))
 			builtin_redir(shell, data, env_cpy);
+		exit(EXIT_SUCCESS);
 	}
 	else if (data->pid.child < 0)
 		ft_perror(FORK_FAIL);
 	else
 	{
-		wait(0);
 		close_fds(data->fds.fd_in, data->fds.fd_out);
+		wait(0);
 	}
 }

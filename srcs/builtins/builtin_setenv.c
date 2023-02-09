@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 11:53:38 by zraunio           #+#    #+#             */
-/*   Updated: 2023/02/02 14:36:24 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/06 12:15:58 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void	setenv_error(int err)
 {
-	ft_putchar_fd('\n', STDERR_FILENO);
 	if (err == 0)
 		ft_perror(NAME_ERROR);
 	if (err == -1)

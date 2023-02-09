@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:05:15 by pskytta           #+#    #+#             */
-/*   Updated: 2023/02/04 12:18:35 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/07 09:12:03 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ static void	ast_add_arguments(t_tok ***token, t_ast *branch, int *i)
 		if (*i == 0)
 			branch->data.cmd = ft_strdup(branch->data.args[0]);
 		(*i)++;
-		(**token) = (**token)->next;
 	}
 	else
-		ft_perror("too many arguments...");
+		ft_perror("too many arguments...\n");
+	(**token) = (**token)->next;
 }
 
 static void	ast_redir_inout(t_tok ***token, t_redir *redir)
@@ -58,7 +58,7 @@ static void	ast_add_redir(t_tok ***token, t_redir *redir, int *idx)
 		(*idx)++;
 	}
 	else
-		ft_perror("too many redirections...");
+		ft_perror("too many redirections...\n");
 	(**token) = (**token)->next;
 }
 
@@ -70,7 +70,7 @@ void	ast_consume_tokens(t_tok ***token, t_ast *branch, int i)
 	int	idx;
 
 	idx = 0;
-	ft_memset(&branch->data.args, 0, sizeof(char *) * 512);
+	ft_memset(&branch->data.args, 0, sizeof(char *) * MAX_REDIR);
 	while ((**token))
 	{
 		if ((**token)->type == WORD)

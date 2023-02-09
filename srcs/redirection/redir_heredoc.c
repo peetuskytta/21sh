@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 19:36:30 by pskytta           #+#    #+#             */
-/*   Updated: 2023/02/03 16:42:45 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/06 12:00:58 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	read_heredoc(t_herfd *hdoc, char *input)
 {
 	if (hdoc->fd > 0)
 	{
-		if (heredoc_listen(hdoc, input, 0) == -1)
+		if (heredoc_listen(hdoc, input, 0, 0) == -1)
 		{
 			if (ft_strilen(hdoc->input) > 0)
 				ft_putstr_fd(hdoc->input, hdoc->fd);

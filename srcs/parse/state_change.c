@@ -22,6 +22,10 @@ void	change_state(t_tok *tok, t_ints *st, int ch)
 		st->state = STATE_IN_QUOTE;
 	else if (ch == CHAR_ESCAPE)
 		st->state = STATE_GENERAL;
+	else if (ch == CHAR_BROPEN)
+		st->state = STATE_IN_BRACKET;
+	else if (ch == CHAR_BROPEN)
+		st->state = STATE_GENERAL;
 	else if (ch == CHAR_GENERAL)
 		st->state = STATE_GENERAL;
 	else if (ch == CHAR_GREATER || ch == CHAR_LESSER)

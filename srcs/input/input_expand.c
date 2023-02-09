@@ -6,11 +6,23 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:45:33 by zraunio           #+#    #+#             */
-/*   Updated: 2023/01/24 16:26:54 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/06 13:10:24 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
+
+static char	*build_argument(char *str, char *temp, int start)
+{
+	char	*res;
+
+	if (start > 1)
+		res = ft_strsub(str, 0, start - 1);
+	else
+		res = NULL;
+	ft_memdel((void *)&(temp));
+	return (res);
+}
 
 static void	expand_variable(t_shell *shell, t_tok *tok)
 {
@@ -19,9 +31,11 @@ static void	expand_variable(t_shell *shell, t_tok *tok)
 	int		w_len;
 	int		index;
 
-	temp = ft_strsub(tok->str, 1, ft_strlen(tok->str));
+	len = ft_strchr_index(tok->str, '$', 'b') + 1;
+	temp = ft_strsub(tok->str, len, ft_strlen(tok->str) - len);
 	w_len = ft_strlen(temp) + 1;
 	index = is_strenv(temp, shell->environ);
+	temp = build_argument(tok->str, temp, len);
 	ft_memdel((void *)&tok->str);
 	if (index == -1)
 		tok->str = ft_strdup("");
@@ -30,7 +44,8 @@ static void	expand_variable(t_shell *shell, t_tok *tok)
 		len = ft_strlen(shell->environ[index]) - w_len;
 		tok->str = ft_strsub(shell->environ[index], w_len, len);
 	}
-	ft_memdel((void *)&(temp));
+	if (temp != NULL)
+		tok->str = ft_strjoin_free(temp, tok->str, 3);
 }
 
 /*
@@ -77,17 +92,11 @@ void	input_expand(t_shell *shell, t_tok **first)
 	temp = *first;
 	while (temp != NULL)
 	{
-		if (temp->str[0] == '$' && temp->str[1] != '\0')
+		if (ft_strchr(temp->str, '$') && temp->str[1] != '\0')
 			expand_token(shell, temp, 1);
-		else if (temp->str[0] == '~' && temp->str[1] != '$'
-			&& (ft_isspace(temp->str[1]) || temp->str[1] == '\0'
-				|| temp->str[1] == '/'))
+		else if (temp->str[0] == '~' && (ft_isspace(temp->str[1])
+				|| temp->str[1] == '\0' || temp->str[1] == '/'))
 			expand_token(shell, temp, 2);
 		temp = temp->next;
 	}
 }
-/*
-** this will be list function instead. it needs the temp to point to head!!!!
-** otherwise take the *str in the list and do the same thing
-** while (next != NULL)
-*/

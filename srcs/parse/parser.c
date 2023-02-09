@@ -12,6 +12,48 @@
 
 #include "../../includes/parse.h"
 
+static bool	redir_amount(t_tok **first)
+{
+	t_tok	*temp;
+	int		max;
+
+	temp = *first;
+	max = 0;
+	while (temp)
+	{
+		if (temp->type == REDIR)
+			max++;
+		temp = temp->next;
+	}
+	if (max > MAX_REDIR)
+	{
+		ft_perror(MANY_ARG);
+		return (false);
+	}
+	return (true);
+}
+
+static bool	word_amount(t_tok **first)
+{
+	t_tok	*temp;
+	int		max;
+
+	temp = *first;
+	max = 0;
+	while (temp)
+	{
+		if (temp->type == WORD)
+			max++;
+		temp = temp->next;
+	}
+	if (max > MAX_REDIR)
+	{
+		ft_perror(MANY_ARG);
+		return (false);
+	}
+	return (true);
+}
+
 static void	check_for_heredoc(t_tok **first, t_shell *shell)
 {
 	t_tok	*temp;
@@ -46,6 +88,27 @@ static int	whitespace_check(char *str)
 	return (1);
 }
 
+/*DELETE BEFORE SUBMIT*/
+void	token_list_print(t_tok *token)
+{
+	t_tok	*temp;
+	int		i;
+
+	i = 0;
+	temp = token;
+	ft_putchar('\n');
+	while (temp != NULL)
+	{
+		if (temp->str)
+			ft_printf("token[%d] type [%d] = %s", i++, temp->type, temp->str);
+		temp = temp->next;
+		if (temp != NULL)
+			ft_putchar('\n');
+	}
+	if (temp == NULL)
+		ft_printf("\ntoken[%d] (NULL)\n", i);
+}
+
 t_tok	*parser(t_shell *shell)
 {
 	t_lex	list;
@@ -57,6 +120,13 @@ t_tok	*parser(t_shell *shell)
 		token_list_build(shell->q_input, lenght, &list);
 	else
 		return (NULL);
+	token_list_print(list.token_list);
+	if (redir_amount(&list.token_list) == false
+		|| word_amount(&list.token_list) == false)
+	{
+		token_list_free(list.token_list);
+		return (NULL);
+	}
 	input_expand(shell, &list.token_list);
 	input_strip_quotes(&list.token_list);
 	parse_errors(&list.token_list);

@@ -30,5 +30,11 @@ int	state_quotes(t_ints *st, t_tok **token, int ch_type)
 		if (ch_type == CHAR_QUOTE)
 			st->state = STATE_GENERAL;
 	}
+	else if (st->state == STATE_IN_BRACKET)
+	{
+		(*token)->str[st->t_i++] = st->c;
+		if (st->c == CHAR_BRCLOSE)
+			st->state = STATE_GENERAL;
+	}
 	return (1);
 }

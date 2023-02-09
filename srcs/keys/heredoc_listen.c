@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 10:50:05 by pskytta           #+#    #+#             */
-/*   Updated: 2023/02/03 17:07:37 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/07 10:24:04 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,11 @@ static int	is_delim(t_herfd *shell)
 
 static int	keys_heredoc(char *input, int *i)
 {
-	if (input[0] == 27)
+	if (input[0] == 27 || input[0] == 127)
 	{
 		while (input[*i] != '\0')
 			*i += 1;
+		*i += 1;
 		return (1);
 	}
 	else if (input[0] == ENTER)
@@ -52,10 +53,8 @@ static void	save_to_heredoc(t_herfd *shell, char c)
 	shell->idx++;
 }
 
-int	heredoc_listen(t_herfd *shell, char *input, int i)
+int	heredoc_listen(t_herfd *shell, char *input, int i, int key)
 {
-	int	key;
-
 	while (input[i] != '\0')
 	{
 		key = keys_heredoc(input, &i);
@@ -64,6 +63,8 @@ int	heredoc_listen(t_herfd *shell, char *input, int i)
 		{
 			if (input[i] != CTRL_D)
 				save_to_heredoc(shell, '\n');
+			else
+				ft_putchar_fd('\n', STDOUT_FILENO);
 			if (is_delim(shell) == 1 || shell->idx + 1 >= MAX_BUFF
 				|| input[i] == CTRL_D)
 				return (-1);

@@ -6,7 +6,7 @@
 #    By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/26 19:22:14 by zraunio           #+#    #+#              #
-#    Updated: 2023/02/03 16:46:20 by pskytta          ###   ########.fr        #
+#    Updated: 2023/02/07 09:37:58 by pskytta          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,6 @@ _BUILTIN := builtin_execute.c \
 			is_strenv.c \
 			is_builtin.c \
 			setenv_update_env.c \
-			env_cmd.c \
 			builtin_env.c
 
 _SRCS :=  main.c \

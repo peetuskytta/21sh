@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:08:12 by zraunio           #+#    #+#             */
-/*   Updated: 2023/02/02 14:35:23 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/07 10:55:32 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,10 @@ void	builtin_echo(t_shell *shell, t_exec data)
 	flg = echo_flag(data.args[1]);
 	if (flg == true)
 		i++;
-	while (data.args[i] != NULL)
+	while (data.args[i] != NULL && i < 512)
 	{
-		ft_putstr(data.args[i++]);
+		ft_putstr(data.args[i]);
+		i++;
 		if (data.args[i])
 			ft_putchar(' ');
 	}

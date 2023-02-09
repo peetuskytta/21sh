@@ -6,7 +6,7 @@
 /*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 19:09:23 by zraunio           #+#    #+#             */
-/*   Updated: 2023/02/02 14:37:03 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/07 09:34:47 by pskytta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,15 @@ bool	env_temp_i(t_shell *shell, t_exec data)
 {
 	t_exec	new;
 
+	(void)shell;
 	if (data.args[2] == NULL)
 		return (false);
 	ft_memset(&new, 0, sizeof(new));
 	if (is_command(&data, 2))
-		return (env_cdm(shell, new, data, 2));
+	{
+		ft_perror(ENV_USE);
+		return (false);
+	}
 	else
 		return (env_i_no_cmd(data, 1));
 	return (true);
