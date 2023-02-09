@@ -17,7 +17,7 @@ _________DONE DONE_________
 - READ_INPUT - together
 - RAWMODE - rori
 - KEYPRESS LISTEN - rori
-- BUILTINS - together 97% >> "\n" for exit builtin sent to kill_mode
+- BUILTINS - together >> "\n" for exit builtin sent to kill_mode
 	- cd: peetu
 		- HOME and - : rori
 	- env: rori
