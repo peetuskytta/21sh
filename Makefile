@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+         #
+#    By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/26 19:22:14 by zraunio           #+#    #+#              #
-#    Updated: 2023/02/07 09:37:58 by pskytta          ###   ########.fr        #
+#    Updated: 2023/02/10 09:45:09 by zraunio          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ NAME := 21sh
 
 #Direcory locations
 SRCS_DIR = srcs/
+ELLA_DIR = srcs/ella/
 AST_DIR = srcs/ast/
 BUILTIN_DIR = srcs/builtins/
 CURSOR_DIR = srcs/cursor/
@@ -72,14 +73,16 @@ _SRCS :=  main.c \
 		copy_environment.c \
 		logo.c
 
-_CURSOR := cursor_reset_line.c \
-		cursor_move.c \
-		cursor_find.c \
-		cursor_load.c \
-		cursor_goto_end.c \
-		cursor_goto_sides.c \
-		cursor_row_find.c \
-		goto_newline.c
+# _CURSOR := cursor_reset_line.c \
+# 		cursor_move.c \
+# 		cursor_find.c \
+# 		cursor_load.c \
+# 		cursor_goto_end.c \
+# 		cursor_goto_sides.c \
+# 		cursor_row_find.c \
+# 		goto_newline.c
+
+_ELLA := reader.c
 
 _EXECUTE := exec_tree.c \
 		exec_branch.c \
@@ -101,27 +104,27 @@ _INIT := init_shell.c \
 		init_term.c \
 		init_in_out_err.c
 
+		# cmd_line.c \
+		# cmd_line_check.c \
+		# cmd_line_reprint.c \
+		# input_read.c
 _INPUT := read_quote.c \
-		cmd_line.c \
-		cmd_line_check.c \
-		cmd_line_reprint.c \
-		input_read.c \
 		input_expand.c \
 		input_rev_cmd.c \
 		input_strip_quotes.c
 
-_HISTORY := history_create.c \
-		history_traverse.c \
-		history_fetch.c \
-		history_runtime.c \
-		history_reset.c
+# _HISTORY := history_create.c \
+# 		history_traverse.c \
+# 		history_fetch.c \
+# 		history_runtime.c \
+# 		history_reset.c
+# 		read_key.c \
+# 		special_keys.c \
+# 		key_is_ctrl_alpha.c \
+#		key_listen.c \
+# 		key_is_arrow.c \
 
-_KEYS := key_listen.c \
-		read_key.c \
-		special_keys.c \
-		key_is_ctrl_alpha.c \
-		key_is_ctrlc.c \
-		key_is_arrow.c \
+_KEYS := key_is_ctrlc.c \
 		heredoc_listen.c
 
 _OUTPUT := stdin_char.c \
@@ -144,8 +147,8 @@ _PARSE:= token_list_build.c \
 		run_parser_checks.c \
 		parser.c
 
-_RAWMODE := enable_rawmode.c \
-		kill_mode.c
+# _RAWMODE := enable_rawmode.c \
+# 		kill_mode.c
 
 _REDIRECTION := redirection_loop.c \
 		redir_file_check.c \
@@ -157,26 +160,27 @@ _SIGNAL := signal_listen.c \
 			signal_ignore.c \
 			signal_runtime.c
 
+			# $(addprefix $(CURSOR_DIR), $(_CURSOR)) \
+			# $(addprefix $(HISTORY_DIR), $(_HISTORY)) \
+			# $(addprefix $(RAWMODE_DIR), $(_RAWMODE)) 
 #All to object files
 ALL_SRCS :=	$(addprefix $(SRCS_AST), $(_AST)) \
+			$(addprefix $(ELLA_DIR), $(_ELLA)) \
 			$(addprefix $(SRCS_DIR), $(_SRCS)) \
 			$(addprefix $(BUILTIN_DIR), $(_BUILTIN)) \
-			$(addprefix $(CURSOR_DIR), $(_CURSOR)) \
-			$(addprefix $(HISTORY_DIR), $(_HISTORY)) \
+			$(addprefix $(KEYS_DIR), $(_KEYS)) \
 			$(addprefix $(EXECUTE_DIR), $(_EXECUTE)) \
 			$(addprefix $(INIT_DIR), $(_INIT)) \
 			$(addprefix $(INPUT_DIR), $(_INPUT)) \
-			$(addprefix $(KEYS_DIR), $(_KEYS)) \
 			$(addprefix $(OUTPUT_DIR), $(_OUTPUT)) \
 			$(addprefix $(PANIC_DIR), $(_PANIC)) \
 			$(addprefix $(PARSE_DIR), $(_PARSE)) \
-			$(addprefix $(RAWMODE_DIR), $(_RAWMODE)) \
 			$(addprefix $(REDIRECTION_DIR), $(_REDIRECTION)) \
 			$(addprefix $(SIGNAL_DIR), $(_SIGNAL))
 
-SRCS = $(_SRCS) $(_CURSOR) $(_INIT) $(_INPUT) $(_BUILTIN) $(_KEYS) $(_SIGNAL) \
-$(_OUTPUT) $(_PANIC) $(_PARSE) $(_RAWMODE) $(_HISTORY) $(_AST) $(_EXECUTE) \
-$(_REDIRECTION)
+SRCS = $(_SRCS) $(_INIT) $(_INPUT) $(_BUILTIN) $(_SIGNAL) $(_KEYS) \
+$(_OUTPUT) $(_PANIC) $(_PARSE) $(_HISTORY) $(_AST) $(_EXECUTE) \
+$(_ELLA) $(_REDIRECTION)
 OBJ_FILES = $(SRCS:.c=.o)
 OBJS = $(patsubst %, $(OBJS_DIR)%, $(SRCS:.c=.o))
 #libft
@@ -187,56 +191,59 @@ HEADER := includes/shell.h
 all: $(NAME)
 
 $(NAME): $(LIBFT_A) $(OBJS_DIR) $(OBJS)
-	@$(CC) $(FLAGS) $(OBJS) -o $(NAME) -ltermcap -L ./libft -lft >> makelog.txt
+	@$(CC) $(FLAGS_DB) $(OBJS) -o $(NAME) -ltermcap -L ./libft -lft >> makelog.txt
 	@echo "$(BOLD)$(WHITE)----------$(NAME) COMPILATION DONE----------$(RESET)"
 
 $(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR) >> makelog.txt
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
-	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(AST_DIR)%.c
-	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(BUILTIN_DIR)%.c
-	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
 
-$(OBJS_DIR)%.o: $(CURSOR_DIR)%.c
-	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
+# $(OBJS_DIR)%.o: $(CURSOR_DIR)%.c
+# 	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
 
-$(OBJS_DIR)%.o: $(HISTORY_DIR)%.c
-	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
+# $(OBJS_DIR)%.o: $(HISTORY_DIR)%.c
+# 	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(INIT_DIR)%.c
-	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(INPUT_DIR)%.c
-	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(KEYS_DIR)%.c
-	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(OUTPUT_DIR)%.c
-	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(PANIC_DIR)%.c
-	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(PARSE_DIR)%.c
-	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
 
-$(OBJS_DIR)%.o: $(RAWMODE_DIR)%.c
-	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
+# $(OBJS_DIR)%.o: $(RAWMODE_DIR)%.c
+# 	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(EXECUTE_DIR)%.c
-	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(REDIRECTION_DIR)%.c
-	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(OBJS_DIR)%.o: $(SIGNAL_DIR)%.c
-	@$(CC) $(FLAGS) $(INCL) -c $< -o $@ >> makelog.txt
+	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
+
+$(OBJS_DIR)%.o: $(ELLA_DIR)%.c
+	@$(CC) $(FLAGS_DB) $(INCL) -c $< -o $@ >> makelog.txt
 
 $(LIBFT_A):
 	-@make -C libft/ >> makelog.txt

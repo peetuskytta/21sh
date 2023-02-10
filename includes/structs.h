@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:45:34 by zraunio           #+#    #+#             */
-/*   Updated: 2023/02/03 15:45:49 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/10 09:06:54 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,20 @@
 # include <termios.h>
 # define MAX_REDIR 512
 # define MAX_PIPE 700
+
+typedef struct s_termcaps
+{
+	char	*buff_area;
+	char	*term_ti_start;
+	char	*term_te_stop;
+	char	*term_cl_clear_screen;
+	char	*term_ce_clear_end_of_line;
+	char	*term_cm_cursor_pos;
+	int		cursor_y;
+	int		cursor_x;
+	int		start_cursor_y;
+	int		start_cursor_x;
+}			t_termcaps;
 
 typedef struct s_win
 {
@@ -33,25 +47,48 @@ typedef struct s_shell
 	char			**environ;
 	int				flg;
 	char			*history[1001];
+	int				history_line;
+	int				history_len;
+	int				history_out;
 	int				hist_idx;
 	char			*q_input;
-	char			*input;
+	char			input[1024][MAX_REDIR];
+	char			tmp_str[1024];
+	char			found_command[1024];
+	int				found_command_index;
 	char			*cmd_line;
 	char			*rev_cmd;
 	char			*temp;
 	char			*clipbrd;
 	char			*cwd;
+	int				fd_out;
+	int				fd_in;
+	int				fd_err;
+	int				input_len;
+	int				input_rows;
 	int				cmd_idx;
 	int				prmpt_len;
+	char			prompt[MAX_REDIR + 31];
+	int				reverse_search;
+	int				reverse_delete;
+	int				middle;
+	int				window_rows;
+	int				window_columns;
 	int				end;
 	int				quote;
-	int				pid;
+	int				pid_i;
+	int				pid_check;
+	pid_t			pid;
+	pid_t			child;
 	bool			pipe;
+	int				pipe_err;
 	char			*tty;
 	bool			last_io;
+	t_termcaps		tcaps;
 	t_win			window;
-	struct termios	orig_raw;
-	struct termios	raw;
+	struct termios	orig_t;
+	struct termios	raw_t;
+	int				raw;
 }					t_shell;
 
 typedef struct s_fds

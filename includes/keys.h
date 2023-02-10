@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:58 by zraunio           #+#    #+#             */
-/*   Updated: 2023/02/06 12:09:42 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/09 18:09:42 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,11 @@
 # define CTRL_P 16
 # define CTRL_V 22
 # define CTRL_W 23
+# define CTRL_R 18
+# define CTRL_D 4
+# define DELETE 127
 # define ENTER 13
+# define SPACE 32
 # define ESC '\x1B'
 # define BACK "\x7f"
 # define ARW_UP "\x1B[A"

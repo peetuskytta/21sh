@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cursor_find.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:50:18 by zraunio           #+#    #+#             */
-/*   Updated: 2023/02/02 14:42:11 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/10 09:08:03 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ void	cursor_find(t_shell *shell, t_win *window)
 
 	if (enable_rawmode(shell) == 0)
 		ft_perror(TCGET_ERR);
-	tcsetattr(STDIN_FILENO, TCSANOW, &shell->raw);
+	tcsetattr(STDIN_FILENO, TCSANOW, &shell->raw_t);
 	ft_putstr_fd("\x1B[6n", STDOUT_FILENO);
 	ft_memset(buf, 0, sizeof(char) * (MAX_BUFF + 1));
 	if (read(STDIN_FILENO, &buf, MAX_BUFF) > 0)
 		grep_coordinates(window, buf);
 	window->loc = shell->prmpt_len;
-	tcsetattr(STDIN_FILENO, TCSANOW, &shell->orig_raw);
+	tcsetattr(STDIN_FILENO, TCSANOW, &shell->orig_t);
 	ft_memset(buf, 0, sizeof(char) * (MAX_BUFF + 1));
 }

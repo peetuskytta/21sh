@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 16:36:30 by zraunio           #+#    #+#             */
-/*   Updated: 2023/02/07 13:02:17 by zraunio          ###   ########.fr       */
+/*   Updated: 2023/02/10 09:44:11 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	key_is_ctrlc(t_shell *shell, t_win *win)
 	shell->cmd_idx = 0;
 	win->loc = shell->prmpt_len;
 	shell->quote = EOF;
-	cursor_find(shell, win);
-	cursor_load(win, -1);
+	// cursor_find(shell, win);
+	// cursor_load(win, -1);
 	init_in_out_err(shell->tty);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskytta <pskytta@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:53:53 by zraunio           #+#    #+#             */
-/*   Updated: 2023/02/02 14:36:46 by pskytta          ###   ########.fr       */
+/*   Updated: 2023/02/10 09:04:13 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define S_QUOTE '\''
 # define D_QUOTE '\"'
 # define MAX_BUFF 4096
+# define HISTORY_LEN 500
 
 # include "ast.h"
 # include "builtin.h"
@@ -56,5 +57,6 @@ int		env_variable_counter(char **environ);
 void	allocation_check(void **check);
 char	**copy_environment(char **environ);
 void	print_logo(void);
+void	run_shell(t_shell *data);
 
 #endif
